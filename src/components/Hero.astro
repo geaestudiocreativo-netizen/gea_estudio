@@ -1,0 +1,45 @@
+---
+import styles from './Hero.module.css';
+---
+
+<section class={styles.hero} aria-label="Hero">
+	<header class={styles.topbar}>
+		<a class={styles.logo} href="/" aria-label="Gea home">
+			<img src="/images/Logotype.svg" alt="Gea" loading="eager" decoding="async" />
+		</a>
+		<button class={styles.menuButton} type="button" aria-label="Open menu">
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+		</button>
+	</header>
+
+	<div class={styles.mediaRow} aria-label="Feature imagery">
+		<img
+			class={styles.primaryImage}
+			src="/images/hero_first.png"
+			alt="Person by a vintage car at sunset"
+			loading="eager"
+			fetchpriority="high"
+		/>
+		<img
+			class={styles.secondaryImage}
+			src="/images/hero_second.png"
+			alt="Close-up architectural texture"
+			loading="lazy"
+		/>
+	</div>
+
+	<div class={styles.copy}>
+		<h1>
+			Of letters ---<br />
+			as opposed to using Content<br />
+			here, making it look like<br />
+			readable English.
+		</h1>
+	</div>
+
+	<p class={styles.wordmark} aria-hidden="true">
+		<img src="/images/Logotype.svg" alt="" loading="lazy" decoding="async" />
+	</p>
+</section>
