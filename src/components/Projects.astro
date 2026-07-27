@@ -1,0 +1,78 @@
+---
+const projects = [
+	{
+		number: '01',
+		title: '.G',
+		subtitle: 'Branding | Web | Fotografia',
+		image: '/images/projects/project%201.png',
+		alt: 'Cheesecake on a plate with fruit topping'
+	},
+	{
+		number: '02',
+		title: 'Talleres Alonso',
+		subtitle: 'Branding - Web',
+		image: '/images/projects/project%202.png',
+		alt: 'Luxury car parked inside a dark showroom'
+	},
+	{
+		number: '03',
+		title: 'MUMA',
+		subtitle: 'Redes Sociales',
+		image: '/images/projects/project%203.png',
+		alt: 'Classic architecture facade with shutters'
+	}
+];
+---
+
+<section class="relative w-full bg-[#f8f8f8] pt-[26px] pb-[34px]" aria-labelledby="projects-title">
+	<div class="pointer-events-none absolute inset-x-0 top-0 h-[480px] overflow-hidden rounded-t-[34px] md:h-[548px] lg:h-[606px]">
+		<img
+			src="/images/projects/project_background.png"
+			alt=""
+			class="h-full w-full object-cover"
+			loading="lazy"
+			decoding="async"
+		/>
+	</div>
+
+	<div class="relative z-10 mx-auto w-full max-w-[1120px]">
+		<h2
+			id="projects-title"
+			class="px-[24px] pt-[84px] font-['Krona_One'] text-[32px] font-normal uppercase leading-[0.98] tracking-[0.08em] text-[#f5f5f5] md:px-[32px] md:pt-[96px] md:text-[39px] lg:px-[68px] lg:pt-[114px] lg:text-[45px]"
+		>
+			PROYECTOS
+		</h2>
+
+		<ul
+			role="list"
+			class="mt-[22px] flex snap-x snap-mandatory gap-[18px] overflow-x-auto px-[24px] pb-[6px] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:mt-[26px] md:gap-[22px] md:px-[32px] lg:mt-[30px] lg:grid lg:grid-cols-3 lg:overflow-visible lg:gap-[24px] lg:px-[68px]"
+		>
+			{
+				projects.map((project) => (
+					<li class="group shrink-0 snap-start basis-[236px] md:basis-[258px] lg:basis-auto">
+						<article>
+							<div class="relative overflow-hidden rounded-[22px] aspect-[236/402] md:aspect-[258/444] lg:aspect-[1/1.72]">
+								<span class="absolute left-[14px] top-[12px] z-10 font-['Krona_One'] text-[17px] leading-none tracking-[0.07em] text-white md:left-[16px] md:top-[14px] md:text-[19px]">
+									{project.number}
+								</span>
+								<img
+									src={project.image}
+									alt={project.alt}
+									class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+									loading="lazy"
+									decoding="async"
+								/>
+							</div>
+							<h3 class="mt-[10px] font-['Satoshi'] text-[19px]/[1.08] font-medium tracking-[0.005em] text-[#222428] md:mt-[12px] md:text-[20px]/[1.08]">
+								{project.title}
+							</h3>
+							<p class="mt-[1px] font-['Satoshi'] text-[13px]/[1.1] font-normal tracking-[0.01em] text-[#b7b7b7] md:text-[14px]/[1.1]">
+								{project.subtitle}
+							</p>
+						</article>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
