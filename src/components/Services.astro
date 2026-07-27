@@ -1,0 +1,83 @@
+---
+import styles from './Services.module.css';
+
+const leftColumnServices = [
+	{
+		title: 'BRANDING',
+		alt: 'Editorial branding artwork on a ceramic vase',
+		image: '/images/services/branding.png',
+		size: 'tall'
+	},
+	{
+		title: 'PAPELER\u00cdA',
+		alt: 'Premium stationery invitation and card set',
+		image: '/images/services/papeleria.png',
+		size: 'medium'
+	},
+	{
+		title: 'REDES SOCIALES',
+		alt: 'Social media profile displayed on a smartphone',
+		image: '/images/services/redes_sociales.png',
+		size: 'tall'
+	}
+];
+
+const rightColumnServices = [
+	{
+		title: 'FOTOGRAF\u00cdA',
+		alt: 'Portrait photographer holding a camera',
+		image: '/images/services/fotografia.png',
+		size: 'medium'
+	},
+	{
+		title: 'DECORACI\u00d3N',
+		alt: 'Interior design living room with framed wall gallery',
+		image: '/images/services/decoracion.png',
+		size: 'tall'
+	},
+	{
+		title: 'WEB',
+		alt: 'Website design shown on a tablet screen',
+		image: '/images/services/web.png',
+		size: 'medium'
+	}
+];
+---
+
+<section class={styles.services} aria-labelledby="services-title">
+	<div class={styles.columns}>
+		<div class={styles.leftStack}>
+			<h2 id="services-title" class={styles.heading}>Qué hacemos</h2>
+
+			<ul class={`${styles.column} ${styles.columnLeft}`} role="list">
+				{
+					leftColumnServices.map((service) => (
+						<li class={`${styles.item} ${styles[service.size]}`}>
+							<article class={styles.card}>
+								<div class={styles.media}>
+									<img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
+								</div>
+								<p class={styles.label}>{service.title}</p>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
+		<ul class={`${styles.column} ${styles.columnRight}`} role="list">
+			{
+				rightColumnServices.map((service) => (
+					<li class={`${styles.item} ${styles[service.size]}`}>
+						<article class={styles.card}>
+							<div class={styles.media}>
+								<img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
+							</div>
+							<p class={styles.label}>{service.title}</p>
+						</article>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
