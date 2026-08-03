@@ -24,27 +24,28 @@
 
 .logo img {
 	display: block;
-	width: clamp(120px, 16vw, 190px);
+	width: clamp(60px, 8vw, 95px);
 	height: auto;
 }
 
 .menuButton {
-	width: 40px;
-	height: 40px;
+	width: 44px;
+	height: 44px;
 	border: 0;
-	padding: 8px 6px;
+	padding: 10px 8px;
 	background: transparent;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	gap: 6px;
+	gap: 5px;
 	cursor: pointer;
 }
 
 .menuButton span {
 	display: block;
-	height: 3px;
-	border-radius: 4px;
+	width: 28px;
+	height: 2px;
+	border-radius: 999px;
 	background: #22252b;
 }
 
