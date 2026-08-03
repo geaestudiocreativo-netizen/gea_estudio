@@ -85,9 +85,20 @@
 	color: var(--ink);
 	font-family: 'Manrope', sans-serif;
 	font-weight: 400;
-	font-size: clamp(30px, 6.2vw, 58px);
 	line-height: 0.98;
 	letter-spacing: -0.03em;
+}
+
+.headingMain {
+	display: block;
+	font-size: clamp(30px, 6.2vw, 58px);
+}
+
+.headingSecondary {
+	display: block;
+	margin-top: 8px;
+	font-size: clamp(20px, 4.5vw, 38px);
+	line-height: 1.2;
 }
 
 .wordmark {
