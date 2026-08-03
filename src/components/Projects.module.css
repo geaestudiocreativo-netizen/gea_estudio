@@ -78,7 +78,7 @@
 	}
 
 	.track {
-		gap: 26px;
+		gap: 12px;
 		padding-right: 0;
 	}
 
@@ -93,7 +93,7 @@
 	}
 
 	.item {
-		/* Leaves ~20px next-card preview with a 26px inter-card gap. */
+		/* Keeps a right-side next-card preview while preserving card dimensions. */
 		width: calc(100% - 46px);
 	}
 }
