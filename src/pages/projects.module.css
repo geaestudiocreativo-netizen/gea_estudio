@@ -66,9 +66,9 @@
 	}
 
 	.grid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		max-width: calc(224px * 2 + 8px);
-		column-gap: 8px;
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		max-width: 100%;
+		column-gap: 14px;
 		row-gap: 34px;
 	}
 }

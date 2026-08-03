@@ -9,9 +9,10 @@ interface Props {
 	services: string;
 	image?: string;
 	imageSize: 'small' | 'medium' | 'large';
+	compactMobile?: boolean;
 }
 
-const { id, number, title, description, services, image, imageSize } = Astro.props as Props;
+const { id, number, title, description, services, image, imageSize, compactMobile = false } = Astro.props as Props;
 
 const sizeClassByKey = {
 	small: styles.imageSmall,
@@ -29,7 +30,7 @@ const imagePath = imageFileName.startsWith('/images/projects/')
 	: `/images/projects/${imageFileName}`;
 ---
 
-<article class={styles.project}>
+<article class={`${styles.project} ${compactMobile ? styles.compactMobile : ''}`}>
 	<p class={styles.number}>{number}</p>
 
 	<div class={`${styles.media} ${sizeClass}`}>
