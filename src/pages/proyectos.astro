@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Footer from '../components/Footer.astro';
+import styles from './projects.module.css';
+
+interface ProjectItem {
+	id: string;
+	number: string;
+	title: string;
+	description: string;
+	services: string;
+	image: string;
+	imageSize: 'small' | 'medium' | 'large';
+}
+
+const projects: ProjectItem[] = [
+	{
+		id: '01',
+		number: '01',
+		title: 'Talleres Alonso',
+		description: 'Una identidad sólida para un taller con más de 40 años de historia.',
+		services: 'Branding | Web',
+		image: 'project-01.jpg',
+		imageSize: 'large'
+	},
+	{
+		id: '02',
+		number: '02',
+		title: '.G',
+		description: 'Una marca de tartas artesanales creada para celebrar momentos especiales.',
+		services: 'Branding | Web | Fotografia',
+		image: 'project-02.jpg',
+		imageSize: 'small'
+	},
+	{
+		id: '03',
+		number: '03',
+		title: 'Gea Artesanía',
+		description: 'Bisutería artesanal con piezas de diseño hechas en arcilla polimérica.',
+		services: 'Branding | Web | Fotografía',
+		image: 'project-03.jpg',
+		imageSize: 'large'
+	},
+	{
+		id: '04',
+		number: '04',
+		title: 'Foc',
+		description: 'Paellas de autor que revolucionan la forma de ver la comida tradicional valenciana.',
+		services: 'Redes Sociales | Fotografía | Cinematografía',
+		image: 'project-04.jpg',
+		imageSize: 'medium'
+	},
+	{
+		id: '05',
+		number: '05',
+		title: 'Margen',
+		description: 'Arcilla a través de una marca auténtica.',
+		services: 'Redes Sociales | Fotografía | Cinematografía',
+		image: 'project-05.jpg',
+		imageSize: 'small'
+	},
+	{
+		id: '06',
+		number: '06',
+		title: 'Trop',
+		description: 'Este proyecto gastronómico revoluciona la forma de ver la comida.',
+		services: 'Redes Sociales | Fotografía | Cinematografía',
+		image: 'project-06.jpg',
+		imageSize: 'medium'
+	}
+];
+---
+
+<Layout>
+	<main class={styles.page}>
+		<header class={styles.header}>
+			<h1 class={styles.title}>PROYECTOS</h1>
+			<p class={styles.intro}>
+				Desde 2026 creando universos creativos con gente como tú. Aquí listamos todos nuestros
+				proyectos hechos con mucho amor y cariño.
+			</p>
+		</header>
+
+		<ul class={styles.grid} role="list" aria-label="Listado de proyectos">
+			{
+				projects.map((project) => (
+					<li class={styles.item}>
+						<ProjectCard {...project} />
+					</li>
+				))
+			}
+		</ul>
+	</main>
+	<Footer />
+</Layout>
