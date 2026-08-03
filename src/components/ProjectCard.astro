@@ -1,0 +1,42 @@
+---
+import styles from './ProjectCard.module.css';
+
+interface Props {
+	id: string;
+	number: string;
+	title: string;
+	description: string;
+	services: string;
+	image?: string;
+	imageSize: 'small' | 'medium' | 'large';
+}
+
+const { id, number, title, description, services, image, imageSize } = Astro.props as Props;
+
+const sizeClassByKey = {
+	small: styles.imageSmall,
+	medium: styles.imageMedium,
+	large: styles.imageLarge
+};
+
+const sizeClass = sizeClassByKey[imageSize] ?? styles.imageMedium;
+
+const normalizedId = String(id).padStart(2, '0');
+const fallbackImage = `project-${normalizedId}.jpg`;
+const imageFileName = image ?? fallbackImage;
+const imagePath = imageFileName.startsWith('/images/projects/')
+	? imageFileName
+	: `/images/projects/${imageFileName}`;
+---
+
+<article class={styles.project}>
+	<p class={styles.number}>{number}</p>
+
+	<div class={`${styles.media} ${sizeClass}`}>
+		<img src={imagePath} alt={title} class={styles.image} loading="lazy" decoding="async" />
+	</div>
+
+	<h3 class={styles.title}>{title}</h3>
+	<p class={styles.description}>{description}</p>
+	<p class={styles.services}>{services}</p>
+</article>

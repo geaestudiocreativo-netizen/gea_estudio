@@ -1,0 +1,84 @@
+.project {
+	display: grid;
+	align-content: start;
+	width: 224px;
+}
+
+.number {
+	margin: 0 0 10px;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 1.2;
+	letter-spacing: 0;
+	color: #1e1e1e;
+}
+
+.media {
+	overflow: hidden;
+}
+
+.image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 260ms ease;
+}
+
+.imageSmall {
+	width: 224px;
+	height: 120px;
+}
+
+.imageMedium {
+	width: 224px;
+	height: 188px;
+}
+
+.imageLarge {
+	width: 224px;
+	height: 256px;
+}
+
+.title {
+	margin: 10px 0 0;
+	font-family: 'Krona One', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.2;
+	letter-spacing: 0;
+	color: #1e1e1e;
+}
+
+.description {
+	margin: 8px 0 0;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 12px;
+	font-weight: 300;
+	line-height: 1.4;
+	letter-spacing: 0;
+	color: #1e1e1e;
+}
+
+.services {
+	margin: 8px 0 0;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 10px;
+	font-weight: 300;
+	line-height: 1.4;
+	letter-spacing: 0;
+	color: #747070;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.project:hover .image {
+		transform: scale(1.03);
+	}
+}
+
+@media (max-width: 959px) {
+	.number {
+		margin-bottom: 14px;
+	}
+}
