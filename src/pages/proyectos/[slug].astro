@@ -1,21 +1,189 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
 import { projects } from '../../data/projects';
+import projectsStyles from '../projects.module.css';
+import styles from './project-detail.module.css';
 
 export function getStaticPaths() {
 	return projects.map((project) => ({
 		params: { slug: project.slug },
-		props: { title: project.title }
+		props: { slug: project.slug }
 	}));
 }
 
-const { title } = Astro.props as { title: string };
+const { slug } = Astro.props as { slug: string };
+
+const projectIndex = projects.findIndex((item) => item.slug === slug);
+
+if (projectIndex === -1) {
+	throw new Error(`Project not found: ${slug}`);
+}
+
+const project = projects[projectIndex];
+const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
+const nextProject = projects[(projectIndex + 1) % projects.length];
+const locationLabel = project.location.replace('España', 'Spain').toUpperCase();
+const clientLabel = project.client.toUpperCase();
+
+const toSectionId = (name: string) =>
+	name
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+		.trim()
+		.replace(/\s+/g, '-');
+
+const serviceGalleryByName = new Map(project.serviceGalleries.map((gallery) => [gallery.name, gallery]));
+
+const serviceSections = project.services
+	.map((serviceName) => {
+		const gallery = serviceGalleryByName.get(serviceName);
+		if (!gallery || gallery.images.length === 0) return null;
+
+		return {
+			id: toSectionId(serviceName),
+			title: serviceName,
+			images: gallery.images,
+			layout: gallery.layout,
+			usesEditorialLayout: gallery.layout.startsWith('editorial')
+		};
+	})
+	.filter((section): section is NonNullable<typeof section> => section !== null);
+
+const getBrandingLayoutClass = (layout: string) => {
+	if (layout === 'editorial-b') return styles['branding-b'];
+	if (layout === 'editorial-c') return styles['branding-c'];
+	return styles['branding-a'];
+};
 ---
 
 <Layout>
-	<main style="min-height: 60vh; display: grid; place-items: center; padding: 48px 24px; text-align: center;">
-		<h1 style="margin: 0; font-family: 'Krona One', sans-serif; font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: #1e1e1e;">
-			{title}
-		</h1>
+	<main class={styles.page}>
+		<header class={styles.projectHeader}>
+			<img class={styles.projectLogo} src={project.logo} alt={project.title} loading="eager" decoding="async" />
+			<p class={styles.projectDescription}>{project.description}</p>
+			<p class={styles.projectMetaLine}>BY {clientLabel} <span aria-hidden="true">·</span> {locationLabel}</p>
+			<p class={styles.projectYear}>{project.year}</p>
+		</header>
+
+		<figure class={styles.cover}>
+			<img src={project.heroImage} alt={project.title} loading="eager" fetchpriority="high" decoding="async" />
+		</figure>
+
+		<div class={styles.divider} aria-hidden="true"></div>
+
+		<nav class={styles.servicesNavWrap} aria-label="Servicios del proyecto">
+			<div class={`${styles.servicesNav} ${projectsStyles.filtersBar}`} data-services-nav>
+				{
+					serviceSections.map((section, index) => (
+						<button
+							type="button"
+							class={projectsStyles.filterPill}
+							data-service-button
+							data-target={section.id}
+							aria-pressed={index === 0 ? 'true' : 'false'}
+						>
+							{section.title}
+						</button>
+					))
+				}
+			</div>
+		</nav>
+
+		{
+			serviceSections.map((section) => (
+				<section id={section.id} class={styles.section} aria-labelledby={`section-${section.id}`} data-service-section>
+					<h2 id={`section-${section.id}`} class={styles.sectionTitle}>{section.title}</h2>
+					{
+						section.usesEditorialLayout ? (
+							<div class={`${styles.brandingGrid} ${getBrandingLayoutClass(section.layout)}`}>
+								{section.images.map((image, index) => (
+									<figure class={styles.brandingItem}>
+										<img
+											src={image}
+											alt={`${project.title} branding ${index + 1}`}
+											loading="lazy"
+											decoding="async"
+										/>
+									</figure>
+								))}
+							</div>
+						) : (
+							<div class={styles.stackGallery}>
+								{section.images.map((image, index) => (
+									<figure class={styles.galleryItem}>
+										<img
+											src={image}
+											alt={`${project.title} ${section.title} ${index + 1}`}
+											loading="lazy"
+											decoding="async"
+										/>
+									</figure>
+								))}
+							</div>
+						)
+					}
+				</section>
+			))
+		}
+
+		<nav class={styles.projectNav} aria-label="Navegación de proyectos">
+			<a class={styles.projectLink} href={`/proyectos/${previousProject.slug}`}>
+				<span class={styles.projectNavLabel}>Proyecto anterior</span>
+				<span class={styles.projectNavTitle}>{previousProject.title}</span>
+			</a>
+			<a class={styles.projectLink} href={`/proyectos/${nextProject.slug}`}>
+				<span class={styles.projectNavLabel}>Siguiente proyecto</span>
+				<span class={styles.projectNavTitle}>{nextProject.title}</span>
+			</a>
+		</nav>
 	</main>
+	<Footer />
+	<script>
+		const serviceButtons = Array.from(
+			document.querySelectorAll('[data-service-button]')
+		) as HTMLButtonElement[];
+		const sections = Array.from(document.querySelectorAll('[data-service-section]')) as HTMLElement[];
+
+		const setActiveButton = (targetId: string) => {
+			for (const button of serviceButtons) {
+				const isActive = button.getAttribute('data-target') === targetId;
+				button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+			}
+		};
+
+		for (const button of serviceButtons) {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				const targetId = button.getAttribute('data-target');
+				if (!targetId) return;
+				const target = document.getElementById(targetId);
+				if (!target) return;
+
+				setActiveButton(targetId);
+
+				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			});
+		}
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				const visible = entries
+					.filter((entry) => entry.isIntersecting)
+					.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+				if (!visible) return;
+				const id = visible.target.getAttribute('id');
+				if (!id) return;
+
+				setActiveButton(id);
+			},
+			{ rootMargin: '-35% 0px -55% 0px', threshold: [0.2, 0.45, 0.7] }
+		);
+
+		for (const section of sections) {
+			observer.observe(section);
+		}
+	</script>
 </Layout>

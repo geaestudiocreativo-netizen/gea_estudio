@@ -1,66 +1,105 @@
-export interface Project {
-  id: string;
-  slug: string;
-  title: string;
-  description: string;
-  services: string[];
-  image: string;
-  imageSize: 'small' | 'medium' | 'large';
+import { existsSync, readdirSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import type { ProjectFolderMetadata, ServiceLayout } from './projects/types';
+
+export interface ServiceGallery {
+	name: string;
+	images: string[];
+	layout: ServiceLayout;
 }
 
-export const projects: Project[] = [
-  {
-    id: '01',
-    slug: 'talleres-alonso',
-    title: 'Talleres Alonso',
-    description: 'Una identidad sólida para un taller con más de 40 años de historia.',
-    services: ['Branding', 'Web'],
-    image: 'project-01.jpg',
-    imageSize: 'large'
-  },
-  {
-    id: '02',
-    slug: 'g',
-    title: '.G',
-    description: 'Una marca de tartas artesanales creada para celebrar momentos especiales.',
-    services: ['Branding', 'Web', 'Fotografía'],
-    image: 'project-02.jpg',
-    imageSize: 'small'
-  },
-  {
-    id: '03',
-    slug: 'gea-artesania',
-    title: 'Gea Artesanía',
-    description: 'Bisutería artesanal con piezas de diseño hechas en arcilla polimérica.',
-    services: ['Branding', 'Web', 'Fotografía'],
-    image: 'project-03.jpg',
-    imageSize: 'large'
-  },
-  {
-    id: '04',
-    slug: 'foc',
-    title: 'Foc',
-    description: 'Paellas de autor que revolucionan la forma de ver la comida tradicional valenciana.',
-    services: ['Redes Sociales', 'Fotografía', 'Cinematografía', 'Papelería'],
-    image: 'project-04.jpg',
-    imageSize: 'medium'
-  },
-  {
-    id: '05',
-    slug: 'margen',
-    title: 'Margen',
-    description: 'Arcilla a través de una marca auténtica.',
-    services: ['Redes Sociales',  'Cinematografía'],
-    image: 'project-05.jpg',
-    imageSize: 'small'
-  },
-  {
-    id: '06',
-    slug: 'trop',
-    title: 'Trop',
-    description: 'Este proyecto gastronómico revoluciona la forma de ver la comida.',
-    services: ['Redes Sociales', 'Fotografía', 'Cinematografía'],
-    image: 'project-06.jpg',
-    imageSize: 'medium'
-  }
-];
+export interface Project {
+	id: string;
+	slug: string;
+	title: string;
+	subtitle: string;
+	description: string;
+	year: string;
+	client: string;
+	location: string;
+	services: string[];
+	image: string;
+	imageSize: 'small' | 'medium' | 'large';
+	coverImage: string;
+	logo: string;
+	heroImage: string;
+	serviceGalleries: ServiceGallery[];
+	layouts: Partial<Record<string, ServiceLayout>>;
+}
+
+type ProjectModule = { default: ProjectFolderMetadata };
+
+const PUBLIC_PROJECTS_DIR = fileURLToPath(new URL('../../public/images/projects', import.meta.url));
+const IMAGE_FILE_RE = /\.(avif|gif|jpe?g|png|svg|webp)$/i;
+
+const modules = import.meta.glob<ProjectModule>('./projects/*/project.ts', { eager: true });
+
+const projectMetadata = Object.values(modules)
+	.map((mod) => mod.default)
+	.sort((a, b) => a.number.localeCompare(b.number, undefined, { numeric: true }));
+
+const encodeSegments = (...segments: string[]) => segments.map((segment) => encodeURIComponent(segment)).join('/');
+
+const toProjectImageUrl = (...segments: string[]) => `/images/projects/${encodeSegments(...segments)}`;
+
+const resolveAssetPath = (meta: ProjectFolderMetadata, asset: string) => {
+	if (asset.startsWith('/')) return asset;
+	return toProjectImageUrl(meta.assetFolder, asset);
+};
+
+const toServiceFolderName = (serviceName: string) =>
+	serviceName
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+		.trim()
+		.replace(/\s+/g, '-');
+
+const getServiceImages = (meta: ProjectFolderMetadata, serviceName: string) => {
+	const folder = toServiceFolderName(serviceName);
+	const folderPath = path.join(PUBLIC_PROJECTS_DIR, meta.assetFolder, folder);
+
+	if (!existsSync(folderPath)) {
+		return [];
+	}
+
+	return readdirSync(folderPath, { withFileTypes: true })
+		.filter((entry) => entry.isFile() && IMAGE_FILE_RE.test(entry.name))
+		.map((entry) => entry.name)
+		.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
+		.map((filename) => toProjectImageUrl(meta.assetFolder, folder, filename));
+};
+
+const getSubtitle = (meta: ProjectFolderMetadata) => meta.subtitle ?? meta.description;
+
+export const projects: Project[] = projectMetadata.map((meta) => {
+	const serviceGalleries = meta.services.map((serviceName) => ({
+		name: serviceName,
+		images: getServiceImages(meta, serviceName),
+		layout: meta.layouts[serviceName] ?? 'stack'
+	}));
+
+	const coverImage = resolveAssetPath(meta, meta.coverImage);
+	const cardImage = resolveAssetPath(meta, meta.cardImage ?? meta.coverImage);
+	const heroImage = resolveAssetPath(meta, meta.heroImage);
+
+	return {
+		id: meta.number,
+		slug: meta.slug,
+		title: meta.title,
+		subtitle: getSubtitle(meta),
+		description: meta.description,
+		year: String(meta.year),
+		client: meta.client,
+		location: meta.location,
+		services: [...meta.services],
+		image: cardImage,
+		imageSize: meta.imageSize,
+		coverImage,
+		logo: resolveAssetPath(meta, meta.logo),
+		heroImage,
+		serviceGalleries,
+		layouts: meta.layouts
+	};
+});

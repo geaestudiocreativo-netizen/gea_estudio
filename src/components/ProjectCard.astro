@@ -3,6 +3,7 @@ import styles from './ProjectCard.module.css';
 
 interface Props {
 	id: string;
+	slug: string;
 	number: string;
 	title: string;
 	description: string;
@@ -12,7 +13,7 @@ interface Props {
 	compactMobile?: boolean;
 }
 
-const { id, number, title, description, services, image, imageSize, compactMobile = false } = Astro.props as Props;
+const { id, slug, number, title, description, services, image, imageSize, compactMobile = false } = Astro.props as Props;
 
 const sizeClassByKey = {
 	small: styles.imageSmall,
@@ -28,16 +29,20 @@ const imageFileName = image ?? fallbackImage;
 const imagePath = imageFileName.startsWith('/images/projects/')
 	? imageFileName
 	: `/images/projects/${imageFileName}`;
+
+const projectHref = `/proyectos/${slug}`;
 ---
 
-<article class={`${styles.project} ${compactMobile ? styles.compactMobile : ''}`}>
-	<p class={styles.number}>{number}</p>
+<a class={styles.cardLink} href={projectHref} aria-label={`Ver proyecto ${title}`}>
+	<article class={`${styles.project} ${compactMobile ? styles.compactMobile : ''}`}>
+		<p class={styles.number}>{number}</p>
 
-	<div class={`${styles.media} ${sizeClass}`}>
-		<img src={imagePath} alt={title} class={styles.image} loading="lazy" decoding="async" />
-	</div>
+		<div class={`${styles.media} ${sizeClass}`}>
+			<img src={imagePath} alt={title} class={styles.image} loading="lazy" decoding="async" />
+		</div>
 
-	<h3 class={styles.title}>{title}</h3>
-	<p class={styles.description}>{description}</p>
-	<p class={styles.services}>{services.join(' · ')}</p>
-</article>
+		<h3 class={styles.title}>{title}</h3>
+		<p class={styles.description}>{description}</p>
+		<p class={styles.services}>{services.join(' · ')}</p>
+	</article>
+</a>
