@@ -14,6 +14,23 @@ interface ProjectItem {
 	imageSize: 'small' | 'medium' | 'large';
 }
 
+const serviceFilters = [
+	'Branding',
+	'Web',
+	'Fotografía',
+	'Decoración',
+	'Redes Sociales',
+	'Papelería',
+	'Cinematografía'
+];
+
+const normalizeService = (value: string) =>
+	value
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase()
+		.trim();
+
 const projects: ProjectItem[] = [
 	{
 		id: '01',
@@ -82,10 +99,34 @@ const projects: ProjectItem[] = [
 			</p>
 		</header>
 
+		<div class={styles.filtersSticky}>
+			<div class={styles.filtersBar} role="group" aria-label="Filtrar proyectos por servicio" data-filter-bar>
+				{
+					serviceFilters.map((service) => (
+						<button
+							type="button"
+							class={styles.filterPill}
+							data-service={normalizeService(service)}
+							aria-pressed="false"
+						>
+							{service}
+						</button>
+					))
+				}
+			</div>
+		</div>
+
 		<ul class={styles.grid} role="list" aria-label="Listado de proyectos">
 			{
 				projects.map((project) => (
-					<li class={styles.item}>
+					<li
+						class={styles.item}
+						data-project-item
+						data-services={project.services
+							.split('|')
+							.map((service) => normalizeService(service))
+							.join(',')}
+					>
 						<ProjectCard {...project} compactMobile />
 					</li>
 				))
@@ -93,4 +134,44 @@ const projects: ProjectItem[] = [
 		</ul>
 	</main>
 	<Footer />
+	<script>
+		const filterButtons = Array.from(
+			document.querySelectorAll('[data-filter-bar] [data-service]')
+		) as HTMLButtonElement[];
+		const projectItems = Array.from(
+			document.querySelectorAll('[data-project-item]')
+		) as HTMLElement[];
+		const activeServices = new Set();
+
+		const updateFilters = () => {
+			const hasActiveFilters = activeServices.size > 0;
+
+			for (const item of projectItems) {
+				const services = (item.getAttribute('data-services') || '')
+					.split(',')
+					.map((value) => value.trim())
+					.filter(Boolean);
+				const isVisible =
+					!hasActiveFilters || services.some((service) => activeServices.has(service));
+				item.hidden = !isVisible;
+			}
+		};
+
+		for (const button of filterButtons) {
+			button.addEventListener('click', () => {
+				const service = button.getAttribute('data-service');
+				if (!service) return;
+
+				if (activeServices.has(service)) {
+					activeServices.delete(service);
+					button.setAttribute('aria-pressed', 'false');
+				} else {
+					activeServices.add(service);
+					button.setAttribute('aria-pressed', 'true');
+				}
+
+				updateFilters();
+			});
+		}
+	</script>
 </Layout>
