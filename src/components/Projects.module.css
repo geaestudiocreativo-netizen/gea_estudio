@@ -34,6 +34,7 @@
 	scroll-snap-type: x proximity;
 	-webkit-overflow-scrolling: touch;
 	touch-action: pan-x;
+	overscroll-behavior-x: contain;
 	scrollbar-width: none;
 	-ms-overflow-style: none;
 }
@@ -54,6 +55,7 @@
 	flex: 0 0 auto;
 	width: 224px;
 	scroll-snap-align: start;
+	scroll-snap-stop: always;
 }
 
 @media (max-width: 959px) {
@@ -82,5 +84,16 @@
 
 	.item {
 		width: 224px;
+	}
+}
+
+@media (max-width: 767px) {
+	.carousel {
+		scroll-snap-type: x mandatory;
+	}
+
+	.item {
+		/* Leaves ~20px next-card preview with a 26px inter-card gap. */
+		width: calc(100% - 46px);
 	}
 }
