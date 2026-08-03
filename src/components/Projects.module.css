@@ -31,7 +31,7 @@
 	overflow-x: auto;
 	overflow-y: visible;
 	scroll-behavior: smooth;
-	scroll-snap-type: x proximity;
+	scroll-snap-type: x mandatory;
 	-webkit-overflow-scrolling: touch;
 	touch-action: pan-x;
 	overscroll-behavior-x: contain;
@@ -78,7 +78,7 @@
 	}
 
 	.track {
-		gap: 6px;
+		gap: 4px;
 		padding-right: 0;
 	}
 
@@ -94,6 +94,6 @@
 
 	.item {
 		/* Keeps a right-side next-card preview while preserving card dimensions. */
-		width: calc(100% - 46px);
+		width: 224px;
 	}
 }
