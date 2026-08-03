@@ -35,7 +35,7 @@
 	top: 0;
 	z-index: 8;
 	margin: clamp(54px, 7vw, 78px) auto 0;
-	padding: 14px 0 10px;
+	padding: 12px 0 9px;
 	background: rgba(248, 248, 248, 0.88);
 	backdrop-filter: blur(6px);
 	box-shadow: 0 1px 0 rgba(20, 23, 29, 0.08);
@@ -45,22 +45,26 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 10px 18px;
-	max-width: 920px;
+	gap: 8px 12px;
+	width: max-content;
+	max-width: 100%;
 	margin: 0 auto;
 }
 
 .filterPill {
 	appearance: none;
-	border: 2px solid #14171d;
+	border: 1px solid #14171d;
 	border-radius: 999px;
-	padding: 6px 34px;
+	width: fit-content;
+	flex: 0 0 auto;
+	padding: 5px 28px;
 	background: #ffffff;
 	color: #14171d;
 	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(20px, 2.5vw, 36px);
+	font-size: clamp(18px, 2.2vw, 32px);
 	font-weight: 400;
 	line-height: 1;
+	white-space: nowrap;
 	letter-spacing: 0.02em;
 	cursor: pointer;
 	transition: background-color 200ms ease, color 200ms ease;
@@ -113,18 +117,20 @@
 
 	.filtersSticky {
 		top: 0;
-		padding-top: 10px;
-		padding-bottom: 8px;
+		padding-top: 9px;
+		padding-bottom: 7px;
 		margin-top: 40px;
 	}
 
 	.filtersBar {
-		gap: 8px 10px;
+		gap: 5px 7px;
+		max-width: 100%;
 	}
 
 	.filterPill {
-		padding: 6px 16px;
-		font-size: clamp(11px, 3.9vw, 16px);
+		padding: 3px 10px;
+		border-radius: 20px;
+		font-size: 13px;
 	}
 
 	.grid {

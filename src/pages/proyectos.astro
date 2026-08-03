@@ -5,7 +5,19 @@ import Footer from '../components/Footer.astro';
 import { projects } from '../data/projects';
 import styles from './projects.module.css';
 
-const serviceFilters = [...new Set(projects.flatMap((project) => project.services))];
+const availableServices = new Set(projects.flatMap((project) => project.services));
+const serviceOrder = [
+	'Branding',
+	'Web',
+	'Fotografía',
+	'Decoración',
+	'Redes Sociales',
+	'Papelería',
+	'Cinematografía'
+];
+const serviceFilters = serviceOrder.filter(
+	(service) => availableServices.has(service) || service === 'Decoración'
+);
 
 const normalizeService = (value: string) =>
 	value
