@@ -2,27 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Footer from '../components/Footer.astro';
+import { projects } from '../data/projects';
 import styles from './projects.module.css';
 
-interface ProjectItem {
-	id: string;
-	number: string;
-	title: string;
-	description: string;
-	services: string;
-	image: string;
-	imageSize: 'small' | 'medium' | 'large';
-}
-
-const serviceFilters = [
-	'Branding',
-	'Web',
-	'Fotografía',
-	'Decoración',
-	'Redes Sociales',
-	'Papelería',
-	'Cinematografía'
-];
+const serviceFilters = [...new Set(projects.flatMap((project) => project.services))];
 
 const normalizeService = (value: string) =>
 	value
@@ -31,62 +14,6 @@ const normalizeService = (value: string) =>
 		.toLowerCase()
 		.trim();
 
-const projects: ProjectItem[] = [
-	{
-		id: '01',
-		number: '01',
-		title: 'Talleres Alonso',
-		description: 'Una identidad sólida para un taller con más de 40 años de historia.',
-		services: 'Branding | Web',
-		image: 'project-01.jpg',
-		imageSize: 'large'
-	},
-	{
-		id: '02',
-		number: '02',
-		title: '.G',
-		description: 'Una marca de tartas artesanales creada para celebrar momentos especiales.',
-		services: 'Branding | Web | Fotografia',
-		image: 'project-02.jpg',
-		imageSize: 'small'
-	},
-	{
-		id: '03',
-		number: '03',
-		title: 'Gea Artesanía',
-		description: 'Bisutería artesanal con piezas de diseño hechas en arcilla polimérica.',
-		services: 'Branding | Web | Fotografía',
-		image: 'project-03.jpg',
-		imageSize: 'large'
-	},
-	{
-		id: '04',
-		number: '04',
-		title: 'Foc',
-		description: 'Paellas de autor que revolucionan la forma de ver la comida tradicional valenciana.',
-		services: 'Redes Sociales | Fotografía | Cinematografía',
-		image: 'project-04.jpg',
-		imageSize: 'medium'
-	},
-	{
-		id: '05',
-		number: '05',
-		title: 'Margen',
-		description: 'Arcilla a través de una marca auténtica.',
-		services: 'Redes Sociales | Fotografía | Cinematografía',
-		image: 'project-05.jpg',
-		imageSize: 'small'
-	},
-	{
-		id: '06',
-		number: '06',
-		title: 'Trop',
-		description: 'Este proyecto gastronómico revoluciona la forma de ver la comida.',
-		services: 'Redes Sociales | Fotografía | Cinematografía',
-		image: 'project-06.jpg',
-		imageSize: 'medium'
-	}
-];
 ---
 
 <Layout>
@@ -101,6 +28,14 @@ const projects: ProjectItem[] = [
 
 		<div class={styles.filtersSticky}>
 			<div class={styles.filtersBar} role="group" aria-label="Filtrar proyectos por servicio" data-filter-bar>
+				<button
+					type="button"
+					class={styles.filterPill}
+					data-service="all"
+					aria-pressed="true"
+				>
+					Todos
+				</button>
 				{
 					serviceFilters.map((service) => (
 						<button
@@ -122,12 +57,11 @@ const projects: ProjectItem[] = [
 					<li
 						class={styles.item}
 						data-project-item
-						data-services={project.services
-							.split('|')
-							.map((service) => normalizeService(service))
-							.join(',')}
+						data-services={JSON.stringify(
+							project.services.map((service) => normalizeService(service))
+						)}
 					>
-						<ProjectCard {...project} compactMobile />
+						<ProjectCard {...project} number={project.id} compactMobile />
 					</li>
 				))
 			}
@@ -141,18 +75,19 @@ const projects: ProjectItem[] = [
 		const projectItems = Array.from(
 			document.querySelectorAll('[data-project-item]')
 		) as HTMLElement[];
-		const activeServices = new Set();
+		let activeService = 'all';
+		const projectServices = new Map<HTMLElement, string[]>(
+			projectItems.map((item) => {
+				const servicesRaw = item.getAttribute('data-services') || '[]';
+				const services = JSON.parse(servicesRaw) as string[];
+				return [item, services];
+			})
+		);
 
 		const updateFilters = () => {
-			const hasActiveFilters = activeServices.size > 0;
-
 			for (const item of projectItems) {
-				const services = (item.getAttribute('data-services') || '')
-					.split(',')
-					.map((value) => value.trim())
-					.filter(Boolean);
-				const isVisible =
-					!hasActiveFilters || services.some((service) => activeServices.has(service));
+				const services = projectServices.get(item) || [];
+				const isVisible = activeService === 'all' || services.includes(activeService);
 				item.hidden = !isVisible;
 			}
 		};
@@ -161,17 +96,18 @@ const projects: ProjectItem[] = [
 			button.addEventListener('click', () => {
 				const service = button.getAttribute('data-service');
 				if (!service) return;
+				if (service === activeService) return;
 
-				if (activeServices.has(service)) {
-					activeServices.delete(service);
-					button.setAttribute('aria-pressed', 'false');
-				} else {
-					activeServices.add(service);
-					button.setAttribute('aria-pressed', 'true');
+				activeService = service;
+
+				for (const filterButton of filterButtons) {
+					filterButton.setAttribute('aria-pressed', filterButton === button ? 'true' : 'false');
 				}
 
 				updateFilters();
 			});
 		}
+
+		updateFilters();
 	</script>
 </Layout>

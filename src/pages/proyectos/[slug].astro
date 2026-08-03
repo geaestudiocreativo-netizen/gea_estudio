@@ -1,14 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { projectRoutes } from '../../data/projects';
-
-interface ProjectRoute {
-	slug: string;
-	title: string;
-}
+import { projects } from '../../data/projects';
 
 export function getStaticPaths() {
-	return projectRoutes.map((project) => ({
+	return projects.map((project) => ({
 		params: { slug: project.slug },
 		props: { title: project.title }
 	}));

@@ -1,73 +1,7 @@
 ---
 import ProjectCard from './ProjectCard.astro';
 import styles from './Projects.module.css';
-
-interface ProjectItem {
-	id: string;
-	number: string;
-	title: string;
-	description: string;
-	services: string;
-	image: string;
-	imageSize: 'small' | 'medium' | 'large';
-}
-
-const projects: ProjectItem[] = [
-	{
-		id: '01',
-		number: '01',
-		title: 'Talleres Alonso',
-		description: 'Una identidad sólida para un taller con más de 40 años de historia.',
-		services: 'Branding | Web',
-		image: 'project-01.jpg',
-		imageSize: 'large'
-	},
-	{
-		id: '02',
-		number: '02',
-		title: '.G',
-		description: 'Una marca de tartas artesanales creada para celebrar momentos especiales.',
-		services: 'Branding | Web | Fotografia',
-		image: 'project-02.jpg',
-		imageSize: 'small'
-	},
-	{
-		id: '03',
-		number: '03',
-		title: 'Gea Artesanía',
-		description: 'Bisutería artesanal con piezas de diseño hechas en arcilla polimérica.',
-		services: 'Branding | Web | Fotografia',
-		image: 'project-03.jpg',
-		imageSize: 'large'
-	},
-	{
-		id: '04',
-		number: '04',
-		title: 'Foc',
-		description: 'Paellas de autor que revolucionan la forma de ver la comida tradicional valenciana.',
-		services: 'Redes Sociales | Fotografía | Cinematografía',
-		image: 'project-04.jpg',
-		imageSize: 'medium'
-	},
-	{
-		id: '05',
-		number: '05',
-		title: 'Margen',
-		description: 'Arcilla a través de una marca auténtica.',
-		services: 'Redes Sociales | Fotografía | Cinematografía',
-		image: 'project-05.jpg',
-		imageSize: 'small'
-	},
-	{
-		id: '06',
-		number: '06',
-		title: 'Trop',
-		description: 'Este proyecto gastronómico revoluciona la forma de ver la comida.',
-		services: 'Redes Sociales | Fotografía | Cinematografía',
-		image: 'project-06.jpg',
-		imageSize: 'medium'
-	}
-];
+import { projects } from '../data/projects';
 ---
 
 <section class={styles.projects} aria-labelledby="projects-title">
@@ -79,7 +13,7 @@ const projects: ProjectItem[] = [
 				{
 					projects.map((project) => (
 						<li class={styles.item}>
-							<ProjectCard {...project} />
+							<ProjectCard {...project} number={project.id} />
 						</li>
 					))
 				}

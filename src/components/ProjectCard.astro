@@ -6,7 +6,7 @@ interface Props {
 	number: string;
 	title: string;
 	description: string;
-	services: string;
+	services: string[];
 	image?: string;
 	imageSize: 'small' | 'medium' | 'large';
 	compactMobile?: boolean;
@@ -39,5 +39,5 @@ const imagePath = imageFileName.startsWith('/images/projects/')
 
 	<h3 class={styles.title}>{title}</h3>
 	<p class={styles.description}>{description}</p>
-	<p class={styles.services}>{services}</p>
+	<p class={styles.services}>{services.join(' · ')}</p>
 </article>
