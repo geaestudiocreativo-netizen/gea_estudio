@@ -107,10 +107,11 @@
 
 .section {
 	max-width: 1120px;
-	margin: clamp(72px, 9vw, 124px) auto 0;
+	margin: clamp(60px, 7vw, 80px) auto 0;
 }
 
 .fullBleedGallery {
+	margin-top: clamp(40px, 5vw, 56px);
 	width: 100vw;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
@@ -333,7 +334,7 @@
 	}
 
 	.section {
-		margin-top: 78px;
+		margin-top: clamp(60px, 10vw, 76px);
 	}
 
 	.sectionTitle {

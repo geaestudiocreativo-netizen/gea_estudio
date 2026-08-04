@@ -17,9 +17,9 @@ const project: ProjectFolderMetadata = {
 		layouts: ['editorial', 'gallery', 'hero']
 	},
 	assetsFolder: '01-talleres-alonso',
-	coverImage: '/images/projects/project-01.jpg',
-	logo: '/images/Logotype.svg',
-	heroImage: '/images/projects/project-01.jpg',
+	coverImage: 'hero.jpg',
+	logo: 'logo.png',
+	heroImage: 'hero.svg',
 	imageSize: 'large',
 	cardImage: '/images/projects/project-01.jpg'
 };
