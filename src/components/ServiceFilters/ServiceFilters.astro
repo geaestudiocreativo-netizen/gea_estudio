@@ -1,0 +1,28 @@
+---
+import styles from './ServiceFilters.module.css';
+import ServicePill from '../ServicePill/ServicePill.astro';
+
+interface ServiceFilterItem {
+	id: string;
+	label: string;
+}
+
+interface Props {
+	items: ServiceFilterItem[];
+}
+
+const { items } = Astro.props as Props;
+---
+
+<div class={styles.filtersBar} role="group" aria-label="Filtrar secciones del proyecto" data-services-nav>
+	{
+		items.map((item, index) => (
+			<ServicePill
+				label={item.label}
+				pressed={index === 0}
+				buttonRole="service-nav"
+				dataTarget={item.id}
+			/>
+		))
+	}
+</div>

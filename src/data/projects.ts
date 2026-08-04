@@ -1,31 +1,46 @@
 import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { ProjectFolderMetadata, ServiceLayout } from './projects/types';
+import type {
+	BrandingLayout,
+	EditorialLayoutName,
+	ProjectFolderMetadata,
+	ServiceName
+} from './projects/types';
 
-export interface ServiceGallery {
-	name: string;
-	images: string[];
-	layout: ServiceLayout;
-}
+type ProjectService =
+	| {
+			type: 'Branding';
+			gallery: 'branding';
+			layout: BrandingLayout;
+			images: string[];
+	  }
+	| {
+			type: Exclude<ServiceName, 'Branding'>;
+			gallery: 'stack';
+			images: string[];
+	  };
 
 export interface Project {
 	id: string;
 	slug: string;
+	assetsFolder: string;
 	title: string;
 	subtitle: string;
 	description: string;
 	year: string;
 	client: string;
 	location: string;
-	services: string[];
+	services: ProjectService[];
 	image: string;
 	imageSize: 'small' | 'medium' | 'large';
 	coverImage: string;
 	logo: string;
 	heroImage: string;
-	serviceGalleries: ServiceGallery[];
-	layouts: Partial<Record<string, ServiceLayout>>;
+	gallery: {
+		layouts: EditorialLayoutName[];
+		images: string[];
+	};
 }
 
 type ProjectModule = { default: ProjectFolderMetadata };
@@ -45,7 +60,7 @@ const toProjectImageUrl = (...segments: string[]) => `/images/projects/${encodeS
 
 const resolveAssetPath = (meta: ProjectFolderMetadata, asset: string) => {
 	if (asset.startsWith('/')) return asset;
-	return toProjectImageUrl(meta.assetFolder, asset);
+	return toProjectImageUrl(meta.assetsFolder, asset);
 };
 
 const toServiceFolderName = (serviceName: string) =>
@@ -58,7 +73,7 @@ const toServiceFolderName = (serviceName: string) =>
 
 const getServiceImages = (meta: ProjectFolderMetadata, serviceName: string) => {
 	const folder = toServiceFolderName(serviceName);
-	const folderPath = path.join(PUBLIC_PROJECTS_DIR, meta.assetFolder, folder);
+	const folderPath = path.join(PUBLIC_PROJECTS_DIR, meta.assetsFolder, folder);
 
 	if (!existsSync(folderPath)) {
 		return [];
@@ -68,17 +83,65 @@ const getServiceImages = (meta: ProjectFolderMetadata, serviceName: string) => {
 		.filter((entry) => entry.isFile() && IMAGE_FILE_RE.test(entry.name))
 		.map((entry) => entry.name)
 		.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
-		.map((filename) => toProjectImageUrl(meta.assetFolder, folder, filename));
+		.map((filename) => toProjectImageUrl(meta.assetsFolder, folder, filename));
+};
+
+const collectNestedProjectImages = (rootPath: string, relativeDir = ''): string[] => {
+	const currentPath = relativeDir ? path.join(rootPath, relativeDir) : rootPath;
+
+	if (!existsSync(currentPath)) {
+		return [];
+	}
+
+	const entries = readdirSync(currentPath, { withFileTypes: true });
+	const images: string[] = [];
+
+	for (const entry of entries) {
+		const nextRelativePath = relativeDir ? path.join(relativeDir, entry.name) : entry.name;
+
+		if (entry.isDirectory()) {
+			images.push(...collectNestedProjectImages(rootPath, nextRelativePath));
+			continue;
+		}
+
+		if (!entry.isFile() || !IMAGE_FILE_RE.test(entry.name) || !relativeDir) {
+			continue;
+		}
+
+		images.push(nextRelativePath);
+	}
+
+	return images;
+};
+
+const getProjectGalleryImages = (meta: ProjectFolderMetadata) => {
+	const projectPath = path.join(PUBLIC_PROJECTS_DIR, meta.assetsFolder);
+
+	return collectNestedProjectImages(projectPath)
+		.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
+		.map((relativePath) => toProjectImageUrl(meta.assetsFolder, ...relativePath.split(path.sep)));
 };
 
 const getSubtitle = (meta: ProjectFolderMetadata) => meta.subtitle ?? meta.description;
 
 export const projects: Project[] = projectMetadata.map((meta) => {
-	const serviceGalleries = meta.services.map((serviceName) => ({
-		name: serviceName,
-		images: getServiceImages(meta, serviceName),
-		layout: meta.layouts[serviceName] ?? 'stack'
-	}));
+	const services = meta.services.map((service): ProjectService => {
+		if (service.gallery === 'branding') {
+			return {
+				type: service.type,
+				gallery: 'branding',
+				layout: service.layout,
+				images: getServiceImages(meta, service.type)
+			};
+		}
+
+		return {
+			type: service.type,
+			gallery: 'stack',
+			images: getServiceImages(meta, service.type)
+		};
+	});
+	const galleryImages = getProjectGalleryImages(meta);
 
 	const coverImage = resolveAssetPath(meta, meta.coverImage);
 	const cardImage = resolveAssetPath(meta, meta.cardImage ?? meta.coverImage);
@@ -87,19 +150,22 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 	return {
 		id: meta.number,
 		slug: meta.slug,
+		assetsFolder: meta.assetsFolder,
 		title: meta.title,
 		subtitle: getSubtitle(meta),
 		description: meta.description,
 		year: String(meta.year),
 		client: meta.client,
 		location: meta.location,
-		services: [...meta.services],
+		services,
 		image: cardImage,
 		imageSize: meta.imageSize,
 		coverImage,
 		logo: resolveAssetPath(meta, meta.logo),
 		heroImage,
-		serviceGalleries,
-		layouts: meta.layouts
+		gallery: {
+			layouts: [...meta.gallery.layouts],
+			images: galleryImages
+		}
 	};
 });

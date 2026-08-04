@@ -7,7 +7,28 @@ export type ServiceName =
 	| 'Cinematografía'
 	| 'Decoración';
 
-export type ServiceLayout = 'editorial-a' | 'editorial-b' | 'editorial-c' | 'stack';
+export type BrandingLayout = 'branding-a' | 'branding-b' | 'branding-c';
+
+export type ServiceGalleryType = 'branding' | 'stack';
+
+export type EditorialLayoutName = 'editorial' | 'hero' | 'gallery';
+
+export interface ProjectGalleryMetadata {
+	layouts: EditorialLayoutName[];
+}
+
+type NonBrandingServiceName = Exclude<ServiceName, 'Branding'>;
+
+export type ProjectServiceMetadata =
+	| {
+			type: 'Branding';
+			gallery: 'branding';
+			layout: BrandingLayout;
+	  }
+	| {
+			type: NonBrandingServiceName;
+			gallery: 'stack';
+	  };
 
 export interface ProjectFolderMetadata {
 	slug: string;
@@ -18,12 +39,12 @@ export interface ProjectFolderMetadata {
 	year: number;
 	description: string;
 	subtitle?: string;
-	services: ServiceName[];
-	assetFolder: string;
+	services: ProjectServiceMetadata[];
+	gallery: ProjectGalleryMetadata;
+	assetsFolder: string;
 	coverImage: string;
 	logo: string;
 	heroImage: string;
-	layouts: Partial<Record<ServiceName, ServiceLayout>>;
 	imageSize: 'small' | 'medium' | 'large';
 	cardImage?: string;
 }

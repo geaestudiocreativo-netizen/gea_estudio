@@ -1,0 +1,28 @@
+---
+import styles from './ServicePill.module.css';
+
+interface Props {
+	label: string;
+	pressed?: boolean;
+	dataTarget?: string;
+	dataService?: string;
+	buttonRole?: 'service-nav' | 'project-filter';
+}
+
+const {
+	label,
+	pressed = false,
+	dataTarget,
+	dataService,
+	buttonRole = 'service-nav'
+} = Astro.props as Props;
+
+const roleAttributes =
+	buttonRole === 'service-nav'
+		? { 'data-service-button': true, 'data-target': dataTarget }
+		: { 'data-service': dataService };
+---
+
+<button type="button" class={styles.pill} aria-pressed={pressed ? 'true' : 'false'} {...roleAttributes}>
+	{label}
+</button>

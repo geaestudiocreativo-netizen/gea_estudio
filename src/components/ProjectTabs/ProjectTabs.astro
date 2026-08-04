@@ -1,0 +1,32 @@
+---
+import styles from './ProjectTabs.module.css';
+
+interface Tab {
+	id: string;
+	label: string;
+}
+
+interface Props {
+	sections: Tab[];
+	activeTab?: string;
+}
+
+const { sections, activeTab } = Astro.props as Props;
+const initialActiveTab = activeTab ?? sections[0]?.id ?? '';
+---
+
+<div class={styles.tabs} aria-label="Navegación de secciones del proyecto" data-project-tabs>
+	{
+		sections.map((tab) => (
+			<a
+				class={styles.tab}
+				href={`#${tab.id}`}
+				aria-current={tab.id === initialActiveTab ? 'true' : 'false'}
+				data-project-tab
+				data-target={tab.id}
+			>
+				{tab.label}
+			</a>
+		))
+	}
+</div>

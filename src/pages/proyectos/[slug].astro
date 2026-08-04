@@ -1,8 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Footer from '../../components/Footer.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import ProjectTabs from '../../components/ProjectTabs/ProjectTabs.astro';
+import EditorialGallery from '../../components/EditorialGallery/EditorialGallery.astro';
 import { projects } from '../../data/projects';
-import projectsStyles from '../projects.module.css';
 import styles from './project-detail.module.css';
 
 export function getStaticPaths() {
@@ -34,28 +35,11 @@ const toSectionId = (name: string) =>
 		.trim()
 		.replace(/\s+/g, '-');
 
-const serviceGalleryByName = new Map(project.serviceGalleries.map((gallery) => [gallery.name, gallery]));
-
-const serviceSections = project.services
-	.map((serviceName) => {
-		const gallery = serviceGalleryByName.get(serviceName);
-		if (!gallery || gallery.images.length === 0) return null;
-
-		return {
-			id: toSectionId(serviceName),
-			title: serviceName,
-			images: gallery.images,
-			layout: gallery.layout,
-			usesEditorialLayout: gallery.layout.startsWith('editorial')
-		};
-	})
-	.filter((section): section is NonNullable<typeof section> => section !== null);
-
-const getBrandingLayoutClass = (layout: string) => {
-	if (layout === 'editorial-b') return styles['branding-b'];
-	if (layout === 'editorial-c') return styles['branding-c'];
-	return styles['branding-a'];
-};
+const sections = project.services.map((service) => ({
+	id: toSectionId(service.type),
+	title: service.type,
+	images: service.images
+}));
 ---
 
 <Layout>
@@ -73,57 +57,19 @@ const getBrandingLayoutClass = (layout: string) => {
 
 		<div class={styles.divider} aria-hidden="true"></div>
 
-		<nav class={styles.servicesNavWrap} aria-label="Servicios del proyecto">
-			<div class={`${styles.servicesNav} ${projectsStyles.filtersBar}`} data-services-nav>
-				{
-					serviceSections.map((section, index) => (
-						<button
-							type="button"
-							class={projectsStyles.filterPill}
-							data-service-button
-							data-target={section.id}
-							aria-pressed={index === 0 ? 'true' : 'false'}
-						>
-							{section.title}
-						</button>
-					))
-				}
+		<nav class={styles.sectionTabsWrap} aria-label="Secciones del proyecto">
+			<div class={styles.sectionTabs}>
+				<ProjectTabs sections={sections.map((section) => ({ id: section.id, label: section.title }))} />
 			</div>
 		</nav>
 
 		{
-			serviceSections.map((section) => (
-				<section id={section.id} class={styles.section} aria-labelledby={`section-${section.id}`} data-service-section>
+			sections.map((section) => (
+				<section id={section.id} class={styles.section} aria-labelledby={`section-${section.id}`} data-project-section>
 					<h2 id={`section-${section.id}`} class={styles.sectionTitle}>{section.title}</h2>
-					{
-						section.usesEditorialLayout ? (
-							<div class={`${styles.brandingGrid} ${getBrandingLayoutClass(section.layout)}`}>
-								{section.images.map((image, index) => (
-									<figure class={styles.brandingItem}>
-										<img
-											src={image}
-											alt={`${project.title} branding ${index + 1}`}
-											loading="lazy"
-											decoding="async"
-										/>
-									</figure>
-								))}
-							</div>
-						) : (
-							<div class={styles.stackGallery}>
-								{section.images.map((image, index) => (
-									<figure class={styles.galleryItem}>
-										<img
-											src={image}
-											alt={`${project.title} ${section.title} ${index + 1}`}
-											loading="lazy"
-											decoding="async"
-										/>
-									</figure>
-								))}
-							</div>
-						)
-					}
+					<div class={styles.fullBleedGallery}>
+						<EditorialGallery images={section.images} projectTitle={project.title} />
+					</div>
 				</section>
 			))
 		}
@@ -141,29 +87,31 @@ const getBrandingLayoutClass = (layout: string) => {
 	</main>
 	<Footer />
 	<script>
-		const serviceButtons = Array.from(
-			document.querySelectorAll('[data-service-button]')
-		) as HTMLButtonElement[];
-		const sections = Array.from(document.querySelectorAll('[data-service-section]')) as HTMLElement[];
+		const tabs = Array.from(document.querySelectorAll('[data-project-tab]')) as HTMLAnchorElement[];
+		const sections = Array.from(document.querySelectorAll('[data-project-section]')) as HTMLElement[];
 
-		const setActiveButton = (targetId: string) => {
-			for (const button of serviceButtons) {
-				const isActive = button.getAttribute('data-target') === targetId;
-				button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+		const setActiveTab = (targetId: string) => {
+			for (const tab of tabs) {
+				const isActive = tab.getAttribute('data-target') === targetId;
+				if (isActive) {
+					tab.setAttribute('aria-current', 'true');
+				} else {
+					tab.removeAttribute('aria-current');
+				}
 			}
 		};
 
-		for (const button of serviceButtons) {
-			button.addEventListener('click', (event) => {
+		for (const tab of tabs) {
+			tab.addEventListener('click', (event) => {
 				event.preventDefault();
-				const targetId = button.getAttribute('data-target');
+				const targetId = tab.getAttribute('data-target');
 				if (!targetId) return;
 				const target = document.getElementById(targetId);
 				if (!target) return;
 
-				setActiveButton(targetId);
-
+				setActiveTab(targetId);
 				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				history.replaceState(null, '', `#${targetId}`);
 			});
 		}
 
@@ -177,7 +125,7 @@ const getBrandingLayoutClass = (layout: string) => {
 				const id = visible.target.getAttribute('id');
 				if (!id) return;
 
-				setActiveButton(id);
+				setActiveTab(id);
 			},
 			{ rootMargin: '-35% 0px -55% 0px', threshold: [0.2, 0.45, 0.7] }
 		);

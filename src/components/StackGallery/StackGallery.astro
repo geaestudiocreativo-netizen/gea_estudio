@@ -1,0 +1,21 @@
+---
+import styles from './StackGallery.module.css';
+
+interface Props {
+	images: string[];
+	projectTitle: string;
+	serviceType: string;
+}
+
+const { images, projectTitle, serviceType } = Astro.props as Props;
+---
+
+<div class={styles.stackGallery}>
+	{
+		images.map((image, index) => (
+			<figure class={styles.galleryItem}>
+				<img src={image} alt={`${projectTitle} ${serviceType} ${index + 1}`} loading="lazy" decoding="async" />
+			</figure>
+		))
+	}
+</div>

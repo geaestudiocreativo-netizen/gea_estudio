@@ -1,0 +1,45 @@
+---
+import styles from './EditorialGallery.module.css';
+
+interface Props {
+	images: readonly string[];
+	projectTitle: string;
+}
+
+const { images, projectTitle } = Astro.props as Props;
+const IMAGES_PER_BLOCK = 7;
+
+const toOrderedBlocks = (orderedImages: readonly string[]) => {
+	const orderedBlocks: string[][] = [];
+
+	for (let index = 0; index < orderedImages.length; index += IMAGES_PER_BLOCK) {
+		const blockImages = orderedImages.slice(index, index + IMAGES_PER_BLOCK);
+		if (blockImages.length > 0) {
+			orderedBlocks.push([...blockImages]);
+		}
+	}
+
+	return orderedBlocks;
+};
+
+const blocks = toOrderedBlocks(images);
+---
+
+{
+	blocks.map((blockImages, blockIndex) => (
+		<div class={`${styles.block} ${styles[`count${blockImages.length}`] ?? styles.count7}`}>
+			{
+				blockImages.map((image, index) => (
+					<figure class={`${styles.item} ${styles[`item${index + 1}`] ?? ''}`}>
+						<img
+							src={image}
+							alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + index + 1}`}
+							loading="lazy"
+							decoding="async"
+						/>
+					</figure>
+				))
+			}
+		</div>
+	))
+}

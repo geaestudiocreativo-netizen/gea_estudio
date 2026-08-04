@@ -1,0 +1,178 @@
+.block {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.9fr);
+	gap: 0;
+	row-gap: 0;
+	column-gap: 0;
+}
+
+.item {
+	margin: 0;
+	overflow: hidden;
+}
+
+.item img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.count7 .item1 {
+	grid-column: 1;
+	grid-row: 1;
+	aspect-ratio: 3 / 4;
+}
+
+.count7 .item2 {
+	grid-column: 2;
+	grid-row: 1 / span 2;
+	aspect-ratio: 16 / 13;
+}
+
+.count7 .item3 {
+	grid-column: 1;
+	grid-row: 2;
+	aspect-ratio: 3 / 4;
+}
+
+.count7 .item4,
+.count7 .item7 {
+	grid-column: 1 / -1;
+	aspect-ratio: 16 / 6;
+}
+
+.count7 .item5 {
+	grid-column: 1;
+	grid-row: 4;
+	aspect-ratio: 16 / 10;
+}
+
+.count7 .item6 {
+	grid-column: 2;
+	grid-row: 4;
+	aspect-ratio: 3 / 4;
+}
+
+.count6 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+
+.count6 .item {
+	grid-column: span 1;
+	aspect-ratio: 4 / 3;
+}
+
+.count6 .item3,
+.count6 .item6 {
+	grid-column: 1 / -1;
+	aspect-ratio: 16 / 8;
+}
+
+.count5 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.count5 .item {
+	grid-column: span 1;
+	aspect-ratio: 4 / 3;
+}
+
+.count5 .item3,
+.count5 .item5 {
+	grid-column: 1 / -1;
+	aspect-ratio: 16 / 8;
+}
+
+.count4 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.count4 .item1 {
+	grid-column: 1;
+	aspect-ratio: 3 / 4;
+}
+
+.count4 .item2 {
+	grid-column: 2;
+	aspect-ratio: 16 / 10;
+}
+
+.count4 .item3,
+.count4 .item4 {
+	grid-column: 1 / -1;
+	aspect-ratio: 16 / 8;
+}
+
+.count3 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.count3 .item1,
+.count3 .item2 {
+	grid-column: span 1;
+	aspect-ratio: 4 / 3;
+}
+
+.count3 .item3 {
+	grid-column: 1 / -1;
+	aspect-ratio: 16 / 8;
+}
+
+.count2 {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.count2 .item {
+	grid-column: span 1;
+	aspect-ratio: 4 / 3;
+}
+
+.count1 {
+	grid-template-columns: 1fr;
+}
+
+.count1 .item1 {
+	grid-column: 1 / -1;
+	aspect-ratio: 16 / 10;
+}
+
+@media (max-width: 1023px) {
+	.block {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.block :where(.item1, .item2, .item3, .item4, .item5, .item6, .item7) {
+		grid-column: span 1;
+		grid-row: span 1;
+		aspect-ratio: 4 / 3;
+	}
+
+	.count7 .item2,
+	.count7 .item4,
+	.count7 .item7,
+	.count6 .item3,
+	.count6 .item6,
+	.count5 .item3,
+	.count5 .item5,
+	.count4 .item3,
+	.count4 .item4,
+	.count3 .item3,
+	.count1 .item1 {
+		grid-column: 1 / -1;
+		aspect-ratio: 16 / 10;
+	}
+}
+
+@media (max-width: 767px) {
+	.block {
+		grid-template-columns: 1fr;
+	}
+
+	.block :where(.item1, .item2, .item3, .item4, .item5, .item6, .item7) {
+		grid-column: 1 / -1;
+		grid-row: span 1;
+		aspect-ratio: 4 / 3;
+	}
+}

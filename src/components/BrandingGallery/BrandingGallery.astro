@@ -1,0 +1,24 @@
+---
+import styles from './BrandingGallery.module.css';
+
+interface Props {
+	images: string[];
+	projectTitle: string;
+	serviceType: string;
+	layout: 'branding-a' | 'branding-b' | 'branding-c';
+}
+
+const { images, projectTitle, serviceType, layout } = Astro.props as Props;
+
+const layoutClass = styles[layout] ?? styles['branding-a'];
+---
+
+<div class={`${styles.brandingGrid} ${layoutClass}`}>
+	{
+		images.map((image, index) => (
+			<figure class={styles.brandingItem}>
+				<img src={image} alt={`${projectTitle} ${serviceType} ${index + 1}`} loading="lazy" decoding="async" />
+			</figure>
+		))
+	}
+</div>

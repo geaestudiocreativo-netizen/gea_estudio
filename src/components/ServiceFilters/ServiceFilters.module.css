@@ -1,0 +1,16 @@
+.filtersBar {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+	width: max-content;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+	.filtersBar {
+		gap: 7px;
+		max-width: 100%;
+	}
+}

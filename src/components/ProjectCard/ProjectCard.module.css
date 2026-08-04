@@ -142,19 +142,12 @@
 	.compactMobile .description {
 		margin-top: 4px;
 		font-size: 0.9rem;
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
 	}
 
 	.compactMobile .services {
 		margin-top: 4px;
 		font-size: 0.76rem;
 		opacity: 0.82;
-		display: -webkit-box;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
+		white-space: nowrap;
 	}
 }

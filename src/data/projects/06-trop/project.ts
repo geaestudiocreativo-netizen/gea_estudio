@@ -9,16 +9,18 @@ const project: ProjectFolderMetadata = {
 	year: 2026,
 	description: 'Este proyecto gastronómico revoluciona la forma de ver la comida.',
 	subtitle: 'Dirección de arte y contenido para una experiencia gastronómica urbana.',
-	services: ['Redes Sociales', 'Fotografía', 'Cinematografía'],
-	assetFolder: '06-trop',
+	services: [
+		{ type: 'Redes Sociales', gallery: 'stack' },
+		{ type: 'Fotografía', gallery: 'stack' },
+		{ type: 'Cinematografía', gallery: 'stack' }
+	],
+	gallery: {
+		layouts: ['editorial', 'gallery', 'hero']
+	},
+	assetsFolder: '06-trop',
 	coverImage: '/images/projects/project-06.jpg',
 	logo: '/images/Logotype.svg',
 	heroImage: '/images/projects/project-06.jpg',
-	layouts: {
-		'Fotografía': 'stack',
-		'Redes Sociales': 'stack',
-		'Cinematografía': 'stack'
-	},
 	imageSize: 'medium',
 	cardImage: '/images/projects/project-06.jpg'
 };

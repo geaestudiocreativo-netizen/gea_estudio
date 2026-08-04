@@ -1,12 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import Footer from '../components/Footer.astro';
-import { projects } from '../data/projects';
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard/ProjectCard.astro';
+import Footer from '../../components/Footer/Footer.astro';
+import ServicePill from '../../components/ServicePill/ServicePill.astro';
+import { projects } from '../../data/projects';
+import type { ServiceName } from '../../data/projects/types';
 import styles from './projects.module.css';
 
-const availableServices = new Set(projects.flatMap((project) => project.services));
-const serviceOrder = [
+const availableServices = new Set(projects.flatMap((project) => project.services.map((service) => service.type)));
+const serviceOrder: ServiceName[] = [
 	'Branding',
 	'Web',
 	'Fotografía',
@@ -40,24 +42,14 @@ const normalizeService = (value: string) =>
 
 		<div class={styles.filtersSticky}>
 			<div class={styles.filtersBar} role="group" aria-label="Filtrar proyectos por servicio" data-filter-bar>
-				<button
-					type="button"
-					class={styles.filterPill}
-					data-service="all"
-					aria-pressed="true"
-				>
-					Todos
-				</button>
+				<ServicePill label="Todos" pressed buttonRole="project-filter" dataService="all" />
 				{
 					serviceFilters.map((service) => (
-						<button
-							type="button"
-							class={styles.filterPill}
-							data-service={normalizeService(service)}
-							aria-pressed="false"
-						>
-							{service}
-						</button>
+						<ServicePill
+							label={service}
+							buttonRole="project-filter"
+							dataService={normalizeService(service)}
+						/>
 					))
 				}
 			</div>
@@ -70,7 +62,7 @@ const normalizeService = (value: string) =>
 						class={styles.item}
 						data-project-item
 						data-services={JSON.stringify(
-							project.services.map((service) => normalizeService(service))
+							project.services.map((service) => normalizeService(service.type))
 						)}
 					>
 						<ProjectCard {...project} number={project.id} compactMobile variant="grid" />

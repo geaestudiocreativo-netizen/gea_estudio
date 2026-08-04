@@ -1,13 +1,15 @@
 ---
 import styles from './ProjectCard.module.css';
 
+type ServiceItem = string | { type: string };
+
 interface Props {
 	id: string;
 	slug: string;
 	number: string;
 	title: string;
 	description: string;
-	services: string[];
+	services: ServiceItem[];
 	image?: string;
 	imageSize: 'small' | 'medium' | 'large';
 	compactMobile?: boolean;
@@ -56,6 +58,7 @@ const imagePath = imageFileName.startsWith('/images/projects/')
 	: `/images/projects/${imageFileName}`;
 
 const projectHref = `/proyectos/${slug}`;
+const serviceLabels = services.map((service) => (typeof service === 'string' ? service : service.type));
 ---
 
 <a class={`${styles.cardLink} ${cardLinkVariantClass}`} href={projectHref} aria-label={`Ver proyecto ${title}`}>
@@ -68,6 +71,6 @@ const projectHref = `/proyectos/${slug}`;
 
 		<h3 class={styles.title}>{title}</h3>
 		<p class={styles.description}>{description}</p>
-		<p class={styles.services}>{services.join(' · ')}</p>
+		<p class={styles.services}>{serviceLabels.join(' · ')}</p>
 	</article>
 </a>

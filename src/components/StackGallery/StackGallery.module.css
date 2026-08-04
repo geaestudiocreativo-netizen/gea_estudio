@@ -1,0 +1,22 @@
+.stackGallery {
+	margin-top: clamp(30px, 4.5vw, 52px);
+	display: grid;
+	gap: clamp(18px, 2.4vw, 28px);
+}
+
+.galleryItem {
+	margin: 0;
+}
+
+.galleryItem img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+@media (max-width: 767px) {
+	.stackGallery {
+		margin-top: 24px;
+		gap: 14px;
+	}
+}
