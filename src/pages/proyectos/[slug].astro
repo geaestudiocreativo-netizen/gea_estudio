@@ -38,7 +38,7 @@ const sections = project.services.map((service) => ({
 	id: toSectionId(service.type),
 	title: service.type,
 	images: service.images
-})).filter((section) => section.images.length > 0);
+}));
 ---
 
 <Layout>
