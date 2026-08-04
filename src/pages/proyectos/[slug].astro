@@ -38,7 +38,7 @@ const sections = project.services.map((service) => ({
 	id: toSectionId(service.type),
 	title: service.type,
 	images: service.images
-}));
+})).filter((section) => section.images.length > 0);
 ---
 
 <Layout>
@@ -55,11 +55,15 @@ const sections = project.services.map((service) => ({
 
 		<div class={styles.divider} aria-hidden="true"></div>
 
-		<nav class={styles.sectionTabsWrap} aria-label="Secciones del proyecto">
-			<div class={styles.sectionTabs}>
-				<ProjectTabs sections={sections.map((section) => ({ id: section.id, label: section.title }))} />
-			</div>
-		</nav>
+		{
+			sections.length > 0 && (
+				<nav class={styles.sectionTabsWrap} aria-label="Secciones del proyecto">
+					<div class={styles.sectionTabs}>
+						<ProjectTabs sections={sections.map((section) => ({ id: section.id, label: section.title }))} />
+					</div>
+				</nav>
+			)
+		}
 
 		{
 			sections.map((section, index) => (
