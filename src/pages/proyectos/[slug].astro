@@ -103,6 +103,7 @@ const sections = project.services.map((service) => ({
 	<script>
 		const tabs = Array.from(document.querySelectorAll('[data-project-tab]')) as HTMLButtonElement[];
 		const panels = Array.from(document.querySelectorAll('[data-project-panel]')) as HTMLElement[];
+		const tabsWrap = document.querySelector('[aria-label="Secciones del proyecto"]') as HTMLElement | null;
 
 		const setActiveTab = (targetId: string) => {
 			for (const tab of tabs) {
@@ -118,10 +119,18 @@ const sections = project.services.map((service) => ({
 		};
 
 		const switchTabInPlace = (targetId: string) => {
-			const previousY = window.scrollY;
 			setActiveTab(targetId);
 			requestAnimationFrame(() => {
-				window.scrollTo(0, previousY);
+				const targetTitle = document.getElementById(`section-${targetId}`);
+				if (!targetTitle) return;
+
+				const stickyOffset = tabsWrap?.getBoundingClientRect().height ?? 0;
+				const targetTop = window.scrollY + targetTitle.getBoundingClientRect().top - stickyOffset;
+
+				window.scrollTo({
+					top: Math.max(0, targetTop),
+					behavior: 'smooth'
+				});
 			});
 		};
 
