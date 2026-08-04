@@ -12,9 +12,14 @@ const project: ProjectFolderMetadata = {
 	subtitle:
 		'Una marca de pastelería artesanal con sensibilidad editorial y carácter contemporáneo.',
 	services: [
-		{ type: 'Branding', gallery: 'branding', layout: 'branding-a' },
-		{ type: 'Web', gallery: 'stack' },
-		{ type: 'Fotografía', gallery: 'stack' }
+		{
+			type: 'Branding',
+			gallery: 'branding',
+			layout: 'branding-a',
+			images: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg']
+		},
+		{ type: 'Web', gallery: 'stack', images: [] },
+		{ type: 'Fotografía', gallery: 'stack', images: [] }
 	],
 	gallery: {
 		layouts: ['editorial', 'gallery', 'hero']

@@ -34,10 +34,14 @@ const toSectionId = (name: string) =>
 		.trim()
 		.replace(/\s+/g, '-');
 
+const encodeSegments = (...segments: string[]) => segments.map((segment) => encodeURIComponent(segment)).join('/');
+
+const toProjectImageUrl = (...segments: string[]) => `/images/projects/${encodeSegments(...segments)}`;
+
 const sections = project.services.map((service) => ({
 	id: toSectionId(service.type),
 	title: service.type,
-	images: service.images
+	images: (service.images ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename))
 }));
 ---
 

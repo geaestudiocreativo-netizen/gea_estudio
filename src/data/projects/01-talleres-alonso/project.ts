@@ -10,8 +10,13 @@ const project: ProjectFolderMetadata = {
 	description: 'Una identidad sólida para un taller con más de 40 años de historia.',
 	subtitle: 'Identidad visual y ecosistema digital para un taller con legado familiar.',
 	services: [
-		{ type: 'Branding', gallery: 'branding', layout: 'branding-a' },
-		{ type: 'Web', gallery: 'stack' }
+		{
+			type: 'Branding',
+			gallery: 'branding',
+			layout: 'branding-a',
+			images: ['01.jpg', '02.jpg', '03.jpg', '04.jpg']
+		},
+		{ type: 'Web', gallery: 'stack', images: [] }
 	],
 	gallery: {
 		layouts: ['editorial', 'gallery', 'hero']

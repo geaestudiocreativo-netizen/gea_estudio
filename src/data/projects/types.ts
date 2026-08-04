@@ -24,10 +24,12 @@ export type ProjectServiceMetadata =
 			type: 'Branding';
 			gallery: 'branding';
 			layout: BrandingLayout;
+			images?: string[];
 	  }
 	| {
 			type: NonBrandingServiceName;
 			gallery: 'stack';
+			images?: string[];
 	  };
 
 export interface ProjectFolderMetadata {
