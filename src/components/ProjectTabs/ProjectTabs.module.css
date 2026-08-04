@@ -15,6 +15,9 @@
 }
 
 .tab {
+	appearance: none;
+	border: 0;
+	background: transparent;
 	position: relative;
 	display: inline-flex;
 	align-items: center;
@@ -25,9 +28,9 @@
 	font-weight: 400;
 	line-height: 1.2;
 	letter-spacing: 0.01em;
-	text-decoration: none;
 	color: #1d2026;
 	white-space: nowrap;
+	cursor: pointer;
 }
 
 .tab::after {
@@ -44,11 +47,11 @@
 	transition: opacity 180ms ease, transform 180ms ease;
 }
 
-.tab[aria-current='true'] {
+.tab[aria-selected='true'] {
 	font-weight: 700;
 }
 
-.tab[aria-current='true']::after {
+.tab[aria-selected='true']::after {
 	opacity: 1;
 	transform: scaleX(1);
 }
@@ -61,8 +64,7 @@
 @media (max-width: 767px) {
 	.tabs {
 		gap: 16px;
-		justify-content: flex-start;
-		width: 100%;
+		justify-content: center;
 	}
 
 	.tab {

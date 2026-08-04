@@ -24,8 +24,7 @@ if (projectIndex === -1) {
 const project = projects[projectIndex];
 const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
 const nextProject = projects[(projectIndex + 1) % projects.length];
-const locationLabel = project.location.replace('España', 'Spain').toUpperCase();
-const clientLabel = project.client.toUpperCase();
+const clientLabel = project.client.replace(/^by\s+/i, '').toUpperCase();
 
 const toSectionId = (name: string) =>
 	name
@@ -47,8 +46,7 @@ const sections = project.services.map((service) => ({
 		<header class={styles.projectHeader}>
 			<img class={styles.projectLogo} src={project.logo} alt={project.title} loading="eager" decoding="async" />
 			<p class={styles.projectDescription}>{project.description}</p>
-			<p class={styles.projectMetaLine}>BY {clientLabel} <span aria-hidden="true">·</span> {locationLabel}</p>
-			<p class={styles.projectYear}>{project.year}</p>
+			<p class={styles.projectMetaLine}>BY {clientLabel}</p>
 		</header>
 
 		<figure class={styles.cover}>
@@ -64,8 +62,16 @@ const sections = project.services.map((service) => ({
 		</nav>
 
 		{
-			sections.map((section) => (
-				<section id={section.id} class={styles.section} aria-labelledby={`section-${section.id}`} data-project-section>
+			sections.map((section, index) => (
+				<section
+					id={`panel-${section.id}`}
+					class={styles.section}
+					role="tabpanel"
+					aria-labelledby={`tab-${section.id}`}
+					data-project-panel
+					data-panel-id={section.id}
+					hidden={index !== 0}
+				>
 					<h2 id={`section-${section.id}`} class={styles.sectionTitle}>{section.title}</h2>
 					<div class={styles.fullBleedGallery}>
 						<EditorialGallery images={section.images} projectTitle={project.title} />
@@ -76,29 +82,39 @@ const sections = project.services.map((service) => ({
 
 		<nav class={styles.projectNav} aria-label="Navegación de proyectos">
 			<a class={styles.projectLink} href={`/proyectos/${previousProject.slug}`}>
-				<span class={styles.projectNavLabel}>Proyecto anterior</span>
+				<span class={styles.projectNavLabel}>← Proyecto anterior</span>
 				<span class={styles.projectNavTitle}>{previousProject.title}</span>
 			</a>
 			<a class={styles.projectLink} href={`/proyectos/${nextProject.slug}`}>
-				<span class={styles.projectNavLabel}>Siguiente proyecto</span>
+				<span class={styles.projectNavLabel}>Proyecto siguiente →</span>
 				<span class={styles.projectNavTitle}>{nextProject.title}</span>
 			</a>
 		</nav>
 	</main>
 	<Footer />
 	<script>
-		const tabs = Array.from(document.querySelectorAll('[data-project-tab]')) as HTMLAnchorElement[];
-		const sections = Array.from(document.querySelectorAll('[data-project-section]')) as HTMLElement[];
+		const tabs = Array.from(document.querySelectorAll('[data-project-tab]')) as HTMLButtonElement[];
+		const panels = Array.from(document.querySelectorAll('[data-project-panel]')) as HTMLElement[];
 
 		const setActiveTab = (targetId: string) => {
 			for (const tab of tabs) {
 				const isActive = tab.getAttribute('data-target') === targetId;
-				if (isActive) {
-					tab.setAttribute('aria-current', 'true');
-				} else {
-					tab.removeAttribute('aria-current');
-				}
+				tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+				tab.tabIndex = isActive ? 0 : -1;
 			}
+
+			for (const panel of panels) {
+				const isActive = panel.getAttribute('data-panel-id') === targetId;
+				panel.hidden = !isActive;
+			}
+		};
+
+		const switchTabInPlace = (targetId: string) => {
+			const previousY = window.scrollY;
+			setActiveTab(targetId);
+			requestAnimationFrame(() => {
+				window.scrollTo(0, previousY);
+			});
 		};
 
 		for (const tab of tabs) {
@@ -106,32 +122,34 @@ const sections = project.services.map((service) => ({
 				event.preventDefault();
 				const targetId = tab.getAttribute('data-target');
 				if (!targetId) return;
-				const target = document.getElementById(targetId);
-				if (!target) return;
+				switchTabInPlace(targetId);
+			});
 
-				setActiveTab(targetId);
-				target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-				history.replaceState(null, '', `#${targetId}`);
+			tab.addEventListener('keydown', (event) => {
+				const currentIndex = tabs.indexOf(tab);
+				if (currentIndex === -1) return;
+
+				let nextIndex = currentIndex;
+				if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+				if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+				if (event.key === 'Home') nextIndex = 0;
+				if (event.key === 'End') nextIndex = tabs.length - 1;
+
+				if (nextIndex === currentIndex) return;
+				event.preventDefault();
+				const nextTab = tabs[nextIndex];
+				const targetId = nextTab?.getAttribute('data-target');
+				if (!targetId) return;
+
+				switchTabInPlace(targetId);
+				nextTab.focus();
 			});
 		}
 
-		const observer = new IntersectionObserver(
-			(entries) => {
-				const visible = entries
-					.filter((entry) => entry.isIntersecting)
-					.sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-				if (!visible) return;
-				const id = visible.target.getAttribute('id');
-				if (!id) return;
-
-				setActiveTab(id);
-			},
-			{ rootMargin: '-35% 0px -55% 0px', threshold: [0.2, 0.45, 0.7] }
-		);
-
-		for (const section of sections) {
-			observer.observe(section);
+		const initialActiveTab = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') ?? tabs[0];
+		const initialTargetId = initialActiveTab?.getAttribute('data-target');
+		if (initialTargetId) {
+			setActiveTab(initialTargetId);
 		}
 	</script>
 </Layout>

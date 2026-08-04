@@ -27,19 +27,87 @@ const blocks = toOrderedBlocks(images);
 
 {
 	blocks.map((blockImages, blockIndex) => (
-		<div class={`${styles.block} ${styles[`count${blockImages.length}`] ?? styles.count7}`}>
-			{
-				blockImages.map((image, index) => (
-					<figure class={`${styles.item} ${styles[`item${index + 1}`] ?? ''}`}>
+		blockImages.length === 7 ? (
+			<div class={styles.layout7}>
+				<div class={styles.topBlock}>
+					<figure class={`${styles.item} ${styles.item1}`}>
 						<img
-							src={image}
-							alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + index + 1}`}
+							src={blockImages[0]}
+							alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 1}`}
 							loading="lazy"
 							decoding="async"
 						/>
 					</figure>
-				))
-			}
-		</div>
+					<figure class={`${styles.item} ${styles.item2}`}>
+						<img
+							src={blockImages[1]}
+							alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 2}`}
+							loading="lazy"
+							decoding="async"
+						/>
+					</figure>
+					<figure class={`${styles.item} ${styles.item3}`}>
+						<img
+							src={blockImages[2]}
+							alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 3}`}
+							loading="lazy"
+							decoding="async"
+						/>
+					</figure>
+				</div>
+
+				<figure class={`${styles.item} ${styles.item4}`}>
+					<img
+						src={blockImages[3]}
+						alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 4}`}
+						loading="lazy"
+						decoding="async"
+					/>
+				</figure>
+
+				<div class={styles.middleBlock}>
+					<figure class={`${styles.item} ${styles.item5}`}>
+						<img
+							src={blockImages[4]}
+							alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 5}`}
+							loading="lazy"
+							decoding="async"
+						/>
+					</figure>
+					<figure class={`${styles.item} ${styles.item6}`}>
+						<img
+							src={blockImages[5]}
+							alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 6}`}
+							loading="lazy"
+							decoding="async"
+						/>
+					</figure>
+				</div>
+
+				<figure class={`${styles.item} ${styles.item7}`}>
+					<img
+						src={blockImages[6]}
+						alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 7}`}
+						loading="lazy"
+						decoding="async"
+					/>
+				</figure>
+			</div>
+		) : (
+			<div class={`${styles.block} ${styles[`count${blockImages.length}`] ?? styles.count7}`}>
+				{
+					blockImages.map((image, index) => (
+						<figure class={`${styles.item} ${styles[`item${index + 1}`] ?? ''}`}>
+							<img
+								src={image}
+								alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + index + 1}`}
+								loading="lazy"
+								decoding="async"
+							/>
+						</figure>
+					))
+				}
+			</div>
+		)
 	))
 }

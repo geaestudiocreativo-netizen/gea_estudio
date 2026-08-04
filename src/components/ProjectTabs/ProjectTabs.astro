@@ -15,18 +15,27 @@ const { sections, activeTab } = Astro.props as Props;
 const initialActiveTab = activeTab ?? sections[0]?.id ?? '';
 ---
 
-<div class={styles.tabs} aria-label="Navegación de secciones del proyecto" data-project-tabs>
+<div
+	class={styles.tabs}
+	role="tablist"
+	aria-label="Navegación de secciones del proyecto"
+	data-project-tabs
+>
 	{
-		sections.map((tab) => (
-			<a
+		sections.map((tab, index) => (
+			<button
+				type="button"
 				class={styles.tab}
-				href={`#${tab.id}`}
-				aria-current={tab.id === initialActiveTab ? 'true' : 'false'}
+				id={`tab-${tab.id}`}
+				role="tab"
+				aria-selected={tab.id === initialActiveTab ? 'true' : 'false'}
+				aria-controls={`panel-${tab.id}`}
+				tabindex={tab.id === initialActiveTab || (!initialActiveTab && index === 0) ? '0' : '-1'}
 				data-project-tab
 				data-target={tab.id}
 			>
 				{tab.label}
-			</a>
+			</button>
 		))
 	}
 </div>
