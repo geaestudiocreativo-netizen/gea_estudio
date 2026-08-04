@@ -73,7 +73,7 @@ const normalizeService = (value: string) =>
 							project.services.map((service) => normalizeService(service))
 						)}
 					>
-						<ProjectCard {...project} number={project.id} compactMobile />
+						<ProjectCard {...project} number={project.id} compactMobile variant="grid" />
 					</li>
 				))
 			}

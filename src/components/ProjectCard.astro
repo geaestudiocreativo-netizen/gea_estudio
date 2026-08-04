@@ -11,9 +11,21 @@ interface Props {
 	image?: string;
 	imageSize: 'small' | 'medium' | 'large';
 	compactMobile?: boolean;
+	variant?: 'carousel' | 'grid';
 }
 
-const { id, slug, number, title, description, services, image, imageSize, compactMobile = false } = Astro.props as Props;
+const {
+	id,
+	slug,
+	number,
+	title,
+	description,
+	services,
+	image,
+	imageSize,
+	compactMobile = false,
+	variant = 'carousel'
+} = Astro.props as Props;
 
 const sizeClassByKey = {
 	small: styles.imageSmall,
@@ -22,6 +34,19 @@ const sizeClassByKey = {
 };
 
 const sizeClass = sizeClassByKey[imageSize] ?? styles.imageMedium;
+
+const projectVariantClassByKey = {
+	carousel: styles.projectCarousel,
+	grid: styles.projectGrid
+};
+
+const cardLinkVariantClassByKey = {
+	carousel: styles.cardLinkCarousel,
+	grid: styles.cardLinkGrid
+};
+
+const projectVariantClass = projectVariantClassByKey[variant] ?? styles.projectCarousel;
+const cardLinkVariantClass = cardLinkVariantClassByKey[variant] ?? styles.cardLinkCarousel;
 
 const normalizedId = String(id).padStart(2, '0');
 const fallbackImage = `project-${normalizedId}.jpg`;
@@ -33,8 +58,8 @@ const imagePath = imageFileName.startsWith('/images/projects/')
 const projectHref = `/proyectos/${slug}`;
 ---
 
-<a class={styles.cardLink} href={projectHref} aria-label={`Ver proyecto ${title}`}>
-	<article class={`${styles.project} ${compactMobile ? styles.compactMobile : ''}`}>
+<a class={`${styles.cardLink} ${cardLinkVariantClass}`} href={projectHref} aria-label={`Ver proyecto ${title}`}>
+	<article class={`${styles.project} ${projectVariantClass} ${compactMobile ? styles.compactMobile : ''}`}>
 		<p class={styles.number}>{number}</p>
 
 		<div class={`${styles.media} ${sizeClass}`}>
