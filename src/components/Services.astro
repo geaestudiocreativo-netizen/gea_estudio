@@ -1,82 +1,78 @@
 ---
 import styles from './Services.module.css';
 
-const leftColumnServices = [
+const services = [
 	{
-		title: 'BRANDING',
+		number: '01',
+		title: 'Branding',
+		description: 'Identidades visuales, estrategia de marca y dirección de arte para crear marcas memorables.',
 		alt: 'Editorial branding artwork on a ceramic vase',
 		image: '/images/services/branding.png',
-		size: 'tall'
+		size: 'imageLarge'
 	},
 	{
-		title: 'PAPELER\u00cdA',
-		alt: 'Premium stationery invitation and card set',
-		image: '/images/services/papeleria.png',
-		size: 'medium'
-	},
-	{
-		title: 'REDES SOCIALES',
-		alt: 'Social media profile displayed on a smartphone',
-		image: '/images/services/redes_sociales.png',
-		size: 'tall'
-	}
-];
-
-const rightColumnServices = [
-	{
-		title: 'FOTOGRAF\u00cdA',
+		number: '02',
+		title: 'Fotografía & Cinematografía',
+		description: 'Fotografía y video editorial para marcas, productos, espacios y campañas con una narrativa cuidada.',
 		alt: 'Portrait photographer holding a camera',
 		image: '/images/services/fotografia.png',
-		size: 'medium'
+		size: 'imageSmall'
 	},
 	{
-		title: 'DECORACI\u00d3N',
-		alt: 'Interior design living room with framed wall gallery',
-		image: '/images/services/decoracion.png',
-		size: 'tall'
-	},
-	{
-		title: 'WEB',
+		number: '03',
+		title: 'Web',
+		description: 'Sitios web diseñados para transmitir confianza, mejorar la experiencia y convertir visitas en clientes.',
 		alt: 'Website design shown on a tablet screen',
 		image: '/images/services/web.png',
-		size: 'medium'
+		size: 'imageXLarge'
+	},
+	{
+		number: '04',
+		title: 'Editorial',
+		description: 'Revistas, álbumes, papelería y piezas impresas diseñadas para contar historias.',
+		alt: 'Premium stationery invitation and card set',
+		image: '/images/services/papeleria.png',
+		size: 'imageLarge'
+	},
+	{
+		number: '05',
+		title: 'Decoración',
+		description: 'Diseño de interiores y espacios comerciales donde cada detalle comunica la personalidad de la marca.',
+		alt: 'Interior design living room with framed wall gallery',
+		image: '/images/services/decoracion.png',
+		size: 'imageXLarge'
+	},
+	{
+		number: '06',
+		title: 'Redes Sociales',
+		description: 'Dirección creativa y contenido visual para construir una presencia coherente en redes sociales.',
+		alt: 'Social media profile displayed on a smartphone',
+		image: '/images/services/redes_sociales.png',
+		size: 'imageMedium'
 	}
 ];
 ---
 
 <section class={styles.services} aria-labelledby="services-title">
-	<div class={styles.columns}>
-		<div class={styles.leftStack}>
-			<h2 id="services-title" class={styles.heading}>
-				<a href="/servicios" aria-label="Ver servicios" style="color: inherit; text-decoration: none;">Qué hacemos</a>
-			</h2>
+	<div class={styles.content}>
+		<h2 id="services-title" class={styles.heading}>
+			<a href="/servicios" aria-label="Ver servicios" class={styles.headingLink}>QUÉ HACEMOS</a>
+		</h2>
 
-			<ul class={`${styles.column} ${styles.columnLeft}`} role="list">
-				{
-					leftColumnServices.map((service) => (
-						<li class={`${styles.item} ${styles[service.size]}`}>
-							<article class={styles.card}>
-								<div class={styles.media}>
-									<img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
-								</div>
-								<p class={styles.label}>{service.title}</p>
-							</article>
-						</li>
-					))
-				}
-			</ul>
-		</div>
-
-		<ul class={`${styles.column} ${styles.columnRight}`} role="list">
+		<ul class={styles.list} role="list">
 			{
-				rightColumnServices.map((service) => (
-					<li class={`${styles.item} ${styles[service.size]}`}>
-						<article class={styles.card}>
-							<div class={styles.media}>
-								<img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
+				services.map((service) => (
+					<li class={styles.serviceRow}>
+						<div class={`${styles.media} ${styles[service.size]}`}>
+							<img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
+						</div>
+						<div class={styles.serviceContent}>
+							<div class={styles.serviceHeading}>
+								<p class={styles.number} aria-hidden="true">{service.number}</p>
+								<h3 class={styles.title}>{service.title}</h3>
 							</div>
-							<p class={styles.label}>{service.title}</p>
-						</article>
+							<p class={styles.description}>{service.description}</p>
+						</div>
 					</li>
 				))
 			}
