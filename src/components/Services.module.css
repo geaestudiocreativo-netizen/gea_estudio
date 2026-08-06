@@ -111,7 +111,7 @@
 
 @media (max-width: 900px) {
 	.services {
-		--row-gap: 2px;
+		--row-gap: 8px;
 		--rows-space: 50px;
 		padding-top: clamp(286px, 35vw, 344px);
 	}
@@ -123,36 +123,55 @@
 
 	.serviceRow {
 		display: flex;
-		align-items: stretch;
-		gap: 13px;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
 	}
 
 	.serviceContent {
-		justify-content: center;
-		flex: 0 0 calc(100% - var(--mobile-image-width) - var(--row-gap));
-		max-width: calc(100% - var(--mobile-image-width) - var(--row-gap));
-		padding-right: 18px;
+		justify-content: flex-start;
+		width: var(--mobile-content-width, 100%);
+		max-width: var(--mobile-content-width, 100%);
+		flex: 0 0 auto;
+		padding-left: 18px;
+		padding-right: 0;
 		box-sizing: border-box;
-		transform: translateY(5px);
+		transform: none;
+	}
+
+	.serviceRow[data-size='imageXS'] {
+		--mobile-content-width: 78%;
+	}
+
+	.serviceRow[data-size='imageS'] {
+		--mobile-content-width: 86%;
+	}
+
+	.serviceRow[data-size='imageM'] {
+		--mobile-content-width: 92%;
+	}
+
+	.serviceRow[data-size='imageL'] {
+		--mobile-content-width: 98%;
 	}
 
 	.imageXS {
-		--mobile-image-width: 46%;
+		--mobile-image-width: 78%;
 		width: var(--mobile-image-width);
 	}
 
 	.imageS {
-		--mobile-image-width: 54%;
+		--mobile-image-width: 86%;
 		width: var(--mobile-image-width);
 	}
 
 	.imageM {
-		--mobile-image-width: 62%;
+		--mobile-image-width: 92%;
 		width: var(--mobile-image-width);
 	}
 
 	.imageL {
-		--mobile-image-width: 70%;
+		--mobile-image-width: 98%;
 		width: var(--mobile-image-width);
 	}
 
