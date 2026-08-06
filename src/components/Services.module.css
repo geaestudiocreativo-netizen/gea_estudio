@@ -109,10 +109,11 @@
 	line-height: 1.45;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
 	.services {
-		--row-gap: 8px;
-		--rows-space: 38px;
+		--row-gap: 10px;
+		--rows-space: 50px;
+		padding-top: clamp(286px, 35vw, 344px);
 	}
 
 	.heading {
@@ -127,17 +128,34 @@
 
 	.serviceContent {
 		justify-content: center;
+		padding-right: 24px;
+	}
+
+	.imageSmall {
+		width: 250px;
+	}
+
+	.imageMedium {
+		width: 270px;
+	}
+
+	.imageLarge {
+		width: 306px;
+	}
+
+	.imageXLarge {
+		width: 348px;
 	}
 
 	.title {
-		font-size: 12px;
+		font-size: 14px;
 		line-height: 1.2;
 	}
 
 	.description {
-		margin-top: 3px;
-		font-size: 10px;
+		margin-top: 2px;
+		font-size: 12px;
 		line-height: 1.45;
-		max-width: 210px;
+		max-width: 270px;
 	}
 }
