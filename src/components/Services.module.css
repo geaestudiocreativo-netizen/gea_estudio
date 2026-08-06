@@ -133,6 +133,7 @@
 		max-width: calc(100% - var(--mobile-image-width) - var(--row-gap));
 		padding-right: 18px;
 		box-sizing: border-box;
+		transform: translateY(5px);
 	}
 
 	.imageSmall {
@@ -165,5 +166,6 @@
 		font-size: 12px;
 		line-height: 1.45;
 		max-width: 100%;
+		color: #7b7b7b;
 	}
 }
