@@ -3,7 +3,7 @@
 
 .services {
 	--image-height: 136px;
-	--row-gap: clamp(5px, 1vw, 13px);
+	--row-gap: clamp(5px, 1vw, 1px);
 	--rows-space: clamp(44px, 6vw, 78px);
 	margin-top: 0;
 	padding-block: clamp(260px, 32vw, 322px) clamp(72px, 10vw, 120px);
