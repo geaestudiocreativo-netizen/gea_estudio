@@ -79,7 +79,7 @@
 }
 
 .serviceContent {
-	height: var(--image-height);
+	align-self: stretch;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -87,18 +87,7 @@
 }
 
 .serviceHeading {
-	display: flex;
-	align-items: baseline;
-	gap: 8px;
-}
-
-.number {
-	margin: 0;
-	font-family: 'Krona One', sans-serif;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 1;
-	color: rgba(255, 255, 255, 0.6);
+	display: block;
 }
 
 .title {
@@ -111,7 +100,7 @@
 }
 
 .description {
-	margin: 10px 0 0;
+	margin-top: 2px;
 	max-width: 210px;
 	color: #6f6f6f;
 	font-family: 'Satoshi', sans-serif;
@@ -140,17 +129,13 @@
 		justify-content: center;
 	}
 
-	.number {
-		font-size: 14px;
-	}
-
 	.title {
 		font-size: 12px;
 		line-height: 1.2;
 	}
 
 	.description {
-		margin-top: 8px;
+		margin-top: 3px;
 		font-size: 10px;
 		line-height: 1.45;
 		max-width: 210px;
