@@ -1,0 +1,19 @@
+---
+import styles from './PrimaryButton.module.css';
+
+interface Props {
+	href: string;
+	label: string;
+	ariaLabel?: string;
+	className?: string;
+	mobileFull?: boolean;
+}
+
+const { href, label, ariaLabel, className = '', mobileFull = true } = Astro.props as Props;
+const mobileWidthClass = mobileFull ? styles.mobileFull : '';
+const composedClass = [styles.button, mobileWidthClass, className].filter(Boolean).join(' ');
+---
+
+<a class={composedClass} href={href} aria-label={ariaLabel ?? label}>
+	{label}
+</a>

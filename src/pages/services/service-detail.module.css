@@ -56,7 +56,7 @@
 .title {
 	margin: 0;
 	font-family: 'Krona One', sans-serif;
-	font-size: clamp(38px, 5.2vw, 64px);
+	font-size: 24px;
 	font-weight: 400;
 	line-height: 1;
 	letter-spacing: 0.1em;
@@ -68,7 +68,7 @@
 	margin: 26px 0 0;
 	max-width: 660px;
 	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(23px, 2.1vw, 32px);
+	font-size: 12px;
 	font-weight: 400;
 	line-height: 1.28;
 	letter-spacing: 0.08em;
@@ -93,8 +93,8 @@
 .sectionTitle {
 	margin: 0;
 	text-align: center;
-	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(40px, 3.5vw, 56px);
+	font-family: 'Krona One', sans-serif;
+	font-size: 14px;
 	font-weight: 500;
 	line-height: 1.05;
 	letter-spacing: 0.055em;
@@ -113,7 +113,7 @@
 	padding: 26px 24px;
 	text-align: center;
 	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(21px, 2vw, 30px);
+	font-size: 12px;
 	font-weight: 400;
 	line-height: 1.2;
 	letter-spacing: 0.07em;
@@ -131,8 +131,8 @@
 
 .universeTitle {
 	margin: 0;
-	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(40px, 3.3vw, 52px);
+	font-family: 'Krona One', sans-serif;
+	font-size: 14px;
 	font-weight: 500;
 	line-height: 1.1;
 	letter-spacing: 0.04em;
@@ -143,7 +143,7 @@
 	margin: 32px 0 0;
 	max-width: 800px;
 	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(29px, 2.15vw, 36px);
+	font-size: 12px;
 	font-weight: 400;
 	line-height: 1.35;
 	letter-spacing: 0.04em;
@@ -166,11 +166,13 @@
 }
 
 .relatedList a {
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	padding: 20px 0;
 	text-decoration: none;
 	font-family: 'Krona One', sans-serif;
-	font-size: clamp(22px, 2.2vw, 34px);
+	font-size: 14px;
 	font-weight: 400;
 	line-height: 1.1;
 	letter-spacing: 0.09em;
@@ -178,22 +180,22 @@
 	color: #1f2126;
 }
 
+.relatedList a::after {
+	content: '→';
+	font: inherit;
+	line-height: 1;
+	color: inherit;
+	text-transform: none;
+	letter-spacing: normal;
+	flex-shrink: 0;
+	margin-left: 16px;
+}
+
 .servicesCta {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: min(520px, 100%);
-	height: 60px;
 	margin: 62px auto 0;
 	border: 2px solid #1c1c1c;
 	border-radius: 12px;
-	text-decoration: none;
-	font-family: 'Satoshi', sans-serif;
-	font-size: 35px;
-	font-weight: 400;
-	line-height: 1;
-	letter-spacing: 0.05em;
-	color: #656a70;
+	color: #1b1b1b;
 }
 
 .contact {
@@ -202,8 +204,8 @@
 
 .contactTitle {
 	margin: 0;
-	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(42px, 3.4vw, 56px);
+	font-family: 'Krona One', sans-serif;
+	font-size: 14px;
 	font-weight: 500;
 	line-height: 1.1;
 	letter-spacing: 0.04em;
@@ -214,7 +216,7 @@
 	margin: 34px 0 0;
 	max-width: 900px;
 	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(29px, 2.15vw, 36px);
+	font-size: 12px;
 	font-weight: 400;
 	line-height: 1.4;
 	letter-spacing: 0.04em;
@@ -222,20 +224,10 @@
 }
 
 .contactButton {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: min(100%, 1120px);
-	height: 74px;
+	max-width: 1120px;
 	margin-top: 44px;
 	border-radius: 12px;
 	background: #111111;
-	text-decoration: none;
-	font-family: 'Satoshi', sans-serif;
-	font-size: 34px;
-	font-weight: 400;
-	line-height: 1;
-	letter-spacing: 0.04em;
 	color: #efefef;
 }
 
@@ -250,14 +242,14 @@
 	}
 
 	.title {
-		font-size: 70px;
+		font-size: 24px;
 		letter-spacing: 0.1em;
 	}
 
 	.intro {
 		margin-top: 24px;
 		max-width: 456px;
-		font-size: 43px;
+		font-size: 12px;
 		line-height: 1.28;
 		letter-spacing: 0.08em;
 	}
@@ -267,7 +259,7 @@
 	}
 
 	.sectionTitle {
-		font-size: 54px;
+		font-size: 14px;
 		letter-spacing: 0.05em;
 		line-height: 1.06;
 	}
@@ -279,7 +271,7 @@
 
 	.systemItem {
 		padding: 14px 10px;
-		font-size: 15px;
+		font-size: 12px;
 		letter-spacing: 0.08em;
 	}
 
@@ -288,7 +280,7 @@
 	}
 
 	.universeTitle {
-		font-size: 49px;
+		font-size: 14px;
 		line-height: 1.08;
 		letter-spacing: 0.06em;
 	}
@@ -296,7 +288,7 @@
 	.universeText {
 		margin-top: 30px;
 		max-width: 430px;
-		font-size: 22px;
+		font-size: 12px;
 		line-height: 1.4;
 		letter-spacing: 0.08em;
 	}
@@ -309,16 +301,12 @@
 
 	.relatedList a {
 		padding: 16px 44px;
-		font-size: 39px;
+		font-size: 14px;
 		letter-spacing: 0.095em;
 	}
 
 	.servicesCta {
-		width: calc(100% - 28px);
-		height: 46px;
 		margin-top: 56px;
-		font-size: 18px;
-		letter-spacing: 0.12em;
 	}
 
 	.contact {
@@ -327,24 +315,21 @@
 	}
 
 	.contactTitle {
-		font-size: 51px;
+		font-size: 14px;
 		line-height: 1.1;
 		letter-spacing: 0.06em;
 	}
 
 	.contactText {
 		margin-top: 28px;
-		font-size: 19px;
+		font-size: 12px;
 		line-height: 1.42;
 		letter-spacing: 0.075em;
 		max-width: 430px;
 	}
 
 	.contactButton {
-		height: 44px;
 		margin-top: 24px;
-		font-size: 15px;
-		letter-spacing: 0.08em;
 		border-radius: 10px;
 	}
 }

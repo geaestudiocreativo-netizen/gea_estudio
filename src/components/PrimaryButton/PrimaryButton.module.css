@@ -1,0 +1,25 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@500&display=swap');
+
+.button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 240px;
+	height: 48px;
+	padding-inline: 30px;
+	box-sizing: border-box;
+	text-align: center;
+	text-decoration: none;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1;
+	letter-spacing: 0.02em;
+	white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+	.mobileFull {
+		width: 100%;
+	}
+}

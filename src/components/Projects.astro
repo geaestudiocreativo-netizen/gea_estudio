@@ -1,5 +1,6 @@
 ---
 import ProjectCard from './ProjectCard/ProjectCard.astro';
+import PrimaryButton from './PrimaryButton/PrimaryButton.astro';
 import styles from './Projects.module.css';
 import { projects } from '../data/projects';
 ---
@@ -20,8 +21,6 @@ import { projects } from '../data/projects';
 			</ul>
 		</div>
 
-		<a class={styles.cta} href="/proyectos" aria-label="Ver proyectos">
-			Ver proyectos
-		</a>
+		<PrimaryButton href="/proyectos" label="Ver proyectos" ariaLabel="Ver proyectos" className={styles.cta} />
 	</div>
 </section>

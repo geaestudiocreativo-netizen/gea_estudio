@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import PrimaryButton from '../../components/PrimaryButton/PrimaryButton.astro';
 import { services } from '../../data/services';
 import styles from './service-detail.module.css';
 
@@ -69,17 +70,23 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 				</ul>
 			</nav>
 
-			<a class={styles.servicesCta} href="/services" aria-label="Ver todos los servicios">
-				Ver todos los servicios
-			</a>
+			<PrimaryButton
+				href="/services"
+				label="Ver todos los servicios"
+				ariaLabel="Ver todos los servicios"
+				className={styles.servicesCta}
+			/>
 		</section>
 
 		<section class={styles.contact} aria-labelledby="service-contact-title">
 			<h2 id="service-contact-title" class={styles.contactTitle}>{service.ctaTitle}</h2>
 			<p class={styles.contactText}>{service.ctaText}</p>
-			<a class={styles.contactButton} href="/contacto" aria-label="Solicitar una consulta">
-				Solicitar una consulta
-			</a>
+			<PrimaryButton
+				href="/contacto"
+				label="Solicitar una consulta"
+				ariaLabel="Solicitar una consulta"
+				className={styles.contactButton}
+			/>
 		</section>
 	</main>
 </Layout>

@@ -1,5 +1,6 @@
 ---
 import projectStyles from './Projects.module.css';
+import PrimaryButton from './PrimaryButton/PrimaryButton.astro';
 
 const aboutText =
 	"Soy Ángela Contreras, ingeniera de formación y directora creativa de Gea. Tras varios años trabajando en tecnología, encontré en el diseño mi verdadera forma de crear. Hoy ayudo a marcas y emprendedores a construir una identidad coherente a través del branding, el diseño web, la fotografía y la dirección creativa, desarrollando proyectos donde la estrategia, la funcionalidad y la estética conviven de forma natural.";
@@ -29,9 +30,7 @@ const aboutText =
 
 		<div class="mt-[48px] flex flex-col items-center text-center">
 			<h3 class="m-0 font-['Satoshi'] text-[18px] font-medium tracking-[0.02em] text-[#2a2d32] md:text-[19px] lg:text-[21px]">¿Hablamos?</h3>
-			<a class={`${projectStyles.cta} !mt-[16px]`} href="/contacto" aria-label="Contactar">
-				Contactar
-			</a>
+			<PrimaryButton href="/contacto" label="Contactar" ariaLabel="Contactar" className={`${projectStyles.cta} !mt-[16px]`} />
 		</div>
 	</div>
 </section>
