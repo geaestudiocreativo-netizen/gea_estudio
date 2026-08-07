@@ -15,7 +15,6 @@ const {
 
 const pathname = Astro.url.pathname;
 const locale = getLocaleFromPath(pathname);
-const overlayHero = pathname === '/' || pathname === '/en' || pathname.startsWith('/services/') || pathname.startsWith('/en/services/');
 ---
 
 <!doctype html>
@@ -34,7 +33,7 @@ const overlayHero = pathname === '/' || pathname === '/en' || pathname.startsWit
 		<title>{title}</title>
 	</head>
 	<body>
-		<SiteNav overlayHero={overlayHero} locale={locale} pathname={pathname} />
+		<SiteNav locale={locale} pathname={pathname} />
 		<slot />
 	</body>
 </html>

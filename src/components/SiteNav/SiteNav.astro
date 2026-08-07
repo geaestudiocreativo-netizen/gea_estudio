@@ -1,48 +1,57 @@
 ---
-import styles from './SiteNav.module.css';
-import { getLanguageSwitchPath, getLocalizedPath, menuFooterCopy, navLabels, type Locale } from '../../i18n/site';
+import styles from "./SiteNav.module.css";
+import { getLanguageSwitchPath } from "../../i18n/site";
 
 interface Props {
-	overlayHero?: boolean;
-	locale: Locale;
-	pathname: string;
+	locale?: "es" | "en";
+	pathname?: string;
 }
 
-const { overlayHero = false, locale, pathname } = Astro.props as Props;
-
-const labels = navLabels[locale];
-const footerCopy = menuFooterCopy[locale];
-const homeHref = locale === 'en' ? '/en' : '/';
-
-const esHomePath = '/';
-const esProjectsPath = '/proyectos';
-const navLinks = [
-	{ href: getLocalizedPath(locale, '/#services'), label: labels.services },
-	{ href: getLocalizedPath(locale, esProjectsPath), label: labels.projects },
-	{ href: getLocalizedPath(locale, '/#about'), label: labels.studio },
-	{ href: getLocalizedPath(locale, '/#contact'), label: labels.contact }
+const { locale = "es", pathname = "/" } = Astro.props as Props;
+const homeHref = locale === "en" ? "/en" : "/";
+const projectsHref = locale === "en" ? "/en/projects" : "/proyectos";
+const servicesHref = `${homeHref}#services`;
+const aboutHref = `${homeHref}#about`;
+const contactHref = `${homeHref}#contact`;
+const desktopLinks = [
+	{ href: servicesHref, label: locale === "en" ? "Services" : "Servicios" },
+	{ href: projectsHref, label: locale === "en" ? "Projects" : "Proyectos" },
+	{ href: aboutHref, label: "Studio" },
+	{ href: contactHref, label: locale === "en" ? "Contact" : "Contacto" },
 ];
-
-const spanishSwitchPath = getLanguageSwitchPath(pathname, 'es');
-const englishSwitchPath = getLanguageSwitchPath(pathname, 'en');
+const mobileLinks = [
+	{ href: servicesHref, label: locale === "en" ? "Services" : "Servicios" },
+	{ href: projectsHref, label: locale === "en" ? "Projects" : "Proyectos" },
+	{ href: aboutHref, label: locale === "en" ? "About Gea" : "Sobre Gea" },
+	{ href: contactHref, label: locale === "en" ? "Contact" : "Contacto" },
+];
+const spanishSwitchPath = getLanguageSwitchPath(pathname, "es");
+const englishSwitchPath = getLanguageSwitchPath(pathname, "en");
 ---
 
 <header
 	class={styles.nav}
 	data-site-nav
-	data-overlay-hero={overlayHero ? 'true' : 'false'}
-	data-scrolled={overlayHero ? 'false' : 'true'}
+	data-scrolled="false"
+	data-menu-open="false"
 >
 	<div class={styles.inner}>
 		<a class={styles.logo} href={homeHref} aria-label="Gea home">
-			<img class={styles.logoDefault} src="/images/Logotype.svg" alt="Gea" loading="eager" decoding="async" />
-			<img class={styles.logoWhite} src="/images/Logotype-white.svg" alt="Gea" loading="eager" decoding="async" />
+			<img
+				class={styles.logoImage}
+				src="/images/Logotype.svg"
+				alt="Gea"
+				loading="eager"
+				decoding="async"
+			/>
 		</a>
 
 		<nav class={styles.desktopNav} aria-label="Main navigation">
 			{
-				navLinks.map((link) => (
-					<a class={styles.desktopLink} href={link.href}>{link.label}</a>
+				desktopLinks.map((link) => (
+					<a class={styles.desktopLink} href={link.href}>
+						{link.label}
+					</a>
 				))
 			}
 		</nav>
@@ -54,44 +63,68 @@ const englishSwitchPath = getLanguageSwitchPath(pathname, 'en');
 			aria-expanded="false"
 			data-nav-toggle
 		>
-			<span class={styles.menuIconOpen} aria-hidden="true">☰</span>
-			<span class={styles.menuIconClose} aria-hidden="true">✕</span>
+			<span class={styles.menuIcon} aria-hidden="true">☰</span>
 		</button>
 	</div>
 
-	<div class={styles.mobileOverlay} data-nav-overlay hidden>
+	<div class={styles.mobileOverlay} data-nav-overlay aria-hidden="true">
 		<div class={styles.overlayInner}>
-			<div class={styles.overlayNavWrap}>
-				<nav class={styles.overlayNav} aria-label="Mobile navigation">
-					{
-						navLinks.map((link) => (
-							<a class={styles.overlayLink} href={link.href} data-overlay-link>
-								{link.label}
-							</a>
-						))
-					}
-				</nav>
-			</div>
+			<header class={styles.overlayHeader}>
+				<a class={styles.overlayLogo} href={homeHref} aria-label="Gea home">
+					<img
+						class={styles.overlayLogoImage}
+						src="/images/Logotype-white.svg"
+						alt="Gea"
+						loading="eager"
+						decoding="async"
+					/>
+				</a>
+				<button
+					class={styles.overlayClose}
+					type="button"
+					aria-label="Close menu"
+					data-overlay-close
+				>
+					<span aria-hidden="true">×</span>
+				</button>
+			</header>
+
+			<nav class={styles.overlayNav} aria-label="Mobile navigation">
+				{
+					mobileLinks.map((link) => (
+						<a
+							class={styles.overlayLink}
+							href={link.href}
+							data-overlay-link
+						>
+							{link.label}
+						</a>
+					))
+				}
+			</nav>
 
 			<footer class={styles.overlayFooter} aria-label="Overlay footer">
-				<p class={styles.overlayStatement}>{footerCopy.statement}</p>
-				<div class={styles.languageSelector} role="group" aria-label="Language selector">
+				<p class={styles.overlayStatement}>
+					Creando universos visuales para marcas.
+				</p>
+				<div
+					class={styles.languageSelector}
+					role="group"
+					aria-label="Language selector"
+				>
 					<a
-						class={`${styles.languageOption} ${locale === 'es' ? styles.languageOptionActive : ''}`}
+						class={`${styles.languageOption} ${locale === "es" ? styles.languageOptionActive : ""}`}
 						href={spanishSwitchPath}
-						data-lang="es"
-						aria-current={locale === 'es' ? 'true' : undefined}
+						data-language-link
 					>
-						{footerCopy.es}
+						ES
 					</a>
-					<span class={styles.languageDivider} aria-hidden="true">/</span>
 					<a
-						class={`${styles.languageOption} ${locale === 'en' ? styles.languageOptionActive : ''}`}
+						class={`${styles.languageOption} ${locale === "en" ? styles.languageOptionActive : ""}`}
 						href={englishSwitchPath}
-						data-lang="en"
-						aria-current={locale === 'en' ? 'true' : undefined}
+						data-language-link
 					>
-						{footerCopy.en}
+						EN
 					</a>
 				</div>
 			</footer>
@@ -100,53 +133,65 @@ const englishSwitchPath = getLanguageSwitchPath(pathname, 'en');
 </header>
 
 <script>
-	const nav = document.querySelector('[data-site-nav]') as HTMLElement | null;
+	const nav = document.querySelector("[data-site-nav]") as HTMLElement | null;
 
 	if (nav) {
-		const overlayHeroMode = nav.dataset.overlayHero === 'true';
-		const toggleButton = nav.querySelector('[data-nav-toggle]') as HTMLButtonElement | null;
-		const overlay = nav.querySelector('[data-nav-overlay]') as HTMLElement | null;
-		const overlayLinks = Array.from(nav.querySelectorAll('[data-overlay-link]')) as HTMLAnchorElement[];
-		const languageLinks = Array.from(nav.querySelectorAll('[data-lang]')) as HTMLAnchorElement[];
-		let menuOpen = false;
+		const toggle = nav.querySelector(
+			"[data-nav-toggle]",
+		) as HTMLButtonElement | null;
+		const overlay = nav.querySelector(
+			"[data-nav-overlay]",
+		) as HTMLElement | null;
+		const overlayClose = nav.querySelector(
+			"[data-overlay-close]",
+		) as HTMLButtonElement | null;
+		const overlayLinks = Array.from(
+			nav.querySelectorAll("[data-overlay-link]"),
+		) as HTMLAnchorElement[];
+		const languageLinks = Array.from(
+			nav.querySelectorAll("[data-language-link]"),
+		) as HTMLAnchorElement[];
 
-		const updateScrollState = () => {
-			nav.dataset.scrolled = overlayHeroMode ? (window.scrollY > 12 ? 'true' : 'false') : 'true';
+		const updateScrolledState = () => {
+			nav.dataset.scrolled = window.scrollY > 12 ? "true" : "false";
 		};
 
 		const setMenuState = (open: boolean) => {
-			if (!overlay || !toggleButton) return;
-			menuOpen = open;
-			nav.dataset.menuOpen = open ? 'true' : 'false';
-			overlay.hidden = !open;
-			toggleButton.setAttribute('aria-expanded', open ? 'true' : 'false');
-			toggleButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-			document.body.style.overflow = open ? 'hidden' : '';
+			if (!toggle || !overlay) return;
+
+			nav.dataset.menuOpen = open ? "true" : "false";
+			toggle.setAttribute("aria-expanded", open ? "true" : "false");
+			overlay.setAttribute("aria-hidden", open ? "false" : "true");
+			document.body.style.overflow = open ? "hidden" : "";
 		};
 
-		toggleButton?.addEventListener('click', () => {
-			setMenuState(!menuOpen);
+		toggle?.addEventListener("click", (event) => {
+			event.preventDefault();
+			event.stopPropagation();
+
+			setMenuState(nav.dataset.menuOpen !== "true");
 		});
 
-		overlayLinks.forEach((link) => {
-			link.addEventListener('click', () => {
+		overlayClose?.addEventListener("click", () => {
+			setMenuState(false);
+		});
+
+		[...overlayLinks, ...languageLinks].forEach((link) => {
+			link.addEventListener("click", () => {
 				setMenuState(false);
 			});
 		});
 
-		languageLinks.forEach((link) => {
-			link.addEventListener('click', () => {
-				setMenuState(false);
-			});
-		});
-
-		window.addEventListener('keydown', (event) => {
-			if (event.key === 'Escape' && menuOpen) {
+		window.addEventListener("keydown", (event) => {
+			if (event.key === "Escape" && nav.dataset.menuOpen === "true") {
 				setMenuState(false);
 			}
 		});
 
-		window.addEventListener('scroll', updateScrollState, { passive: true });
-		updateScrollState();
+		window.addEventListener("scroll", updateScrolledState, {
+			passive: true,
+		});
+		updateScrolledState();
+		setMenuState(false);
 	}
 </script>
