@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
 
 .services {
-	--image-height: 136px;
 	--row-gap: clamp(5px, 1vw, 1px);
 	--rows-space: clamp(44px, 6vw, 78px);
 	margin-top: 0;
@@ -32,6 +31,10 @@
 	text-decoration: none;
 }
 
+.headingBreak {
+	display: inline;
+}
+
 .list {
 	list-style: none;
 	margin: clamp(54px, 7vw, 88px) 0 0;
@@ -48,26 +51,30 @@
 }
 
 .imageXS {
-	width: 170px;
+	--image-ratio: calc(170 / 136);
+	width: calc(170px * 1.13);
 }
 
 .imageS {
-	width: 215px;
+	--image-ratio: calc(215 / 136);
+	width: calc(215px * 1.13);
 }
 
 .imageM {
-	width: 265px;
+	--image-ratio: calc(265 / 136);
+	width: calc(265px * 1.13);
 }
 
 .imageL {
-	width: 330px;
+	--image-ratio: calc(330 / 136);
+	width: calc(330px * 1.13);
 }
 
 .media {
 	position: relative;
 	overflow: visible;
 	flex-shrink: 0;
-	height: var(--image-height);
+	aspect-ratio: var(--image-ratio);
 	background: #efefef;
 }
 
@@ -119,6 +126,13 @@
 	.heading {
 		font-size: clamp(24px, 7.2vw, 34px);
 		letter-spacing: 0.06em;
+		text-align: left;
+		padding-inline: 14px;
+		box-sizing: border-box;
+	}
+
+	.headingBreak {
+		display: block;
 	}
 
 	.serviceRow {
@@ -155,22 +169,22 @@
 	}
 
 	.imageXS {
-		--mobile-image-width: 51%;
+		--mobile-image-width: calc(51% * 1.13);
 		width: var(--mobile-image-width);
 	}
 
 	.imageS {
-		--mobile-image-width: 59%;
+		--mobile-image-width: calc(59% * 1.13);
 		width: var(--mobile-image-width);
 	}
 
 	.imageM {
-		--mobile-image-width: 68%;
+		--mobile-image-width: calc(68% * 1.13);
 		width: var(--mobile-image-width);
 	}
 
 	.imageL {
-		--mobile-image-width: 77%;
+		--mobile-image-width: calc(77% * 1.13);
 		width: var(--mobile-image-width);
 	}
 
