@@ -23,17 +23,6 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 
 <Layout title={service.seo.title} description={service.seo.description}>
 	<main class={styles.page}>
-		<header class={styles.topbar}>
-			<a class={styles.logo} href="/" aria-label="Gea home">
-				<img src="/images/Logotype.svg" alt="Gea" loading="eager" decoding="async" />
-			</a>
-			<button class={styles.menuButton} type="button" aria-label="Open menu">
-				<span aria-hidden="true"></span>
-				<span aria-hidden="true"></span>
-				<span aria-hidden="true"></span>
-			</button>
-		</header>
-
 		<section class={styles.hero}>
 			<h1 class={styles.title}>{service.title}</h1>
 			<p class={styles.intro}>{service.intro}</p>
@@ -71,9 +60,9 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 			</nav>
 
 			<PrimaryButton
-				href="/services"
-				label="Ver todos los servicios"
-				ariaLabel="Ver todos los servicios"
+				href="/proyectos"
+				label="Explorar proyectos"
+				ariaLabel="Explorar proyectos"
 				className={styles.servicesCta}
 			/>
 		</section>

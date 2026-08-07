@@ -1,0 +1,246 @@
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@500&display=swap');
+
+.nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 80;
+	background: rgba(248, 248, 248, 0.86);
+	backdrop-filter: blur(8px);
+	transition: background-color 250ms ease, backdrop-filter 250ms ease;
+}
+
+.nav[data-overlay-hero='true'] {
+	position: absolute;
+	background: transparent;
+	backdrop-filter: none;
+}
+
+.inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: calc(26px + env(safe-area-inset-top)) 32px 26px;
+	transition: padding 250ms ease;
+}
+
+.nav[data-scrolled='true'] {
+	position: fixed;
+	background: rgba(248, 248, 248, 0.86);
+	backdrop-filter: blur(8px);
+}
+
+.nav[data-scrolled='true'] .inner {
+	padding-top: calc(18px + env(safe-area-inset-top));
+	padding-bottom: 18px;
+}
+
+.logo {
+	display: inline-block;
+	line-height: 0;
+	text-decoration: none;
+}
+
+.logo img {
+	display: block;
+	width: clamp(62px, 8vw, 96px);
+	height: auto;
+}
+
+.desktopNav {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+}
+
+.desktopLink {
+	font-family: 'Satoshi', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: 0.02em;
+	color: #1b1b1b;
+	text-decoration: none;
+	transition: opacity 250ms ease;
+}
+
+.desktopLink:hover,
+.desktopLink:focus-visible {
+	opacity: 0.68;
+}
+
+.menuButton {
+	display: none;
+	border: 0;
+	padding: 0;
+	background: transparent;
+	line-height: 1;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	color: #1b1b1b;
+	cursor: pointer;
+}
+
+.menuIconOpen,
+.menuIconClose {
+	display: block;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 24px;
+	font-weight: 500;
+	letter-spacing: 0;
+	line-height: 1;
+	color: #1b1b1b;
+}
+
+.menuIconClose {
+	display: none;
+}
+
+.menuButton[aria-expanded='true'] .menuIconOpen {
+	display: none;
+}
+
+.menuButton[aria-expanded='true'] .menuIconClose {
+	display: block;
+}
+
+.mobileOverlay {
+	position: fixed;
+	inset: 0;
+	z-index: 70;
+	background: #111111;
+	opacity: 0;
+	transform: translateY(10px);
+	transition: opacity 250ms ease, transform 250ms ease;
+}
+
+.overlayInner {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: calc(128px + env(safe-area-inset-top)) 28px 34px;
+}
+
+.overlayNavWrap {
+	flex: 1;
+	display: flex;
+	align-items: center;
+}
+
+.overlayNav {
+	width: 100%;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 38px;
+}
+
+.overlayLink {
+	font-family: 'Satoshi', sans-serif;
+	font-size: clamp(42px, 11vw, 48px);
+	font-weight: 500;
+	line-height: 1.08;
+	letter-spacing: 0.02em;
+	color: #ffffff;
+	text-decoration: none;
+	transition: opacity 250ms ease;
+	outline: none;
+}
+
+.overlayLink:hover,
+.overlayLink:focus-visible {
+	opacity: 0.68;
+}
+
+.overlayFooter {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 18px;
+	padding-top: 24px;
+}
+
+.overlayStatement {
+	margin: 0;
+	max-width: 320px;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.35;
+	letter-spacing: 0.02em;
+	text-align: center;
+	color: rgba(255, 255, 255, 0.65);
+}
+
+.languageSelector {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.languageOption {
+	border: 0;
+	padding: 0;
+	background: transparent;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: 0.08em;
+	color: rgba(255, 255, 255, 0.5);
+	cursor: pointer;
+}
+
+.languageOptionActive {
+	color: #ffffff;
+}
+
+.languageDivider {
+	font-family: 'Satoshi', sans-serif;
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: 0.08em;
+	color: rgba(255, 255, 255, 0.65);
+}
+
+@media (max-width: 900px) {
+	.inner {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	.desktopNav {
+		display: none;
+	}
+
+	.menuButton {
+		display: inline-block;
+	}
+
+	.nav[data-menu-open='true'] {
+		background: transparent;
+		backdrop-filter: none;
+	}
+
+	.nav[data-menu-open='true'] .inner {
+		padding-top: calc(26px + env(safe-area-inset-top));
+		padding-bottom: 26px;
+	}
+
+	.nav[data-menu-open='true'] .logo img {
+		filter: brightness(0) invert(1);
+	}
+
+	.nav[data-menu-open='true'] .menuButton {
+		color: #ffffff;
+	}
+
+	.nav[data-menu-open='true'] .mobileOverlay {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
