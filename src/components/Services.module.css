@@ -5,7 +5,7 @@
 	--row-gap: clamp(5px, 1vw, 1px);
 	--rows-space: clamp(44px, 6vw, 78px);
 	margin-top: 0;
-	padding-block: clamp(260px, 32vw, 322px) clamp(72px, 10vw, 120px);
+	padding-block: clamp(224px, 28vw, 296px) clamp(96px, 12vw, 136px);
 	padding-inline: 0;
 }
 
@@ -59,7 +59,7 @@
 
 .list {
 	list-style: none;
-	margin: clamp(54px, 7vw, 88px) 0 0;
+	margin: clamp(56px, 7vw, 88px) 0 0;
 	padding: 0;
 	display: grid;
 	gap: var(--rows-space);
@@ -67,9 +67,15 @@
 
 .serviceRow {
 	position: relative;
+	display: block;
+}
+
+.serviceCardLink {
 	display: flex;
 	gap: var(--row-gap);
 	align-items: stretch;
+	color: inherit;
+	text-decoration: none;
 }
 
 .imageXS {
@@ -142,7 +148,7 @@
 	.services {
 		--row-gap: 11px;
 		--rows-space: 50px;
-		padding-top: clamp(286px, 35vw, 344px);
+		padding-top: clamp(256px, 32vw, 320px);
 	}
 
 	.heading {
@@ -178,6 +184,10 @@
 	}
 
 	.serviceRow {
+		display: block;
+	}
+
+	.serviceCardLink {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;

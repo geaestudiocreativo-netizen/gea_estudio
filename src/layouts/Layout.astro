@@ -1,5 +1,15 @@
 ---
 import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = 'Gea | Estudio creativo de branding, diseño web, fotografía, papelería, decoración, cinematografía y redes sosicales.',
+	description = 'Gea es un estudio creativo especializado en branding, diseño web, fotografía, decoración, cinematografía, papelería, redes sociales y dirección creativa para marcas y empresas.'
+} = Astro.props as Props;
 ---
 
 <!doctype html>
@@ -9,13 +19,13 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta
   		name="description"
-  		content="Gea es un estudio creativo especializado en branding, diseño web, fotografía, decoración, cinematografía, papelería, redes sociales y dirección creativa para marcas y empresas."
+	 		content={description}
 		/>
 		<meta name="theme-color" content="#F8F8F8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Gea | Estudio creativo de branding, diseño web, fotografía, papelería, decoración, cinematografía y redes sosicales.</title>
+		<title>{title}</title>
 	</head>
 	<body>
 		<slot />

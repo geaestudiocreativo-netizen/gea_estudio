@@ -1,50 +1,6 @@
 ---
 import styles from './Services.module.css';
-
-const services = [
-	{
-		title: 'Branding',
-		description: 'El punto de partida para construir una identidad sólida y reconocible.',
-		alt: 'Editorial branding artwork on a ceramic vase',
-		image: '/images/services/branding/branding-home.jpg',
-		size: 'imageL'
-	},
-	{
-		title: 'Fotografía & Cinematografía',
-		description: 'Imágenes que mantienen viva la personalidad de la marca en cada detalle.',
-		alt: 'Portrait photographer holding a camera',
-		image: '/images/services/fotografia/fotografia-home.jpg',
-		size: 'imageM'
-	},
-	{
-		title: 'Web',
-		description: 'La extensión digital de una identidad diseñada para conectar con las personas.',
-		alt: 'Website design shown on a tablet screen',
-		image: '/images/services/web/web-home.jpg',
-		size: 'imageXS'
-	},
-	{
-		title: 'Editorial',
-		description: 'Piezas editoriales que amplían el universo visual de una marca.',
-		alt: 'Premium stationery invitation and card set',
-		image: '/images/services/papeleria/papeleria-home.jpg',
-		size: 'imageM'
-	},
-	{
-		title: 'Decoración',
-		description: 'Espacios donde la identidad de la marca tambien se vive.',
-		alt: 'Interior design living room with framed wall gallery',
-		image: '/images/services/decoracion/decoracion-home.jpg',
-		size: 'imageL'
-	},
-	{
-		title: 'Redes Sociales',
-		description: 'Contenido visual coherente para que cada publicación forme parte de la misma historia.',
-		alt: 'Social media profile displayed on a smartphone',
-		image: '/images/services/redes-sociales/redes_sociales-home.jpg',
-		size: 'imageS'
-	}
-];
+import { services } from '../data/services';
 ---
 
 <section class={styles.services} aria-labelledby="services-title">
@@ -58,16 +14,18 @@ const services = [
 		<ul class={styles.list} role="list">
 			{
 				services.map((service) => (
-					<li class={styles.serviceRow} data-size={service.size}>
-						<div class={`${styles.media} ${styles[service.size]}`}>
-							<img src={service.image} alt={service.alt} loading="lazy" decoding="async" />
-						</div>
-						<div class={styles.serviceContent}>
-							<div class={styles.serviceHeading}>
-								<h3 class={styles.title}>{service.title}</h3>
+					<li class={styles.serviceRow} data-size={service.homeSize}>
+						<a class={styles.serviceCardLink} href={`/services/${service.slug}`} aria-label={`Ver servicio de ${service.homeTitle}`}>
+							<div class={`${styles.media} ${styles[service.homeSize]}`}>
+								<img src={service.homeImage} alt={service.homeAlt} loading="lazy" decoding="async" />
 							</div>
-							<p class={styles.description}>{service.description}</p>
-						</div>
+							<div class={styles.serviceContent}>
+								<div class={styles.serviceHeading}>
+									<h3 class={styles.title}>{service.homeTitle}</h3>
+								</div>
+								<p class={styles.description}>{service.homeDescription}</p>
+							</div>
+						</a>
 					</li>
 				))
 			}

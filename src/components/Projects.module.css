@@ -1,6 +1,6 @@
 .projects {
 	background: #f8f8f8;
-	padding: clamp(132px, 15vw, 180px) 0 96px;
+	padding: clamp(144px, 16vw, 192px) 0 112px;
 }
 
 .layout {
@@ -94,7 +94,7 @@
 
 @media (max-width: 959px) {
 	.projects {
-		padding: 106px 0 96px;
+		padding: 112px 0 104px;
 	}
 
 	.layout {

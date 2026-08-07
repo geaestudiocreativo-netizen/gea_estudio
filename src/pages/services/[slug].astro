@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { services } from '../../data/services';
+import styles from './service-detail.module.css';
+
+export function getStaticPaths() {
+	return services.map((service) => ({
+		params: { slug: service.slug }
+	}));
+}
+
+const { slug } = Astro.params;
+
+const service = services.find((item) => item.slug === slug);
+
+if (!service) {
+	throw new Response('Service not found', { status: 404 });
+}
+
+const relatedServices = services.filter((item) => item.slug !== service.slug);
+---
+
+<Layout title={service.seo.title} description={service.seo.description}>
+	<main class={styles.page}>
+		<header class={styles.topbar}>
+			<a class={styles.logo} href="/" aria-label="Gea home">
+				<img src="/images/Logotype.svg" alt="Gea" loading="eager" decoding="async" />
+			</a>
+			<button class={styles.menuButton} type="button" aria-label="Open menu">
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			</button>
+		</header>
+
+		<section class={styles.hero}>
+			<h1 class={styles.title}>{service.title}</h1>
+			<p class={styles.intro}>{service.intro}</p>
+		</section>
+
+		<figure class={styles.heroImage}>
+			<img src={service.heroImage} alt={service.title} loading="eager" fetchpriority="high" decoding="async" />
+		</figure>
+
+		<section class={styles.systems} aria-labelledby="service-systems-title">
+			<h2 id="service-systems-title" class={styles.sectionTitle}>{service.sectionTitle}</h2>
+			<ul class={styles.systemsList} role="list">
+				{
+					service.services.map((item) => (
+						<li class={styles.systemItem}>{item}</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<section class={styles.universe} aria-labelledby="service-universe-title">
+			<h2 id="service-universe-title" class={styles.universeTitle}>{service.universeTitle}</h2>
+			<p class={styles.universeText}>{service.universeText}</p>
+
+			<nav class={styles.relatedNav} aria-label="Otros servicios">
+				<ul class={styles.relatedList} role="list">
+					{
+						relatedServices.map((related) => (
+							<li>
+								<a href={`/services/${related.slug}`}>{related.title}</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			<a class={styles.servicesCta} href="/services" aria-label="Ver todos los servicios">
+				Ver todos los servicios
+			</a>
+		</section>
+
+		<section class={styles.contact} aria-labelledby="service-contact-title">
+			<h2 id="service-contact-title" class={styles.contactTitle}>{service.ctaTitle}</h2>
+			<p class={styles.contactText}>{service.ctaText}</p>
+			<a class={styles.contactButton} href="/contacto" aria-label="Solicitar una consulta">
+				Solicitar una consulta
+			</a>
+		</section>
+	</main>
+</Layout>
