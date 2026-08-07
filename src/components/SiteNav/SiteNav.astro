@@ -1,18 +1,30 @@
 ---
 import styles from './SiteNav.module.css';
+import { getLanguageSwitchPath, getLocalizedPath, menuFooterCopy, navLabels, type Locale } from '../../i18n/site';
 
 interface Props {
 	overlayHero?: boolean;
+	locale: Locale;
+	pathname: string;
 }
 
-const { overlayHero = false } = Astro.props as Props;
+const { overlayHero = false, locale, pathname } = Astro.props as Props;
 
+const labels = navLabels[locale];
+const footerCopy = menuFooterCopy[locale];
+const homeHref = locale === 'en' ? '/en' : '/';
+
+const esHomePath = '/';
+const esProjectsPath = '/proyectos';
 const navLinks = [
-	{ href: '/#services', label: 'Services' },
-	{ href: '/proyectos', label: 'Projects' },
-	{ href: '/#about', label: 'Studio' },
-	{ href: '/#contact', label: 'Contact' }
+	{ href: getLocalizedPath(locale, '/#services'), label: labels.services },
+	{ href: getLocalizedPath(locale, esProjectsPath), label: labels.projects },
+	{ href: getLocalizedPath(locale, '/#about'), label: labels.studio },
+	{ href: getLocalizedPath(locale, '/#contact'), label: labels.contact }
 ];
+
+const spanishSwitchPath = getLanguageSwitchPath(pathname, 'es');
+const englishSwitchPath = getLanguageSwitchPath(pathname, 'en');
 ---
 
 <header
@@ -22,8 +34,9 @@ const navLinks = [
 	data-scrolled={overlayHero ? 'false' : 'true'}
 >
 	<div class={styles.inner}>
-		<a class={styles.logo} href="/" aria-label="Gea home">
-			<img src="/images/Logotype.svg" alt="Gea" loading="eager" decoding="async" />
+		<a class={styles.logo} href={homeHref} aria-label="Gea home">
+			<img class={styles.logoDefault} src="/images/Logotype.svg" alt="Gea" loading="eager" decoding="async" />
+			<img class={styles.logoWhite} src="/images/Logotype-white.svg" alt="Gea" loading="eager" decoding="async" />
 		</a>
 
 		<nav class={styles.desktopNav} aria-label="Main navigation">
@@ -61,15 +74,25 @@ const navLinks = [
 			</div>
 
 			<footer class={styles.overlayFooter} aria-label="Overlay footer">
-				<p class={styles.overlayStatement}>Creating visual universes for brands.</p>
+				<p class={styles.overlayStatement}>{footerCopy.statement}</p>
 				<div class={styles.languageSelector} role="group" aria-label="Language selector">
-					<button class={`${styles.languageOption} ${styles.languageOptionActive}`} type="button" data-lang="en" aria-pressed="true">
-						EN
-					</button>
+					<a
+						class={`${styles.languageOption} ${locale === 'es' ? styles.languageOptionActive : ''}`}
+						href={spanishSwitchPath}
+						data-lang="es"
+						aria-current={locale === 'es' ? 'true' : undefined}
+					>
+						{footerCopy.es}
+					</a>
 					<span class={styles.languageDivider} aria-hidden="true">/</span>
-					<button class={styles.languageOption} type="button" data-lang="es" aria-pressed="false">
-						ES
-					</button>
+					<a
+						class={`${styles.languageOption} ${locale === 'en' ? styles.languageOptionActive : ''}`}
+						href={englishSwitchPath}
+						data-lang="en"
+						aria-current={locale === 'en' ? 'true' : undefined}
+					>
+						{footerCopy.en}
+					</a>
 				</div>
 			</footer>
 		</div>
@@ -84,6 +107,7 @@ const navLinks = [
 		const toggleButton = nav.querySelector('[data-nav-toggle]') as HTMLButtonElement | null;
 		const overlay = nav.querySelector('[data-nav-overlay]') as HTMLElement | null;
 		const overlayLinks = Array.from(nav.querySelectorAll('[data-overlay-link]')) as HTMLAnchorElement[];
+		const languageLinks = Array.from(nav.querySelectorAll('[data-lang]')) as HTMLAnchorElement[];
 		let menuOpen = false;
 
 		const updateScrollState = () => {
@@ -105,6 +129,12 @@ const navLinks = [
 		});
 
 		overlayLinks.forEach((link) => {
+			link.addEventListener('click', () => {
+				setMenuState(false);
+			});
+		});
+
+		languageLinks.forEach((link) => {
 			link.addEventListener('click', () => {
 				setMenuState(false);
 			});

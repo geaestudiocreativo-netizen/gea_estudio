@@ -1,21 +1,33 @@
 ---
 import styles from './Services.module.css';
 import { services } from '../data/services';
+import { servicesEn } from '../data/services-en';
+import { servicesSectionContent } from '../i18n/home-content';
+import { getLocalizedPath, type Locale } from '../i18n/site';
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props as Props;
+const content = servicesSectionContent[locale];
+const list = locale === 'en' ? servicesEn : services;
+const serviceBasePath = getLocalizedPath(locale, '/services');
 ---
 
 <section id="services" class={styles.services} aria-labelledby="services-title">
 	<div class={styles.content}>
 		<h2 id="services-title" class={styles.heading}>
-			<a href="/servicios" aria-label="Ver servicios" class={styles.headingLink}>QUÉ <span class={styles.headingBreak}>HACEMOS</span></a>
+			<a href={getLocalizedPath(locale, '/#services')} aria-label={content.headingAria} class={styles.headingLink}>{content.heading} <span class={styles.headingBreak}>{content.headingBreak}</span></a>
 		</h2>
-		<p class={styles.introHeadline}>Seis disciplinas. Un mismo universo visual.</p>
-		<p class={styles.introSupporting}>Todo lo que una marca necesita para comunicar con coherencia.</p>
+		<p class={styles.introHeadline}>{content.introHeadline}</p>
+		<p class={styles.introSupporting}>{content.introSupporting}</p>
 
 		<ul class={styles.list} role="list">
 			{
-				services.map((service) => (
+				list.map((service) => (
 					<li class={styles.serviceRow} data-size={service.homeSize}>
-						<a class={styles.serviceCardLink} href={`/services/${service.slug}`} aria-label={`Ver servicio de ${service.homeTitle}`}>
+						<a class={styles.serviceCardLink} href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
 							<div class={`${styles.media} ${styles[service.homeSize]}`}>
 								<img src={service.homeImage} alt={service.homeAlt} loading="lazy" decoding="async" />
 							</div>

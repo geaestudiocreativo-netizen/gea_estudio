@@ -9,16 +9,17 @@ interface Tab {
 interface Props {
 	sections: Tab[];
 	activeTab?: string;
+	ariaLabel?: string;
 }
 
-const { sections, activeTab } = Astro.props as Props;
+const { sections, activeTab, ariaLabel = 'Navegación de secciones del proyecto' } = Astro.props as Props;
 const initialActiveTab = activeTab ?? sections[0]?.id ?? '';
 ---
 
 <div
 	class={styles.tabs}
 	role="tablist"
-	aria-label="Navegación de secciones del proyecto"
+	aria-label={ariaLabel}
 	data-project-tabs
 >
 	{

@@ -1,9 +1,15 @@
 ---
 import projectStyles from './Projects.module.css';
 import PrimaryButton from './PrimaryButton/PrimaryButton.astro';
+import { aboutSectionContent } from '../i18n/home-content';
+import { getLocalizedPath, type Locale } from '../i18n/site';
 
-const aboutText =
-	"Soy Ángela Contreras, ingeniera de formación y directora creativa de Gea. Tras varios años trabajando en tecnología, encontré en el diseño mi verdadera forma de crear. Hoy ayudo a marcas y emprendedores a construir una identidad coherente a través del branding, el diseño web, la fotografía y la dirección creativa, desarrollando proyectos donde la estrategia, la funcionalidad y la estética conviven de forma natural.";
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props as Props;
+const content = aboutSectionContent[locale];
 ---
 
 <section id="about" class="w-full -mt-[32px] bg-[#f8f8f8] px-[24px] pt-[96px] pb-[96px] md:-mt-[32px] md:px-[32px] md:pt-[120px] md:pb-[112px] lg:-mt-[40px] lg:px-[68px] lg:pt-[136px] lg:pb-[128px]" aria-labelledby="about-title">
@@ -20,17 +26,17 @@ const aboutText =
 				id="about-title"
 				class="absolute right-[24px] top-[9%] m-0 font-['Krona_One'] text-[24px] font-normal uppercase leading-none tracking-[0.1em] text-[#0f1115] md:right-[34px] md:text-[33px] lg:right-[42px] lg:text-[52px]"
 			>
-				<a href="/sobre-gea" aria-label="Sobre Gea" style="color: inherit; text-decoration: none;">SOBRE GEA</a>
+				<a href={getLocalizedPath(locale, '/#about')} aria-label={content.titleAria} style="color: inherit; text-decoration: none;">{content.title}</a>
 			</h2>
 		</div>
 
 		<p class="mt-[32px] max-w-[66ch] font-['Satoshi'] text-[18px] leading-[1.42] tracking-[0.02em] text-[#2a2d32] md:mt-[40px] md:text-[19px] lg:text-[21px]">
-			{aboutText}
+			{content.text}
 		</p>
 
 		<div id="contact" class="mt-[48px] flex flex-col items-center text-center">
-			<h3 class="m-0 font-['Satoshi'] text-[18px] font-medium tracking-[0.02em] text-[#2a2d32] md:text-[19px] lg:text-[21px]">¿Hablamos?</h3>
-			<PrimaryButton href="/contacto" label="Contactar" ariaLabel="Contactar" className={`${projectStyles.cta} !mt-[16px]`} />
+			<h3 class="m-0 font-['Satoshi'] text-[18px] font-medium tracking-[0.02em] text-[#2a2d32] md:text-[19px] lg:text-[21px]">{content.contactTitle}</h3>
+			<PrimaryButton href={getLocalizedPath(locale, '/#contact')} label={content.contactButton} ariaLabel={content.contactButtonAria} className={`${projectStyles.cta} !mt-[16px]`} />
 		</div>
 	</div>
 </section>

@@ -1,13 +1,16 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import ProjectCard from '../../components/ProjectCard/ProjectCard.astro';
-import Footer from '../../components/Footer/Footer.astro';
-import ServicePill from '../../components/ServicePill/ServicePill.astro';
-import { projects } from '../../data/projects';
-import type { ServiceName } from '../../data/projects/types';
-import styles from './projects.module.css';
+import Layout from '../../../layouts/Layout.astro';
+import ProjectCard from '../../../components/ProjectCard/ProjectCard.astro';
+import Footer from '../../../components/Footer/Footer.astro';
+import ServicePill from '../../../components/ServicePill/ServicePill.astro';
+import { projects as baseProjects } from '../../../data/projects';
+import { getLocalizedProjects, localizeServiceType } from '../../../data/projects-i18n';
+import type { ServiceName } from '../../../data/projects/types';
+import styles from '../../proyectos/projects.module.css';
+import { projectsPageContent } from '../../../i18n/projects-content';
 
-const availableServices = new Set(projects.flatMap((project) => project.services.map((service) => service.type)));
+const projects = getLocalizedProjects('en');
+const availableServices = new Set(baseProjects.flatMap((project) => project.services.map((service) => service.type)));
 const serviceOrder: ServiceName[] = [
 	'Branding',
 	'Web',
@@ -17,9 +20,7 @@ const serviceOrder: ServiceName[] = [
 	'Papelería',
 	'Cinematografía'
 ];
-const serviceFilters = serviceOrder.filter(
-	(service) => availableServices.has(service) || service === 'Decoración'
-);
+const serviceFilters = serviceOrder.filter((service) => availableServices.has(service) || service === 'Decoración');
 
 const normalizeService = (value: string) =>
 	value
@@ -28,22 +29,23 @@ const normalizeService = (value: string) =>
 		.toLowerCase()
 		.trim();
 
+const content = projectsPageContent.en;
 ---
 
-<Layout>
+<Layout title="Projects | Gea Studio" description="Selected branding, digital, editorial, and visual direction projects by Gea Studio.">
 	<main class={styles.page}>
 		<header class={styles.header}>
-			<h1 class={styles.title}>PROYECTOS</h1>
-			<p class={styles.intro}>Así es como construimos universos visuales para marcas.</p>
+			<h1 class={styles.title}>{content.title}</h1>
+			<p class={styles.intro}>{content.intro}</p>
 		</header>
 
 		<div class={styles.filtersSticky}>
-			<div class={styles.filtersBar} role="group" aria-label="Filtrar proyectos por servicio" data-filter-bar>
-				<ServicePill label="Todos" pressed buttonRole="project-filter" dataService="all" />
+			<div class={styles.filtersBar} role="group" aria-label={content.filterAria} data-filter-bar>
+				<ServicePill label={content.allFilter} pressed buttonRole="project-filter" dataService="all" />
 				{
 					serviceFilters.map((service) => (
 						<ServicePill
-							label={service}
+							label={localizeServiceType(service, 'en')}
 							buttonRole="project-filter"
 							dataService={normalizeService(service)}
 						/>
@@ -52,23 +54,23 @@ const normalizeService = (value: string) =>
 			</div>
 		</div>
 
-		<ul class={styles.grid} role="list" aria-label="Listado de proyectos">
+		<ul class={styles.grid} role="list" aria-label={content.listAria}>
 			{
-				projects.map((project) => (
+				projects.map((project, index) => (
 					<li
 						class={styles.item}
 						data-project-item
 						data-services={JSON.stringify(
-							project.services.map((service) => normalizeService(service.type))
+							baseProjects[index].services.map((service) => normalizeService(service.type))
 						)}
 					>
-						<ProjectCard {...project} number={project.id} compactMobile variant="grid" locale="es" />
+						<ProjectCard {...project} number={project.id} compactMobile variant="grid" locale="en" />
 					</li>
 				))
 			}
 		</ul>
 	</main>
-	<Footer locale="es" />
+	<Footer locale="en" />
 	<script>
 		const filterButtons = Array.from(
 			document.querySelectorAll('[data-filter-bar] [data-service]')

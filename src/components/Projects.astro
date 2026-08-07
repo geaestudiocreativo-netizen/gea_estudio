@@ -2,25 +2,36 @@
 import ProjectCard from './ProjectCard/ProjectCard.astro';
 import PrimaryButton from './PrimaryButton/PrimaryButton.astro';
 import styles from './Projects.module.css';
-import { projects } from '../data/projects';
+import { getLocalizedProjects } from '../data/projects-i18n';
+import { projectsSectionContent } from '../i18n/home-content';
+import { getLocalizedPath, type Locale } from '../i18n/site';
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props as Props;
+const content = projectsSectionContent[locale];
+const projects = getLocalizedProjects(locale);
+const projectsHref = getLocalizedPath(locale, '/proyectos');
 ---
 
 <section id="projects" class={styles.projects} aria-labelledby="projects-title">
 	<div class={styles.layout}>
-		<h2 id="projects-title" class={styles.title}>PROYECTOS</h2>
+		<h2 id="projects-title" class={styles.title}>{content.title}</h2>
 
-		<div class={styles.carousel} aria-label="Project portfolio carousel" tabindex="0">
+		<div class={styles.carousel} aria-label={content.carouselLabel} tabindex="0">
 			<ul class={styles.track} role="list">
 				{
 					projects.map((project) => (
 						<li class={styles.item}>
-							<ProjectCard {...project} number={project.id} />
+							<ProjectCard {...project} number={project.id} locale={locale} />
 						</li>
 					))
 				}
 			</ul>
 		</div>
 
-		<PrimaryButton href="/proyectos" label="Ver proyectos" ariaLabel="Ver proyectos" className={styles.cta} />
+		<PrimaryButton href={projectsHref} label={content.cta} ariaLabel={content.ctaAria} className={styles.cta} />
 	</div>
 </section>

@@ -1,24 +1,26 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PrimaryButton from '../../components/PrimaryButton/PrimaryButton.astro';
-import { services } from '../../data/services';
-import styles from './service-detail.module.css';
+import Layout from '../../../layouts/Layout.astro';
+import PrimaryButton from '../../../components/PrimaryButton/PrimaryButton.astro';
+import { servicesEn } from '../../../data/services-en';
+import styles from '../../services/service-detail.module.css';
+import { servicePageContent } from '../../../i18n/services-content';
 
 export function getStaticPaths() {
-	return services.map((service) => ({
+	return servicesEn.map((service) => ({
 		params: { slug: service.slug }
 	}));
 }
 
 const { slug } = Astro.params;
 
-const service = services.find((item) => item.slug === slug);
+const service = servicesEn.find((item) => item.slug === slug);
 
 if (!service) {
 	throw new Response('Service not found', { status: 404 });
 }
 
-const relatedServices = services.filter((item) => item.slug !== service.slug);
+const relatedServices = servicesEn.filter((item) => item.slug !== service.slug);
+const content = servicePageContent.en;
 ---
 
 <Layout title={service.seo.title} description={service.seo.description}>
@@ -47,12 +49,12 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 			<h2 id="service-universe-title" class={styles.universeTitle}>{service.universeTitle}</h2>
 			<p class={styles.universeText}>{service.universeText}</p>
 
-			<nav class={styles.relatedNav} aria-label="Otros servicios">
+			<nav class={styles.relatedNav} aria-label={content.relatedAria}>
 				<ul class={styles.relatedList} role="list">
 					{
 						relatedServices.map((related) => (
 							<li>
-								<a href={`/services/${related.slug}`}>{related.title}</a>
+								<a href={`/en/services/${related.slug}`}>{related.title}</a>
 							</li>
 						))
 					}
@@ -60,9 +62,9 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 			</nav>
 
 			<PrimaryButton
-				href="/proyectos"
-				label="Explorar proyectos"
-				ariaLabel="Explorar proyectos"
+				href="/en/projects"
+				label={content.viewProjects}
+				ariaLabel={content.viewProjectsAria}
 				className={styles.servicesCta}
 			/>
 		</section>
@@ -71,9 +73,9 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 			<h2 id="service-contact-title" class={styles.contactTitle}>{service.ctaTitle}</h2>
 			<p class={styles.contactText}>{service.ctaText}</p>
 			<PrimaryButton
-				href="/#contact"
-				label="Solicitar una consulta"
-				ariaLabel="Solicitar una consulta"
+				href="/en/#contact"
+				label={content.consultation}
+				ariaLabel={content.consultationAria}
 				className={styles.contactButton}
 			/>
 		</section>

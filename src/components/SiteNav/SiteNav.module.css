@@ -42,10 +42,15 @@
 	text-decoration: none;
 }
 
-.logo img {
+.logoDefault,
+.logoWhite {
 	display: block;
 	width: clamp(62px, 8vw, 96px);
 	height: auto;
+}
+
+.logoWhite {
+	display: none;
 }
 
 .desktopNav {
@@ -182,15 +187,15 @@
 }
 
 .languageOption {
-	border: 0;
+	display: inline-block;
 	padding: 0;
-	background: transparent;
 	font-family: 'Satoshi', sans-serif;
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 1.2;
 	letter-spacing: 0.08em;
 	color: rgba(255, 255, 255, 0.5);
+	text-decoration: none;
 	cursor: pointer;
 }
 
@@ -231,11 +236,20 @@
 		padding-bottom: 26px;
 	}
 
-	.nav[data-menu-open='true'] .logo img {
-		filter: brightness(0) invert(1);
+	.nav[data-menu-open='true'] .logoDefault {
+		display: none;
+	}
+
+	.nav[data-menu-open='true'] .logoWhite {
+		display: block;
 	}
 
 	.nav[data-menu-open='true'] .menuButton {
+		color: #ffffff;
+	}
+
+	.nav[data-menu-open='true'] .menuIconOpen,
+	.nav[data-menu-open='true'] .menuIconClose {
 		color: #ffffff;
 	}
 

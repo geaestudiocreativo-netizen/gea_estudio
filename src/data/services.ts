@@ -173,7 +173,7 @@ export const services: ServicePageItem[] = [
 		ctaText:
 			'Cada proyecto es diferente. Cuéntame qué tienes en mente y prepararemos una propuesta adaptada a tu marca, tus objetivos y la forma en la que quieres comunicar.',
 		seo: {
-			title: 'Interior Design | Gea Estudio',
+			title: 'Decoración e Interiorismo | Gea Estudio',
 			description:
 				'Servicio de interior design para marcas: espacios coherentes con la identidad visual y la experiencia que quieres proyectar.'
 		}

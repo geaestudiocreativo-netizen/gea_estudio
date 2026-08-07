@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SiteNav from '../components/SiteNav/SiteNav.astro';
+import { getLocaleFromPath } from '../i18n/site';
 
 interface Props {
 	title?: string;
@@ -13,11 +14,12 @@ const {
 } = Astro.props as Props;
 
 const pathname = Astro.url.pathname;
-const overlayHero = pathname === '/' || pathname.startsWith('/services/');
+const locale = getLocaleFromPath(pathname);
+const overlayHero = pathname === '/' || pathname === '/en' || pathname.startsWith('/services/') || pathname.startsWith('/en/services/');
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -32,7 +34,7 @@ const overlayHero = pathname === '/' || pathname.startsWith('/services/');
 		<title>{title}</title>
 	</head>
 	<body>
-		<SiteNav overlayHero={overlayHero} />
+		<SiteNav overlayHero={overlayHero} locale={locale} pathname={pathname} />
 		<slot />
 	</body>
 </html>
