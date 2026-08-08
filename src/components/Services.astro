@@ -20,7 +20,11 @@ const serviceBasePath = getLocalizedPath(locale, '/services');
 		<h2 id="services-title" class={styles.heading}>
 			<a href={getLocalizedPath(locale, '/#services')} aria-label={content.headingAria} class={styles.headingLink}>{content.heading} <span class={styles.headingBreak}>{content.headingBreak}</span></a>
 		</h2>
-		<p class={styles.introHeadline}>{content.introHeadline}</p>
+		<p class={styles.introHeadline}>
+			{content.introHeadlineLines.map((line) => (
+				<span class={styles.introHeadlineLine}>{line}</span>
+			))}
+		</p>
 		<p class={styles.introSupporting}>{content.introSupporting}</p>
 
 		<ul class={styles.list} role="list">

@@ -25,6 +25,7 @@ export const servicesSectionContent = {
 		headingBreak: 'HACEMOS',
 		headingAria: 'Ver servicios',
 		introHeadline: 'Seis disciplinas. Un mismo universo visual.',
+		introHeadlineLines: ['Seis disciplinas.', 'Un mismo universo visual.'],
 		introSupporting: 'Todo lo que una marca necesita para comunicar con coherencia.',
 		serviceAriaPrefix: 'Ver servicio de'
 	},
@@ -33,6 +34,7 @@ export const servicesSectionContent = {
 		headingBreak: 'WE DO',
 		headingAria: 'View services',
 		introHeadline: 'Six disciplines. One visual universe.',
+		introHeadlineLines: ['Six disciplines.', 'One visual universe.'],
 		introSupporting: 'Everything a brand needs to communicate with coherence.',
 		serviceAriaPrefix: 'View'
 	}

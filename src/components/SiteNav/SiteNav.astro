@@ -27,6 +27,8 @@ const mobileLinks = [
 ];
 const spanishSwitchPath = getLanguageSwitchPath(pathname, "es");
 const englishSwitchPath = getLanguageSwitchPath(pathname, "en");
+const switchPath = locale === "en" ? spanishSwitchPath : englishSwitchPath;
+const switchLabel = locale === "en" ? "ES" : "EN";
 ---
 
 <header
@@ -56,15 +58,35 @@ const englishSwitchPath = getLanguageSwitchPath(pathname, "en");
 			}
 		</nav>
 
-		<button
-			class={styles.menuButton}
-			type="button"
-			aria-label="Open menu"
-			aria-expanded="false"
-			data-nav-toggle
-		>
-			<span class={styles.menuIcon} aria-hidden="true">☰</span>
-		</button>
+		<div class={styles.navControls}>
+			<div
+				class={styles.languageSelector}
+				role="group"
+				aria-label="Language selector"
+			>
+				<a
+					class={styles.languageOption}
+					href={switchPath}
+					data-language-link
+				>
+					{switchLabel}
+				</a>
+			</div>
+
+			<button
+				class={styles.menuButton}
+				type="button"
+				aria-label="Open menu"
+				aria-expanded="false"
+				data-nav-toggle
+			>
+				<span class={styles.menuIcon} aria-hidden="true">
+					<span class={styles.menuLine}></span>
+					<span class={styles.menuLine}></span>
+					<span class={styles.menuLine}></span>
+				</span>
+			</button>
+		</div>
 	</div>
 
 	<div class={styles.mobileOverlay} data-nav-overlay aria-hidden="true">
@@ -73,7 +95,7 @@ const englishSwitchPath = getLanguageSwitchPath(pathname, "en");
 				<a class={styles.overlayLogo} href={homeHref} aria-label="Gea home">
 					<img
 						class={styles.overlayLogoImage}
-						src="/images/Logotype-white.svg"
+						src="/images/Logotype-menu.svg"
 						alt="Gea"
 						loading="eager"
 						decoding="async"
@@ -107,26 +129,6 @@ const englishSwitchPath = getLanguageSwitchPath(pathname, "en");
 				<p class={styles.overlayStatement}>
 					Creando universos visuales para marcas.
 				</p>
-				<div
-					class={styles.languageSelector}
-					role="group"
-					aria-label="Language selector"
-				>
-					<a
-						class={`${styles.languageOption} ${locale === "es" ? styles.languageOptionActive : ""}`}
-						href={spanishSwitchPath}
-						data-language-link
-					>
-						ES
-					</a>
-					<a
-						class={`${styles.languageOption} ${locale === "en" ? styles.languageOptionActive : ""}`}
-						href={englishSwitchPath}
-						data-language-link
-					>
-						EN
-					</a>
-				</div>
 			</footer>
 		</div>
 	</div>
