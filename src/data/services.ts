@@ -156,7 +156,7 @@ export const services: ServicePageItem[] = [
 		homeSize: 'imageL',
 		intro: 'Diseñamos espacios que expresan la identidad de marca a través de atmósferas, materiales y dirección estética.',
 		heroImage: '/images/services/interior-design/interior-design-service.jpg',
-		homeImage: '/images/services/interior-design/interior-design-home.jpg',
+		homeImage: '/images/services/decoracion/decoracion-home.jpg',
 		sectionTitle: 'Construimos espacios con identidad',
 		services: [
 			'Concepto visual del espacio',
