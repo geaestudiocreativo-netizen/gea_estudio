@@ -43,8 +43,8 @@ export const servicesEn: ServicePageItem[] = [
 		homeSize: 'imageM',
 		intro:
 			'We craft images that translate brand identity into memorable scenes, atmospheres, and visual narratives.',
-		heroImage: '/images/services/photography/photography-service.jpg',
-		homeImage: '/images/services/photography/photography-home.jpg',
+		heroImage: '/images/services/fotografia/fotografia-service.jpg',
+		homeImage: '/images/services/fotografia/fotografia-home.jpg',
 		sectionTitle: 'We build complete visual narratives',
 		services: [
 			'Art direction for photo shoots',
@@ -143,7 +143,7 @@ export const servicesEn: ServicePageItem[] = [
 		intro:
 			'We design spaces that express brand identity through atmosphere, materials, and aesthetic direction.',
 		heroImage: '/images/services/interior-design/interior-design-service.jpg',
-		homeImage: '/images/services/decoracion/decoracion-home.jpg',
+		homeImage: '/images/services/decoracion/decoracion-service.jpg',
 		sectionTitle: 'We build spaces with identity',
 		services: [
 			'Spatial visual concept',

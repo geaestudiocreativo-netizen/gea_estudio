@@ -68,7 +68,6 @@
 
 .primaryImage {
 	aspect-ratio: 510 / 654;
-	filter: contrast(1.02) saturate(0.72) brightness(0.82);
 }
 
 .secondaryImage {

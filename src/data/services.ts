@@ -62,8 +62,8 @@ export const services: ServicePageItem[] = [
 		homeAlt: 'Portrait photographer holding a camera',
 		homeSize: 'imageM',
 		intro: 'Construimos imágenes que traducen la identidad de marca en escenas, atmósferas y narrativas visuales memorables.',
-		heroImage: '/images/services/photography/photography-service.jpg',
-		homeImage: '/images/services/photography/photography-home.jpg',
+		heroImage: '/images/services/fotografia/fotografia-service.jpg',
+		homeImage: '/images/services/fotografia/fotografia-home.jpg',
 		sectionTitle: 'Construimos narrativas visuales completas',
 		services: [
 			'Dirección de arte para sesiones',
@@ -156,7 +156,7 @@ export const services: ServicePageItem[] = [
 		homeSize: 'imageL',
 		intro: 'Diseñamos espacios que expresan la identidad de marca a través de atmósferas, materiales y dirección estética.',
 		heroImage: '/images/services/interior-design/interior-design-service.jpg',
-		homeImage: '/images/services/decoracion/decoracion-home.jpg',
+		homeImage: '/images/services/decoracion/decoracion-service.jpg',
 		sectionTitle: 'Construimos espacios con identidad',
 		services: [
 			'Concepto visual del espacio',
