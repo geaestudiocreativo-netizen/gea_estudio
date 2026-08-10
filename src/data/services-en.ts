@@ -9,8 +9,8 @@ export const servicesEn: ServicePageItem[] = [
 		homeAlt: 'Editorial branding artwork on a ceramic vase',
 		homeSize: 'imageL',
 		intro: 'A brand is not just a logo. It is how a business presents itself, communicates, and stays memorable.',
-		heroImage: '/images/services/branding/branding-service.jpg',
-		homeImage: '/images/services/branding/branding-home.jpg',
+		heroImage: '/images/services/branding-service.jpg',
+		homeImage: '/images/services/branding-home.jpg',
 		sectionTitle: 'We build complete visual systems',
 		services: [
 			'Primary logo + logo system',
@@ -43,8 +43,8 @@ export const servicesEn: ServicePageItem[] = [
 		homeSize: 'imageM',
 		intro:
 			'We craft images that translate brand identity into memorable scenes, atmospheres, and visual narratives.',
-		heroImage: '/images/services/fotografia/fotografia-service.jpg',
-		homeImage: '/images/services/fotografia/fotografia-home.jpg',
+		heroImage: '/images/services/fotografia-service.jpg',
+		homeImage: '/images/services/fotografia-home.jpg',
 		sectionTitle: 'We build complete visual narratives',
 		services: [
 			'Art direction for photo shoots',
@@ -76,8 +76,8 @@ export const servicesEn: ServicePageItem[] = [
 		homeSize: 'imageXS',
 		intro:
 			'We design digital experiences that extend brand identity with clarity, functionality, and character.',
-		heroImage: '/images/services/web/web-service.jpg',
-		homeImage: '/images/services/web/web-home.jpg',
+		heroImage: '/images/services/web-service.jpg',
+		homeImage: '/images/services/web-home.jpg',
 		sectionTitle: 'We build complete web experiences',
 		services: [
 			'Information architecture',
@@ -109,8 +109,8 @@ export const servicesEn: ServicePageItem[] = [
 		homeSize: 'imageM',
 		intro:
 			'We create editorial pieces that expand brand visual universes through rhythm, detail, and narrative.',
-		heroImage: '/images/services/editorial/editorial-service.jpg',
-		homeImage: '/images/services/editorial/editorial-home.jpg',
+		heroImage: '/images/services/editorial-service.jpg',
+		homeImage: '/images/services/editorial-home.jpg',
 		sectionTitle: 'We build complete editorial systems',
 		services: [
 			'Magazine and catalog design',
@@ -142,8 +142,8 @@ export const servicesEn: ServicePageItem[] = [
 		homeSize: 'imageL',
 		intro:
 			'We design spaces that express brand identity through atmosphere, materials, and aesthetic direction.',
-		heroImage: '/images/services/interior-design/interior-design-service.jpg',
-		homeImage: '/images/services/decoracion/decoracion-service.jpg',
+		heroImage: '/images/services/interior-design-service.jpg',
+		homeImage: '/images/services/decoracion-service.jpg',
 		sectionTitle: 'We build spaces with identity',
 		services: [
 			'Spatial visual concept',
@@ -175,8 +175,8 @@ export const servicesEn: ServicePageItem[] = [
 		homeSize: 'imageS',
 		intro:
 			'We develop content systems that maintain brand visual consistency in every publication.',
-		heroImage: '/images/services/social-media/social-media-service.jpg',
-		homeImage: '/images/services/social-media/social-media-home.jpg',
+		heroImage: '/images/services/social-media-service.jpg',
+		homeImage: '/images/services/social-media-home.jpg',
 		sectionTitle: 'We build continuous visual presence',
 		services: [
 			'Visual direction for social media',
