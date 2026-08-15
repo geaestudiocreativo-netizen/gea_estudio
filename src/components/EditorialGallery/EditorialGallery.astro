@@ -1,5 +1,6 @@
 ---
 import styles from './EditorialGallery.module.css';
+import ResponsiveImage from '../ResponsiveImage.astro';
 
 interface Props {
 	images: readonly string[];
@@ -31,7 +32,14 @@ const blocks = toOrderedBlocks(images);
 		<div class={styles.verticalStack}>
 			{images.map((image, index) => (
 				<figure class={styles.verticalItem}>
-					<img src={image} alt={`${projectTitle} editorial ${index + 1}`} loading="lazy" decoding="async" />
+					<ResponsiveImage
+						src={image}
+						alt={`${projectTitle} editorial ${index + 1}`}
+						loading="lazy"
+						decoding="async"
+						sizes="100vw"
+						widths={[640, 960, 1280, 1600, 1920]}
+					/>
 				</figure>
 			))}
 		</div>
@@ -41,29 +49,35 @@ const blocks = toOrderedBlocks(images);
 				{
 					blockImages.length === 1 ? (
 						<figure class={`${styles.item} ${styles.itemSingle}`}>
-							<img
+							<ResponsiveImage
 								src={blockImages[0]}
 								alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 1}`}
 								loading="lazy"
 								decoding="async"
+								sizes="100vw"
+								widths={[640, 960, 1280, 1600, 1920]}
 							/>
 						</figure>
 					) : blockImages.length === 2 ? (
 						<div class={styles.pairBlock}>
 							<figure class={`${styles.item} ${styles.itemPair}`}>
-								<img
+								<ResponsiveImage
 									src={blockImages[0]}
 									alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 1}`}
 									loading="lazy"
 									decoding="async"
+									sizes="(max-width: 767px) 100vw, 50vw"
+									widths={[480, 768, 960, 1280]}
 								/>
 							</figure>
 							<figure class={`${styles.item} ${styles.itemPair}`}>
-								<img
+								<ResponsiveImage
 									src={blockImages[1]}
 									alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 2}`}
 									loading="lazy"
 									decoding="async"
+									sizes="(max-width: 767px) 100vw, 50vw"
+									widths={[480, 768, 960, 1280]}
 								/>
 							</figure>
 						</div>
@@ -71,27 +85,33 @@ const blocks = toOrderedBlocks(images);
 						<>
 							<div class={styles.topBlock}>
 								<figure class={`${styles.item} ${styles.item1}`}>
-									<img
+									<ResponsiveImage
 										src={blockImages[0]}
 										alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 1}`}
 										loading="lazy"
 										decoding="async"
+										sizes="(max-width: 767px) 100vw, 38vw"
+										widths={[360, 520, 768, 960]}
 									/>
 								</figure>
 								<figure class={`${styles.item} ${styles.item2}`}>
-									<img
+									<ResponsiveImage
 										src={blockImages[1]}
 										alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 2}`}
 										loading="lazy"
 										decoding="async"
+										sizes="(max-width: 767px) 100vw, 38vw"
+										widths={[360, 520, 768, 960]}
 									/>
 								</figure>
 								<figure class={`${styles.item} ${styles.item3}`}>
-									<img
+									<ResponsiveImage
 										src={blockImages[2]}
 										alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 3}`}
 										loading="lazy"
 										decoding="async"
+										sizes="(max-width: 767px) 100vw, 62vw"
+										widths={[520, 768, 960, 1280, 1600]}
 									/>
 								</figure>
 							</div>
@@ -99,11 +119,13 @@ const blocks = toOrderedBlocks(images);
 							{
 								blockImages[3] && (
 									<figure class={`${styles.item} ${styles.item4}`}>
-										<img
+										<ResponsiveImage
 											src={blockImages[3]}
 											alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 4}`}
 											loading="lazy"
 											decoding="async"
+											sizes="100vw"
+											widths={[640, 960, 1280, 1600, 1920]}
 										/>
 									</figure>
 								)
@@ -115,11 +137,13 @@ const blocks = toOrderedBlocks(images);
 										{
 											blockImages[4] && (
 												<figure class={`${styles.item} ${styles.item5}`}>
-													<img
+													<ResponsiveImage
 														src={blockImages[4]}
 														alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 5}`}
 														loading="lazy"
 														decoding="async"
+														sizes="(max-width: 767px) 100vw, 50vw"
+														widths={[480, 768, 960, 1280]}
 													/>
 												</figure>
 											)
@@ -127,11 +151,13 @@ const blocks = toOrderedBlocks(images);
 										{
 											blockImages[5] && (
 												<figure class={`${styles.item} ${styles.item6}`}>
-													<img
+													<ResponsiveImage
 														src={blockImages[5]}
 														alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 6}`}
 														loading="lazy"
 														decoding="async"
+														sizes="(max-width: 767px) 100vw, 50vw"
+														widths={[480, 768, 960, 1280]}
 													/>
 												</figure>
 											)
@@ -143,11 +169,13 @@ const blocks = toOrderedBlocks(images);
 							{
 								blockImages[6] && (
 									<figure class={`${styles.item} ${styles.item7}`}>
-										<img
+										<ResponsiveImage
 											src={blockImages[6]}
 											alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 7}`}
 											loading="lazy"
 											decoding="async"
+											sizes="100vw"
+											widths={[640, 960, 1280, 1600, 1920]}
 										/>
 									</figure>
 								)

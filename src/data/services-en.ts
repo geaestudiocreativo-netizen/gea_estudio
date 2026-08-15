@@ -142,7 +142,7 @@ export const servicesEn: ServicePageItem[] = [
 		homeSize: 'imageL',
 		intro:
 			'We design spaces that express brand identity through atmosphere, materials, and aesthetic direction.',
-		heroImage: '/images/services/interior-design-service.jpg',
+		heroImage: '/images/services/decoracion-service.jpg',
 		homeImage: '/images/services/decoracion-service.jpg',
 		sectionTitle: 'We build spaces with identity',
 		services: [

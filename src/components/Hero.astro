@@ -2,6 +2,7 @@
 import styles from './Hero.module.css';
 import { heroContent } from '../i18n/home-content';
 import type { Locale } from '../i18n/site';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 interface Props {
 	locale?: Locale;
@@ -13,18 +14,24 @@ const content = heroContent[locale];
 
 <section class={styles.hero} aria-label="Hero">
 	<div class={styles.mediaRow} aria-label="Feature imagery">
-		<img
+		<ResponsiveImage
 			class={styles.primaryImage}
 			src="/images/hero/hero_first.png"
 			alt={content.primaryImageAlt}
 			loading="eager"
 			fetchpriority="high"
+			sizes="(max-width: 767px) 100vw, 60vw"
+			widths={[480, 768, 1024, 1440, 1920]}
+			formats={['webp']}
 		/>
-		<img
+		<ResponsiveImage
 			class={styles.secondaryImage}
 			src="/images/hero/hero_second.png"
 			alt={content.secondaryImageAlt}
 			loading="lazy"
+			sizes="(max-width: 767px) 100vw, 40vw"
+			widths={[400, 640, 960, 1280]}
+			formats={['webp']}
 		/>
 	</div>
 

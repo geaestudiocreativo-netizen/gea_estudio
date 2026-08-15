@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets';
+import { getOptimizedImageMetadata } from '../utils/optimized-images';
+
+interface Props {
+	src: string;
+	alt: string;
+	class?: string;
+	loading?: 'lazy' | 'eager';
+	decoding?: 'async' | 'sync' | 'auto';
+	fetchpriority?: 'high' | 'low' | 'auto';
+	sizes?: string;
+	widths?: number[];
+	formats?: Array<'webp' | 'png' | 'jpg' | 'jpeg' | 'avif'>;
+}
+
+const {
+	src,
+	alt,
+	class: className,
+	loading = 'lazy',
+	decoding = 'async',
+	fetchpriority,
+	sizes,
+	widths,
+	formats = ['webp']
+} = Astro.props as Props;
+
+const imageMetadata = getOptimizedImageMetadata(src);
+---
+
+{
+	imageMetadata ? (
+		<Image
+			src={imageMetadata}
+			alt={alt}
+			class={className}
+			loading={loading}
+			decoding={decoding}
+			fetchpriority={fetchpriority}
+			sizes={sizes}
+			widths={widths}
+			format={formats[0]}
+		/>
+	) : (
+		<img src={src} alt={alt} class={className} loading={loading} decoding={decoding} fetchpriority={fetchpriority} />
+	)
+}

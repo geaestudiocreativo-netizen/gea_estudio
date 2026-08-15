@@ -1,5 +1,6 @@
 ---
 import styles from './ProjectCard.module.css';
+import ResponsiveImage from '../ResponsiveImage.astro';
 import { projectDetailContent } from '../../i18n/projects-content';
 import { getLocalizedPath, type Locale } from '../../i18n/site';
 
@@ -71,7 +72,15 @@ const cardAriaPrefix = projectDetailContent[locale].projectCardAriaPrefix;
 		<p class={styles.number}>{number}</p>
 
 		<div class={`${styles.media} ${sizeClass}`}>
-			<img src={imagePath} alt={title} class={styles.image} loading="lazy" decoding="async" />
+			<ResponsiveImage
+				src={imagePath}
+				alt={title}
+				class={styles.image}
+				loading="lazy"
+				decoding="async"
+				sizes="(max-width: 767px) 42vw, 224px"
+				widths={[224, 336, 448, 672]}
+			/>
 		</div>
 
 		<h3 class={styles.title}>{title}</h3>

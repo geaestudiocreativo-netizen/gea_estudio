@@ -3,6 +3,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Footer from '../../../components/Footer/Footer.astro';
 import ProjectTabs from '../../../components/ProjectTabs/ProjectTabs.astro';
 import EditorialGallery from '../../../components/EditorialGallery/EditorialGallery.astro';
+import ResponsiveImage from '../../../components/ResponsiveImage.astro';
 import { getLocalizedProjects } from '../../../data/projects-i18n';
 import styles from '../../proyectos/project-detail.module.css';
 import { projectDetailContent } from '../../../i18n/projects-content';
@@ -68,7 +69,15 @@ const sections = project.services.map((service) => ({
 		</header>
 
 		<figure class={styles.cover}>
-			<img src={project.heroImage} alt={project.title} loading="eager" fetchpriority="high" decoding="async" />
+			<ResponsiveImage
+				src={project.heroImage}
+				alt={project.title}
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				sizes="(max-width: 1200px) 100vw, 1120px"
+				widths={[768, 1120, 1440, 1920]}
+			/>
 		</figure>
 
 		<div class={styles.divider} aria-hidden="true"></div>

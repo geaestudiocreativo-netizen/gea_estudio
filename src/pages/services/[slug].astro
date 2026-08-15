@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PrimaryButton from '../../components/PrimaryButton/PrimaryButton.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
 import { services } from '../../data/services';
 import styles from './service-detail.module.css';
 
@@ -29,7 +30,15 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 		</section>
 
 		<figure class={styles.heroImage}>
-			<img src={service.heroImage} alt={service.title} loading="eager" fetchpriority="high" decoding="async" />
+			<ResponsiveImage
+				src={service.heroImage}
+				alt={service.title}
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+				sizes="100vw"
+				widths={[768, 1280, 1600, 1920]}
+			/>
 		</figure>
 
 		<section class={styles.systems} aria-labelledby="service-systems-title">

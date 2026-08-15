@@ -1,5 +1,6 @@
 ---
 import styles from './Services.module.css';
+import ResponsiveImage from './ResponsiveImage.astro';
 import { services } from '../data/services';
 import { servicesEn } from '../data/services-en';
 import { servicesSectionContent } from '../i18n/home-content';
@@ -33,7 +34,14 @@ const serviceBasePath = getLocalizedPath(locale, '/services');
 					<li class={styles.serviceRow} data-size={service.homeSize}>
 						<a class={styles.serviceCardLink} href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
 							<div class={`${styles.media} ${styles[service.homeSize]}`}>
-								<img src={service.homeImage} alt={service.homeAlt} loading="lazy" decoding="async" />
+								<ResponsiveImage
+									src={service.homeImage}
+									alt={service.homeAlt}
+									loading="lazy"
+									decoding="async"
+									sizes="(max-width: 767px) 72vw, 330px"
+									widths={[240, 320, 480, 660]}
+								/>
 							</div>
 							<div class={styles.serviceContent}>
 								<div class={styles.serviceHeading}>

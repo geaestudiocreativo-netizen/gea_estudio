@@ -155,7 +155,7 @@ export const services: ServicePageItem[] = [
 		homeAlt: 'Interior design living room with framed wall gallery',
 		homeSize: 'imageL',
 		intro: 'Diseñamos espacios que expresan la identidad de marca a través de atmósferas, materiales y dirección estética.',
-		heroImage: '/images/services/interior-design-service.jpg',
+		heroImage: '/images/services/decoracion-service.jpg',
 		homeImage: '/images/services/decoracion-service.jpg',
 		sectionTitle: 'Construimos espacios con identidad',
 		services: [
