@@ -14,7 +14,7 @@ type ProjectService =
 	  }
 	| {
 			type: Exclude<ServiceName, 'Branding'>;
-			gallery: 'stack';
+			gallery: 'stack' | 'fotografia';
 			images?: string[];
 	  };
 
@@ -72,7 +72,7 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 
 		return {
 			type: service.type,
-			gallery: 'stack',
+			gallery: service.gallery,
 			images: service.images
 		};
 	});

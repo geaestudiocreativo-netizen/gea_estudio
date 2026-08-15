@@ -4,6 +4,23 @@
 	aspect-ratio: var(--slot-ratio, 1 / 1);
 }
 
+.verticalStack {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.verticalItem {
+	margin: 0;
+}
+
+.verticalItem img {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
 .item img {
 	display: block;
 	width: 100%;

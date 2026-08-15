@@ -28,7 +28,7 @@ export type ProjectServiceMetadata =
 	  }
 	| {
 			type: NonBrandingServiceName;
-			gallery: 'stack';
+			gallery: 'stack' | 'fotografia';
 			images?: string[];
 	  };
 

@@ -42,9 +42,19 @@ const encodeSegments = (...segments: string[]) => segments.map((segment) => enco
 
 const toProjectImageUrl = (...segments: string[]) => `/images/projects/${encodeSegments(...segments)}`;
 
+const isPhotographySection = (name: string) => {
+	const normalized = name
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLowerCase();
+
+	return normalized === 'fotografia' || normalized === 'cinematografia' || normalized === 'photography' || normalized === 'cinematography';
+};
+
 const sections = project.services.map((service) => ({
 	id: toSectionId(service.type),
 	title: service.type,
+	isPhotography: isPhotographySection(service.type),
 	images: (service.images ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename))
 }));
 ---
@@ -89,7 +99,11 @@ const sections = project.services.map((service) => ({
 				>
 					<h2 id={`section-${section.id}`} class={styles.sectionTitle}>{section.title}</h2>
 					<div class={styles.fullBleedGallery}>
-						<EditorialGallery images={section.images} projectTitle={project.title} />
+						<EditorialGallery
+							images={section.images}
+							projectTitle={project.title}
+							layout={section.isPhotography ? 'vertical' : 'editorial'}
+						/>
 					</div>
 				</section>
 			))

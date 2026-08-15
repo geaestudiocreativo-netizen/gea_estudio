@@ -17,8 +17,7 @@ const projectDescriptionTranslations: Record<string, string> = {
 	g: 'An artisanal pastry brand with editorial sensitivity and contemporary character.',
 	'gea-artesania': 'Handcrafted jewelry with design-led pieces made in polymer clay.',
 	foc: 'Signature paellas reshaping how traditional Valencian cuisine is perceived.',
-	margen: 'Clay through the lens of an authentic brand.',
-	trop: 'A culinary project that reimagines the way we experience food.'
+	margen: 'Clay through the lens of an authentic brand.'
 };
 
 export const localizeServiceType = (serviceType: string, locale: Locale): string => {

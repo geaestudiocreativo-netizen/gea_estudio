@@ -4,9 +4,10 @@ import styles from './EditorialGallery.module.css';
 interface Props {
 	images: readonly string[];
 	projectTitle: string;
+	layout?: 'editorial' | 'vertical';
 }
 
-const { images, projectTitle } = Astro.props as Props;
+const { images, projectTitle, layout = 'editorial' } = Astro.props as Props;
 const IMAGES_PER_BLOCK = 7;
 
 const toOrderedBlocks = (orderedImages: readonly string[]) => {
@@ -26,21 +27,20 @@ const blocks = toOrderedBlocks(images);
 ---
 
 {
-	blocks.map((blockImages, blockIndex) => (
-		<div class={styles.layout7}>
-			{
-				blockImages.length === 1 ? (
-					<figure class={`${styles.item} ${styles.itemSingle}`}>
-						<img
-							src={blockImages[0]}
-							alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 1}`}
-							loading="lazy"
-							decoding="async"
-						/>
-					</figure>
-				) : blockImages.length === 2 ? (
-					<div class={styles.pairBlock}>
-						<figure class={`${styles.item} ${styles.itemPair}`}>
+	layout === 'vertical' ? (
+		<div class={styles.verticalStack}>
+			{images.map((image, index) => (
+				<figure class={styles.verticalItem}>
+					<img src={image} alt={`${projectTitle} editorial ${index + 1}`} loading="lazy" decoding="async" />
+				</figure>
+			))}
+		</div>
+	) : (
+		blocks.map((blockImages, blockIndex) => (
+			<div class={styles.layout7}>
+				{
+					blockImages.length === 1 ? (
+						<figure class={`${styles.item} ${styles.itemSingle}`}>
 							<img
 								src={blockImages[0]}
 								alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 1}`}
@@ -48,19 +48,9 @@ const blocks = toOrderedBlocks(images);
 								decoding="async"
 							/>
 						</figure>
-						<figure class={`${styles.item} ${styles.itemPair}`}>
-							<img
-								src={blockImages[1]}
-								alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 2}`}
-								loading="lazy"
-								decoding="async"
-							/>
-						</figure>
-					</div>
-				) : (
-					<>
-						<div class={styles.topBlock}>
-							<figure class={`${styles.item} ${styles.item1}`}>
+					) : blockImages.length === 2 ? (
+						<div class={styles.pairBlock}>
+							<figure class={`${styles.item} ${styles.itemPair}`}>
 								<img
 									src={blockImages[0]}
 									alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 1}`}
@@ -68,7 +58,7 @@ const blocks = toOrderedBlocks(images);
 									decoding="async"
 								/>
 							</figure>
-							<figure class={`${styles.item} ${styles.item2}`}>
+							<figure class={`${styles.item} ${styles.itemPair}`}>
 								<img
 									src={blockImages[1]}
 									alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 2}`}
@@ -76,75 +66,96 @@ const blocks = toOrderedBlocks(images);
 									decoding="async"
 								/>
 							</figure>
-							<figure class={`${styles.item} ${styles.item3}`}>
-								<img
-									src={blockImages[2]}
-									alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 3}`}
-									loading="lazy"
-									decoding="async"
-								/>
-							</figure>
 						</div>
-
-						{
-							blockImages[3] && (
-								<figure class={`${styles.item} ${styles.item4}`}>
+					) : (
+						<>
+							<div class={styles.topBlock}>
+								<figure class={`${styles.item} ${styles.item1}`}>
 									<img
-										src={blockImages[3]}
-										alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 4}`}
+										src={blockImages[0]}
+										alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 1}`}
 										loading="lazy"
 										decoding="async"
 									/>
 								</figure>
-							)
-						}
-
-						{
-							(blockImages[4] || blockImages[5]) && (
-								<div class={`${styles.middleBlock} ${!blockImages[5] ? styles.middleBlockSingle : ''}`}>
-									{
-										blockImages[4] && (
-											<figure class={`${styles.item} ${styles.item5}`}>
-												<img
-													src={blockImages[4]}
-													alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 5}`}
-													loading="lazy"
-													decoding="async"
-												/>
-											</figure>
-										)
-									}
-									{
-										blockImages[5] && (
-											<figure class={`${styles.item} ${styles.item6}`}>
-												<img
-													src={blockImages[5]}
-													alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 6}`}
-													loading="lazy"
-													decoding="async"
-												/>
-											</figure>
-										)
-									}
-								</div>
-							)
-						}
-
-						{
-							blockImages[6] && (
-								<figure class={`${styles.item} ${styles.item7}`}>
+								<figure class={`${styles.item} ${styles.item2}`}>
 									<img
-										src={blockImages[6]}
-										alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 7}`}
+										src={blockImages[1]}
+										alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 2}`}
 										loading="lazy"
 										decoding="async"
 									/>
 								</figure>
-							)
-						}
-					</>
-				)
-			}
-		</div>
-	))
+								<figure class={`${styles.item} ${styles.item3}`}>
+									<img
+										src={blockImages[2]}
+										alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 3}`}
+										loading="lazy"
+										decoding="async"
+									/>
+								</figure>
+							</div>
+
+							{
+								blockImages[3] && (
+									<figure class={`${styles.item} ${styles.item4}`}>
+										<img
+											src={blockImages[3]}
+											alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 4}`}
+											loading="lazy"
+											decoding="async"
+										/>
+									</figure>
+								)
+							}
+
+							{
+								(blockImages[4] || blockImages[5]) && (
+									<div class={`${styles.middleBlock} ${!blockImages[5] ? styles.middleBlockSingle : ''}`}>
+										{
+											blockImages[4] && (
+												<figure class={`${styles.item} ${styles.item5}`}>
+													<img
+														src={blockImages[4]}
+														alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 5}`}
+														loading="lazy"
+														decoding="async"
+													/>
+												</figure>
+											)
+										}
+										{
+											blockImages[5] && (
+												<figure class={`${styles.item} ${styles.item6}`}>
+													<img
+														src={blockImages[5]}
+														alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 6}`}
+														loading="lazy"
+														decoding="async"
+													/>
+												</figure>
+											)
+										}
+									</div>
+								)
+							}
+
+							{
+								blockImages[6] && (
+									<figure class={`${styles.item} ${styles.item7}`}>
+										<img
+											src={blockImages[6]}
+											alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 7}`}
+											loading="lazy"
+											decoding="async"
+										/>
+									</figure>
+								)
+							}
+						</>
+					)
+				}
+			</div>
+		))
+	)
 }
