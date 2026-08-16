@@ -283,6 +283,7 @@
 
 @media (max-width: 767px) {
 	.page {
+		padding-top: calc(122px + env(safe-area-inset-top));
 		padding-left: 10px;
 		padding-right: 10px;
 	}
@@ -322,7 +323,7 @@
 	}
 
 	.sectionTabsWrap {
-		top: 0;
+		top: calc(64px + env(safe-area-inset-top));
 		padding-top: 8px;
 		padding-bottom: 10px;
 	}
@@ -355,4 +356,5 @@
 		gap: 8px;
 		margin-top: 82px;
 	}
+
 }
