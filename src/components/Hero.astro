@@ -13,35 +13,37 @@ const content = heroContent[locale];
 ---
 
 <section class={styles.hero} aria-label="Hero">
-	<div class={styles.mediaRow} aria-label="Feature imagery">
-		<ResponsiveImage
-			class={styles.primaryImage}
-			src="/images/hero/hero_first.png"
-			alt={content.primaryImageAlt}
-			loading="eager"
-			fetchpriority="high"
-			sizes="(max-width: 767px) 100vw, 60vw"
-			widths={[480, 768, 1024, 1440, 1920]}
-			formats={['webp']}
-		/>
-		<ResponsiveImage
-			class={styles.secondaryImage}
-			src="/images/hero/hero_second.png"
-			alt={content.secondaryImageAlt}
-			loading="lazy"
-			sizes="(max-width: 767px) 100vw, 40vw"
-			widths={[400, 640, 960, 1280]}
-			formats={['webp']}
-		/>
-	</div>
+	<div class={styles.introRow}>
+		<div class={styles.mediaRow} aria-label="Feature imagery">
+			<ResponsiveImage
+				class={styles.primaryImage}
+				src="/images/hero/hero_first.png"
+				alt={content.primaryImageAlt}
+				loading="eager"
+				fetchpriority="high"
+				sizes="(max-width: 767px) 100vw, 44vw"
+				widths={[480, 768, 1024, 1440, 1920]}
+				formats={['webp']}
+			/>
+			<ResponsiveImage
+				class={styles.secondaryImage}
+				src="/images/hero/hero_second.png"
+				alt={content.secondaryImageAlt}
+				loading="lazy"
+				sizes="(max-width: 767px) 100vw, 18vw"
+				widths={[400, 640, 960, 1280]}
+				formats={['webp']}
+			/>
+		</div>
 
-<div class={styles.copy}>
-	<h1>
-		<span class={styles.eyebrow}>{content.eyebrow}</span>
-		<span class={styles.headingMain}>{content.headingMain}</span>
-		<span class={styles.headingSecondary}>{content.headingSecondary}</span>
-	</h1>
-</div>
+		<div class={styles.copy}>
+			<h1>
+				<span class={styles.eyebrow}>{content.eyebrow}</span>
+				<span class={styles.headingMain}>{content.headingMain}</span>
+				<span class={styles.headingSecondary}>{content.headingSecondary}</span>
+			</h1>
+		</div>
+	</div>
 
 	<p class={styles.wordmark} aria-hidden="true">
 		<img src="/images/Logotype.svg" alt="" loading="lazy" decoding="async" />

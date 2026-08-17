@@ -50,8 +50,11 @@
 	background: #22252b;
 }
 
-.mediaRow {
+.introRow {
 	margin-top: 76px;
+}
+
+.mediaRow {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) 27.5%;
 	gap: 16px;
@@ -76,7 +79,7 @@
 }
 
 .copy {
-	margin-top: 104px;
+	margin-top: 56px;
 	padding-left: 16px;
 }
 
@@ -130,6 +133,88 @@
 	display: block;
 	width: 100%;
 	height: auto;
+}
+
+@media (min-width: 768px) {
+	.hero {
+		min-height: 100svh;
+	}
+
+	.introRow {
+		max-width: 100%;
+		margin-left: 0;
+		margin-right: auto;
+		display: grid;
+		grid-template-columns: minmax(0, 980px) minmax(420px, 1fr);
+		column-gap: clamp(34px, 3.6vw, 72px);
+		align-items: start;
+		justify-content: start;
+		min-height: calc(100svh - 150px);
+		padding-bottom: clamp(28px, 4vh, 52px);
+	}
+
+	.mediaRow {
+		margin-top: 0;
+		width: min(100%, 980px);
+		grid-template-columns: minmax(0, 1fr) minmax(300px, 33.5%, 338px);
+		gap: clamp(14px, 2vw, 26px);
+	}
+
+	.primaryImage {
+		max-width: 640px;
+		justify-self: start;
+		width: 100%;
+		height: auto;
+		aspect-ratio: auto;
+		object-fit: contain;
+	}
+
+	.secondaryImage {
+		max-width: 338px;
+		justify-self: start;
+		height: auto;
+		width: 100%;
+		aspect-ratio: auto;
+		object-fit: contain;
+	}
+
+	.copy {
+		margin-top: clamp(50px, 8vh, 92px);
+		padding-left: clamp(8px, 1vw, 20px);
+		max-width: min(100%, 640px);
+	}
+
+	.copy h1 {
+		line-height: 1.04;
+		letter-spacing: -0.015em;
+	}
+
+	.eyebrow {
+		margin-bottom: 12px;
+		font-size: 12px;
+	}
+
+	.headingMain {
+		font-size: clamp(30px, 2.8vw, 40px);
+	}
+
+	.headingSecondary {
+		margin-top: 10px;
+		font-size: clamp(18px, 1.6vw, 24px);
+		line-height: 1.26;
+	}
+
+	.wordmark {
+		display: block;
+		width: clamp(593px, 50vw, 842px);
+		max-width: none;
+		margin-top: clamp(-128px, -10svh, -56px);
+		margin-left: auto;
+		margin-right: 0;
+		left: auto;
+		top: -49px;
+		transform: translate(10%, -36%);
+	}
 }
 
 @media (max-width: 767px) {
