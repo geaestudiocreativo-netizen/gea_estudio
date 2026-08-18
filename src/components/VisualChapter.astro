@@ -5,12 +5,14 @@ const imageSrc = '/images/others/Background.png';
 ---
 
 <section class={styles.chapter} aria-label="Visual chapter" data-visual-chapter data-state="idle">
+	<div class={styles.wordmarkDock} data-wordmark-dock aria-hidden="true"></div>
 	<div class={styles.stickyStage}>
 		<div class={styles.frame} data-visual-frame>
 			<img class={styles.image} src={imageSrc} alt="" loading="lazy" decoding="async" />
 			<p class={styles.copy} aria-hidden="true">
-				<span>CREAMOS UNIVERSOS</span>
-				<span>VISUALES PARA MARCAS</span>
+				<span class={styles.mainLineA}>Donde las ideas</span>
+				<span class={styles.mainLineB}>encuentran su <em>forma.</em></span>
+				<small class={styles.support}>Estrategia, estética y emoción para marcas con identidad.</small>
 			</p>
 		</div>
 	</div>

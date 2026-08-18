@@ -60,30 +60,149 @@ const content = heroContent[locale];
 		const wordmark = hero.querySelector('[data-hero-wordmark]');
 		const visualFrame = document.querySelector('[data-visual-frame]');
 		const visualChapter = document.querySelector('[data-visual-chapter]');
+		const wordmarkDock = document.querySelector('[data-wordmark-dock]');
+		const siteNav = document.querySelector('[data-site-nav]');
+		const mobileQuery = window.matchMedia('(max-width: 767px)');
 		let syncRaf = 0;
+		let watchRaf = 0;
+		let lastSplit = '';
 		let wordmarkLocked = false;
+		let wordmarkAbsoluteTop = 0;
+		let wordmarkDockedMobile = false;
+		let wordmarkLockTop: number | null = null;
+		let wordmarkLockWidth: number | null = null;
+		let wordmarkLockViewportTop: number | null = null;
+
+		const captureWordmarkLockMetrics = () => {
+			if (!(wordmark instanceof HTMLElement) || wordmarkLockTop !== null) {
+				return;
+			}
+
+			const wordmarkRect = wordmark.getBoundingClientRect();
+			const heroRect = hero.getBoundingClientRect();
+			wordmarkLockTop = wordmarkRect.top - heroRect.top;
+			wordmarkLockWidth = wordmarkRect.width;
+			wordmarkLockViewportTop = wordmarkRect.top;
+		};
 
 		const lockWordmarkPosition = () => {
 			if (!(wordmark instanceof HTMLElement) || wordmarkLocked) {
 				return;
 			}
 
+			captureWordmarkLockMetrics();
+
 			const wordmarkRect = wordmark.getBoundingClientRect();
-			const heroRect = hero.getBoundingClientRect();
-			const top = wordmarkRect.top - heroRect.top;
+			const top = wordmarkLockTop ?? 0;
+			const width = wordmarkLockWidth ?? wordmarkRect.width;
+			wordmarkAbsoluteTop = top;
 
 			wordmark.style.position = 'absolute';
 			wordmark.style.top = `${top.toFixed(2)}px`;
 			wordmark.style.left = '50%';
 			wordmark.style.right = 'auto';
-			wordmark.style.width = `${wordmarkRect.width.toFixed(2)}px`;
+			wordmark.style.width = `${width.toFixed(2)}px`;
 			wordmark.style.margin = '0';
+			wordmark.style.animation = 'none';
 			wordmark.style.transform = 'translateX(-50%)';
 			wordmark.style.maxWidth = 'none';
 			wordmarkLocked = true;
 		};
 
-		const readVisibleImageTop = () => {
+
+		const getMobileStickyTop = () => {
+			if (!(siteNav instanceof HTMLElement)) {
+				return 74;
+			}
+
+			const navRect = siteNav.getBoundingClientRect();
+			return navRect.bottom + 10;
+		};
+
+		const syncMobileWordmarkSticky = () => {
+			if (!(wordmark instanceof HTMLElement) || !wordmarkLocked) {
+				return;
+			}
+
+			if (!mobileQuery.matches) {
+				if (wordmarkDockedMobile) {
+					hero.appendChild(wordmark);
+					wordmarkDockedMobile = false;
+				}
+
+				wordmark.style.position = 'absolute';
+				wordmark.style.top = `${wordmarkAbsoluteTop.toFixed(2)}px`;
+				wordmark.style.left = '50%';
+				wordmark.style.right = 'auto';
+				wordmark.style.transform = 'translateX(-50%)';
+				return;
+			}
+
+			if (!(visualChapter instanceof HTMLElement) || !(wordmarkDock instanceof HTMLElement)) {
+				return;
+			}
+
+			const chapterRect = visualChapter.getBoundingClientRect();
+			const stickyTop = getMobileStickyTop();
+			const hasStartedScrolling = window.scrollY > 0;
+			const shouldDock = hasStartedScrolling && chapterRect.top <= stickyTop && chapterRect.bottom > stickyTop;
+
+			if (!wordmarkDockedMobile && shouldDock) {
+				wordmarkDock.appendChild(wordmark);
+				wordmarkDockedMobile = true;
+			} else if (wordmarkDockedMobile && !shouldDock) {
+				hero.appendChild(wordmark);
+				wordmarkDockedMobile = false;
+			}
+
+			if (!wordmarkDockedMobile) {
+				wordmark.style.position = 'absolute';
+				wordmark.style.top = `${wordmarkAbsoluteTop.toFixed(2)}px`;
+				wordmark.style.left = '50%';
+				wordmark.style.right = 'auto';
+				wordmark.style.transform = 'translateX(-50%)';
+				return;
+			}
+
+			wordmarkDock.style.setProperty('--wordmark-sticky-top', `${stickyTop.toFixed(2)}px`);
+
+			if (chapterRect.bottom <= 0) {
+				wordmark.style.position = 'absolute';
+				wordmark.style.top = '0';
+				wordmark.style.left = '50%';
+				wordmark.style.right = 'auto';
+				wordmark.style.transform = 'translateX(-50%)';
+				return;
+			}
+
+			wordmark.style.position = 'absolute';
+			if (chapterRect.top > stickyTop) {
+				const offsetTop = stickyTop - chapterRect.top;
+				wordmark.style.top = `${offsetTop.toFixed(2)}px`;
+			} else {
+				wordmark.style.top = '0';
+			}
+			wordmark.style.left = '50%';
+			wordmark.style.right = 'auto';
+			wordmark.style.transform = 'translateX(-50%)';
+		};
+
+		const readClipInset = (token: string, size: number) => {
+			const value = token.trim();
+
+			if (value.endsWith('%')) {
+				const pct = Number.parseFloat(value);
+				if (!Number.isNaN(pct)) {
+					return (size * pct) / 100;
+				}
+				return 0;
+			}
+
+			const px = Number.parseFloat(value);
+			return Number.isNaN(px) ? 0 : px;
+		};
+
+		const getVisibleFrameBand = () => {
 			if (!(visualFrame instanceof HTMLElement)) {
 				return null;
 			}
@@ -91,41 +210,57 @@ const content = heroContent[locale];
 			const frameRect = visualFrame.getBoundingClientRect();
 			const clipPath = getComputedStyle(visualFrame).clipPath;
 			let insetTop = 0;
+			let insetBottom = 0;
 
 			if (clipPath.startsWith('inset(')) {
 				const body = clipPath.slice(6, -1).trim();
-				const topToken = body.split(/\s+/)[0] ?? '0';
+				const tokens = body.split(/\s+/).filter(Boolean);
 
-				if (topToken.endsWith('%')) {
-					const pct = Number.parseFloat(topToken);
-					if (!Number.isNaN(pct)) {
-						insetTop = (frameRect.height * pct) / 100;
-					}
-				} else {
-					const px = Number.parseFloat(topToken);
-					if (!Number.isNaN(px)) {
-						insetTop = px;
-					}
+				if (tokens.length >= 1) {
+					insetTop = readClipInset(tokens[0], frameRect.height);
+				}
+
+				if (tokens.length >= 3) {
+					insetBottom = readClipInset(tokens[2], frameRect.height);
+				} else if (tokens.length === 2) {
+					insetBottom = readClipInset(tokens[0], frameRect.height);
 				}
 			}
 
-			return frameRect.top + insetTop;
+			return {
+				top: frameRect.top + insetTop,
+				bottom: frameRect.bottom - insetBottom,
+			};
 		};
 
 		const syncWordmarkSplit = () => {
-			if (!(wordmark instanceof HTMLElement)) {
-				return;
-			}
-
-			const visibleImageTop = readVisibleImageTop();
-			if (visibleImageTop === null) {
+			if (!(wordmark instanceof HTMLElement) || !(visualFrame instanceof HTMLElement)) {
 				return;
 			}
 
 			const wordmarkRect = wordmark.getBoundingClientRect();
-			const splitPx = visibleImageTop - wordmarkRect.top;
+			const desktopBackgroundRect = visualFrame.getBoundingClientRect();
+			const mobileBand = getVisibleFrameBand();
+			const isMobile = mobileQuery.matches;
+
+			const backgroundTop = isMobile && mobileBand ? mobileBand.top : desktopBackgroundRect.top;
+			const backgroundBottom = isMobile && mobileBand ? mobileBand.bottom : desktopBackgroundRect.bottom;
+
+			let splitPx = wordmarkRect.height;
+			const overlapTop = Math.max(wordmarkRect.top, backgroundTop);
+			const overlapBottom = Math.min(wordmarkRect.bottom, backgroundBottom);
+
+			if (overlapBottom > overlapTop) {
+				splitPx = overlapTop - wordmarkRect.top;
+			}
+
 			const clamped = Math.max(0, Math.min(splitPx, wordmarkRect.height));
-			wordmark.style.setProperty('--wordmark-split', `${clamped.toFixed(2)}px`);
+			const nextSplit = `${clamped.toFixed(2)}px`;
+
+			if (nextSplit !== lastSplit) {
+				wordmark.style.setProperty('--wordmark-split', nextSplit);
+				lastSplit = nextSplit;
+			}
 		};
 
 		const requestSplitSync = () => {
@@ -139,6 +274,44 @@ const content = heroContent[locale];
 			});
 		};
 
+		const shouldWatchSplit = () => {
+			if (!(wordmark instanceof HTMLElement) || !(visualChapter instanceof HTMLElement)) {
+				return hero.dataset.entrance !== 'done';
+			}
+
+			if (mobileQuery.matches) {
+				const chapterRect = visualChapter.getBoundingClientRect();
+				const mobileMargin = window.innerHeight;
+				return chapterRect.bottom > -mobileMargin && chapterRect.top < window.innerHeight + mobileMargin;
+			}
+
+			if (hero.dataset.entrance !== 'done') {
+				return true;
+			}
+
+			const chapterRect = visualChapter.getBoundingClientRect();
+			const wordmarkRect = wordmark.getBoundingClientRect();
+			const margin = Math.max(wordmarkRect.height, 160);
+
+			return chapterRect.bottom > -margin && chapterRect.top < window.innerHeight + margin;
+		};
+
+		const watchSplitLoop = () => {
+			watchRaf = 0;
+			syncMobileWordmarkSticky();
+			requestSplitSync();
+
+			if (shouldWatchSplit()) {
+				watchRaf = window.requestAnimationFrame(watchSplitLoop);
+			}
+		};
+
+		const ensureSplitWatcher = () => {
+			if (!watchRaf) {
+				watchRaf = window.requestAnimationFrame(watchSplitLoop);
+			}
+		};
+
 		const syncUntilEntranceDone = () => {
 			requestSplitSync();
 			if (hero.dataset.entrance !== 'done') {
@@ -148,6 +321,7 @@ const content = heroContent[locale];
 
 		const observer = new MutationObserver(() => {
 			requestSplitSync();
+			ensureSplitWatcher();
 		});
 
 		if (visualChapter instanceof HTMLElement) {
@@ -162,10 +336,33 @@ const content = heroContent[locale];
 			attributeFilter: ['data-entrance', 'style', 'class'],
 		});
 
-		window.addEventListener('resize', requestSplitSync);
-		window.addEventListener('scroll', requestSplitSync, { passive: true });
-		window.addEventListener('DOMContentLoaded', requestSplitSync, { once: true });
+		const onViewportUpdate = () => {
+			syncMobileWordmarkSticky();
+			requestSplitSync();
+			ensureSplitWatcher();
+		};
+
+		window.addEventListener('resize', onViewportUpdate);
+		window.addEventListener('scroll', onViewportUpdate, { passive: true });
+		window.addEventListener('DOMContentLoaded', onViewportUpdate, { once: true });
 		requestSplitSync();
+		ensureSplitWatcher();
+
+		const cleanupSplitSync = () => {
+			observer.disconnect();
+			window.removeEventListener('resize', onViewportUpdate);
+			window.removeEventListener('scroll', onViewportUpdate);
+			if (syncRaf) {
+				window.cancelAnimationFrame(syncRaf);
+				syncRaf = 0;
+			}
+			if (watchRaf) {
+				window.cancelAnimationFrame(watchRaf);
+				watchRaf = 0;
+			}
+		};
+
+		window.addEventListener('pagehide', cleanupSplitSync, { once: true });
 
 		if (!prefersReducedMotion) {
 			syncUntilEntranceDone();
@@ -185,9 +382,15 @@ const content = heroContent[locale];
 			if (headline instanceof HTMLElement) {
 				const fullText = headline.dataset.fullText ?? '';
 				const typingStartDelay = 2360;
+				const lockCaptureDelay = 2140;
+
+				window.setTimeout(() => {
+					captureWordmarkLockMetrics();
+				}, lockCaptureDelay);
 
 				window.setTimeout(() => {
 					lockWordmarkPosition();
+					syncMobileWordmarkSticky();
 					requestSplitSync();
 
 					hero.dataset.typing = 'active';
@@ -215,6 +418,7 @@ const content = heroContent[locale];
 				hero.dataset.entrance = 'done';
 				hero.dataset.support = 'done';
 				lockWordmarkPosition();
+				syncMobileWordmarkSticky();
 				requestSplitSync();
 			}, 5600);
 		} else {
@@ -222,6 +426,7 @@ const content = heroContent[locale];
 			hero.dataset.typing = 'done';
 			hero.dataset.support = 'done';
 			lockWordmarkPosition();
+			syncMobileWordmarkSticky();
 			requestSplitSync();
 		}
 	}
