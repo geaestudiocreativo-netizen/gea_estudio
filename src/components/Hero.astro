@@ -12,7 +12,7 @@ const { locale = 'es' } = Astro.props as Props;
 const content = heroContent[locale];
 ---
 
-<section class={styles.hero} aria-label="Hero">
+<section class={styles.hero} aria-label="Hero" data-hero-entrance data-entrance="idle">
 	<div class={styles.introRow}>
 		<div class={styles.mediaRow} aria-label="Feature imagery">
 			<ResponsiveImage
@@ -49,3 +49,24 @@ const content = heroContent[locale];
 		<img src="/images/Logotype.svg" alt="" loading="lazy" decoding="async" />
 	</p>
 </section>
+
+<script>
+	const hero = document.querySelector('[data-hero-entrance]');
+
+	if (hero instanceof HTMLElement) {
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		if (!prefersReducedMotion) {
+			hero.dataset.entrance = 'prepare';
+			requestAnimationFrame(() => {
+				hero.dataset.entrance = 'start';
+			});
+
+			window.setTimeout(() => {
+				hero.dataset.entrance = 'done';
+			}, 2500);
+		} else {
+			hero.dataset.entrance = 'done';
+		}
+	}
+</script>

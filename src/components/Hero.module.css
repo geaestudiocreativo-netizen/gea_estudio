@@ -118,13 +118,16 @@
 }
 
 .wordmark {
+	--wordmark-transform: translateX(-50%);
+	--wordmark-transform-final: translateX(-50%);
+	--wordmark-transform-start: translate(-50%, -435%);
 	margin: 160px 0 -32px;
 	line-height: 0;
 	width: calc(100vw - 2px);
 	max-width: calc(100vw - 2px);
 	position: relative;
 	left: 50%;
-	transform: translateX(-50%);
+	transform: var(--wordmark-transform-final);
 	overflow: visible;
 	z-index: 2;
 }
@@ -133,6 +136,76 @@
 	display: block;
 	width: 100%;
 	height: auto;
+}
+
+@keyframes wordmarkBuild {
+	0% {
+		opacity: 0;
+		transform: var(--wordmark-transform-start) scale(1.06);
+	}
+	38% {
+		opacity: 1;
+		transform: var(--wordmark-transform-start) scale(1.03);
+	}
+	100% {
+		opacity: 1;
+		transform: var(--wordmark-transform-final) scale(1);
+	}
+}
+
+@keyframes heroElementReveal {
+	0% {
+		opacity: 0;
+		transform: translateY(22px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.hero[data-entrance='prepare'],
+.hero[data-entrance='start'] {
+	background: #ffffff;
+}
+
+.hero[data-entrance='prepare'] .introRow {
+	pointer-events: none;
+}
+
+.hero[data-entrance='prepare'] .primaryImage,
+.hero[data-entrance='prepare'] .secondaryImage,
+.hero[data-entrance='prepare'] .copy {
+	opacity: 0;
+	transform: translateY(22px);
+}
+
+.hero[data-entrance='prepare'] .wordmark {
+	opacity: 0;
+	transform: var(--wordmark-transform-start) scale(1.06);
+	transform-origin: 50% 50%;
+}
+
+.hero[data-entrance='start'] .wordmark {
+	animation: wordmarkBuild 1800ms cubic-bezier(0.2, 0.63, 0.22, 1) 220ms both;
+	transform-origin: 50% 50%;
+}
+
+.hero[data-entrance='start'] .primaryImage {
+	animation: heroElementReveal 780ms cubic-bezier(0.22, 0.61, 0.36, 1) 1120ms both;
+}
+
+.hero[data-entrance='start'] .secondaryImage {
+	animation: heroElementReveal 740ms cubic-bezier(0.22, 0.61, 0.36, 1) 1450ms both;
+}
+
+.hero[data-entrance='start'] .copy {
+	animation: heroElementReveal 700ms cubic-bezier(0.22, 0.61, 0.36, 1) 1760ms both;
+}
+
+.hero[data-entrance='done'] .wordmark {
+	transform: var(--wordmark-transform-final);
+	opacity: 1;
 }
 
 @media (min-width: 768px) {
@@ -205,6 +278,9 @@
 	}
 
 	.wordmark {
+		--wordmark-transform: translate(10%, -36%);
+		--wordmark-transform-final: translate(10%, -36%);
+		--wordmark-transform-start: translate(-47%, -216%);
 		display: block;
 		width: clamp(593px, 50vw, 842px);
 		max-width: none;
@@ -213,7 +289,7 @@
 		margin-right: 0;
 		left: auto;
 		top: -49px;
-		transform: translate(10%, -36%);
+		transform: var(--wordmark-transform-final);
 	}
 }
 
@@ -224,5 +300,25 @@
 
 	.eyebrow {
 		font-size: 12px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero[data-entrance='prepare'] .wordmark,
+	.hero[data-entrance='prepare'] .primaryImage,
+	.hero[data-entrance='prepare'] .secondaryImage,
+	.hero[data-entrance='prepare'] .copy,
+	.hero[data-entrance='start'] .wordmark,
+	.hero[data-entrance='start'] .primaryImage,
+	.hero[data-entrance='start'] .secondaryImage,
+	.hero[data-entrance='start'] .copy {
+		animation: none;
+		opacity: 1;
+		transform: none;
+	}
+
+	.hero[data-entrance='prepare'] .wordmark,
+	.hero[data-entrance='start'] .wordmark {
+		transform: var(--wordmark-transform-final);
 	}
 }
