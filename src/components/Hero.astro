@@ -45,8 +45,9 @@ const content = heroContent[locale];
 		</div>
 	</div>
 
-	<p class={styles.wordmark} aria-hidden="true">
-		<img src="/images/Logotype.svg" alt="" loading="lazy" decoding="async" />
+	<p class={styles.wordmark} data-hero-wordmark aria-hidden="true">
+		<img class={styles.wordmarkBase} src="/images/Logotype.svg" alt="" loading="lazy" decoding="async" />
+		<img class={styles.wordmarkOverlay} src="/images/Logotype.svg" alt="" loading="lazy" decoding="async" />
 	</p>
 </section>
 
@@ -56,8 +57,119 @@ const content = heroContent[locale];
 	if (hero instanceof HTMLElement) {
 		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const headline = hero.querySelector('[data-hero-headline]');
+		const wordmark = hero.querySelector('[data-hero-wordmark]');
+		const visualFrame = document.querySelector('[data-visual-frame]');
+		const visualChapter = document.querySelector('[data-visual-chapter]');
+		let syncRaf = 0;
+		let wordmarkLocked = false;
+
+		const lockWordmarkPosition = () => {
+			if (!(wordmark instanceof HTMLElement) || wordmarkLocked) {
+				return;
+			}
+
+			const wordmarkRect = wordmark.getBoundingClientRect();
+			const heroRect = hero.getBoundingClientRect();
+			const top = wordmarkRect.top - heroRect.top;
+
+			wordmark.style.position = 'absolute';
+			wordmark.style.top = `${top.toFixed(2)}px`;
+			wordmark.style.left = '50%';
+			wordmark.style.right = 'auto';
+			wordmark.style.width = `${wordmarkRect.width.toFixed(2)}px`;
+			wordmark.style.margin = '0';
+			wordmark.style.transform = 'translateX(-50%)';
+			wordmark.style.maxWidth = 'none';
+			wordmarkLocked = true;
+		};
+
+		const readVisibleImageTop = () => {
+			if (!(visualFrame instanceof HTMLElement)) {
+				return null;
+			}
+
+			const frameRect = visualFrame.getBoundingClientRect();
+			const clipPath = getComputedStyle(visualFrame).clipPath;
+			let insetTop = 0;
+
+			if (clipPath.startsWith('inset(')) {
+				const body = clipPath.slice(6, -1).trim();
+				const topToken = body.split(/\s+/)[0] ?? '0';
+
+				if (topToken.endsWith('%')) {
+					const pct = Number.parseFloat(topToken);
+					if (!Number.isNaN(pct)) {
+						insetTop = (frameRect.height * pct) / 100;
+					}
+				} else {
+					const px = Number.parseFloat(topToken);
+					if (!Number.isNaN(px)) {
+						insetTop = px;
+					}
+				}
+			}
+
+			return frameRect.top + insetTop;
+		};
+
+		const syncWordmarkSplit = () => {
+			if (!(wordmark instanceof HTMLElement)) {
+				return;
+			}
+
+			const visibleImageTop = readVisibleImageTop();
+			if (visibleImageTop === null) {
+				return;
+			}
+
+			const wordmarkRect = wordmark.getBoundingClientRect();
+			const splitPx = visibleImageTop - wordmarkRect.top;
+			const clamped = Math.max(0, Math.min(splitPx, wordmarkRect.height));
+			wordmark.style.setProperty('--wordmark-split', `${clamped.toFixed(2)}px`);
+		};
+
+		const requestSplitSync = () => {
+			if (syncRaf) {
+				return;
+			}
+
+			syncRaf = window.requestAnimationFrame(() => {
+				syncRaf = 0;
+				syncWordmarkSplit();
+			});
+		};
+
+		const syncUntilEntranceDone = () => {
+			requestSplitSync();
+			if (hero.dataset.entrance !== 'done') {
+				window.requestAnimationFrame(syncUntilEntranceDone);
+			}
+		};
+
+		const observer = new MutationObserver(() => {
+			requestSplitSync();
+		});
+
+		if (visualChapter instanceof HTMLElement) {
+			observer.observe(visualChapter, {
+				attributes: true,
+				attributeFilter: ['data-state', 'style', 'class'],
+			});
+		}
+
+		observer.observe(hero, {
+			attributes: true,
+			attributeFilter: ['data-entrance', 'style', 'class'],
+		});
+
+		window.addEventListener('resize', requestSplitSync);
+		window.addEventListener('scroll', requestSplitSync, { passive: true });
+		window.addEventListener('DOMContentLoaded', requestSplitSync, { once: true });
+		requestSplitSync();
 
 		if (!prefersReducedMotion) {
+			syncUntilEntranceDone();
+
 			if (headline instanceof HTMLElement) {
 				hero.dataset.typing = 'pending';
 				hero.dataset.support = 'pending';
@@ -67,6 +179,7 @@ const content = heroContent[locale];
 			hero.dataset.entrance = 'prepare';
 			requestAnimationFrame(() => {
 				hero.dataset.entrance = 'start';
+				requestSplitSync();
 			});
 
 			if (headline instanceof HTMLElement) {
@@ -74,6 +187,9 @@ const content = heroContent[locale];
 				const typingStartDelay = 2360;
 
 				window.setTimeout(() => {
+					lockWordmarkPosition();
+					requestSplitSync();
+
 					hero.dataset.typing = 'active';
 					let cursor = 0;
 
@@ -98,11 +214,15 @@ const content = heroContent[locale];
 			window.setTimeout(() => {
 				hero.dataset.entrance = 'done';
 				hero.dataset.support = 'done';
+				lockWordmarkPosition();
+				requestSplitSync();
 			}, 5600);
 		} else {
 			hero.dataset.entrance = 'done';
 			hero.dataset.typing = 'done';
 			hero.dataset.support = 'done';
+			lockWordmarkPosition();
+			requestSplitSync();
 		}
 	}
 </script>

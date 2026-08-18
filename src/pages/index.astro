@@ -1,5 +1,6 @@
 ---
 import Hero from '../components/Hero.astro';
+import VisualChapter from '../components/VisualChapter.astro';
 import AboutSection from '../components/AboutSection.astro';
 import Projects from '../components/Projects.astro';
 import Services from '../components/Services.astro';
@@ -9,8 +10,38 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
 	<Hero locale="es" />
-	<Services locale="es" />
+	<div class="visualServicesStage">
+		<VisualChapter />
+		<div class="servicesLayer">
+			<Services locale="es" />
+		</div>
+	</div>
 	<Projects locale="es" />
 	<AboutSection locale="es" />
 	<Footer locale="es" />
 </Layout>
+
+<style>
+	.visualServicesStage {
+		position: relative;
+		z-index: 0;
+	}
+
+	.servicesLayer {
+		position: relative;
+		z-index: 3;
+		margin-top: -158svh;
+	}
+
+	@media (max-width: 900px) {
+		.servicesLayer {
+			margin-top: -82svh;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.servicesLayer {
+			margin-top: 0;
+		}
+	}
+</style>

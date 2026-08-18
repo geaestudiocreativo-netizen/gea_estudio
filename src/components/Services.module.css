@@ -4,8 +4,13 @@
 .services {
 	--editorial-image-width: clamp(760px, 78vw, 980px);
 	--editorial-block-gap: clamp(72px, 9vw, 120px);
+	position: relative;
+	z-index: 3;
+	background: #f8f8f8;
+	border-top-left-radius: clamp(22px, 2.6vw, 38px);
+	border-top-right-radius: clamp(22px, 2.6vw, 38px);
 	margin-top: 0;
-	padding-block: clamp(224px, 28vw, 296px) clamp(96px, 12vw, 136px);
+	padding-block: clamp(96px, 13vw, 152px) clamp(96px, 12vw, 136px);
 	padding-inline: 0;
 }
 
@@ -161,8 +166,9 @@
 	.services {
 		--row-gap: 11px;
 		--rows-space: 50px;
-		padding-top: clamp(256px, 32vw, 320px);
+		padding-top: clamp(128px, 16vw, 160px);
 	}
+
 
 	.heading {
 		font-size: clamp(24px, 7.2vw, 34px);

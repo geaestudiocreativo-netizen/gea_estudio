@@ -1,0 +1,52 @@
+---
+import styles from './VisualChapter.module.css';
+
+const imageSrc = '/images/others/Background.png';
+---
+
+<section class={styles.chapter} aria-label="Visual chapter" data-visual-chapter data-state="idle">
+	<div class={styles.stickyStage}>
+		<div class={styles.frame} data-visual-frame>
+			<img class={styles.image} src={imageSrc} alt="" loading="lazy" decoding="async" />
+			<p class={styles.copy} aria-hidden="true">
+				<span>CREAMOS UNIVERSOS</span>
+				<span>VISUALES PARA MARCAS</span>
+			</p>
+		</div>
+	</div>
+</section>
+
+<script is:inline>
+	const chapters = document.querySelectorAll('[data-visual-chapter]');
+
+	chapters.forEach((chapter) => {
+		if (!(chapter instanceof HTMLElement)) {
+			return;
+		}
+
+		const frame = chapter.querySelector('[data-visual-frame]');
+		if (!(frame instanceof HTMLElement)) {
+			return;
+		}
+
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (prefersReducedMotion) {
+			chapter.dataset.state = 'done';
+			return;
+		}
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						chapter.dataset.state = 'entered';
+						observer.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.24, rootMargin: '0px 0px -6% 0px' }
+		);
+
+		observer.observe(chapter);
+	});
+</script>
