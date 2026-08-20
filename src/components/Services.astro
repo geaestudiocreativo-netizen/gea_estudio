@@ -14,6 +14,18 @@ const content = servicesSectionContent[locale];
 const list = locale === 'en' ? servicesEn : services;
 const serviceBasePath = getLocalizedPath(locale, '/services');
 
+const getServiceNameLines = (serviceTitle: string) => {
+	if (serviceTitle === 'Fotografía & Cinematografía') {
+		return ['FOTOGRAFÍA &', 'CINEMATOGRAFÍA'];
+	}
+
+	if (serviceTitle === 'Photography & Cinematography') {
+		return ['PHOTOGRAPHY &', 'CINEMATOGRAPHY'];
+	}
+
+	return [getServiceName(serviceTitle)];
+};
+
 const getServiceName = (serviceTitle: string) => {
 	if (serviceTitle === 'Fotografía & Cinematografía' || serviceTitle === 'Photography & Cinematography') {
 		return locale === 'en' ? 'PHOTOGRAPHY & CINEMATOGRAPHY' : 'FOTOGRAFÍA &\u00A0CINEMATOGRAFÍA';
@@ -56,7 +68,11 @@ const getServiceName = (serviceTitle: string) => {
 					<li class="services-editorial__item" data-index={index}>
 						<a class="services-editorial__link" href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
 							<span class="services-editorial__index">{String(index + 1).padStart(2, '0')} /</span>
-							<span class="services-editorial__name">{getServiceName(service.homeTitle)}</span>
+							<span class="services-editorial__name" data-service-name={service.slug}>
+								{getServiceNameLines(service.homeTitle).map((line, lineIndex) => (
+									<span class:list={["services-editorial__name-line", lineIndex === 0 && "services-editorial__name-line--first"]}>{line}</span>
+								))}
+							</span>
 						</a>
 					</li>
 				))}
@@ -85,6 +101,7 @@ const getServiceName = (serviceTitle: string) => {
 	@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
 
 	.services-editorial {
+		--services-row-height: clamp(112px, 8.6vw, 154px);
 		position: relative;
 		background: #f3f0ee;
 		border-top-left-radius: clamp(22px, 2.8vw, 38px);
@@ -101,18 +118,19 @@ const getServiceName = (serviceTitle: string) => {
 
 	.services-editorial__intro {
 		display: grid;
-		gap: 0.5rem;
-		margin-bottom: clamp(26px, 3vw, 44px);
+		gap: 0.9rem;
+		margin-bottom: clamp(48px, 6vw, 88px);
 	}
 
 	.services-editorial__heading {
 		margin: 0;
-		font-family: 'Krona One', sans-serif;
-		font-size: clamp(20px, 2vw, 34px);
-		font-weight: 400;
-		line-height: 1;
-		letter-spacing: 0.08em;
+		font-family: 'Satoshi', sans-serif;
+		font-size: clamp(13px, 0.9vw, 15px);
+		font-weight: 500;
+		line-height: 1.2;
+		letter-spacing: 0.2em;
 		text-transform: uppercase;
+		color: #a0a0a0;
 	}
 
 	.services-editorial__heading-link {
@@ -123,15 +141,20 @@ const getServiceName = (serviceTitle: string) => {
 		text-decoration: none;
 	}
 
+	.services-editorial__heading-link span {
+		margin-left: 0.45rem;
+	}
+
 	.services-editorial__subtitle {
 		margin: 0;
 		display: grid;
-		gap: 0.15rem;
+		gap: 0.2rem;
 		max-width: 620px;
 		font-family: 'Satoshi', sans-serif;
-		font-size: clamp(22px, 2vw, 38px);
-		font-weight: 500;
-		line-height: 1.08;
+		font-size: clamp(24px, 2.25vw, 42px);
+		font-weight: 400;
+		line-height: 1.16;
+		letter-spacing: -0.02em;
 		color: #111111;
 	}
 
@@ -146,11 +169,14 @@ const getServiceName = (serviceTitle: string) => {
 		list-style: none;
 		margin: 0;
 		padding: 0;
+		min-width: 0;
 	}
 
 	.services-editorial__item {
 		position: relative;
-		padding: clamp(10px, 1vw, 18px) 0;
+		display: flex;
+		align-items: center;
+		height: var(--services-row-height);
 		border-top: 1px solid rgba(17, 17, 17, 0.16);
 		transition: opacity 260ms ease, transform 260ms ease;
 	}
@@ -170,9 +196,10 @@ const getServiceName = (serviceTitle: string) => {
 	.services-editorial__link {
 		display: grid;
 		grid-template-columns: 72px minmax(0, 1fr);
-		align-items: baseline;
+		align-items: center;
 		gap: 18px;
 		width: 100%;
+		height: 100%;
 		color: rgba(17, 17, 17, 0.82);
 		text-decoration: none;
 	}
@@ -185,7 +212,6 @@ const getServiceName = (serviceTitle: string) => {
 		line-height: 1;
 		text-transform: uppercase;
 		color: rgba(17, 17, 17, 0.86);
-		transform: translateY(0.2em);
 	}
 
 	.services-editorial__name {
@@ -199,6 +225,11 @@ const getServiceName = (serviceTitle: string) => {
 		color: #111111;
 		transition: color 260ms ease, opacity 260ms ease, transform 260ms ease;
 		will-change: transform, color;
+	}
+
+	.services-editorial__name-line {
+		display: block;
+		max-width: 100%;
 	}
 
 	.services-editorial__item.is-active .services-editorial__name {
@@ -219,8 +250,25 @@ const getServiceName = (serviceTitle: string) => {
 	}
 
 	@media (min-width: 901px) {
+		.services-editorial__layout {
+			grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
+		}
+
+		.services-editorial__link {
+			grid-template-columns: 72px minmax(0, 1fr);
+		}
+
+		.services-editorial__name {
+			max-width: min(100%, 44rem);
+		}
+
+		.services-editorial__name[data-service-name='photography'] {
+			max-width: min(100%, 41rem);
+		}
+
 		.services-editorial__visuals {
 			display: block;
+			margin-top: clamp(44px, 5vw, 88px);
 		}
 	}
 
@@ -250,16 +298,22 @@ const getServiceName = (serviceTitle: string) => {
 
 	@media (max-width: 900px) {
 		.services-editorial {
+			--services-row-height: clamp(106px, 14.2vw, 126px);
 			padding-top: clamp(82px, 14vw, 110px);
+			min-height: 100svh;
 		}
 
 		.services-editorial__inner {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			min-height: calc(100svh - clamp(82px, 14vw, 110px) - clamp(90px, 11vw, 140px));
 			padding-inline: 18px;
 		}
 
 		.services-editorial__heading {
-			font-size: clamp(14px, 4vw, 26px);
-			letter-spacing: 0.08em;
+			font-size: 14px;
+			letter-spacing: 0.2em;
 		}
 
 		.services-editorial__heading-link {
@@ -267,12 +321,14 @@ const getServiceName = (serviceTitle: string) => {
 		}
 
 		.services-editorial__subtitle {
-			font-size: clamp(20px, 5vw, 30px);
+			font-size: clamp(22px, 5.4vw, 32px);
 			max-width: 320px;
+			line-height: 1.14;
 		}
 
 		.services-editorial__layout {
 			display: block;
+			flex: 1;
 		}
 
 		.services-editorial__visuals {
@@ -280,23 +336,91 @@ const getServiceName = (serviceTitle: string) => {
 		}
 
 		.services-editorial__item {
-			padding: 8px 0;
+			height: var(--services-row-height);
+		}
+
+		.services-editorial__list {
+			min-height: min(60svh, 540px);
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
 		}
 
 		.services-editorial__link {
 			grid-template-columns: 52px minmax(0, 1fr);
+			align-items: center;
 			gap: 10px;
+			width: 100%;
+			max-width: 100%;
 		}
 
 		.services-editorial__index {
 			font-size: 12px;
 			letter-spacing: 0.12em;
+			flex-shrink: 0;
 		}
 
 		.services-editorial__name {
-			font-size: clamp(42px, 14vw, 86px);
-			line-height: 0.8;
+			display: block;
+			width: 100%;
+			max-width: 100%;
+			font-size: clamp(31px, 8.8vw, 74px);
+			line-height: 0.84;
+			word-break: normal;
+			overflow-wrap: normal;
+			hyphens: manual;
 		}
+
+		.services-editorial__name-line--first {
+			white-space: nowrap;
+		}
+
+		.services-editorial__name[data-service-name='photography'] {
+			font-size: clamp(29px, 8.1vw, 68px);
+		}
+
+		.services-editorial__name[data-service-name='interior-design'],
+		.services-editorial__name[data-service-name='social-media'] {
+			font-size: clamp(30px, 8.35vw, 70px);
+		}
+	}
+
+	@media (max-width: 420px) {
+		.services-editorial {
+			--services-row-height: clamp(96px, 15vw, 114px);
+		}
+
+		.services-editorial__inner {
+			padding-inline: 14px;
+		}
+
+		.services-editorial__link {
+			grid-template-columns: 46px minmax(0, 1fr);
+			gap: 8px;
+		}
+
+		.services-editorial__name {
+			font-size: clamp(27px, 8.9vw, 48px);
+			line-height: 0.85;
+		}
+
+		.services-editorial__list {
+			min-height: min(58svh, 500px);
+		}
+
+		.services-editorial__name[data-service-name='photography'] {
+			font-size: clamp(25px, 8.1vw, 44px);
+		}
+
+		.services-editorial__name[data-service-name='interior-design'],
+		.services-editorial__name[data-service-name='social-media'] {
+			font-size: clamp(26px, 8.45vw, 46px);
+		}
+	}
+
+	html,
+	body {
+		overflow-x: clip;
 	}
 </style>
 

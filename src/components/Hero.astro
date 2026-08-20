@@ -10,6 +10,16 @@ interface Props {
 
 const { locale = 'es' } = Astro.props as Props;
 const content = heroContent[locale];
+
+const getHeadingLines = (heading: string) => {
+	if (heading === 'Creamos universos visuales para marcas') {
+		return ['Creamos universos', 'visuales para marcas'];
+	}
+
+	return [heading, ''];
+};
+
+const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 ---
 
 <section class={styles.hero} aria-label="Hero" data-hero-entrance data-entrance="idle">
@@ -39,7 +49,10 @@ const content = heroContent[locale];
 		<div class={styles.copy}>
 			<h1>
 				<span class={styles.eyebrow}>{content.eyebrow}</span>
-				<span class={styles.headingMain} data-hero-headline data-full-text={content.headingMain}>{content.headingMain}</span>
+				<span class={styles.headingMain} data-hero-headline data-full-text={content.headingMain} data-line-one={headingLineOne} data-line-two={headingLineTwo}>
+					<span class={styles.headingMainLine} data-hero-headline-line="one">{headingLineOne}</span>
+					{headingLineTwo && <span class={styles.headingMainLine} data-hero-headline-line="two">{headingLineTwo}</span>}
+				</span>
 				<span class={styles.headingSecondary} data-hero-support>{content.headingSecondary}</span>
 			</h1>
 		</div>
@@ -57,6 +70,8 @@ const content = heroContent[locale];
 	if (hero instanceof HTMLElement) {
 		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		const headline = hero.querySelector('[data-hero-headline]');
+		const headlineLineOne = headline?.querySelector('[data-hero-headline-line="one"]');
+		const headlineLineTwo = headline?.querySelector('[data-hero-headline-line="two"]');
 		const wordmark = hero.querySelector('[data-hero-wordmark]');
 		const visualFrame = document.querySelector('[data-visual-frame]');
 		const visualChapter = document.querySelector('[data-visual-chapter]');
@@ -378,7 +393,12 @@ const content = heroContent[locale];
 			if (headline instanceof HTMLElement) {
 				hero.dataset.typing = 'pending';
 				hero.dataset.support = 'pending';
-				headline.textContent = '';
+				if (headlineLineOne instanceof HTMLElement) {
+					headlineLineOne.textContent = '';
+				}
+				if (headlineLineTwo instanceof HTMLElement) {
+					headlineLineTwo.textContent = '';
+				}
 			}
 
 			hero.dataset.entrance = 'prepare';
@@ -389,6 +409,8 @@ const content = heroContent[locale];
 
 			if (headline instanceof HTMLElement) {
 				const fullText = headline.dataset.fullText ?? '';
+				const lineOneText = headline.dataset.lineOne ?? fullText;
+				const lineTwoText = headline.dataset.lineTwo ?? '';
 				const typingStartDelay = 2360;
 				const lockCaptureDelay = 2140;
 
@@ -412,7 +434,13 @@ const content = heroContent[locale];
 						}
 
 						cursor += 1;
-						headline.textContent = fullText.slice(0, cursor);
+						if (headlineLineOne instanceof HTMLElement) {
+							headlineLineOne.textContent = lineOneText.slice(0, Math.min(cursor, lineOneText.length));
+						}
+						if (headlineLineTwo instanceof HTMLElement) {
+							const secondLineCursor = Math.max(cursor - lineOneText.length, 0);
+							headlineLineTwo.textContent = lineTwoText.slice(0, secondLineCursor);
+						}
 
 						const nextDelay = Math.floor(35 + Math.random() * 26);
 						window.setTimeout(typeNextChar, nextDelay);

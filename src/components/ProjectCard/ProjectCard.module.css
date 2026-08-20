@@ -62,12 +62,13 @@
 }
 
 .title {
-	margin: 10px 0 0;
-	font-family: 'Krona One', sans-serif;
+	margin: 20px 0 0;
+	font-family: 'Satoshi', sans-serif;
 	font-size: 16px;
-	font-weight: 400;
+	font-weight: 700;
 	line-height: 1.2;
 	letter-spacing: 0;
+	text-transform: uppercase;
 	color: #1e1e1e;
 }
 

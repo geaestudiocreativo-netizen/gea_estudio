@@ -110,6 +110,10 @@
 	font-size: clamp(30px, 6.2vw, 58px);
 }
 
+.headingMainLine {
+	display: block;
+}
+
 .headingSecondary {
     display: block;
     margin-top: 8px;
