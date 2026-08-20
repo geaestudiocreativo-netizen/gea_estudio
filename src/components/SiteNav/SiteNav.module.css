@@ -6,7 +6,7 @@
 	left: 0;
 	right: 0;
 	z-index: 80;
-	background: transparent;
+	background: #f8f8f8;
 	transition: background-color 220ms ease;
 }
 
@@ -239,8 +239,9 @@
 		display: none;
 	}
 
-	.logoImage {
-		width: clamp(82px, 22vw, 88px);
+	.logoImage,
+	.overlayLogoImage {
+		width: clamp(32px, 10vw, 44px);
 	}
 
 	.navControls {
@@ -249,6 +250,17 @@
 
 	.menuButton {
 		display: flex;
+		width: 22px;
+		height: 22px;
+	}
+
+	.menuIcon {
+		width: 22px;
+		height: 16px;
+	}
+
+	.menuLine {
+		height: 2.5px;
 	}
 
 	.nav[data-menu-open='true'] .languageSelector {

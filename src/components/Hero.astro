@@ -120,7 +120,7 @@ const content = heroContent[locale];
 		};
 
 		const syncMobileWordmarkSticky = () => {
-			if (!(wordmark instanceof HTMLElement) || !wordmarkLocked) {
+			if (!(wordmark instanceof HTMLElement) || !wordmarkLocked || hero.dataset.entrance === 'done') {
 				return;
 			}
 
@@ -264,7 +264,7 @@ const content = heroContent[locale];
 		};
 
 		const requestSplitSync = () => {
-			if (syncRaf) {
+			if (hero.dataset.entrance === 'done' || syncRaf) {
 				return;
 			}
 
@@ -275,6 +275,10 @@ const content = heroContent[locale];
 		};
 
 		const shouldWatchSplit = () => {
+			if (hero.dataset.entrance === 'done') {
+				return false;
+			}
+
 			if (!(wordmark instanceof HTMLElement) || !(visualChapter instanceof HTMLElement)) {
 				return hero.dataset.entrance !== 'done';
 			}
@@ -337,6 +341,10 @@ const content = heroContent[locale];
 		});
 
 		const onViewportUpdate = () => {
+			if (hero.dataset.entrance === 'done') {
+				return;
+			}
+
 			syncMobileWordmarkSticky();
 			requestSplitSync();
 			ensureSplitWatcher();

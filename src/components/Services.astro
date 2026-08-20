@@ -1,5 +1,4 @@
 ---
-import styles from './Services.module.css';
 import ResponsiveImage from './ResponsiveImage.astro';
 import { services } from '../data/services';
 import { servicesEn } from '../data/services-en';
@@ -14,45 +13,376 @@ const { locale = 'es' } = Astro.props as Props;
 const content = servicesSectionContent[locale];
 const list = locale === 'en' ? servicesEn : services;
 const serviceBasePath = getLocalizedPath(locale, '/services');
+
+const getServiceName = (serviceTitle: string) => {
+	if (serviceTitle === 'Fotografía & Cinematografía' || serviceTitle === 'Photography & Cinematography') {
+		return locale === 'en' ? 'PHOTOGRAPHY & CINEMATOGRAPHY' : 'FOTOGRAFÍA &\u00A0CINEMATOGRAFÍA';
+	}
+
+	if (serviceTitle === 'Redes Sociales' || serviceTitle === 'Social Media') {
+		return locale === 'en' ? 'SOCIAL MEDIA' : 'REDES SOCIALES';
+	}
+
+	if (serviceTitle === 'Decoración' || serviceTitle === 'Interior Design') {
+		return locale === 'en' ? 'INTERIOR DESIGN' : 'DECORACIÓN';
+	}
+
+	if (serviceTitle === 'Editorial' || serviceTitle === 'Editorial Design') {
+		return locale === 'en' ? 'EDITORIAL' : 'EDITORIAL';
+	}
+
+	return serviceTitle.toUpperCase();
+};
 ---
 
-<section id="services" class={styles.services} aria-labelledby="services-title">
-	<div class={styles.content}>
-		<h2 id="services-title" class={styles.heading}>
-			<a href={getLocalizedPath(locale, '/#services')} aria-label={content.headingAria} class={styles.headingLink}>{content.heading} <span class={styles.headingBreak}>{content.headingBreak}</span></a>
-		</h2>
-		<p class={styles.introHeadline}>
-			{content.introHeadlineLines.map((line) => (
-				<span class={styles.introHeadlineLine}>{line}</span>
-			))}
-		</p>
-		<p class={styles.introSupporting}>{content.introSupporting}</p>
+<section id="services" class="services-editorial" aria-labelledby="services-title">
+	<div class="services-editorial__inner">
+		<div class="services-editorial__intro">
+			<h2 id="services-title" class="services-editorial__heading">
+				<a href={getLocalizedPath(locale, '/#services')} aria-label={content.headingAria} class="services-editorial__heading-link">
+					{content.heading}
+					<span>{content.headingBreak}</span>
+				</a>
+			</h2>
+			<p class="services-editorial__subtitle">
+				<span>{content.introHeadlineLines[0]}</span>
+				<span>{content.introHeadlineLines[1]}</span>
+			</p>
+		</div>
 
-		<ul class={styles.list} role="list">
-			{
-				list.map((service) => (
-					<li class={styles.serviceRow} data-size={service.homeSize}>
-						<a class={styles.serviceCardLink} href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
-							<div class={`${styles.media} ${styles[service.homeSize]}`}>
-								<ResponsiveImage
-									src={service.homeImage}
-									alt={service.homeAlt}
-									loading="lazy"
-									decoding="async"
-									sizes="(max-width: 900px) 72vw, 78vw"
-									widths={[240, 320, 480, 660, 900, 1200]}
-								/>
-							</div>
-							<div class={styles.serviceContent}>
-								<div class={styles.serviceHeading}>
-									<h3 class={styles.title}>{service.homeTitle}</h3>
-								</div>
-								<p class={styles.description}>{service.homeDescription}</p>
-							</div>
+		<div class="services-editorial__layout">
+			<ul class="services-editorial__list" role="list">
+				{list.map((service, index) => (
+					<li class="services-editorial__item" data-index={index}>
+						<a class="services-editorial__link" href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
+							<span class="services-editorial__index">{String(index + 1).padStart(2, '0')} /</span>
+							<span class="services-editorial__name">{getServiceName(service.homeTitle)}</span>
 						</a>
 					</li>
-				))
-			}
-		</ul>
+				))}
+			</ul>
+
+			<div class="services-editorial__visuals" aria-hidden="true">
+				{list.map((service, index) => (
+					<div class={`services-editorial__visual ${index === 0 ? 'is-active' : ''}`} data-index={index}>
+						<ResponsiveImage
+							src={service.homeImage}
+							alt={service.homeAlt}
+							loading="lazy"
+							decoding="async"
+							sizes="(max-width: 900px) 0px, 38vw"
+							widths={[240, 320, 480, 660, 900, 1200]}
+						/>
+					</div>
+				))}
+			</div>
+		</div>
 	</div>
 </section>
+
+<style is:global>
+	@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+
+	.services-editorial {
+		position: relative;
+		background: #f3f0ee;
+		border-top-left-radius: clamp(22px, 2.8vw, 38px);
+		border-top-right-radius: clamp(22px, 2.8vw, 38px);
+		padding: clamp(88px, 9vw, 120px) 0 clamp(90px, 11vw, 140px);
+		color: #111111;
+	}
+
+	.services-editorial__inner {
+		max-width: 1480px;
+		margin: 0 auto;
+		padding: 0 clamp(28px, 4vw, 54px);
+	}
+
+	.services-editorial__intro {
+		display: grid;
+		gap: 0.5rem;
+		margin-bottom: clamp(26px, 3vw, 44px);
+	}
+
+	.services-editorial__heading {
+		margin: 0;
+		font-family: 'Krona One', sans-serif;
+		font-size: clamp(20px, 2vw, 34px);
+		font-weight: 400;
+		line-height: 1;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.services-editorial__heading-link {
+		display: inline-flex;
+		flex-wrap: wrap;
+		gap: 0.45rem;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.services-editorial__subtitle {
+		margin: 0;
+		display: grid;
+		gap: 0.15rem;
+		max-width: 620px;
+		font-family: 'Satoshi', sans-serif;
+		font-size: clamp(22px, 2vw, 38px);
+		font-weight: 500;
+		line-height: 1.08;
+		color: #111111;
+	}
+
+	.services-editorial__layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.85fr) minmax(240px, 0.95fr);
+		align-items: start;
+		gap: clamp(26px, 3vw, 56px);
+	}
+
+	.services-editorial__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.services-editorial__item {
+		position: relative;
+		padding: clamp(10px, 1vw, 18px) 0;
+		border-top: 1px solid rgba(17, 17, 17, 0.16);
+		transition: opacity 260ms ease, transform 260ms ease;
+	}
+
+	.services-editorial__item:last-child {
+		border-bottom: 1px solid rgba(17, 17, 17, 0.16);
+	}
+
+	.services-editorial__item.is-active {
+		opacity: 1;
+	}
+
+	.services-editorial__item:not(.is-active) {
+		opacity: 0.62;
+	}
+
+	.services-editorial__link {
+		display: grid;
+		grid-template-columns: 72px minmax(0, 1fr);
+		align-items: baseline;
+		gap: 18px;
+		width: 100%;
+		color: rgba(17, 17, 17, 0.82);
+		text-decoration: none;
+	}
+
+	.services-editorial__index {
+		font-family: 'Satoshi', sans-serif;
+		font-size: clamp(14px, 1vw, 20px);
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		line-height: 1;
+		text-transform: uppercase;
+		color: rgba(17, 17, 17, 0.86);
+		transform: translateY(0.2em);
+	}
+
+	.services-editorial__name {
+		display: block;
+		font-family: 'Satoshi', sans-serif;
+		font-size: clamp(62px, 7vw, 210px);
+		font-weight: 900;
+		line-height: 0.74;
+		letter-spacing: -0.07em;
+		text-transform: uppercase;
+		color: #111111;
+		transition: color 260ms ease, opacity 260ms ease, transform 260ms ease;
+		will-change: transform, color;
+	}
+
+	.services-editorial__item.is-active .services-editorial__name {
+		color: #111111;
+	}
+
+	.services-editorial__item:not(.is-active) .services-editorial__name {
+		color: rgba(17, 17, 17, 0.34);
+	}
+
+	.services-editorial__visuals {
+		display: none;
+		position: sticky;
+		top: 120px;
+		width: 100%;
+		height: clamp(280px, 29vw, 540px);
+		margin-top: 12px;
+	}
+
+	@media (min-width: 901px) {
+		.services-editorial__visuals {
+			display: block;
+		}
+	}
+
+	.services-editorial__visual {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		transform: translate3d(0, 18px, 0) scale(0.98);
+		clip-path: inset(0 0 0 100% round 26px);
+		transition: opacity 420ms ease, transform 420ms ease, clip-path 420ms ease;
+	}
+
+	.services-editorial__visual.is-active {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) scale(1);
+		clip-path: inset(0 0 0 0 round 26px);
+	}
+
+	.services-editorial__visual img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 26px;
+		filter: saturate(0.88) contrast(1.03);
+	}
+
+	@media (max-width: 900px) {
+		.services-editorial {
+			padding-top: clamp(82px, 14vw, 110px);
+		}
+
+		.services-editorial__inner {
+			padding-inline: 18px;
+		}
+
+		.services-editorial__heading {
+			font-size: clamp(14px, 4vw, 26px);
+			letter-spacing: 0.08em;
+		}
+
+		.services-editorial__heading-link {
+			display: inline;
+		}
+
+		.services-editorial__subtitle {
+			font-size: clamp(20px, 5vw, 30px);
+			max-width: 320px;
+		}
+
+		.services-editorial__layout {
+			display: block;
+		}
+
+		.services-editorial__visuals {
+			display: none;
+		}
+
+		.services-editorial__item {
+			padding: 8px 0;
+		}
+
+		.services-editorial__link {
+			grid-template-columns: 52px minmax(0, 1fr);
+			gap: 10px;
+		}
+
+		.services-editorial__index {
+			font-size: 12px;
+			letter-spacing: 0.12em;
+		}
+
+		.services-editorial__name {
+			font-size: clamp(42px, 14vw, 86px);
+			line-height: 0.8;
+		}
+	}
+</style>
+
+<script is:inline>
+	(() => {
+		const section = document.getElementById('services');
+		if (!section) return;
+
+		const items = Array.from(section.querySelectorAll('.services-editorial__item'));
+		const visuals = Array.from(section.querySelectorAll('.services-editorial__visual'));
+		if (!items.length) return;
+
+		const setActive = (index) => {
+			items.forEach((item, itemIndex) => {
+				item.classList.toggle('is-active', itemIndex === index);
+			});
+
+			visuals.forEach((visual, visualIndex) => {
+				visual.classList.toggle('is-active', visualIndex === index);
+			});
+		};
+
+		const updateActiveItem = () => {
+			const targetScrollCenter = window.scrollY + (window.innerHeight * 0.5);
+			let activeIndex = 0;
+			let minimumDistance = Number.POSITIVE_INFINITY;
+
+			items.forEach((item, index) => {
+				const rect = item.getBoundingClientRect();
+				const itemCenter = rect.top + (rect.height / 2) + window.scrollY;
+				const distance = Math.abs(itemCenter - targetScrollCenter);
+
+				if (distance < minimumDistance) {
+					minimumDistance = distance;
+					activeIndex = index;
+				}
+			});
+
+			setActive(activeIndex);
+		};
+
+		let rafId = 0;
+		const schedule = () => {
+			if (rafId) cancelAnimationFrame(rafId);
+			rafId = requestAnimationFrame(updateActiveItem);
+		};
+
+		updateActiveItem();
+		window.addEventListener('scroll', schedule, { passive: true });
+		window.addEventListener('resize', schedule);
+	})();
+</script>
+
+<!--
+LEGACY HOME SERVICES MARKUP (kept for rollback):
+<section id="services" class={styles.services} aria-labelledby="services-title">
+  <div class={styles.content}>
+    <h2 id="services-title" class={styles.heading}>
+      <a href={getLocalizedPath(locale, '/#services')} aria-label={content.headingAria} class={styles.headingLink}>{content.heading} <span class={styles.headingBreak}>{content.headingBreak}</span></a>
+    </h2>
+    <p class={styles.introHeadline}>
+      {content.introHeadlineLines.map((line) => (
+        <span class={styles.introHeadlineLine}>{line}</span>
+      ))}
+    </p>
+    <p class={styles.introSupporting}>{content.introSupporting}</p>
+
+    <ul class={styles.list} role="list">
+      {
+        list.map((service, index) => (
+          <li class={styles.serviceRow} data-size={service.homeSize}>
+            <a class={styles.serviceCardLink} href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
+              <div class={`${styles.media} ${styles[service.homeSize]}`}>
+                <ResponsiveImage src={service.homeImage} alt={service.homeAlt} loading="lazy" decoding="async" sizes="(max-width: 900px) 72vw, 78vw" widths={[240, 320, 480, 660, 900, 1200]} />
+              </div>
+              <div class={styles.serviceContent}>
+                <div class={styles.serviceHeading}>
+                  <h3 class={styles.title}>{service.homeTitle}</h3>
+                </div>
+                <p class={styles.description}>{service.homeDescription}</p>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+-->

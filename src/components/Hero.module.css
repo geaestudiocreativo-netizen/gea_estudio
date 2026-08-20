@@ -366,7 +366,15 @@
 
 @media (max-width: 767px) {
 	.hero {
-		padding-top: calc(18px + env(safe-area-inset-top));
+		padding-top: calc(76px + env(safe-area-inset-top));
+	}
+
+	.introRow {
+		margin-top: 0;
+	}
+
+	.copy {
+		padding-left: 0;
 	}
 
 	.eyebrow {

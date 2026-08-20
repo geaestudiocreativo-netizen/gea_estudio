@@ -15,6 +15,7 @@ export function getStaticPaths() {
 const { slug } = Astro.params;
 
 const service = servicesEn.find((item) => item.slug === slug);
+const isBrandingExperiment = service?.slug === 'branding';
 
 if (!service) {
 	throw new Response('Service not found', { status: 404 });
@@ -26,21 +27,23 @@ const content = servicePageContent.en;
 
 <Layout title={service.seo.title} description={service.seo.description}>
 	<main class={styles.page}>
-		<section class={styles.hero}>
-			<h1 class={styles.title}>{service.title}</h1>
-			<p class={styles.intro}>{service.intro}</p>
+		<section class={`${styles.hero} ${isBrandingExperiment ? styles.brandingHero : ''}`} data-branding-hero={isBrandingExperiment ? 'true' : undefined}>
+			<h1 class={styles.title} data-branding-title>{service.title}</h1>
+			<p class={styles.intro} data-branding-intro>{service.intro}</p>
 		</section>
 
-		<figure class={styles.heroImage}>
-			<ResponsiveImage
-				src={service.heroImage}
-				alt={service.title}
-				loading="eager"
-				fetchpriority="high"
-				decoding="async"
-				sizes="100vw"
-				widths={[768, 1280, 1600, 1920]}
-			/>
+		<figure class={`${styles.heroImage} ${isBrandingExperiment ? styles.brandingImageStage : ''}`} data-branding-stage={isBrandingExperiment ? 'true' : undefined}>
+			<div class={styles.brandingViewport} data-branding-viewport>
+				<ResponsiveImage
+					src={service.heroImage}
+					alt={service.title}
+					loading="eager"
+					fetchpriority="high"
+					decoding="async"
+					sizes="100vw"
+					widths={[768, 1280, 1600, 1920]}
+				/>
+			</div>
 		</figure>
 
 		<section class={styles.systems} aria-labelledby="service-systems-title">
@@ -89,4 +92,51 @@ const content = servicePageContent.en;
 			/>
 		</section>
 	</main>
-</Layout>
+	<script is:inline>
+		(() => {
+			const feature = document.querySelector('[data-branding-stage="true"]');
+			const hero = document.querySelector('[data-branding-hero="true"]');
+			const title = document.querySelector('[data-branding-title]');
+			const intro = document.querySelector('[data-branding-intro]');
+			if (!feature || !hero || !title || !intro || window.matchMedia('(max-width: 767px)').matches) {
+				return;
+			}
+
+			const viewport = feature.querySelector('[data-branding-viewport]');
+			if (!(viewport instanceof HTMLElement)) {
+				return;
+			}
+
+			const updateBrandingMotion = () => {
+				const rect = feature.getBoundingClientRect();
+				const viewportHeight = window.innerHeight;
+				const start = viewportHeight * 0.2;
+				const end = viewportHeight * 0.8;
+				const rawProgress = (start - rect.top) / (end - start + viewportHeight * 0.35);
+				const progress = Math.min(Math.max(rawProgress, 0), 1);
+				const scale = 1 + progress * 0.85;
+				const titleOpacity = 1 - progress * 0.36;
+				const introOpacity = 1 - progress * 0.28;
+				const textShift = progress * 14;
+
+				viewport.style.transform = `scale(${scale})`;
+				viewport.style.transformOrigin = 'center center';
+				title.style.opacity = String(titleOpacity);
+				title.style.transform = `translate3d(0, ${textShift}px, 0)`;
+				intro.style.opacity = String(introOpacity);
+				intro.style.transform = `translate3d(0, ${textShift * 0.7}px, 0)`;
+			};
+
+			let rafId = 0;
+			const scheduleUpdate = () => {
+				if (rafId) {
+					cancelAnimationFrame(rafId);
+				}
+				rafId = requestAnimationFrame(updateBrandingMotion);
+			};
+
+			window.addEventListener('scroll', scheduleUpdate, { passive: true });
+			window.addEventListener('resize', scheduleUpdate);
+			scheduleUpdate();
+		})();
+	</script></Layout>
