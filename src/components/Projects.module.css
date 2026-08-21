@@ -4,13 +4,14 @@
 }
 
 .layout {
+	--projects-inline-offset: clamp(22px, 4.5vw, 84px);
 	margin: 0;
 	max-width: none;
-	padding-left: clamp(22px, 4.5vw, 84px);
+	padding-left: var(--projects-inline-offset);
 	padding-right: 0;
 	display: grid;
 	grid-template-columns: auto minmax(0, 1fr);
-	column-gap: clamp(30px, 3.8vw, 56px);
+	column-gap: clamp(12px, 1.8vw, 24px);
 	align-items: start;
 }
 
@@ -32,6 +33,7 @@
 	overflow-y: visible;
 	scroll-behavior: smooth;
 	scroll-snap-type: x mandatory;
+	margin-left: -6px;
 	-webkit-overflow-scrolling: touch;
 	touch-action: auto;
 	overscroll-behavior-x: contain;
@@ -53,7 +55,7 @@
 
 .item {
 	flex: 0 0 auto;
-	width: 224px;
+	width: 248px;
 	scroll-snap-align: start;
 	scroll-snap-stop: always;
 }
@@ -61,9 +63,11 @@
 .cta {
 	grid-column: 1 / -1;
 	justify-self: center;
-	margin-top: 40px;
+	position: relative;
+	left: calc(var(--projects-inline-offset) * -0.5);
+	margin-top: 76px;
 	border: 0;
-	border-radius: 16px;
+	border-radius: 9999px;
 	background: #111111;
 	color: #ffffff;
 	cursor: pointer;
@@ -88,10 +92,11 @@
 	}
 
 	.layout {
+		--projects-inline-offset: 26px;
 		padding-left: 26px;
 		padding-right: 0;
 		grid-template-columns: 56px minmax(0, 1fr);
-		column-gap: 20px;
+		column-gap: 8px;
 	}
 
 	.title {
@@ -107,7 +112,7 @@
 	}
 
 	.item {
-		width: 224px;
+		width: 248px;
 	}
 
 	.cta {
@@ -118,10 +123,11 @@
 @media (max-width: 767px) {
 	.carousel {
 		scroll-snap-type: x mandatory;
+		margin-left: -4px;
 	}
 
 	.item {
 		/* Keeps a right-side next-card preview while preserving card dimensions. */
-		width: 224px;
+		width: 248px;
 	}
 }

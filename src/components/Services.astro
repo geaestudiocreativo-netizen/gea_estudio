@@ -212,10 +212,13 @@ const getServiceName = (serviceTitle: string) => {
 		line-height: 1;
 		text-transform: uppercase;
 		color: rgba(17, 17, 17, 0.86);
+		align-self: center;
 	}
 
 	.services-editorial__name {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		font-family: 'Satoshi', sans-serif;
 		font-size: clamp(62px, 7vw, 210px);
 		font-weight: 900;
@@ -225,6 +228,8 @@ const getServiceName = (serviceTitle: string) => {
 		color: #111111;
 		transition: color 260ms ease, opacity 260ms ease, transform 260ms ease;
 		will-change: transform, color;
+		height: 100%;
+		min-height: 0;
 	}
 
 	.services-editorial__name-line {
@@ -361,7 +366,9 @@ const getServiceName = (serviceTitle: string) => {
 		}
 
 		.services-editorial__name {
-			display: block;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
 			width: 100%;
 			max-width: 100%;
 			font-size: clamp(31px, 8.8vw, 74px);

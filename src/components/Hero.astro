@@ -83,6 +83,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 		let lastSplit = '';
 		let wordmarkLocked = false;
 		let wordmarkAbsoluteTop = 0;
+		let wordmarkAbsoluteLeft = 0;
 		let wordmarkDockedMobile = false;
 		let wordmarkLockTop: number | null = null;
 		let wordmarkLockWidth: number | null = null;
@@ -108,18 +109,50 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 			captureWordmarkLockMetrics();
 
 			const wordmarkRect = wordmark.getBoundingClientRect();
+			const heroRect = hero.getBoundingClientRect();
 			const top = wordmarkLockTop ?? 0;
 			const width = wordmarkLockWidth ?? wordmarkRect.width;
+			const left = wordmarkRect.left - heroRect.left;
 			wordmarkAbsoluteTop = top;
+			wordmarkAbsoluteLeft = left;
 
 			wordmark.style.position = 'absolute';
 			wordmark.style.top = `${top.toFixed(2)}px`;
-			wordmark.style.left = '50%';
+			wordmark.style.left = `${left.toFixed(2)}px`;
 			wordmark.style.right = 'auto';
 			wordmark.style.width = `${width.toFixed(2)}px`;
 			wordmark.style.margin = '0';
 			wordmark.style.animation = 'none';
-			wordmark.style.transform = 'translateX(-50%)';
+			wordmark.style.transform = 'none';
+			wordmark.style.maxWidth = 'none';
+			wordmarkLocked = true;
+		};
+
+		const freezeWordmarkFinalState = () => {
+			if (!(wordmark instanceof HTMLElement)) {
+				return;
+			}
+
+			const wordmarkRect = wordmark.getBoundingClientRect();
+			const heroRect = hero.getBoundingClientRect();
+			const top = wordmarkRect.top - heroRect.top;
+			const left = wordmarkRect.left - heroRect.left;
+
+			if (wordmark.parentElement !== hero) {
+				hero.appendChild(wordmark);
+				wordmarkDockedMobile = false;
+			}
+
+			wordmarkAbsoluteTop = top;
+			wordmarkAbsoluteLeft = left;
+			wordmark.style.position = 'absolute';
+			wordmark.style.top = `${top.toFixed(2)}px`;
+			wordmark.style.left = `${left.toFixed(2)}px`;
+			wordmark.style.right = 'auto';
+			wordmark.style.width = `${wordmarkRect.width.toFixed(2)}px`;
+			wordmark.style.margin = '0';
+			wordmark.style.animation = 'none';
+			wordmark.style.transform = 'none';
 			wordmark.style.maxWidth = 'none';
 			wordmarkLocked = true;
 		};
@@ -147,9 +180,9 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 
 				wordmark.style.position = 'absolute';
 				wordmark.style.top = `${wordmarkAbsoluteTop.toFixed(2)}px`;
-				wordmark.style.left = '50%';
+				wordmark.style.left = `${wordmarkAbsoluteLeft.toFixed(2)}px`;
 				wordmark.style.right = 'auto';
-				wordmark.style.transform = 'translateX(-50%)';
+				wordmark.style.transform = 'none';
 				return;
 			}
 
@@ -173,9 +206,9 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 			if (!wordmarkDockedMobile) {
 				wordmark.style.position = 'absolute';
 				wordmark.style.top = `${wordmarkAbsoluteTop.toFixed(2)}px`;
-				wordmark.style.left = '50%';
+				wordmark.style.left = `${wordmarkAbsoluteLeft.toFixed(2)}px`;
 				wordmark.style.right = 'auto';
-				wordmark.style.transform = 'translateX(-50%)';
+				wordmark.style.transform = 'none';
 				return;
 			}
 
@@ -184,9 +217,9 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 			if (chapterRect.bottom <= 0) {
 				wordmark.style.position = 'absolute';
 				wordmark.style.top = '0';
-				wordmark.style.left = '50%';
+				wordmark.style.left = `${wordmarkAbsoluteLeft.toFixed(2)}px`;
 				wordmark.style.right = 'auto';
-				wordmark.style.transform = 'translateX(-50%)';
+				wordmark.style.transform = 'none';
 				return;
 			}
 
@@ -197,9 +230,9 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 			} else {
 				wordmark.style.top = '0';
 			}
-			wordmark.style.left = '50%';
+			wordmark.style.left = `${wordmarkAbsoluteLeft.toFixed(2)}px`;
 			wordmark.style.right = 'auto';
-			wordmark.style.transform = 'translateX(-50%)';
+			wordmark.style.transform = 'none';
 		};
 
 		const readClipInset = (token: string, size: number) => {
@@ -453,17 +486,15 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 			window.setTimeout(() => {
 				hero.dataset.entrance = 'done';
 				hero.dataset.support = 'done';
-				lockWordmarkPosition();
-				syncMobileWordmarkSticky();
-				requestSplitSync();
+				freezeWordmarkFinalState();
+				cleanupSplitSync();
 			}, 5600);
 		} else {
 			hero.dataset.entrance = 'done';
 			hero.dataset.typing = 'done';
 			hero.dataset.support = 'done';
-			lockWordmarkPosition();
-			syncMobileWordmarkSticky();
-			requestSplitSync();
+			freezeWordmarkFinalState();
+			cleanupSplitSync();
 		}
 	}
 </script>
