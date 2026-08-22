@@ -68,10 +68,13 @@ const getServiceName = (serviceTitle: string) => {
 					<li class="services-editorial__item" data-index={index}>
 						<a class="services-editorial__link" href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
 							<span class="services-editorial__index">{String(index + 1).padStart(2, '0')} /</span>
-							<span class="services-editorial__name" data-service-name={service.slug}>
-								{getServiceNameLines(service.homeTitle).map((line, lineIndex) => (
-									<span class:list={["services-editorial__name-line", lineIndex === 0 && "services-editorial__name-line--first"]}>{line}</span>
-								))}
+							<span class="services-editorial__content">
+								<span class="services-editorial__name" data-service-name={service.slug}>
+									{getServiceNameLines(service.homeTitle).map((line, lineIndex) => (
+										<span class:list={["services-editorial__name-line", lineIndex === 0 && "services-editorial__name-line--first"]}>{line}</span>
+									))}
+								</span>
+								<span class="services-editorial__description">{service.homeDescription}</span>
 							</span>
 						</a>
 					</li>
@@ -101,7 +104,7 @@ const getServiceName = (serviceTitle: string) => {
 	@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
 
 	.services-editorial {
-		--services-row-height: clamp(112px, 8.6vw, 154px);
+		--services-row-height: clamp(176px, 12vw, 208px);
 		position: relative;
 		background: #f3f0ee;
 		border-top-left-radius: clamp(22px, 2.8vw, 38px);
@@ -204,6 +207,15 @@ const getServiceName = (serviceTitle: string) => {
 		text-decoration: none;
 	}
 
+	.services-editorial__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    min-width: 0;
+    height: 100%;
+	}
+
 	.services-editorial__index {
 		font-family: 'Satoshi', sans-serif;
 		font-size: clamp(14px, 1vw, 20px);
@@ -228,8 +240,37 @@ const getServiceName = (serviceTitle: string) => {
 		color: #111111;
 		transition: color 260ms ease, opacity 260ms ease, transform 260ms ease;
 		will-change: transform, color;
-		height: 100%;
+		height: auto;
 		min-height: 0;
+	}
+
+	.services-editorial__description {
+		display: block;
+		max-width: 560px;
+		margin-top: 0;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 17px;
+		font-weight: 400;
+		line-height: 1.35;
+		letter-spacing: 0;
+		color: #1f2024;
+
+		opacity: 0;
+		visibility: hidden;
+		max-height: 0;
+		overflow: hidden;
+
+		transition:
+			opacity 260ms ease,
+			max-height 260ms ease,
+			margin-top 260ms ease;
+	}
+
+	.services-editorial__item.is-active .services-editorial__description {
+		opacity: 1;
+		visibility: visible;
+		max-height: 3em;
+		margin-top: 10px;
 	}
 
 	.services-editorial__name-line {
@@ -265,6 +306,10 @@ const getServiceName = (serviceTitle: string) => {
 
 		.services-editorial__name {
 			max-width: min(100%, 44rem);
+		}
+
+		.services-editorial__description {
+			max-width: min(100%, 600px);
 		}
 
 		.services-editorial__name[data-service-name='photography'] {
@@ -303,7 +348,7 @@ const getServiceName = (serviceTitle: string) => {
 
 	@media (max-width: 900px) {
 		.services-editorial {
-			--services-row-height: clamp(106px, 14.2vw, 126px);
+			--services-row-height: clamp(152px, 24vw, 188px);
 			padding-top: clamp(82px, 14vw, 110px);
 			min-height: 100svh;
 		}
@@ -359,6 +404,10 @@ const getServiceName = (serviceTitle: string) => {
 			max-width: 100%;
 		}
 
+		.services-editorial__content {
+			gap: 8px;
+		}
+
 		.services-editorial__index {
 			font-size: 12px;
 			letter-spacing: 0.12em;
@@ -390,11 +439,17 @@ const getServiceName = (serviceTitle: string) => {
 		.services-editorial__name[data-service-name='social-media'] {
 			font-size: clamp(30px, 8.35vw, 70px);
 		}
+
+		.services-editorial__description {
+			max-width: 100%;
+			font-size: clamp(15px, 4vw, 17px);
+			line-height: 1.45;
+		}
 	}
 
 	@media (max-width: 420px) {
 		.services-editorial {
-			--services-row-height: clamp(96px, 15vw, 114px);
+			--services-row-height: clamp(144px, 38vw, 176px);
 		}
 
 		.services-editorial__inner {
@@ -423,12 +478,43 @@ const getServiceName = (serviceTitle: string) => {
 		.services-editorial__name[data-service-name='social-media'] {
 			font-size: clamp(26px, 8.45vw, 46px);
 		}
+
+		.services-editorial__description {
+			font-size: 15px;
+		}
 	}
 
 	html,
 	body {
 		overflow-x: clip;
 	}
+	@media (max-width: 900px) {
+    .services-editorial__content {
+        gap: 0;
+    }
+
+    .services-editorial__name {
+        height: auto;
+    }
+
+    .services-editorial__description {
+        max-width: 100%;
+        font-size: 16px;
+        line-height: 1.35;
+        margin-top: 0;
+        opacity: 0;
+        visibility: hidden;
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    .services-editorial__item.is-active .services-editorial__description {
+        opacity: 1;
+        visibility: visible;
+        max-height: 3em;
+        margin-top: 10px;
+    }
+}
 </style>
 
 <script is:inline>
