@@ -486,7 +486,11 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 			window.setTimeout(() => {
 				hero.dataset.entrance = 'done';
 				hero.dataset.support = 'done';
-				freezeWordmarkFinalState();
+
+				if (wordmark instanceof HTMLElement && !wordmarkLocked) {
+					lockWordmarkPosition();
+				}
+
 				cleanupSplitSync();
 			}, 5600);
 		} else {

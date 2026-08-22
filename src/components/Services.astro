@@ -49,18 +49,7 @@ const getServiceName = (serviceTitle: string) => {
 
 <section id="services" class="services-editorial" aria-labelledby="services-title">
 	<div class="services-editorial__inner">
-		<div class="services-editorial__intro">
-			<h2 id="services-title" class="services-editorial__heading">
-				<a href={getLocalizedPath(locale, '/#services')} aria-label={content.headingAria} class="services-editorial__heading-link">
-					{content.heading}
-					<span>{content.headingBreak}</span>
-				</a>
-			</h2>
-			<p class="services-editorial__subtitle">
-				<span>{content.introHeadlineLines[0]}</span>
-				<span>{content.introHeadlineLines[1]}</span>
-			</p>
-		</div>
+		
 
 		<div class="services-editorial__layout">
 			<ul class="services-editorial__list" role="list">
@@ -179,9 +168,19 @@ const getServiceName = (serviceTitle: string) => {
 		position: relative;
 		display: flex;
 		align-items: center;
-		height: var(--services-row-height);
 		border-top: 1px solid rgba(17, 17, 17, 0.16);
-		transition: opacity 260ms ease, transform 260ms ease;
+		height: auto;
+		min-height: 0;
+		flex: 0 0 70px;
+		transition: flex-basis 400ms ease;
+	}
+
+	.services-editorial__item:first-child {
+		border-top: none;
+	}
+
+	.services-editorial__item.is-active {
+		flex-basis: 190px;
 	}
 
 	.services-editorial__item:last-child {
@@ -568,39 +567,4 @@ const getServiceName = (serviceTitle: string) => {
 	})();
 </script>
 
-<!--
-LEGACY HOME SERVICES MARKUP (kept for rollback):
-<section id="services" class={styles.services} aria-labelledby="services-title">
-  <div class={styles.content}>
-    <h2 id="services-title" class={styles.heading}>
-      <a href={getLocalizedPath(locale, '/#services')} aria-label={content.headingAria} class={styles.headingLink}>{content.heading} <span class={styles.headingBreak}>{content.headingBreak}</span></a>
-    </h2>
-    <p class={styles.introHeadline}>
-      {content.introHeadlineLines.map((line) => (
-        <span class={styles.introHeadlineLine}>{line}</span>
-      ))}
-    </p>
-    <p class={styles.introSupporting}>{content.introSupporting}</p>
 
-    <ul class={styles.list} role="list">
-      {
-        list.map((service, index) => (
-          <li class={styles.serviceRow} data-size={service.homeSize}>
-            <a class={styles.serviceCardLink} href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
-              <div class={`${styles.media} ${styles[service.homeSize]}`}>
-                <ResponsiveImage src={service.homeImage} alt={service.homeAlt} loading="lazy" decoding="async" sizes="(max-width: 900px) 72vw, 78vw" widths={[240, 320, 480, 660, 900, 1200]} />
-              </div>
-              <div class={styles.serviceContent}>
-                <div class={styles.serviceHeading}>
-                  <h3 class={styles.title}>{service.homeTitle}</h3>
-                </div>
-                <p class={styles.description}>{service.homeDescription}</p>
-              </div>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-</section>
--->

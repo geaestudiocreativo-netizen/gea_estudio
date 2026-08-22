@@ -1,7 +1,7 @@
 ---
 import styles from './VisualChapter.module.css';
 
-const imageSrc = '/images/others/Background.png';
+const imageSrc = '/images/others/Galaxia.jpg';
 ---
 
 <section class={styles.chapter} aria-label="Visual chapter" data-visual-chapter data-state="idle">
@@ -10,9 +10,13 @@ const imageSrc = '/images/others/Background.png';
 		<div class={styles.frame} data-visual-frame>
 			<img class={styles.image} src={imageSrc} alt="" loading="lazy" decoding="async" />
 			<p class={styles.copy} aria-hidden="true">
-				<span class={styles.mainLineA}>Donde las ideas</span>
-				<span class={styles.mainLineB}>encuentran su <em>forma.</em></span>
-				<small class={styles.support}>Estrategia, estética y emoción para marcas con identidad.</small>
+				<span class={styles.mainLineA}>Qué hacemos</span>
+				<span class={styles.mainLineB}>
+					Seis disciplinas.<br />Un mismo universo visual.
+				</span>
+				<span class={styles.support}>
+					Todo lo que una marca necesita para comunicar con coherencia.
+				</span>
 			</p>
 		</div>
 	</div>
