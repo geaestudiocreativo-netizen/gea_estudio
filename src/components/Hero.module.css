@@ -6,10 +6,7 @@
 	--ink: #1e2024;
 	--ink-strong: #111216;
 	position: relative;
-	background: transparent;
-	min-height: 100svh;
-	padding: 18px 18px 0;
-	overflow: visible;
+	background: var(--page-bg);
 }
 
 .topbar {
@@ -187,7 +184,7 @@
 
 .hero[data-entrance='prepare'],
 .hero[data-entrance='start'] {
-	background: #ffffff;
+	background: var(--page-bg);
 }
 
 .hero[data-entrance='prepare'] .introRow {
