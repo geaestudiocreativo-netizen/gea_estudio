@@ -7,6 +7,8 @@
 	--ink-strong: #111216;
 	position: relative;
 	background: var(--page-bg);
+	padding: 18px 18px 0;
+	overflow: visible;
 }
 
 .topbar {
