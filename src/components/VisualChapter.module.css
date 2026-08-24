@@ -131,15 +131,14 @@
 }
 
 @media (max-width: 767px) {
-	.wordmarkDock {
-		display: block;
-		position: sticky;
-		top: var(--wordmark-sticky-top, calc(env(safe-area-inset-top) + 74px));
-		height: 0;
-		z-index: 2;
-		overflow: visible;
-		pointer-events: none;
-	}
+.wordmarkDock {
+	display: block;
+	position: relative;
+	height: 0;
+	z-index: 2;
+	overflow: visible;
+	pointer-events: none;
+}
 
 	.chapter {
 		--mobile-chapter-visual-height: clamp(680px, 90vh, 760px);
@@ -147,10 +146,10 @@
 		height: calc(var(--mobile-chapter-visual-height) + 82svh);
 	}
 
-	.stickyStage {
-		width: 100vw;
-		height: var(--mobile-chapter-visual-height);
-	}
+.stickyStage {
+	width: 100vw;
+	height: var(--mobile-chapter-visual-height);
+}
 
 	.frame {
 		clip-path: inset(12% 0 12% 0);
