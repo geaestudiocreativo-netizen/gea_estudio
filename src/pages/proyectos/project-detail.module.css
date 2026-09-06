@@ -20,7 +20,7 @@
 
 .logoMark {
 	margin: 0;
-	font-family: 'Krona One', sans-serif;
+	font-family: 'Panchang', sans-serif;
 	font-size: clamp(56px, 12vw, 132px);
 	font-weight: 400;
 	line-height: 0.92;
@@ -71,19 +71,29 @@
 
 .divider {
 	height: 1px;
-	background: #dbdee3;
+	background: #111111;
 	width: 100vw;
 	margin: 52px calc(50% - 50vw) 44px;
 }
 
 .sectionTabsWrap {
 	position: sticky;
-	top: 0;
+	top: 60px;
 	z-index: 12;
 	width: 100vw;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
 	padding: 10px 0 12px;
+	background: #f8f8f8;
+}
+
+.sectionTabsWrap::before {
+	content: '';
+	position: absolute;
+	top: -4px;
+	left: 0;
+	width: 100%;
+	height: 4px;
 	background: #f8f8f8;
 }
 
@@ -118,7 +128,7 @@
 
 .sectionTitle {
 	margin: 0;
-	font-family: 'Krona One', sans-serif;
+	font-family: 'Panchang', sans-serif;
 	font-size: clamp(30px, 4.2vw, 54px);
 	font-weight: 400;
 	line-height: 1;
@@ -258,7 +268,7 @@
 }
 
 .projectNavTitle {
-	font-family: 'Krona One', sans-serif;
+	font-family: 'Panchang', sans-serif;
 	font-size: clamp(18px, 2.1vw, 26px);
 	font-weight: 400;
 	line-height: 1.2;
@@ -323,7 +333,7 @@
 	}
 
 	.sectionTabsWrap {
-		top: calc(64px + env(safe-area-inset-top));
+		top: 60px;
 		padding-top: 8px;
 		padding-bottom: 10px;
 	}

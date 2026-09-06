@@ -1,7 +1,7 @@
 .pill {
 	appearance: none;
 	border: 1px solid #14171d;
-	border-radius: 999px;
+	border-radius: 0;
 	width: fit-content;
 	flex: 0 0 auto;
 	padding: 7px 16px;

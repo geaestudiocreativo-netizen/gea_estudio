@@ -11,7 +11,7 @@
 
 .title {
 	margin: 0;
-	font-family: 'Krona One', sans-serif;
+	font-family: 'Panchang', sans-serif;
 	font-size: clamp(34px, 5.2vw, 52px);
 	font-weight: 400;
 	line-height: 1;
@@ -32,13 +32,36 @@
 
 .filtersSticky {
 	position: sticky;
-	top: 0;
+	top: 60px;
 	z-index: 8;
 	margin: clamp(54px, 7vw, 78px) auto 0;
 	padding: 12px 0 9px;
-	background: rgba(248, 248, 248, 0.88);
-	backdrop-filter: blur(6px);
-	box-shadow: 0 1px 0 rgba(20, 23, 29, 0.08);
+	background: #f8f8f8;
+
+}
+
+.filtersSticky::after {
+	content: '';
+	position: absolute;
+	bottom: -16px;
+	left: 50%;
+	width: 100vw;
+	height: 17px;
+	background: #f8f8f8;
+	border-bottom: 1px solid #111111;
+	box-sizing: border-box;
+	transform: translateX(-50%);
+}
+
+.filtersSticky::before {
+	content: '';
+	position: absolute;
+	top: -4px;
+	left: 50%;
+	width: 100vw;
+	height: 4px;
+	background: #f8f8f8;
+	transform: translateX(-50%);
 }
 
 .filtersBar {
@@ -73,6 +96,17 @@
 	width: 100%;
 }
 
+@media (min-width: 1024px) {
+	.header {
+		max-width: 1100px;
+	}
+
+	.intro {
+		max-width: none;
+		white-space: nowrap;
+	}
+}
+
 @media (max-width: 1023px) {
 	.grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -88,7 +122,6 @@
 	}
 
 	.filtersSticky {
-		top: 0;
 		padding-top: 9px;
 		padding-bottom: 7px;
 		margin-top: 40px;
