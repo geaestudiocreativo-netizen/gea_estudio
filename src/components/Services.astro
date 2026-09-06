@@ -16,7 +16,7 @@ const serviceBasePath = getLocalizedPath(locale, '/services');
 
 const getServiceNameLines = (serviceTitle: string) => {
 	if (serviceTitle === 'Fotografía & Filmmaking') {
-		return ['FOTOGRAFÍA Y', 'FILMMAKING'];
+		return ['FOTOGRAFÍA', 'Y FILMMAKING'];
 	}
 
 	if (serviceTitle === 'Photography & Filmmaking') {
@@ -476,7 +476,7 @@ const getServiceName = (serviceTitle: string) => {
 		.services-editorial__link {
 			grid-template-columns: 44px minmax(0, 1fr);
 			align-items: flex-start;
-			gap: 4px;
+			gap: 0;
 			width: 100%;
 			max-width: 100%;
 		}
@@ -499,6 +499,7 @@ const getServiceName = (serviceTitle: string) => {
 			max-width: 100%;
 			font-size: clamp(27px, calc(8.8vw - 4px), 70px);
 			line-height: 0.84;
+			letter-spacing: 0;
 			word-break: normal;
 			overflow-wrap: normal;
 			hyphens: manual;
@@ -511,6 +512,10 @@ const getServiceName = (serviceTitle: string) => {
 
 		.services-editorial__name[data-service-name='photography'] {
 			font-size: clamp(25px, calc(8.1vw - 4px), 64px);
+		}
+
+		.services-editorial__name[data-service-name='photography'] .services-editorial__name-line {
+			white-space: nowrap;
 		}
 
 		.services-editorial__name[data-service-name='interior-design'],
@@ -536,7 +541,7 @@ const getServiceName = (serviceTitle: string) => {
 
 		.services-editorial__link {
 			grid-template-columns: 38px minmax(0, 1fr);
-			gap: 4px;
+			gap: 0;
 		}
 
 		.services-editorial__name {

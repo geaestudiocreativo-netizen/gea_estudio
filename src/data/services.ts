@@ -28,7 +28,7 @@ export const services: ServicePageItem[] = [
 		homeDescription: 'Creamos la identidad visual de una marca: estrategia, logotipo, colores, tipografías y sistema gráfico.',
 		homeAlt: 'Editorial branding artwork on a ceramic vase',
 		homeSize: 'imageL',
-		intro: 'Una marca no es solo un logotipo. Es la forma en la que una empresa se presenta, comunica y consigue ser recordada.',
+		intro: 'Una marca no es solo un logotipo.\n\nEs la forma en la que una empresa se presenta, comunica y consigue ser recordada.',
 		heroImage: '/images/services/branding-service.jpg',
 		homeImage: '/images/services/branding-home.jpg',
 		sectionTitle: 'Construimos sistemas visuales completos',

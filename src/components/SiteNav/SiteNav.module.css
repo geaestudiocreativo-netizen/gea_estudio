@@ -226,6 +226,7 @@
 	.inner {
 		padding-left: 24px;
 		padding-right: 24px;
+		align-items: center;
 	}
 
 	.overlayHeader {
@@ -248,7 +249,17 @@
 
 	.logoImage,
 	.overlayLogoImage {
-		width: clamp(32px, 10vw, 44px);
+		width: clamp(36px, 11vw, 48px);
+	}
+
+	.logo,
+	.navControls,
+	.menuButton {
+		align-self: center;
+	}
+
+	.languageOption {
+		line-height: 1;
 	}
 
 	.navControls {

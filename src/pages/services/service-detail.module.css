@@ -140,46 +140,91 @@
 }
 
 .systems {
-	padding: 76px 24px 0;
+	margin-top: 88px;
+	padding: clamp(64px, 8vw, 112px) 24px clamp(72px, 9vw, 128px);
+	background: #f8f8f8;
+	color: #111111;
+}
+
+.systemsEyebrow {
+	max-width: 1120px;
+	margin: 0 auto 32px;
+	font-family: 'Satoshi', sans-serif;
+	font-size: clamp(12px, 0.9vw, 14px);
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: #a0a0a0;
+}
+
+.systemsIntro {
+	max-width: 760px;
+	margin: 0 auto 18px;
+	white-space: pre-line;
+	font-family: 'Satoshi', sans-serif;
+	font-size: clamp(18px, 2.2vw, 30px);
+	font-weight: 400;
+	line-height: 1.2;
+	letter-spacing: 0.01em;
+	color: #1f2126;
 }
 
 .sectionTitle {
-	margin: 0;
-	text-align: center;
+	position: relative;
+	margin: 0 auto;
+	padding-bottom: 22px;
+	max-width: 1120px;
+	text-align: left;
 	font-family: 'Panchang', sans-serif;
-	font-size: 14px;
+	font-size: clamp(17px, 2vw, 28px);
 	font-weight: 500;
-	line-height: 1.05;
-	letter-spacing: 0.055em;
-	color: #23262c;
+	line-height: 1.1;
+	letter-spacing: 0.03em;
+	color: #111111;
+}
+
+.sectionTitle::after {
+	display: none;
 }
 
 .systemsList {
+	counter-reset: system-index;
 	list-style: none;
-	margin: 46px auto 0;
+	margin: 0 auto;
 	padding: 0;
 	max-width: 1120px;
-	border: 1px solid #8b8b8b;
 }
 
 .systemItem {
-	padding: 26px 24px;
-	text-align: center;
+	counter-increment: system-index;
+	display: grid;
+	grid-template-columns: 48px minmax(0, 1fr);
+	align-items: baseline;
+	gap: 24px;
+	padding: 28px 0;
+	text-align: left;
 	font-family: 'Satoshi', sans-serif;
-	font-size: 12px;
+	font-size: clamp(19px, 2.25vw, 32px);
 	font-weight: 400;
-	line-height: 1.2;
-	letter-spacing: 0.07em;
+	line-height: 1.1;
+	letter-spacing: 0.025em;
 	text-transform: uppercase;
-	color: #484b50;
+	color: #111111;
 }
 
-.systemItem + .systemItem {
-	border-top: 1px solid #8b8b8b;
+.systemItem::before {
+	content: '0' counter(system-index);
+	font-family: 'Satoshi', sans-serif;
+	font-size: 11px;
+	font-weight: 400;
+	letter-spacing: 0.12em;
+	color: rgba(17, 17, 17, 0.56);
 }
 
 .universe {
-	padding: 76px 24px 0;
+	padding: 76px 24px 90px;
+	background: #f3f0ee;
 }
 
 .universeTitle {
@@ -254,13 +299,14 @@
 
 .contact {
 	padding: 118px 24px 90px;
+	text-align: center;
 }
 
 .contactTitle {
 	margin: 0;
 	font-family: 'Panchang', sans-serif;
-	font-size: 14px;
-	font-weight: 500;
+	font-size: clamp(24px, 3.8vw, 52px);
+	font-weight: 700;
 	line-height: 1.1;
 	letter-spacing: 0.04em;
 	color: #23262c;
@@ -275,6 +321,8 @@
 	line-height: 1.4;
 	letter-spacing: 0.04em;
 	color: #4b4f55;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .contactButton {
@@ -306,24 +354,27 @@
 	}
 
 	.systems {
+		margin-top: 56px;
 		padding-top: 48px;
 	}
 
 	.sectionTitle {
-		font-size: 14px;
-		letter-spacing: 0.05em;
-		line-height: 1.06;
+		font-size: 17px;
+		letter-spacing: 0.03em;
+		line-height: 1.1;
 	}
 
 	.systemsList {
-		margin-top: 34px;
-		max-width: 380px;
+		margin-top: 0;
+		max-width: 100%;
 	}
 
 	.systemItem {
-		padding: 14px 10px;
-		font-size: 12px;
-		letter-spacing: 0.08em;
+		grid-template-columns: 30px minmax(0, 1fr);
+		gap: 12px;
+		padding: 22px 0;
+		font-size: 16px;
+		letter-spacing: 0.035em;
 	}
 
 	.universe {
@@ -366,7 +417,8 @@
 	}
 
 	.contactTitle {
-		font-size: 14px;
+		font-size: 26px;
+		font-weight: 700;
 		line-height: 1.1;
 		letter-spacing: 0.06em;
 	}

@@ -85,6 +85,40 @@ const cardAriaPrefix = projectDetailContent[locale].projectCardAriaPrefix;
 
 		<h3 class={styles.title}>{title}</h3>
 		<p class={styles.description}>{description}</p>
-		<p class={styles.services}>{serviceLabels.join(' · ')}</p>
+		<p class={styles.services} data-services-list>
+			{serviceLabels.map((service, index) => (
+				<span class={styles.serviceItem} data-service-item>
+					{index > 0 && <span class={styles.serviceSeparator} data-service-separator aria-hidden="true">— </span>}
+					{service}
+				</span>
+			))}
+		</p>
 	</article>
 </a>
+
+<script>
+	const serviceLists = document.querySelectorAll<HTMLElement>('[data-services-list]');
+
+	const updateServiceSeparators = () => {
+		serviceLists.forEach((list) => {
+			const items = Array.from(list.querySelectorAll<HTMLElement>('[data-service-item]'));
+
+			items.forEach((item, index) => {
+				if (index === 0) return;
+
+				const separator = item.querySelector<HTMLElement>('[data-service-separator]');
+				const previousItem = items[index - 1];
+				if (!separator || !previousItem) return;
+
+				if (item.offsetTop > previousItem.offsetTop) {
+					separator.setAttribute('data-hidden', 'true');
+				} else {
+					separator.removeAttribute('data-hidden');
+				}
+			});
+		});
+	};
+
+	updateServiceSeparators();
+	window.addEventListener('resize', updateServiceSeparators);
+</script>

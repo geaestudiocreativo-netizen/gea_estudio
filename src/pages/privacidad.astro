@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Politica de privacidad | Gea Estudio"
+	description="Politica de privacidad de Gea Estudio. Informacion sobre el tratamiento de datos personales cuando contactas por telefono o WhatsApp."
+>
+	<main class="privacy-page">
+		<div class="privacy-page__inner">
+			<p class="privacy-page__eyebrow">GEA ESTUDIO</p>
+			<h1>POLITICA DE PRIVACIDAD</h1>
+
+			<section>
+				<h2>1. Responsable del tratamiento</h2>
+				<p>Gea Estudio es responsable del tratamiento de los datos personales que nos facilites al contactar con nosotros.</p>
+				<p>Para cualquier consulta relacionada con tus datos puedes escribir a <a href="mailto:geaestudiocreativo@gmail.com">geaestudiocreativo@gmail.com</a>.</p>
+			</section>
+
+			<section>
+				<h2>2. Como contactamos</h2>
+				<p>Esta web no incorpora formularios de contacto. Puedes comunicarte con Gea Estudio mediante llamadas telefonicas, WhatsApp o email, cuando eliges utilizar alguno de estos canales.</p>
+			</section>
+
+			<section>
+				<h2>3. Datos que podemos tratar</h2>
+				<p>Podemos tratar los datos que decidas compartir durante la conversacion, como tu nombre, telefono, informacion sobre tu proyecto y cualquier otro dato necesario para responder a tu consulta o preparar un presupuesto.</p>
+			</section>
+
+			<section>
+				<h2>4. Finalidad y base legal</h2>
+				<p>Utilizamos esos datos para atender tu solicitud, mantener la comunicacion contigo y, cuando corresponda, gestionar una relacion profesional o contractual. La base legal es tu consentimiento al iniciar la comunicacion y, cuando proceda, la aplicacion de medidas precontractuales o la ejecucion de un contrato.</p>
+			</section>
+
+			<section>
+				<h2>5. Conservacion</h2>
+				<p>Conservaremos los datos durante el tiempo necesario para atender tu consulta y, posteriormente, durante los plazos exigidos por las obligaciones legales aplicables. No los conservaremos durante mas tiempo del necesario.</p>
+			</section>
+
+			<section>
+				<h2>6. Destinatarios</h2>
+				<p>No cedemos tus datos a terceros salvo que exista una obligacion legal o sea necesario para prestar el servicio solicitado. WhatsApp es un servicio externo y su uso se rige tambien por sus propias condiciones y politica de privacidad.</p>
+			</section>
+
+			<section>
+				<h2>7. Tus derechos</h2>
+				<p>Puedes solicitar el acceso, rectificacion, supresion, limitacion, oposicion o portabilidad de tus datos escribiendo a <a href="mailto:geaestudiocreativo@gmail.com">geaestudiocreativo@gmail.com</a>. Tambien puedes presentar una reclamacion ante la Agencia Espanola de Proteccion de Datos.</p>
+			</section>
+
+			<section>
+				<h2>8. Cookies y analitica</h2>
+				<p>Esta web no utiliza cookies propias, cookies de analitica ni herramientas de seguimiento publicitario.</p>
+			</section>
+
+			<p class="privacy-page__updated">Ultima actualizacion: 6 de septiembre de 2026.</p>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.privacy-page {
+		padding: 180px 24px 120px;
+		background: #f8f8f8;
+		color: #1b1b1b;
+	}
+
+	.privacy-page__inner {
+		width: min(100%, 760px);
+		margin: 0 auto;
+	}
+
+	.privacy-page__eyebrow {
+		margin: 0 0 28px;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 12px;
+		letter-spacing: 0.16em;
+	}
+
+	h1,
+	h2,
+	p {
+		margin: 0;
+	}
+
+	h1 {
+		font-family: 'Panchang', sans-serif;
+		font-size: clamp(30px, 5vw, 64px);
+		font-weight: 400;
+		line-height: 0.95;
+		letter-spacing: 0.01em;
+	}
+
+	section {
+		margin-top: 64px;
+	}
+
+	h2 {
+		font-family: 'Satoshi', sans-serif;
+		font-size: 16px;
+		font-weight: 500;
+		line-height: 1.2;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	section p {
+		margin-top: 16px;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 16px;
+		font-weight: 300;
+		line-height: 1.55;
+	}
+
+	a {
+		color: inherit;
+	}
+
+	.privacy-page__updated {
+		margin-top: 72px;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 13px;
+		font-weight: 300;
+		color: rgba(27, 27, 27, 0.58);
+	}
+
+	@media (max-width: 767px) {
+		.privacy-page {
+			padding: 136px 24px 80px;
+		}
+
+		section {
+			margin-top: 48px;
+		}
+
+		section p {
+			font-size: 15px;
+		}
+	}
+</style>

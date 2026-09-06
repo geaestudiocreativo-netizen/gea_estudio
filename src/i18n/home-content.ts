@@ -75,13 +75,11 @@ export const footerContent = {
 	es: {
 		instagramAria: 'Instagram de Gea Estudio',
 		footerNavAria: 'Enlaces de pie de pagina',
-		contact: 'Contacto',
-		privacy: 'Privacidad'
+		privacy: 'POLITICA DE PRIVACIDAD'
 	},
 	en: {
 		instagramAria: 'Gea Studio Instagram',
 		footerNavAria: 'Footer links',
-		contact: 'Contact',
-		privacy: 'Privacy'
+		privacy: 'PRIVACY POLICY'
 	}
 } as const;

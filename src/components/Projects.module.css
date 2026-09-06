@@ -9,7 +9,7 @@
 
 .layout {
 	--projects-inline-offset: clamp(22px, 4.5vw, 84px);
-	--project-card-width: 273px;
+	--project-card-width: 232px;
 	--project-card-gap: 22px;
 	margin: 0;
 	max-width: none;
@@ -77,7 +77,7 @@
 	justify-self: center;
 	position: relative;
 	left: calc(var(--projects-inline-offset) * -0.5);
-	margin-top: 76px;
+	margin-top: 40px;
 	margin-bottom: 0;
 }
 
@@ -117,7 +117,7 @@
 @media (min-width: 960px) {
 	.layout {
 		--projects-inline-offset: 0px;
-		--project-card-width: 355px;
+		--project-card-width: 302px;
 		grid-template-columns: minmax(0, 35%) minmax(0, 65%);
 		column-gap: 0;
 		padding-left: 0;
@@ -152,7 +152,7 @@
 
 	.layout {
 		--projects-inline-offset: 26px;
-		--project-card-width: 345px;
+		--project-card-width: 293px;
 		padding-left: 26px;
 		padding-right: 0;
 		grid-template-columns: 56px minmax(0, 1fr);
@@ -160,9 +160,10 @@
 	}
 
 	.title {
-		font-size: clamp(31px, 8.8vw, 74px);
+		font-size: clamp(28px, 8vw, 67px);
 		align-self: start;
 		margin-top: 35px;
+		height: calc(var(--project-card-width) * 256 / 224);
 	}
 
 	.track {
@@ -171,13 +172,16 @@
 	}
 
 	.item {
-		width: 345px;
+		width: 293px;
 	}
 
 	.cta {
 		display: block;
-		width: calc(100vw - 48px);
-		max-width: none;
+		width: var(--project-card-width);
+		max-width: var(--project-card-width);
+		justify-self: start;
+		left: 0;
+		margin-left: 56px;
 	}
 
 	.carouselArrow {
@@ -191,7 +195,7 @@
 
 @media (max-width: 420px) {
 	.title {
-		font-size: clamp(28px, calc(7.6vw + 4px), 44px);
+		font-size: clamp(25px, calc(6.9vw + 3.5px), 40px);
 	}
 }
 
@@ -210,6 +214,6 @@
 	}
 
 	.item {
-		width: 345px;
+		width: 293px;
 	}
 }

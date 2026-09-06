@@ -27,7 +27,6 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 	<main class={styles.page}>
 		<section class={`${styles.hero} ${isBrandingExperiment ? styles.brandingHero : ''}`} data-branding-hero={isBrandingExperiment ? 'true' : undefined}>
 			<h1 class={styles.title} data-branding-title>{service.title}</h1>
-			<p class={styles.intro} data-branding-intro>{service.intro}</p>
 		</section>
 
 		<figure class={`${styles.heroImage} ${isBrandingExperiment ? styles.brandingImageStage : ''}`} data-branding-stage={isBrandingExperiment ? 'true' : undefined}>
@@ -44,8 +43,9 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 			</div>
 		</figure>
 
-		<section class={styles.systems} aria-labelledby="service-systems-title">
-			<h2 id="service-systems-title" class={styles.sectionTitle}>{service.sectionTitle}</h2>
+		<section class={styles.systems}>
+			<p class={styles.systemsEyebrow}>QUE INCLUYE</p>
+			<p class={styles.systemsIntro}>{service.intro}</p>
 			<ul class={styles.systemsList} role="list">
 				{
 					service.services.map((item) => (
@@ -96,8 +96,7 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 			const feature = document.querySelector('[data-branding-stage="true"]');
 			const hero = document.querySelector('[data-branding-hero="true"]');
 			const title = document.querySelector('[data-branding-title]');
-			const intro = document.querySelector('[data-branding-intro]');
-			if (!feature || !hero || !title || !intro || window.matchMedia('(max-width: 767px)').matches) {
+			if (!feature || !hero || !title || window.matchMedia('(max-width: 767px)').matches) {
 				return;
 			}
 
@@ -115,15 +114,12 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 				const progress = Math.min(Math.max(rawProgress, 0), 1);
 				const scale = 1 + progress * 0.85;
 				const titleOpacity = 1 - progress * 0.36;
-				const introOpacity = 1 - progress * 0.28;
 				const textShift = progress * 14;
 
 				viewport.style.transform = `scale(${scale})`;
 				viewport.style.transformOrigin = 'center center';
 				title.style.opacity = String(titleOpacity);
 				title.style.transform = `translate3d(0, ${textShift}px, 0)`;
-				intro.style.opacity = String(introOpacity);
-				intro.style.transform = `translate3d(0, ${textShift * 0.7}px, 0)`;
 			};
 
 			let rafId = 0;

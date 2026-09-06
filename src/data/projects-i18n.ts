@@ -16,8 +16,7 @@ const projectDescriptionTranslations: Record<string, string> = {
 	'talleres-alonso': 'A strong identity for a workshop with more than 40 years of history.',
 	g: 'An artisanal pastry brand with editorial sensitivity and contemporary character.',
 	'gea-artesania': 'Handcrafted jewelry with design-led pieces made in polymer clay.',
-	foc: 'Signature paellas reshaping how traditional Valencian cuisine is perceived.',
-	margen: 'Clay through the lens of an authentic brand.'
+	foc: 'Signature paellas reshaping how traditional Valencian cuisine is perceived.'
 };
 
 export const localizeServiceType = (serviceType: string, locale: Locale): string => {

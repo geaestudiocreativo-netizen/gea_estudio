@@ -58,7 +58,10 @@ const projectsHref = getLocalizedPath(locale, '/proyectos');
 	carouselDirections.forEach((button) => {
 		button.addEventListener('click', () => {
 			const direction = button.dataset.carouselDirection === 'previous' ? -1 : 1;
-			projectCarousel?.scrollBy({ left: direction * 377, behavior: 'smooth' });
+			const firstCard = projectCarousel?.querySelector<HTMLElement>('li');
+			const gap = firstCard ? parseFloat(getComputedStyle(firstCard.parentElement as HTMLElement).gap) || 0 : 0;
+			const scrollDistance = (firstCard?.getBoundingClientRect().width ?? 0) + gap;
+			projectCarousel?.scrollBy({ left: direction * scrollDistance, behavior: 'smooth' });
 		});
 	});
 </script>

@@ -24,6 +24,7 @@
 
 .projectGrid {
 	width: 100%;
+	grid-template-columns: minmax(0, 1fr);
 }
 
 .number {
@@ -92,6 +93,20 @@
 	color: #747070;
 }
 
+.serviceItem {
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.serviceSeparator {
+	white-space: pre;
+	margin-left: 0.25em;
+}
+
+.serviceSeparator[data-hidden='true'] {
+	display: none;
+}
+
 @media (hover: hover) and (pointer: fine) {
 	.project:hover .image {
 		transform: scale(1.03);
@@ -142,13 +157,18 @@
 
 	.compactMobile .description {
 		margin-top: 4px;
-		font-size: 0.9rem;
+		font-size: 10px;
+		font-weight: 300;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.compactMobile .services {
 		margin-top: 4px;
 		font-size: 0.76rem;
 		opacity: 0.82;
-		white-space: nowrap;
+		white-space: normal;
+		overflow-wrap: anywhere;
 	}
 }

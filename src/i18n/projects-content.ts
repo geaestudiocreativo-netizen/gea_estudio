@@ -3,7 +3,7 @@ import type { Locale } from './site';
 export const projectsPageContent = {
 	es: {
 		title: 'PROYECTOS',
-		intro: 'Así es como construimos universos visuales para marcas.',
+		intro: 'Así como construimos universos visuales para marcas.',
 		filterAria: 'Filtrar proyectos por servicio',
 		allFilter: 'Todos',
 		listAria: 'Listado de proyectos'

@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SiteNav from '../components/SiteNav/SiteNav.astro';
+import Footer from '../components/Footer/Footer.astro';
 import { getLocaleFromPath } from '../i18n/site';
 
 interface Props {
@@ -35,6 +36,7 @@ const locale = getLocaleFromPath(pathname);
 	<body>
 		<SiteNav locale={locale} pathname={pathname} />
 		<slot />
+		<Footer locale={locale} />
 	</body>
 </html>
 

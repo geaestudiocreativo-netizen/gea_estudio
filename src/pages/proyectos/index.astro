@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ProjectCard from '../../components/ProjectCard/ProjectCard.astro';
-import Footer from '../../components/Footer/Footer.astro';
 import ServicePill from '../../components/ServicePill/ServicePill.astro';
 import { projects } from '../../data/projects';
 import type { ServiceName } from '../../data/projects/types';
@@ -34,7 +33,7 @@ const normalizeService = (value: string) =>
 	<main class={styles.page}>
 		<header class={styles.header}>
 			<h1 class={styles.title}>PROYECTOS</h1>
-			<p class={styles.intro}>Así es como construimos universos visuales para marcas.</p>
+			<p class={styles.intro}>Así como construimos universos visuales para marcas.</p>
 		</header>
 
 		<div class={styles.filtersSticky}>
@@ -68,7 +67,6 @@ const normalizeService = (value: string) =>
 			}
 		</ul>
 	</main>
-	<Footer locale="es" />
 	<script>
 		const filterButtons = Array.from(
 			document.querySelectorAll('[data-filter-bar] [data-service]')
