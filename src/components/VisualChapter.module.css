@@ -152,6 +152,10 @@
 	margin: 0 18px;
 }
 
+	.image {
+		object-position: left center;
+	}
+
 	.copy {
 		gap: 0.24em;
 		padding-inline: 20px;

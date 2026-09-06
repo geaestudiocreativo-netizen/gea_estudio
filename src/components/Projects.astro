@@ -20,7 +20,7 @@ const projectsHref = getLocalizedPath(locale, '/proyectos');
 	<div class={styles.layout}>
 		<h2 id="projects-title" class={styles.title}>{content.title}</h2>
 
-		<div class={styles.carousel} aria-label={content.carouselLabel} tabindex="0">
+			<div class={styles.carousel} aria-label={content.carouselLabel} tabindex="0" data-project-carousel>
 			<ul class={styles.track} role="list">
 				{
 					projects.map((project) => (
@@ -32,6 +32,33 @@ const projectsHref = getLocalizedPath(locale, '/proyectos');
 			</ul>
 		</div>
 
-		<PrimaryButton href={projectsHref} label={content.cta} ariaLabel={content.ctaAria} variant="outline" className={styles.cta} />
+		<div class={styles.cta}>
+			<button class={styles.carouselArrow} type="button" aria-label={locale === 'en' ? 'Previous projects' : 'Proyectos anteriores'} data-carousel-direction="previous">
+				<span aria-hidden="true">←</span>
+			</button>
+			<PrimaryButton
+				href={projectsHref}
+				label={content.cta}
+				desktopLabel={locale === 'en' ? 'VIEW ALL' : 'VER TODOS'}
+				ariaLabel={content.ctaAria}
+				variant="outline"
+				className={styles.ctaButton}
+			/>
+			<button class={styles.carouselArrow} type="button" aria-label={locale === 'en' ? 'Next projects' : 'Siguientes proyectos'} data-carousel-direction="next">
+				<span aria-hidden="true">→</span>
+			</button>
+		</div>
 	</div>
 </section>
+
+<script>
+	const projectCarousel = document.querySelector('[data-project-carousel]');
+	const carouselDirections = document.querySelectorAll<HTMLButtonElement>('[data-carousel-direction]');
+
+	carouselDirections.forEach((button) => {
+		button.addEventListener('click', () => {
+			const direction = button.dataset.carouselDirection === 'previous' ? -1 : 1;
+			projectCarousel?.scrollBy({ left: direction * 377, behavior: 'smooth' });
+		});
+	});
+</script>

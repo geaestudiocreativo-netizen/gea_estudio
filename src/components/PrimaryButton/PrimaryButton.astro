@@ -8,14 +8,24 @@ interface Props {
 	className?: string;
 	mobileFull?: boolean;
 	variant?: 'default' | 'outline';
+	desktopLabel?: string;
 }
 
-const { href, label, ariaLabel, className = '', mobileFull = true, variant = 'default' } = Astro.props as Props;
+const {
+	href,
+	label,
+	ariaLabel,
+	className = '',
+	mobileFull = true,
+	variant = 'default',
+	desktopLabel
+} = Astro.props as Props;
 const mobileWidthClass = mobileFull ? styles.mobileFull : '';
 const variantClass = variant === 'outline' ? styles.outline : '';
 const composedClass = [styles.button, variantClass, mobileWidthClass, className].filter(Boolean).join(' ');
 ---
 
 <a class={composedClass} href={href} aria-label={ariaLabel ?? label}>
-	{label}
+	<span class={desktopLabel ? styles.mobileLabel : ''}>{label}</span>
+	{desktopLabel && <span class={styles.desktopLabel}>{desktopLabel}</span>}
 </a>

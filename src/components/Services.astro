@@ -291,7 +291,7 @@ const getServiceName = (serviceTitle: string) => {
 		opacity: 1;
 		visibility: visible;
 		max-height: 5em;
-		margin-top: 10px;
+		margin-top: 12px;
 	}
 
 	.services-editorial__name-line {
@@ -317,6 +317,14 @@ const getServiceName = (serviceTitle: string) => {
 	}
 
 	@media (min-width: 901px) {
+		.services-editorial__subtitle {
+			font-size: clamp(28px, calc(2.25vw + 4px), 46px);
+		}
+
+		.services-editorial__description {
+			font-size: 19px;
+		}
+
 		.services-editorial::after {
 			content: '';
 			position: absolute;

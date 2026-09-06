@@ -43,6 +43,10 @@
 	outline-offset: 3px;
 }
 
+.desktopLabel {
+	display: none;
+}
+
 @media (max-width: 767px) {
 	.mobileFull {
 		width: 100%;
@@ -52,5 +56,13 @@
 @media (min-width: 768px) {
 	.desktopFull {
 		width: 100%;
+	}
+
+	.mobileLabel {
+		display: none;
+	}
+
+	.desktopLabel {
+		display: inline;
 	}
 }

@@ -13,31 +13,33 @@ const content = footerContent[locale];
 
 <footer class={styles.footer}>
 	<div class={styles.inner}>
-		<a
-			class={styles.instagram}
-			href="https://www.instagram.com/geaestudio__/"
-			target="_blank"
-			rel="noreferrer"
-			aria-label={content.instagramAria}
-		>
-			<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-				<rect x="2.25" y="2.25" width="19.5" height="19.5" rx="6" stroke="currentColor" stroke-width="2.5"></rect>
-				<circle cx="12" cy="12" r="4.6" stroke="currentColor" stroke-width="2.5"></circle>
-				<circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"></circle>
-			</svg>
-			<span>geaestudio__</span>
-		</a>
+		<div class={styles.details}>
+			<a
+				class={styles.instagram}
+				href="https://www.instagram.com/gea.estudio__"
+				target="_blank"
+				rel="noreferrer"
+				aria-label={content.instagramAria}
+			>
+				<svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<rect x="2.25" y="2.25" width="19.5" height="19.5" rx="6" stroke="currentColor" stroke-width="1.6"></rect>
+					<circle cx="12" cy="12" r="4.6" stroke="currentColor" stroke-width="1.6"></circle>
+					<circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"></circle>
+				</svg>
+				<span>gea.estudio__</span>
+			</a>
 
-		<a class={styles.email} href="mailto:hola@geaestudiocreativo.com">hola@geaestudiocreativo.com</a>
+			<a class={styles.email} href="mailto:geaestudiocreativo@gmail.com">geaestudiocreativo@gmail.com</a>
+
+			<nav class={styles.links} aria-label={content.footerNavAria}>
+				<a href={getLocalizedPath(locale, '/#contact')}>{content.contact}</a>
+				<a href={getLocalizedPath(locale, '/privacidad')}>{content.privacy}</a>
+			</nav>
+		</div>
 
 		<p class={styles.wordmark} aria-hidden="true">
 			<img src="/images/Logotype.svg" alt="" loading="lazy" decoding="async" />
 		</p>
 
-		<nav class={styles.links} aria-label={content.footerNavAria}>
-			<a href={getLocalizedPath(locale, '/#contact')}>{content.contact}</a>
-			<a href={getLocalizedPath(locale, '/privacidad')}>{content.privacy}</a>
-			<a href={getLocalizedPath(locale, '/cookies')}>{content.cookies}</a>
-		</nav>
 	</div>
 </footer>

@@ -211,8 +211,15 @@
 	font-weight: 500;
 	line-height: 1;
 	letter-spacing: 0.02em;
-	color: #1b1b1b;
+	color: rgba(27, 27, 27, 0.52);
 	text-decoration: none;
+}
+
+@media (min-width: 901px) {
+	.desktopLink,
+	.languageOption {
+		font-weight: 300;
+	}
 }
 
 @media (max-width: 900px) {

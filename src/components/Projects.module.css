@@ -69,6 +69,11 @@
 
 .cta {
 	grid-column: 1 / -1;
+	display: grid;
+	grid-template-columns: 1fr 7fr 1fr;
+	align-items: start;
+	gap: calc(var(--project-card-width) * 0.025);
+	height: 52px;
 	justify-self: center;
 	position: relative;
 	left: calc(var(--projects-inline-offset) * -0.5);
@@ -76,9 +81,43 @@
 	margin-bottom: 0;
 }
 
+.ctaButton {
+	width: 100% !important;
+	height: 52px;
+	padding-inline: 0;
+}
+
+.carouselArrow {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 52px;
+	padding: 0;
+	border: 1px solid #111111;
+	border-radius: 1px;
+	background: transparent;
+	color: #111111;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 22px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.carouselArrow:hover {
+	background: #111111;
+	color: #f3f0ee;
+}
+
+.ctaButton:hover {
+	background: #111111;
+	color: #f3f0ee;
+}
+
 @media (min-width: 960px) {
 	.layout {
 		--projects-inline-offset: 0px;
+		--project-card-width: 355px;
 		grid-template-columns: minmax(0, 35%) minmax(0, 65%);
 		column-gap: 0;
 		padding-left: 0;
@@ -93,18 +132,16 @@
 		grid-column: 2;
 		justify-self: start;
 		width: var(--project-card-width) !important;
-		margin-left: calc(2 * (var(--project-card-width) + var(--project-card-gap)));
+		margin-left: 0;
 		left: 0;
+	}
+
+	.ctaButton {
+		width: 100% !important;
 	}
 
 	.carousel {
 		margin-left: 0;
-	}
-}
-
-@media (hover: hover) and (pointer: fine) {
-	.cta:hover {
-		background: #252525;
 	}
 }
 
@@ -115,10 +152,11 @@
 
 	.layout {
 		--projects-inline-offset: 26px;
+		--project-card-width: 345px;
 		padding-left: 26px;
 		padding-right: 0;
 		grid-template-columns: 56px minmax(0, 1fr);
-		column-gap: 8px;
+		column-gap: 0;
 	}
 
 	.title {
@@ -133,11 +171,21 @@
 	}
 
 	.item {
-		width: 273px;
+		width: 345px;
 	}
 
 	.cta {
-		max-width: 340px;
+		display: block;
+		width: calc(100vw - 48px);
+		max-width: none;
+	}
+
+	.carouselArrow {
+		display: none;
+	}
+
+	.ctaButton {
+		width: 100% !important;
 	}
 }
 
@@ -149,7 +197,7 @@
 
 @media (max-width: 767px) {
 	.layout {
-		column-gap: 4px;
+		column-gap: 0;
 	}
 
 	.track {
@@ -158,11 +206,10 @@
 
 	.carousel {
 		scroll-snap-type: x mandatory;
-		margin-left: -16px;
+		margin-left: 0;
 	}
 
 	.item {
-		/* Keeps a right-side next-card preview while preserving card dimensions. */
-		width: 273px;
+		width: 345px;
 	}
 }
