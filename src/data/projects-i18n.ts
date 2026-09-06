@@ -8,7 +8,7 @@ const serviceTypeTranslations: Record<ServiceName, string> = {
 	Fotografía: 'Photography',
 	'Redes Sociales': 'Social Media',
 	Papelería: 'Editorial',
-	Cinematografía: 'Cinematography',
+	Filmmaking: 'Filmmaking',
 	Decoración: 'Interior Design'
 };
 

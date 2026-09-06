@@ -246,8 +246,9 @@
 
 .servicesCta {
 	margin: 62px auto 0;
-	border: 2px solid #1c1c1c;
-	border-radius: 12px;
+	border: 1px solid #111111;
+	border-radius: 1px;
+	background: #f3f0ee;
 	color: #1b1b1b;
 }
 
@@ -279,9 +280,6 @@
 .contactButton {
 	max-width: 1120px;
 	margin-top: 44px;
-	border-radius: 12px;
-	background: #111111;
-	color: #efefef;
 }
 
 @media (max-width: 767px) {
@@ -383,6 +381,5 @@
 
 	.contactButton {
 		margin-top: 24px;
-		border-radius: 10px;
 	}
 }

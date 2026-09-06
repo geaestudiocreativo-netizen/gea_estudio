@@ -4,7 +4,7 @@ export type ServiceName =
 	| 'Fotografía'
 	| 'Redes Sociales'
 	| 'Papelería'
-	| 'Cinematografía'
+	| 'Filmmaking'
 	| 'Decoración';
 
 export type BrandingLayout = 'branding-a' | 'branding-b' | 'branding-c';

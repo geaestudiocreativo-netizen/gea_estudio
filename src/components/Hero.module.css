@@ -281,7 +281,7 @@
 	opacity: 1;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
 	.hero {
 		min-height: 100svh;
 	}
@@ -291,7 +291,7 @@
 		margin-left: 0;
 		margin-right: auto;
 		display: grid;
-		grid-template-columns: minmax(0, 980px) minmax(420px, 1fr);
+		grid-template-columns: minmax(0, 576px) minmax(0, 1fr) minmax(300px, 338px);
 		column-gap: clamp(34px, 3.6vw, 72px);
 		align-items: start;
 		justify-content: start;
@@ -304,10 +304,13 @@
 		width: min(100%, 980px);
 		grid-template-columns: minmax(0, 1fr) minmax(300px, 33.5%, 338px);
 		gap: clamp(14px, 2vw, 26px);
+		display: contents;
 	}
 
 	.primaryImage {
-		max-width: 640px;
+		max-width: 576px;
+		grid-column: 1;
+		grid-row: 1;
 		justify-self: start;
 		width: 100%;
 		height: auto;
@@ -317,6 +320,8 @@
 
 	.secondaryImage {
 		max-width: 338px;
+		grid-column: 3;
+		grid-row: 1;
 		justify-self: start;
 		height: auto;
 		width: 100%;
@@ -325,6 +330,8 @@
 	}
 
 	.copy {
+		grid-column: 2;
+		grid-row: 1;
 		margin-top: clamp(50px, 8vh, 92px);
 		padding-left: clamp(8px, 1vw, 20px);
 		max-width: min(100%, 640px);
@@ -352,7 +359,7 @@
 
 	.wordmark {
 		--wordmark-transform: translate(10%, -36%);
-		--wordmark-transform-final: translate(10%, -36%);
+		--wordmark-transform-final: translate(calc(10% - 180px), calc(-36% - 25px));
 		--wordmark-transform-start: translate(-47%, -216%);
 		display: block;
 		width: clamp(593px, 50vw, 842px);
@@ -382,6 +389,21 @@
 
 	.eyebrow {
 		font-size: 12px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	.wordmark {
+		--wordmark-transform-final: none;
+		--wordmark-transform-start: translateY(-435%);
+		left: 0;
+		width: 100%;
+		max-width: 100%;
+		transform: none;
+	}
+
+	.hero[data-entrance='done'] .wordmark {
+		transform: none;
 	}
 }
 

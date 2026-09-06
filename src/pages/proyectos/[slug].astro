@@ -45,7 +45,7 @@ const isPhotographySection = (name: string) => {
 		.replace(/[\u0300-\u036f]/g, '')
 		.toLowerCase();
 
-	return normalized === 'fotografia' || normalized === 'cinematografia';
+	return normalized === 'fotografia' || normalized === 'filmmaking';
 };
 
 const sections = project.services.map((service) => ({

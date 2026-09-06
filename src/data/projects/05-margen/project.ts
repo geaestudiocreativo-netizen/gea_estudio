@@ -11,7 +11,7 @@ const project: ProjectFolderMetadata = {
 	subtitle: 'Narrativa visual para un proyecto cerámico de autor con tono escultórico.',
 	services: [
 		{ type: 'Redes Sociales', gallery: 'stack' },
-		{ type: 'Cinematografía', gallery: 'stack' }
+		{ type: 'Filmmaking', gallery: 'stack' }
 	],
 	gallery: {
 		layouts: ['editorial', 'gallery', 'hero']

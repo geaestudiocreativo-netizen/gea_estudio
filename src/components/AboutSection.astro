@@ -1,5 +1,6 @@
 ---
 import projectStyles from './Projects.module.css';
+import buttonStyles from './PrimaryButton/PrimaryButton.module.css';
 import PrimaryButton from './PrimaryButton/PrimaryButton.astro';
 import ResponsiveImage from './ResponsiveImage.astro';
 import { aboutSectionContent } from '../i18n/home-content';
@@ -11,15 +12,43 @@ interface Props {
 
 const { locale = 'es' } = Astro.props as Props;
 const content = aboutSectionContent[locale];
+
+const segmentStarts =
+	locale === 'es'
+		? [
+				'Soy Ángela Contreras,',
+				'ingeniera de formación y directora creativa de Gea.',
+				'Tras varios años trabajando en tecnología,',
+				'encontré en el diseño mi verdadera forma de crear.',
+				'Hoy ayudo a marcas y emprendedores a construir una identidad coherente a través del branding, el diseño web, la fotografía y la dirección creativa.',
+				
+			]
+		: [
+				'I am Angela Contreras,',
+				'an engineer by training and the creative director of Gea.',
+				'After several years in technology,',
+				'I found in design my truest way of creating.',
+				'Today I help brands and founders build coherent identities through branding, web design, photography and creative direction.',
+				
+			];
+
+const aboutSegments = segmentStarts.map((start, index) => {
+	const startIndex = content.text.indexOf(start);
+	const nextStart = segmentStarts[index + 1];
+	const endIndex = nextStart ? content.text.indexOf(nextStart, startIndex) : content.text.length;
+
+	return content.text.slice(startIndex, endIndex).trim();
+});
+
 ---
 
-<section id="about" class="w-full -mt-[32px] bg-[#f8f8f8] px-[24px] pt-[96px] pb-[96px] md:-mt-[32px] md:px-[32px] md:pt-[120px] md:pb-[112px] lg:-mt-[40px] lg:px-[68px] lg:pt-[136px] lg:pb-[128px]" aria-labelledby="about-title">
-	<div class="mx-auto w-full max-w-[1120px]">
-		<div class="relative overflow-hidden">
+<section id="about" class="w-full -mt-[32px] bg-[#f8f8f8] px-[24px] pt-[96px] pb-[96px] md:-mt-[32px] md:px-[32px] md:pt-[120px] md:pb-[112px] lg:-mt-[40px] lg:px-[68px] lg:pt-[184px] lg:pb-[128px]" aria-labelledby="about-title">
+	<div class="mx-auto w-full max-w-[1120px] lg:grid lg:grid-cols-[220px_minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-x-[64px]">
+		<div class="relative overflow-hidden lg:contents">
 			<ResponsiveImage
 				src="/images/about/about_image.png"
 				alt="Creative director reviewing editorial color and print material"
-				class="block w-full object-cover aspect-[704/860]"
+				class="block w-full object-cover aspect-[704/860] lg:h-full lg:aspect-auto"
 				loading="lazy"
 				decoding="async"
 				sizes="(max-width: 1120px) 100vw, 1120px"
@@ -27,19 +56,116 @@ const content = aboutSectionContent[locale];
 			/>
 			<h2
 				id="about-title"
-				class="absolute right-[24px] top-[9%] m-0 font-['Krona_One'] text-[24px] font-normal uppercase leading-none tracking-[0.1em] text-[#0f1115] md:right-[34px] md:text-[33px] lg:right-[42px] lg:text-[52px]"
+				class="about-title m-0 font-['Panchang'] text-[24px] font-normal uppercase leading-none tracking-[0.1em] text-[#0f1115] md:text-[33px] lg:text-[52px]"
 			>
-				<a href={getLocalizedPath(locale, '/#about')} aria-label={content.titleAria} style="color: inherit; text-decoration: none;">{content.title}</a>
+				<a href={getLocalizedPath(locale, '/#about')} aria-label={content.titleAria} style="color: inherit; text-decoration: none;"><span>Sobre</span> <span>Gea</span></a>
 			</h2>
 		</div>
 
-		<p class="mt-[32px] max-w-[66ch] font-['Satoshi'] text-[18px] leading-[1.42] tracking-[0.02em] text-[#2a2d32] md:mt-[40px] md:text-[19px] lg:text-[21px]">
-			{content.text}
-		</p>
+		<div class="about-side lg:flex lg:min-h-full lg:flex-col lg:justify-between">
+			<div class="about-copy mt-[32px] md:mt-[40px] lg:mt-0">
+				<p class="about-copy__label">{aboutSegments[0]} {aboutSegments[1]}</p>
+				<p class="about-copy__transition">{aboutSegments[2]} {aboutSegments[3]}</p>
+				<p class="about-copy__body">{aboutSegments[4]}</p>
+			</div>
 
-		<div id="contact" class="mt-[48px] flex flex-col items-center text-center">
-			<h3 class="m-0 font-['Satoshi'] text-[18px] font-medium tracking-[0.02em] text-[#2a2d32] md:text-[19px] lg:text-[21px]">{content.contactTitle}</h3>
-			<PrimaryButton href={getLocalizedPath(locale, '/#contact')} label={content.contactButton} ariaLabel={content.contactButtonAria} className={`${projectStyles.cta} !mt-[16px]`} />
+			<div id="contact" class="mt-[48px] flex flex-col items-center text-center lg:mt-auto lg:items-start lg:text-left">
+				<h3 class="m-0 font-['Satoshi'] text-[18px] font-normal tracking-[0.02em] text-[#2a2d32] md:text-[19px] lg:text-[21px]">{content.contactTitle}</h3>
+				<PrimaryButton href={getLocalizedPath(locale, '/#contact')} label={content.contactButton} ariaLabel={content.contactButtonAria} variant="outline" className={`${projectStyles.cta} ${buttonStyles.desktopFull} !mt-[16px]`} />
+			</div>
 		</div>
 	</div>
 </section>
+
+<style>
+	.about-copy {
+		color: #2a2d32;
+	}
+
+	.about-title {
+		position: absolute;
+		top: 9%;
+		right: 24px;
+	}
+
+	.about-copy p {
+		margin: 0;
+	}
+
+	.about-copy__label {
+		font-family: 'Satoshi', sans-serif;
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 1.2;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+	}
+
+	.about-copy__transition {
+		max-width: none;
+		margin-top: clamp(42px, 5vw, 72px) !important;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 1.35;
+		letter-spacing: 0.01em;
+	}
+
+	.about-copy__body {
+		max-width: none;
+		margin-top: clamp(48px, 6vw, 88px) !important;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 1.35;
+		letter-spacing: 0.01em;
+	}
+
+	@media (min-width: 1024px) {
+		.about-title {
+			position: static;
+			grid-column: 1;
+			grid-row: 1;
+			align-self: start;
+			justify-self: stretch;
+			width: 100%;
+			margin: 0;
+			text-align: right;
+		}
+
+		.about-title span {
+			display: block;
+		}
+
+		.about-copy {
+			max-width: 440px;
+		}
+
+		.about-side {
+			justify-content: flex-start;
+		}
+
+		.about-copy__transition {
+			margin-top: 24px !important;
+		}
+
+		.about-copy__body {
+			margin-top: 32px !important;
+		}
+
+		#contact {
+			margin-top: 32px !important;
+		}
+	}
+
+	@media (max-width: 639px) {
+		.about-copy__transition {
+			margin-top: 24px !important;
+		}
+
+		.about-copy__body {
+			margin-top: 24px !important;
+		}
+
+	}
+</style>

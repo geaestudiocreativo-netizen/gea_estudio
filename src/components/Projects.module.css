@@ -1,10 +1,16 @@
+@import url('https://api.fontshare.com/v2/css?f[]=panchang@400,600,700,800,900&display=swap');
+
 .projects {
+	position: relative;
+	z-index: 2;
 	background: #f8f8f8;
-	padding: clamp(144px, 16vw, 192px) 0 112px;
+	padding: clamp(144px, 16vw, 192px) 0;
 }
 
 .layout {
 	--projects-inline-offset: clamp(22px, 4.5vw, 84px);
+	--project-card-width: 273px;
+	--project-card-gap: 22px;
 	margin: 0;
 	max-width: none;
 	padding-left: var(--projects-inline-offset);
@@ -17,15 +23,16 @@
 
 .title {
 	margin: 0;
-	font-family: 'Krona One', sans-serif;
-	font-size: clamp(46px, 5vw, 64px);
-	font-weight: 400;
-	line-height: 0.9;
-	letter-spacing: 0.09em;
+	font-family: 'Panchang', sans-serif;
+	font-size: 44px;
+	font-weight: 600;
+	line-height: 0.74;
+	letter-spacing: 0.01em;
 	color: #14171d;
 	writing-mode: vertical-rl;
 	transform: rotate(180deg);
-	align-self: center;
+	align-self: start;
+	margin-top: 31px;
 }
 
 .carousel {
@@ -50,12 +57,12 @@
 	margin: 0;
 	padding: 0;
 	display: flex;
-	gap: 22px;
+	gap: var(--project-card-gap);
 }
 
 .item {
 	flex: 0 0 auto;
-	width: 248px;
+	width: var(--project-card-width);
 	scroll-snap-align: start;
 	scroll-snap-stop: always;
 }
@@ -66,29 +73,44 @@
 	position: relative;
 	left: calc(var(--projects-inline-offset) * -0.5);
 	margin-top: 76px;
-	border: 0;
-	border-radius: 9999px;
-	background: #111111;
-	color: #ffffff;
-	cursor: pointer;
-	transition: background-color 200ms ease, transform 200ms ease;
+	margin-bottom: 0;
 }
 
-.cta:focus-visible {
-	outline: 2px solid #1e1e1e;
-	outline-offset: 3px;
+@media (min-width: 960px) {
+	.layout {
+		--projects-inline-offset: 0px;
+		grid-template-columns: minmax(0, 35%) minmax(0, 65%);
+		column-gap: 0;
+		padding-left: 0;
+	}
+
+	.title {
+		justify-self: end;
+		margin-right: 24px;
+	}
+
+	.cta {
+		grid-column: 2;
+		justify-self: start;
+		width: var(--project-card-width) !important;
+		margin-left: calc(2 * (var(--project-card-width) + var(--project-card-gap)));
+		left: 0;
+	}
+
+	.carousel {
+		margin-left: 0;
+	}
 }
 
 @media (hover: hover) and (pointer: fine) {
 	.cta:hover {
-		background: #222222;
-		transform: translateY(-2px);
+		background: #252525;
 	}
 }
 
 @media (max-width: 959px) {
 	.projects {
-		padding: 112px 0 104px;
+		padding: 112px 0;
 	}
 
 	.layout {
@@ -100,10 +122,9 @@
 	}
 
 	.title {
-		font-size: 24px;
-		letter-spacing: 0.11em;
+		font-size: clamp(31px, 8.8vw, 74px);
 		align-self: start;
-		margin-top: 68px;
+		margin-top: 35px;
 	}
 
 	.track {
@@ -112,7 +133,7 @@
 	}
 
 	.item {
-		width: 248px;
+		width: 273px;
 	}
 
 	.cta {
@@ -120,14 +141,28 @@
 	}
 }
 
+@media (max-width: 420px) {
+	.title {
+		font-size: clamp(28px, calc(7.6vw + 4px), 44px);
+	}
+}
+
 @media (max-width: 767px) {
+	.layout {
+		column-gap: 4px;
+	}
+
+	.track {
+		gap: 12px;
+	}
+
 	.carousel {
 		scroll-snap-type: x mandatory;
-		margin-left: -4px;
+		margin-left: -16px;
 	}
 
 	.item {
 		/* Keeps a right-side next-card preview while preserving card dimensions. */
-		width: 248px;
+		width: 273px;
 	}
 }

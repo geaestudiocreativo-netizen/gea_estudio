@@ -1,25 +1,56 @@
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@500&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500&display=swap');
 
 .button {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	width: 240px;
-	height: 48px;
-	padding-inline: 30px;
+	height: 52px;
+	padding-inline: 34px;
 	box-sizing: border-box;
+	border: 1px solid #111111;
+	border-radius: 1px;
+	background: #111111;
+	color: #f3f0ee;
 	text-align: center;
 	text-decoration: none;
 	font-family: 'Satoshi', sans-serif;
-	font-size: 14px;
-	font-weight: 500;
+	font-size: 13px;
+	font-weight: 400;
 	line-height: 1;
-	letter-spacing: 0.02em;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
 	white-space: nowrap;
+	transition: background-color 180ms ease, color 180ms ease;
+}
+
+.button:hover {
+	background: #252525;
+}
+
+.outline {
+	background: transparent;
+	color: #111111;
+}
+
+.outline:hover {
+	background: #111111;
+	color: #f3f0ee;
+}
+
+.button:focus-visible {
+	outline: 1px solid #111111;
+	outline-offset: 3px;
 }
 
 @media (max-width: 767px) {
 	.mobileFull {
+		width: 100%;
+	}
+}
+
+@media (min-width: 768px) {
+	.desktopFull {
 		width: 100%;
 	}
 }

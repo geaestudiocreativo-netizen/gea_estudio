@@ -1,0 +1,112 @@
+---
+import { services } from '../data/services';
+import { servicesEn } from '../data/services-en';
+import type { Locale } from '../i18n/site';
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props as Props;
+const serviceTitles = (locale === 'en' ? servicesEn : services).map((service) => service.homeTitle);
+const marqueeItems = ['Gea Estudio — Estudio Creativo', ...serviceTitles];
+const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
+---
+
+<div class="serviceMarquee" aria-label={marqueeItems.join(' · ')}>
+	<div class="serviceMarquee__track">
+		<div class="serviceMarquee__group" aria-hidden="true">
+			{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
+		</div>
+		<div class="serviceMarquee__group" aria-hidden="true">
+			{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
+		</div>
+	</div>
+</div>
+
+<style>
+	.serviceMarquee {
+		position: relative;
+		z-index: 4;
+		width: 100vw;
+		height: clamp(39px, 10.5vw, 56px);
+		margin-left: calc(50% - 50vw);
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+		background: #000;
+	}
+
+	.serviceMarquee__track,
+	.serviceMarquee__group {
+		display: flex;
+		align-items: center;
+	}
+
+	.serviceMarquee__track {
+		height: 100%;
+		width: max-content;
+		animation: serviceMarqueeScroll 26s linear infinite;
+	}
+
+	.serviceMarquee__group {
+		gap: 48px;
+		padding-right: 48px;
+		white-space: nowrap;
+	}
+
+	.serviceMarquee__item {
+		color: #f8f8f8;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		letter-spacing: 0.04em;
+		line-height: 1;
+		text-transform: none;
+	}
+
+	.serviceMarquee__item--panchang {
+		font-family: 'Panchang', sans-serif;
+		font-size: 16px;
+		letter-spacing: 0.08em;
+	}
+
+	.serviceMarquee__item--light {
+		font-weight: 400;
+		letter-spacing: 0.1em;
+	opacity: 0.82;
+	}
+
+	.serviceMarquee__item--uppercase {
+		text-transform: uppercase;
+	}
+
+	.serviceMarquee__item--lowercase {
+		text-transform: lowercase;
+	}
+
+	@media (min-width: 1024px) {
+		.serviceMarquee {
+			height: clamp(58px, 6.5vw, 96px);
+		}
+
+		.serviceMarquee__track {
+			animation: serviceMarqueeScroll 32s linear infinite;
+		}
+	}
+
+	@keyframes serviceMarqueeScroll {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.serviceMarquee__track {
+			animation: none;
+		}
+	}
+</style>

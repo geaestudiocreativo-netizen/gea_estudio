@@ -56,8 +56,8 @@ export const services: ServicePageItem[] = [
 	},
 	{
 		slug: 'photography',
-		title: 'Fotografía y Cinematografía',
-		homeTitle: 'Fotografía & Cinematografía',
+		title: 'Fotografía y Filmmaking',
+		homeTitle: 'Fotografía & Filmmaking',
 		homeDescription: 'Creamos fotografías y piezas audiovisuales para mostrar tu marca, producto o espacio con una dirección visual coherente.',
 		homeAlt: 'Portrait photographer holding a camera',
 		homeSize: 'imageM',
@@ -69,7 +69,7 @@ export const services: ServicePageItem[] = [
 			'Dirección de arte para sesiones',
 			'Fotografía de producto',
 			'Fotografía editorial',
-			'Cinematografía de marca',
+			'Filmmaking de marca',
 			'Reels y piezas para campañas',
 			'Postproducción y color',
 			'Biblioteca visual de marca'
@@ -80,9 +80,9 @@ export const services: ServicePageItem[] = [
 		ctaText:
 			'Cada proyecto es diferente. Cuéntame qué tienes en mente y prepararemos una propuesta adaptada a tu marca, tus objetivos y la forma en la que quieres comunicar.',
 		seo: {
-			title: 'Fotografía y Cinematografía | Gea Estudio',
+			title: 'Fotografía y Filmmaking | Gea Estudio',
 			description:
-				'Servicio de fotografía y cinematografía para marcas: contenido visual editorial y coherente en todos los puntos de contacto.'
+				'Servicio de fotografía y filmmaking para marcas: contenido visual editorial y coherente en todos los puntos de contacto.'
 		}
 	},
 	{

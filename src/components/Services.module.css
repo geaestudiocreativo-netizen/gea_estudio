@@ -162,6 +162,10 @@
 	line-height: 1.5;
 }
 
+:global(.services-editorial__index) {
+	align-self: flex-start;
+}
+
 @media (max-width: 900px) {
 	.services {
 		--row-gap: 11px;
@@ -237,7 +241,7 @@
 		max-width: var(--mobile-content-width, 100%);
 		flex: 0 0 auto;
 		padding-inline: 14px;
-		padding-bottom: 6px;
+		padding-bottom: 14px;
 		box-sizing: border-box;
 		transform: none;
 	}

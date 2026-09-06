@@ -7,11 +7,13 @@ interface Props {
 	ariaLabel?: string;
 	className?: string;
 	mobileFull?: boolean;
+	variant?: 'default' | 'outline';
 }
 
-const { href, label, ariaLabel, className = '', mobileFull = true } = Astro.props as Props;
+const { href, label, ariaLabel, className = '', mobileFull = true, variant = 'default' } = Astro.props as Props;
 const mobileWidthClass = mobileFull ? styles.mobileFull : '';
-const composedClass = [styles.button, mobileWidthClass, className].filter(Boolean).join(' ');
+const variantClass = variant === 'outline' ? styles.outline : '';
+const composedClass = [styles.button, variantClass, mobileWidthClass, className].filter(Boolean).join(' ');
 ---
 
 <a class={composedClass} href={href} aria-label={ariaLabel ?? label}>

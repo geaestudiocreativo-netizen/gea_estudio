@@ -12,7 +12,7 @@ const project: ProjectFolderMetadata = {
 	services: [
 		{ type: 'Redes Sociales', gallery: 'stack' },
 		{ type: 'Fotografía', gallery: 'stack' },
-		{ type: 'Cinematografía', gallery: 'stack' },
+		{ type: 'Filmmaking', gallery: 'stack' },
 		{ type: 'Papelería', gallery: 'stack' }
 	],
 	gallery: {

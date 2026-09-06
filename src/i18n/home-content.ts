@@ -39,8 +39,8 @@ export const projectsSectionContent = {
 	es: {
 		title: 'PROYECTOS',
 		carouselLabel: 'Project portfolio carousel',
-		cta: 'Ver proyectos',
-		ctaAria: 'Ver proyectos'
+		cta: 'Ver todos los proyectos',
+		ctaAria: 'Ver todos los proyectos'
 	},
 	en: {
 		title: 'PROJECTS',
@@ -55,8 +55,8 @@ export const aboutSectionContent = {
 		title: 'SOBRE GEA',
 		titleAria: 'Sobre Gea',
 		text:
-			'Soy Ángela Contreras, ingeniera de formación y directora creativa de Gea. Tras varios años trabajando en tecnología, encontré en el diseño mi verdadera forma de crear. Hoy ayudo a marcas y emprendedores a construir una identidad coherente a través del branding, el diseño web, la fotografía y la dirección creativa, desarrollando proyectos donde la estrategia, la funcionalidad y la estética conviven de forma natural.',
-		contactTitle: '¿Hablamos?',
+			'Soy Ángela Contreras, ingeniera de formación y directora creativa de Gea. Tras varios años trabajando en tecnología, encontré en el diseño mi verdadera forma de crear. Hoy ayudo a marcas y emprendedores a construir una identidad coherente a través del branding, el diseño web, la fotografía y la dirección creativa.',
+		contactTitle: '¿Hablamos sobre tu proyecto?',
 		contactButton: 'Contactar',
 		contactButtonAria: 'Contactar'
 	},
@@ -64,7 +64,7 @@ export const aboutSectionContent = {
 		title: 'ABOUT GEA',
 		titleAria: 'About Gea',
 		text:
-			'I am Angela Contreras, an engineer by training and the creative director of Gea. After several years in technology, I found in design my truest way of creating. Today I help brands and founders build coherent identities through branding, web design, photography, and creative direction, developing projects where strategy, functionality, and aesthetics coexist naturally.',
+			'I am Angela Contreras, an engineer by training and the creative director of Gea. After several years in technology, I found in design my truest way of creating. Today I help brands and founders build coherent identities through branding, web design, photography, and creative direction.',
 		contactTitle: 'Shall we talk?',
 		contactButton: 'Contact',
 		contactButtonAria: 'Contact'

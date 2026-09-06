@@ -27,8 +27,8 @@ export const getServicesSeoDefaults = (locale: Locale) => {
 	}
 
 	return {
-		title: 'Gea | Estudio creativo de branding, diseño web, fotografía, papelería, decoración, cinematografía y redes sociales.',
+		title: 'Gea | Estudio creativo de branding, diseño web, fotografía, papelería, decoración, filmmaking y redes sociales.',
 		description:
-			'Gea es un estudio creativo especializado en branding, diseño web, fotografía, decoración, cinematografía, papelería, redes sociales y dirección creativa para marcas y empresas.'
+			'Gea es un estudio creativo especializado en branding, diseño web, fotografía, decoración, filmmaking, papelería, redes sociales y dirección creativa para marcas y empresas.'
 	};
 };
