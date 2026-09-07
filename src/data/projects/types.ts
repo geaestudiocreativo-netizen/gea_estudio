@@ -27,6 +27,12 @@ export type ProjectServiceMetadata =
 			images?: string[];
 	  }
 	| {
+			type: 'Web';
+			gallery: 'web';
+			images?: string[];
+			background?: string;
+	  }
+	| {
 			type: NonBrandingServiceName;
 			gallery: 'stack' | 'fotografia';
 			images?: string[];

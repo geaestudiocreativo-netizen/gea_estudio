@@ -16,7 +16,12 @@ const project: ProjectFolderMetadata = {
 			layout: 'branding-a',
 			images: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg']
 		},
-		{ type: 'Web', gallery: 'stack', images: [] }
+		{
+			type: 'Web',
+			gallery: 'web',
+			background: 'background_web_talleres_alonso.jpg.svg',
+			images: ['webpage.jpg']
+		}
 	],
 	gallery: {
 		layouts: ['editorial', 'gallery', 'hero']

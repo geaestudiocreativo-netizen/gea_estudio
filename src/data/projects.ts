@@ -13,6 +13,12 @@ type ProjectService =
 			images?: string[];
 	  }
 	| {
+			type: 'Web';
+			gallery: 'web';
+			images?: string[];
+			background?: string;
+	  }
+	| {
 			type: Exclude<ServiceName, 'Branding'>;
 			gallery: 'stack' | 'fotografia';
 			images?: string[];
@@ -66,6 +72,15 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 				type: service.type,
 				gallery: 'branding',
 				layout: service.layout,
+				images: service.images
+			};
+		}
+
+		if (service.gallery === 'web') {
+			return {
+				type: service.type,
+				gallery: 'web',
+				background: service.background,
 				images: service.images
 			};
 		}
