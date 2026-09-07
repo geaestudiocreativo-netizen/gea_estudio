@@ -20,6 +20,7 @@ const project: ProjectFolderMetadata = {
 			type: 'Web',
 			gallery: 'web',
 			background: 'background_web_talleres_alonso.jpg.svg',
+			url: 'https://www.talleresalonsolasrozas.com',
 			images: ['webpage.jpg']
 		}
 	],

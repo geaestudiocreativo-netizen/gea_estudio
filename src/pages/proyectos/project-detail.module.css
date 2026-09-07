@@ -1,7 +1,7 @@
 .page {
 	background: #f8f8f8;
 	overflow-anchor: none;
-	padding: clamp(34px, 6vw, 88px) clamp(16px, 3vw, 42px) clamp(92px, 10vw, 140px);
+	padding: clamp(34px, 6vw, 88px) clamp(16px, 3vw, 42px) 0;
 }
 
 .projectHeader {
@@ -147,6 +147,67 @@
 	box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
 }
 
+.webVisitButton {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 20;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	padding: 15px 18px 15px 20px;
+	width: 100vw;
+	box-sizing: border-box;
+	border: 1px solid #171a20;
+	background: #f8f8f8;
+	color: #171a20;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	line-height: 1;
+	text-decoration: none;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+	transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.webVisitLabel {
+	display: inline-flex;
+	align-items: center;
+}
+
+.webVisitArrow {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: grid;
+	place-items: center;
+	width: clamp(58px, 8vw, 96px);
+	border-left: 1px solid #111111;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 0.7;
+}
+
+.webVisitDomain {
+	font-size: 10px;
+	font-weight: 400;
+	letter-spacing: 0.04em;
+	opacity: 0.62;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.webVisitButton:hover {
+		background: #171a20;
+		color: #f8f8f8;
+		transform: translateY(-3px);
+	}
+}
+
 .sectionTitle {
 	margin: 0;
 	font-family: 'Panchang', sans-serif;
@@ -253,20 +314,30 @@
 
 .projectNav {
 	max-width: 1120px;
-	margin: clamp(86px, 11vw, 138px) auto 0;
+	margin: 0 auto;
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 20px;
 }
 
 .projectLink {
+	position: relative;
 	padding: 18px 0;
 	text-decoration: none;
 	color: #1d2026;
-	border-top: 1px solid #d8dade;
 	display: grid;
 	gap: 8px;
 	transition: color 200ms ease;
+}
+
+.projectLink::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: calc(50% - 50vw);
+	width: 100vw;
+	height: 1px;
+	background: #d8dade;
 }
 
 .projectLink:first-child {
@@ -289,7 +360,7 @@
 }
 
 .projectNavTitle {
-	font-family: 'Panchang', sans-serif;
+	font-family: 'Satoshi', sans-serif;
 	font-size: clamp(18px, 2.1vw, 26px);
 	font-weight: 400;
 	line-height: 1.2;
@@ -372,6 +443,20 @@
 		font-size: 30px;
 	}
 
+	.webVisitButton {
+		gap: 5px;
+		padding: 13px 14px 13px 16px;
+		font-size: 10px;
+	}
+
+	.webVisitDomain {
+		font-size: 9px;
+	}
+
+	.webVisitArrow {
+		width: 58px;
+	}
+
 	.brandingGrid {
 		margin-top: 24px;
 		gap: 8px;
@@ -385,7 +470,7 @@
 	.projectNav {
 		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 		gap: 8px;
-		margin-top: 82px;
+		margin-top: 0;
 	}
 
 }
