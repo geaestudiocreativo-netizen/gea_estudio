@@ -117,7 +117,8 @@
 @media (min-width: 960px) {
 	.layout {
 		--projects-inline-offset: 0px;
-		--project-card-width: 423px;
+		--project-card-width: 508px;
+		--project-card-gap: 16px;
 		grid-template-columns: minmax(0, 35%) minmax(0, 65%);
 		column-gap: 0;
 		padding-left: 0;
