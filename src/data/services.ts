@@ -87,7 +87,7 @@ export const services: ServicePageItem[] = [
 	},
 	{
 		slug: 'web',
-		title: 'Diseño Web',
+		title: 'Web',
 		homeTitle: 'Web',
 		homeDescription: 'Diseñamos y desarrollamos páginas web alineadas con la identidad de la marca, pensadas para comunicar y conectar con su público.',
 		homeAlt: 'Website design shown on a tablet screen',
