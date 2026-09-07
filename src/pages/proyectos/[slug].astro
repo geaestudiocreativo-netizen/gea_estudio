@@ -126,8 +126,8 @@ const sections = project.services.map((service) => ({
 	<script>
 		const tabs = Array.from(document.querySelectorAll('[data-project-tab]')) as HTMLButtonElement[];
 		const panels = Array.from(document.querySelectorAll('[data-project-panel]')) as HTMLElement[];
+		const projectMain = document.querySelector('main') as HTMLElement | null;
 		const tabsWrap = document.querySelector('[aria-label="Secciones del proyecto"]') as HTMLElement | null;
-
 		const setActiveTab = (targetId: string) => {
 			for (const tab of tabs) {
 				const isActive = tab.getAttribute('data-target') === targetId;
@@ -142,13 +142,29 @@ const sections = project.services.map((service) => ({
 		};
 
 		const switchTabInPlace = (targetId: string) => {
+			const previousScrollY = window.scrollY;
+			const mainTop = projectMain
+				? projectMain.getBoundingClientRect().top + previousScrollY
+				: 0;
 			setActiveTab(targetId);
-			requestAnimationFrame(() => {
-				const targetTitle = document.getElementById(`section-${targetId}`);
-				if (!targetTitle) return;
 
-				const stickyOffset = tabsWrap?.getBoundingClientRect().height ?? 0;
-				const targetTop = window.scrollY + targetTitle.getBoundingClientRect().top - stickyOffset;
+			if (!projectMain) return;
+
+			const requiredMainHeight = previousScrollY + window.innerHeight - mainTop;
+
+			if (projectMain.offsetHeight < requiredMainHeight) {
+				projectMain.style.minHeight = `${requiredMainHeight}px`;
+			}
+
+			window.scrollTo({ top: previousScrollY, behavior: 'auto' });
+
+			requestAnimationFrame(() => {
+				const tabsRect = tabsWrap?.getBoundingClientRect();
+				const targetTitle = document.getElementById(`section-${targetId}`);
+				if (!tabsRect || !targetTitle || tabsRect.top > 80) return;
+
+				const titleRect = targetTitle.getBoundingClientRect();
+				const targetTop = window.scrollY + titleRect.top - tabsRect.bottom - 16;
 
 				window.scrollTo({
 					top: Math.max(0, targetTop),

@@ -470,6 +470,14 @@
 }
 
 @media (min-width: 768px) {
+	.hero,
+	.systems,
+	.universe,
+	.contact {
+		padding-left: 64px;
+		padding-right: 64px;
+	}
+
 	.systems {
 		background: transparent;
 	}
