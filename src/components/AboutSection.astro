@@ -16,7 +16,7 @@ const segmentStarts =
 	locale === 'es'
 		? [
 				'Soy Ángela Contreras,',
-				'directora creativa de Gea.',
+				'ingeniera de formación y directora creativa de Gea.',
 				'Tras varios años trabajando en tecnología,',
 				'encontré en el diseño mi verdadera forma de crear.',
 				'Hoy ayudo a marcas y emprendedores a construir una identidad coherente a través del branding, el diseño web, la fotografía y la dirección creativa.',
@@ -24,7 +24,7 @@ const segmentStarts =
 			]
 		: [
 				'I am Angela Contreras,',
-				'the creative director of Gea.',
+				'an engineer by training and the creative director of Gea.',
 				'After several years in technology,',
 				'I found in design my truest way of creating.',
 				'Today I help brands and founders build coherent identities through branding, web design, photography and creative direction.',
@@ -185,10 +185,28 @@ const aboutSegments = segmentStarts.map((start, index) => {
 		}
 	}
 
+	@media (max-width: 767px) {
+		.about-section {
+			background-image: none;
+		}
+
+		#about :global(img) {
+			display: block;
+		}
+
+		.about-title {
+			top: 6%;
+			font-family: 'Panchang', sans-serif;
+			font-size: clamp(27px, calc(8.8vw - 4px), 70px);
+			font-weight: 900;
+			line-height: 0.84;
+			letter-spacing: 0 !important;
+		}
+	}
+
 	@media (max-width: 639px) {
 		.about-title {
-			line-height: 0.84;
-			letter-spacing: 0;
+			line-height: 0.85;
 		}
 
 		#about :global(img) {
@@ -214,5 +232,11 @@ const aboutSegments = segmentStarts.map((start, index) => {
 			margin-top: 24px !important;
 		}
 
+	}
+
+	@media (max-width: 420px) {
+		.about-title {
+			font-size: clamp(24px, 7.6vw, 40px);
+		}
 	}
 </style>

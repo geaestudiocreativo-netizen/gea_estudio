@@ -5,7 +5,7 @@
 	position: relative;
 	height: 270vh;
 	padding: 0;
-	margin-top: 300px;
+	margin-top: 80px;
 	z-index: 1;
 }
 
@@ -138,6 +138,7 @@
 		--mobile-chapter-visual-height: clamp(680px, 90vh, 760px);
 		width: 100vw;
 		height: calc(var(--mobile-chapter-visual-height) + 82svh);
+		margin-top: 40px;
 	}
 
 .stickyStage {

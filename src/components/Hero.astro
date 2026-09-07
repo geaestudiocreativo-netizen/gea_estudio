@@ -254,53 +254,17 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 				return;
 			}
 
-			if (!(visualChapter instanceof HTMLElement) || !(wordmarkDock instanceof HTMLElement)) {
-				return;
-			}
-
-			const chapterRect = visualChapter.getBoundingClientRect();
-			const stickyTop = getMobileStickyTop();
-			const hasStartedScrolling = window.scrollY > 0;
-			const shouldDock = hasStartedScrolling && chapterRect.top <= stickyTop && chapterRect.bottom > stickyTop;
-
-			if (!wordmarkDockedMobile && shouldDock) {
-				wordmarkDock.appendChild(wordmark);
-				wordmarkDockedMobile = true;
-			} else if (wordmarkDockedMobile && !shouldDock) {
+			if (wordmarkDockedMobile) {
 				hero.appendChild(wordmark);
 				wordmarkDockedMobile = false;
 			}
 
-			if (!wordmarkDockedMobile) {
-				wordmark.style.position = 'absolute';
-				wordmark.style.top = `${wordmarkAbsoluteTop.toFixed(2)}px`;
-				wordmark.style.left = `${wordmarkAbsoluteLeft.toFixed(2)}px`;
-				wordmark.style.right = 'auto';
-				wordmark.style.transform = 'none';
-				return;
-			}
-
-			wordmarkDock.style.setProperty('--wordmark-sticky-top', `${stickyTop.toFixed(2)}px`);
-
-			if (chapterRect.bottom <= 0) {
-				wordmark.style.position = 'absolute';
-				wordmark.style.top = '0';
-				wordmark.style.left = `${wordmarkAbsoluteLeft.toFixed(2)}px`;
-				wordmark.style.right = 'auto';
-				wordmark.style.transform = 'none';
-				return;
-			}
-
 			wordmark.style.position = 'absolute';
-			if (chapterRect.top > stickyTop) {
-				const offsetTop = stickyTop - chapterRect.top;
-				wordmark.style.top = `${offsetTop.toFixed(2)}px`;
-			} else {
-				wordmark.style.top = '0';
-			}
+			wordmark.style.top = `${wordmarkAbsoluteTop.toFixed(2)}px`;
 			wordmark.style.left = `${wordmarkAbsoluteLeft.toFixed(2)}px`;
 			wordmark.style.right = 'auto';
 			wordmark.style.transform = 'none';
+			return;
 		};
 
 		const readClipInset = (token: string, size: number) => {
