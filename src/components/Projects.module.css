@@ -117,15 +117,27 @@
 @media (min-width: 960px) {
 	.layout {
 		--projects-inline-offset: 0px;
-		--project-card-width: 302px;
+		--project-card-width: 423px;
 		grid-template-columns: minmax(0, 35%) minmax(0, 65%);
 		column-gap: 0;
 		padding-left: 0;
 	}
 
 	.title {
-		justify-self: end;
-		margin-right: 24px;
+		justify-self: start;
+		align-self: center;
+		font-family: 'Panchang', sans-serif;
+		font-size: clamp(48px, 5vw, 150px);
+		font-weight: 900;
+		line-height: 0.74;
+		letter-spacing: 0.01em;
+		text-transform: uppercase;
+		color: #111111;
+		writing-mode: horizontal-tb;
+		transform: rotate(-90deg);
+		position: relative;
+		left: -100px;
+		top: 30px;
 	}
 
 	.cta {
