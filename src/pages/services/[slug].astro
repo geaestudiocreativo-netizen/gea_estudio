@@ -47,7 +47,15 @@ const relatedServices = services.filter((item) => item.slug !== service.slug);
 					{
 						relatedServices.map((related) => (
 							<li>
-								<a href={`/services/${related.slug}`}>{related.title}</a>
+									<a href={`/services/${related.slug}`}>
+										{related.slug === 'photography' ? (
+											<>Fotografía<br />y Filmmaking</>
+										) : related.slug === 'interior-design' ? (
+											<>Decoración<br />e Interiorismo</>
+										) : (
+											related.title
+										)}
+									</a>
 							</li>
 						))
 					}

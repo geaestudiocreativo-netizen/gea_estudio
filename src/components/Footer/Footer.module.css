@@ -137,6 +137,7 @@
 
 	.details .links {
 		margin-top: clamp(18px, 2.2vw, 26px);
+		font-size: 14px;
 	}
 
 	.details .email {
