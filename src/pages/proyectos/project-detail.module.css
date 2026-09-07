@@ -70,6 +70,13 @@
 	max-width: 1120px;
 }
 
+@media (min-width: 768px) {
+	.cover {
+		width: 50%;
+		max-width: 560px;
+	}
+}
+
 .divider {
 	height: 1px;
 	background: #111111;
@@ -417,6 +424,7 @@
 
 	.cover {
 		margin-top: 48px;
+		width: calc(100% - 20px);
 	}
 
 	.divider {
