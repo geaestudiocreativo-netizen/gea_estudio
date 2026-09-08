@@ -16,7 +16,14 @@ const project: ProjectFolderMetadata = {
 			type: 'Branding',
 			gallery: 'branding',
 			layout: 'branding-a',
-			images: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg', '06.jpg', '07.jpg']
+			images: [
+				'Mockup_bolsa.png',
+				'Mockup_packaging.png',
+				'Mockup_packaging_2.png',
+				'Mockup_packaging_cajas.png',
+				'Mockup_packaging_sticker.png',
+				'Mockup_poste.png'
+			]
 		},
 		{ type: 'Web', gallery: 'stack', images: [] },
 		{
