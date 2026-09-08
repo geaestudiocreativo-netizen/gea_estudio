@@ -27,7 +27,7 @@ const project: ProjectFolderMetadata = {
 		{
 			type: 'Web',
 			gallery: 'web',
-			background: 'background_web.jpeg',
+			background: 'background_image.jpg',
 			video: 'Vide_Web.mp4'
 		},
 		{
@@ -37,9 +37,13 @@ const project: ProjectFolderMetadata = {
 				'fotografia_cheescake.JPG',
 				'fotografia_gabi_chocolates.JPG',
 				'fotografia_gabi_cocinando.JPG',
+				'fotografia_tartas.JPG',
 				'fotografia_oreo.JPG',
+				'fotografia_cheescake2.JPG',
+				'fotografia_7.JPG',
+				'fotografia_tarta_limon.JPG',
 				'fotografia_tarta_limon_entera.JPG',
-				'fotografia_tarta_limon.JPG'
+				'fotografia_10.JPG',
 			]
 		}
 	],

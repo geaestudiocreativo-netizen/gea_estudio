@@ -29,15 +29,15 @@ const blocks = toOrderedBlocks(images);
 
 {
 	layout === 'vertical' ? (
-		<div class={styles.verticalStack}>
+		<div class={styles.verticalStack} data-photography-masonry>
 			{images.map((image, index) => (
-				<figure class={styles.verticalItem}>
+				<figure class={styles.verticalItem} data-masonry-item>
 					<ResponsiveImage
 						src={image}
 						alt={`${projectTitle} editorial ${index + 1}`}
 						loading="lazy"
 						decoding="async"
-						sizes="100vw"
+						sizes={layout === 'vertical' ? '(max-width: 767px) 100vw, 33vw' : '100vw'}
 						widths={[640, 960, 1280, 1600, 1920]}
 					/>
 				</figure>
@@ -187,3 +187,69 @@ const blocks = toOrderedBlocks(images);
 		))
 	)
 }
+
+{layout === 'vertical' && (
+	<script>
+		const masonryStacks = Array.from(document.querySelectorAll('[data-photography-masonry]'));
+
+		const arrangeMasonry = (stack: Element) => {
+			const items = Array.from(stack.querySelectorAll('[data-masonry-item]'));
+			const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+			const columnCount = isDesktop ? 3 : 2;
+			const columns = Array.from({ length: columnCount }, () => document.createElement('div'));
+			const gap = isDesktop ? Math.min(Math.max(window.innerWidth * 0.02, 16), 32) : 10;
+			const heights = columns.map(() => 0);
+
+			for (const column of Array.from(stack.querySelectorAll('[data-masonry-column]'))) {
+				column.remove();
+			}
+
+			for (const column of columns) {
+				column.dataset.masonryColumn = '';
+				stack.append(column);
+			}
+
+			if (isDesktop) {
+				const columnWidth = (stack.clientWidth - gap * (columnCount - 1)) / columnCount;
+				for (const item of items) {
+					const image = item.querySelector('img');
+					const aspectRatio = image?.naturalWidth && image.naturalHeight
+						? image.naturalHeight / image.naturalWidth
+						: 1;
+					const shortestColumn = heights.indexOf(Math.min(...heights));
+					columns[shortestColumn].append(item);
+					heights[shortestColumn] += columnWidth * aspectRatio + gap;
+				}
+			} else {
+				const itemsPerColumn = Math.ceil(items.length / columnCount);
+				for (let columnIndex = 0; columnIndex < columns.length; columnIndex += 1) {
+					const start = columnIndex * itemsPerColumn;
+					columns[columnIndex].append(...items.slice(start, start + itemsPerColumn));
+				}
+			}
+
+			stack.dataset.masonryReady = '';
+		};
+
+		for (const stack of masonryStacks) {
+			const images = Array.from(stack.querySelectorAll('img'));
+			Promise.all(images.map((image) => image.complete
+				? Promise.resolve()
+				: new Promise<void>((resolve) => image.addEventListener('load', () => resolve(), { once: true }))))
+				.then(() => arrangeMasonry(stack));
+
+			let resizeFrame = 0;
+			let lastWidth = stack.getBoundingClientRect().width;
+			const resizeObserver = new ResizeObserver(() => {
+				const width = stack.getBoundingClientRect().width;
+				if (width === lastWidth) {
+					return;
+				}
+				lastWidth = width;
+				cancelAnimationFrame(resizeFrame);
+				resizeFrame = requestAnimationFrame(() => arrangeMasonry(stack));
+			});
+			resizeObserver.observe(stack);
+		}
+	</script>
+)}

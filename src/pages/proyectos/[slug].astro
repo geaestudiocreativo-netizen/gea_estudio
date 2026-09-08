@@ -120,6 +120,8 @@ const sections = project.services.map((service) => ({
 										class={styles.webVideo}
 										src={section.video}
 										controls
+										autoplay
+										muted
 										playsinline
 										preload="metadata"
 										aria-label={`${project.title} web design`}
@@ -181,6 +183,14 @@ const sections = project.services.map((service) => ({
 		const panels = Array.from(document.querySelectorAll('[data-project-panel]')) as HTMLElement[];
 		const projectMain = document.querySelector('main') as HTMLElement | null;
 		const tabsWrap = document.querySelector('[aria-label="Secciones del proyecto"]') as HTMLElement | null;
+		const webVideo = document.querySelector('[data-panel-id="web"] video') as HTMLVideoElement | null;
+		if (webVideo) webVideo.playbackRate = 1.3;
+		const resetWebVideo = (shouldPlay: boolean) => {
+			if (!webVideo) return;
+			webVideo.pause();
+			webVideo.currentTime = 0;
+			if (shouldPlay) webVideo.play().catch(() => undefined);
+		};
 		const setActiveTab = (targetId: string) => {
 			for (const tab of tabs) {
 				const isActive = tab.getAttribute('data-target') === targetId;
@@ -192,6 +202,8 @@ const sections = project.services.map((service) => ({
 				const isActive = panel.getAttribute('data-panel-id') === targetId;
 				panel.hidden = !isActive;
 			}
+
+			resetWebVideo(targetId === 'web');
 		};
 
 		const switchTabInPlace = (targetId: string) => {

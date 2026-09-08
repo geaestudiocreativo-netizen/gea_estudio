@@ -142,13 +142,21 @@
 	margin-right: calc(50% - 50vw);
 	padding: clamp(24px, 6vw, 88px) clamp(16px, 8vw, 144px);
 	box-sizing: border-box;
-	background: #20252b var(--web-background-image) center / cover no-repeat;
+	background: #20252b var(--web-background-image) center bottom / cover no-repeat;
+}
+
+.webComposition::before {
+	position: absolute;
+	inset: 0;
+	content: '';
+	background: rgba(0, 0, 0, 0.4);
 }
 
 .webComposition img,
 .webVideo {
 	display: block;
 	position: relative;
+	z-index: 1;
 	width: min(100%, 1280px);
 	height: auto;
 	margin: 0 auto;
@@ -158,7 +166,13 @@
 .webVideo {
 	max-height: 82vh;
 	background: #111;
-	border-radius: 10px;
+	border-radius: 2px;
+}
+
+@media (min-width: 768px) {
+	.webVideo {
+		width: 50%;
+	}
 }
 
 .webVisitButton {
