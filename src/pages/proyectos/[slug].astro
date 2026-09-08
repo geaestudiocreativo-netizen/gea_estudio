@@ -119,8 +119,8 @@ const sections = project.services.map((service) => ({
 									<video
 										class={styles.webVideo}
 										src={section.video}
-										controls
 										autoplay
+										loop
 										muted
 										playsinline
 										preload="metadata"
@@ -161,6 +161,7 @@ const sections = project.services.map((service) => ({
 									layout={section.isPhotography ? 'vertical' : 'editorial'}
 									frameFirstImages={project.slug === 'g' && section.id === 'branding'}
 									insertBrandStatement={project.slug === 'g' && section.id === 'branding'}
+									containLastImage={project.slug === 'talleres-alonso' && section.id === 'branding'}
 								/>
 							</div>
 						)
@@ -169,14 +170,20 @@ const sections = project.services.map((service) => ({
 			))
 		}
 
-		<nav class={styles.projectNav} aria-label="Navegación de proyectos">
+		<nav class={`${styles.projectNav} ${project.slug === 'talleres-alonso' ? styles.projectNavTalleres : ''}`} aria-label="Navegación de proyectos">
 			<a class={styles.projectLink} href={`/proyectos/${previousProject.slug}`}>
-				<span class={styles.projectNavLabel}>← Proyecto anterior</span>
-				<span class={styles.projectNavTitle}>{previousProject.title}</span>
+				<span class={styles.projectNavArrow} aria-hidden="true">←</span>
+				<span class={styles.projectNavBody}>
+					<span class={styles.projectNavTitle}>{previousProject.title}</span>
+					<span class={styles.projectNavLabel}>Proyecto anterior</span>
+				</span>
 			</a>
 			<a class={styles.projectLink} href={`/proyectos/${nextProject.slug}`}>
-				<span class={styles.projectNavLabel}>Proyecto siguiente →</span>
-				<span class={styles.projectNavTitle}>{nextProject.title}</span>
+				<span class={styles.projectNavBody}>
+					<span class={styles.projectNavTitle}>{nextProject.title}</span>
+					<span class={styles.projectNavLabel}>Proyecto siguiente</span>
+				</span>
+				<span class={styles.projectNavArrow} aria-hidden="true">→</span>
 			</a>
 		</nav>
 	</main>

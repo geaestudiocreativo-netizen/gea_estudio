@@ -8,6 +8,7 @@ interface Props {
 	layout?: 'editorial' | 'vertical';
 	frameFirstImages?: boolean;
 	insertBrandStatement?: boolean;
+	containLastImage?: boolean;
 }
 
 const {
@@ -15,7 +16,8 @@ const {
 	projectTitle,
 	layout = 'editorial',
 	frameFirstImages = false,
-	insertBrandStatement = false
+	insertBrandStatement = false,
+	containLastImage = false
 } = Astro.props as Props;
 const IMAGES_PER_BLOCK = 7;
 
@@ -152,7 +154,7 @@ const blocks = toOrderedBlocks(images);
 									<div class={`${styles.middleBlock} ${!blockImages[5] ? styles.middleBlockSingle : ''}`}>
 										{
 											blockImages[4] && (
-												<figure class={`${styles.item} ${styles.item5}`}>
+														<figure class={`${styles.item} ${styles.item5} ${containLastImage && blockIndex === blocks.length - 1 ? styles.containLastImage : ''}`}>
 													<ResponsiveImage
 														src={blockImages[4]}
 														alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 5}`}
