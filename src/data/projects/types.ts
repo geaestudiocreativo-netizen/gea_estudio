@@ -31,6 +31,7 @@ export type ProjectServiceMetadata =
 			gallery: 'web';
 			images?: string[];
 			background?: string;
+			video?: string;
 			url?: string;
 	  }
 	| {

@@ -17,15 +17,19 @@ const project: ProjectFolderMetadata = {
 			gallery: 'branding',
 			layout: 'branding-a',
 			images: [
-				'Mockup_bolsa.png',
-				'Mockup_packaging.png',
-				'Mockup_packaging_2.png',
+				'Color_ivory.jpg',
+				'Color_brown.jpg',
+				'Mockup_poste.png',
 				'Mockup_packaging_cajas.png',
-				'Mockup_packaging_sticker.png',
-				'Mockup_poste.png'
+				'Mockup_bolsa.png',
 			]
 		},
-		{ type: 'Web', gallery: 'stack', images: [] },
+		{
+			type: 'Web',
+			gallery: 'web',
+			background: 'background_web.jpeg',
+			video: 'Vide_Web.mp4'
+		},
 		{
 			type: 'Fotografía',
 			gallery: 'fotografia',

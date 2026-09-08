@@ -17,6 +17,7 @@ type ProjectService =
 			gallery: 'web';
 			images?: string[];
 			background?: string;
+			video?: string;
 			url?: string;
 	  }
 	| {
@@ -82,6 +83,7 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 				type: service.type,
 				gallery: 'web',
 				background: service.background,
+				video: service.video,
 				url: service.url,
 				images: service.images
 			};

@@ -56,6 +56,9 @@ const sections = project.services.map((service) => ({
 	background: service.type === 'Web' && service.gallery === 'web' && service.background
 		? toProjectImageUrl(project.assetsFolder, service.gallery, service.background)
 		: undefined,
+	video: service.type === 'Web' && service.gallery === 'web' && service.video
+		? toProjectImageUrl(project.assetsFolder, service.gallery, service.video)
+		: undefined,
 	images: (service.images ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename))
 }));
 ---
@@ -112,14 +115,25 @@ const sections = project.services.map((service) => ({
 								class={styles.webComposition}
 								style={`--web-background-image: url("${section.background}")`}
 							>
-								<ResponsiveImage
-									src={section.images[0]}
-									alt={`${project.title} web design`}
-									loading="lazy"
-									decoding="async"
-									sizes="(max-width: 767px) 92vw, 78vw"
-									widths={[480, 768, 960, 1280, 1600]}
-								/>
+								{section.video ? (
+									<video
+										class={styles.webVideo}
+										src={section.video}
+										controls
+										playsinline
+										preload="metadata"
+										aria-label={`${project.title} web design`}
+									/>
+								) : (
+									<ResponsiveImage
+										src={section.images[0]}
+										alt={`${project.title} web design`}
+										loading="lazy"
+										decoding="async"
+										sizes="(max-width: 767px) 92vw, 78vw"
+										widths={[480, 768, 960, 1280, 1600]}
+									/>
+								)}
 								{section.websiteUrl && (
 									<a
 										class={styles.webVisitButton}
