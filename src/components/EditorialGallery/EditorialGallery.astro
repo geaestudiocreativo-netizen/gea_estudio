@@ -6,9 +6,17 @@ interface Props {
 	images: readonly string[];
 	projectTitle: string;
 	layout?: 'editorial' | 'vertical';
+	frameFirstImages?: boolean;
+	insertBrandStatement?: boolean;
 }
 
-const { images, projectTitle, layout = 'editorial' } = Astro.props as Props;
+const {
+	images,
+	projectTitle,
+	layout = 'editorial',
+	frameFirstImages = false,
+	insertBrandStatement = false
+} = Astro.props as Props;
 const IMAGES_PER_BLOCK = 7;
 
 const toOrderedBlocks = (orderedImages: readonly string[]) => {
@@ -45,7 +53,7 @@ const blocks = toOrderedBlocks(images);
 		</div>
 	) : (
 		blocks.map((blockImages, blockIndex) => (
-			<div class={styles.layout7}>
+			<div class={`${styles.layout7} ${frameFirstImages && blockIndex === 0 ? styles.frameFirstImages : ''}`}>
 				{
 					blockImages.length === 1 ? (
 						<figure class={`${styles.item} ${styles.itemSingle}`}>
@@ -128,6 +136,14 @@ const blocks = toOrderedBlocks(images);
 											widths={[640, 960, 1280, 1600, 1920]}
 										/>
 									</figure>
+								)
+							}
+
+							{
+								insertBrandStatement && blockIndex === 0 && blockImages[4] && (
+									<div class={styles.brandStatement}>
+										<p>Hechas a mano, pensadas para quedarse.</p>
+									</div>
 								)
 							}
 

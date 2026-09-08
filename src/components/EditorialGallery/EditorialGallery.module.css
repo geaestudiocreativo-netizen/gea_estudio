@@ -122,6 +122,36 @@
 	grid-row: 1 / span 2;
 }
 
+.frameFirstImages .topBlock .item1,
+.frameFirstImages .topBlock .item2 {
+	padding: clamp(18px, 3vw, 48px);
+	box-sizing: border-box;
+	background: #f8f8f8;
+}
+
+.brandStatement {
+	display: grid;
+	place-items: center;
+	min-height: clamp(90px, 12vw, 180px);
+	padding: clamp(20px, 3vw, 48px) clamp(16px, 5vw, 80px);
+	box-sizing: border-box;
+	background: #fff;
+	color: #1b1917;
+	text-align: center;
+}
+
+.brandStatement p {
+	max-width: none;
+	margin: 0;
+	font-family: 'Satoshi', sans-serif;
+	font-size: clamp(14px, 2.6vw, 34px);
+	font-weight: 300;
+	font-style: italic;
+	letter-spacing: 0.12em;
+	line-height: 1.05;
+	white-space: nowrap;
+}
+
 .layout7 .item4,
 .layout7 .item7 {
 	aspect-ratio: var(--slot-landscape);

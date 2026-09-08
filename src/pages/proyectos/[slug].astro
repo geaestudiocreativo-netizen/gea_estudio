@@ -159,6 +159,8 @@ const sections = project.services.map((service) => ({
 									images={section.images}
 									projectTitle={project.title}
 									layout={section.isPhotography ? 'vertical' : 'editorial'}
+									frameFirstImages={project.slug === 'g' && section.id === 'branding'}
+									insertBrandStatement={project.slug === 'g' && section.id === 'branding'}
 								/>
 							</div>
 						)

@@ -149,7 +149,7 @@
 	position: absolute;
 	inset: 0;
 	content: '';
-	background: rgba(0, 0, 0, 0.4);
+	background: rgba(0, 0, 0, 0.55);
 }
 
 .webComposition img,
@@ -172,14 +172,14 @@
 
 @media (max-width: 767px) {
 	.webComposition {
-		min-height: 100svh;
+		min-height: 50svh;
 		display: grid;
 		align-items: center;
 	}
 }
 @media (min-width: 768px) {
 	.webVideo {
-		width: 50%;
+		width: 67%;
 	}
 }
 
