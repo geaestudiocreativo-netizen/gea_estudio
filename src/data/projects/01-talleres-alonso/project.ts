@@ -7,14 +7,14 @@ const project: ProjectFolderMetadata = {
 	client: 'Talleres Alonso',
 	location: 'Valencia, España',
 	year: 2026,
-	description: 'Una identidad sólida para un taller con más de 40 años de historia.',
-	subtitle: 'Identidad visual y ecosistema digital para un taller con legado familiar.',
+	description: 'Una identidad sólida para un taller con más de 40 años de historia. El taller de toda la vida, ahora con una identidad visual y ecosistema digital que refleja su legado familiar.',
+	subtitle: 'Una identidad sólida para un taller con más de 40 años de historia. El taller de toda la vida, ahora con una identidad visual y ecosistema digital que refleja su legado familiar.	',
 	services: [
 		{
 			type: 'Branding',
 			gallery: 'branding',
 			layout: 'branding-a',
-			images: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '05.jpg']
+			images: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '06.svg', '05.jpg']
 		},
 		{
 			type: 'Web',

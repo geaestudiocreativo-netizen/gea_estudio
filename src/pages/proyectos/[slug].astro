@@ -67,22 +67,9 @@ const sections = project.services.map((service) => ({
 	<main class={styles.page}>
 		<header class={styles.projectHeader}>
 			<img class={styles.projectLogo} src={project.logo} alt={project.title} loading="eager" decoding="async" />
+			<div class={styles.headerDivider} aria-hidden="true"></div>
 			<p class={styles.projectDescription}>{project.description}</p>
 		</header>
-
-		<figure class={styles.cover}>
-			<ResponsiveImage
-				src={project.heroImage}
-				alt={project.title}
-				loading="eager"
-				fetchpriority="high"
-				decoding="async"
-				sizes="(max-width: 1200px) 100vw, 1120px"
-				widths={[768, 1120, 1440, 1920]}
-			/>
-		</figure>
-
-		<div class={styles.divider} aria-hidden="true"></div>
 
 		{
 			sections.length > 0 && (

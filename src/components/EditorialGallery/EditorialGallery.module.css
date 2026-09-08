@@ -205,6 +205,19 @@
 }
 
 @media (max-width: 767px) {
+	.middleBlock .containLastImage {
+		aspect-ratio: auto;
+		height: auto;
+	}
+
+	.middleBlock .containLastImage img {
+		height: auto;
+		object-fit: contain;
+		object-position: top;
+	}
+}
+
+@media (max-width: 767px) {
 	.topBlock {
 		height: clamp(300px, 70vw, 520px);
 	}
@@ -212,6 +225,17 @@
 	.middleBlock .item5,
 	.middleBlock .item6 {
 		aspect-ratio: var(--slot-square);
+	}
+
+	.middleBlock .item5.containLastImage {
+		aspect-ratio: auto;
+		height: auto;
+	}
+
+	.middleBlock .item5.containLastImage img {
+		height: auto;
+		object-fit: contain;
+		object-position: top;
 	}
 
 	.middleBlock {
