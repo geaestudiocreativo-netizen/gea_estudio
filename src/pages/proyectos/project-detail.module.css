@@ -169,6 +169,14 @@
 	border-radius: 2px;
 }
 
+
+@media (max-width: 767px) {
+	.webComposition {
+		min-height: 100svh;
+		display: grid;
+		align-items: center;
+	}
+}
 @media (min-width: 768px) {
 	.webVideo {
 		width: 50%;

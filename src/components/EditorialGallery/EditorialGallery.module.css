@@ -9,6 +9,7 @@
 	column-count: 2;
 	column-gap: 10px;
 	padding: 0 10px;
+	margin-bottom: clamp(32px, 5vw, 80px);
 }
 
 .verticalItem {
