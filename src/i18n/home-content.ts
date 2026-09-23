@@ -54,8 +54,14 @@ export const aboutSectionContent = {
 	es: {
 		title: 'SOBRE GEA',
 		titleAria: 'Sobre Gea',
-		text:
-			'Soy Ángela Contreras, ingeniera de formación y directora creativa de Gea. Tras varios años trabajando en tecnología, encontré en el diseño mi verdadera forma de crear. Hoy ayudo a marcas y emprendedores a construir una identidad coherente a través del branding, el diseño web, la fotografía y la dirección creativa.',
+		intro: 'SOY ÁNGELA CONTRERAS,',
+		introSecondLine: 'LA PERSONA DETRÁS DE GEA ESTUDIO.',
+		context:
+			'Mi formación empezó en la ingeniería y mi camino profesional ha estado muy ligado al mundo de la tecnología, un entorno de lógica, estructuras y soluciones. Pero siempre he sentido una necesidad muy fuerte de crear, de explorar lo visual y de dar forma a las ideas de una manera más libre.',
+		statement: 'Gea nace de ahí.',
+		body:
+			'De esa mezcla entre lo técnico y lo creativo, y de las ganas de construir un espacio donde poder explorar todo aquello que me inspira. En Gea Studio hago muchas de las cosas que más disfruto:',
+		disciplines: 'branding, diseño web, fotografía, filmmaking y dirección creativa.',
 		contactTitle: '¿Hablamos sobre tu proyecto?',
 		contactButton: 'Contactar',
 		contactButtonAria: 'Contactar'
@@ -63,8 +69,14 @@ export const aboutSectionContent = {
 	en: {
 		title: 'ABOUT GEA',
 		titleAria: 'About Gea',
-		text:
-			'I am Angela Contreras, an engineer by training and the creative director of Gea. After several years in technology, I found in design my truest way of creating. Today I help brands and founders build coherent identities through branding, web design, photography, and creative direction.',
+		intro: 'I AM ANGELA CONTRERAS,',
+		introSecondLine: 'THE PERSON BEHIND GEA STUDIO.',
+		context:
+			'My background began in engineering and my professional path has been closely linked to technology, a world of logic, structures, and solutions. But I have always felt a strong need to create, explore the visual, and shape ideas in a freer way.',
+		statement: 'Gea was born from that.',
+		body:
+			'From that mix of the technical and the creative, and from the desire to build a space where I can explore everything that inspires me. At Gea Studio I do many of the things I enjoy most:',
+		disciplines: 'branding, web design, photography, filmmaking, and creative direction.',
 		contactTitle: 'Shall we talk?',
 		contactButton: 'Contact',
 		contactButtonAria: 'Contact'

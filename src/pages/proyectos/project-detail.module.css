@@ -393,7 +393,7 @@
 	left: calc(50% - 50vw);
 	width: 100vw;
 	height: 1px;
-	background: #d8dade;
+	background: #111111;
 }
 
 .projectLink:first-child {
@@ -428,14 +428,14 @@
 .projectLink:first-child .projectNavArrow {
 	margin-left: clamp(16px, 3vw, 42px);
 	padding-right: 24px;
-	border-right: 1px solid #d8dade;
+	border-right: 1px solid #111111;
 }
 
 
 .projectLink:last-child .projectNavArrow {
 	margin-right: clamp(16px, 3vw, 42px);
 	padding-left: 24px;
-	border-left: 1px solid #d8dade;
+	border-left: 1px solid #111111;
 }
 
 .projectNavLabel {
@@ -478,6 +478,8 @@
 	}
 
 	.projectNavArrow {
+		font-size: 32px;
+		color: #111111;
 		margin-bottom: -26px;
 	}
 
@@ -499,7 +501,7 @@
 
 @media (max-width: 767px) {
 	.page {
-		padding-top: calc(122px + env(safe-area-inset-top));
+		padding-top: calc(78px + env(safe-area-inset-top));
 		padding-left: 10px;
 		padding-right: 10px;
 	}
@@ -514,7 +516,7 @@
 	}
 
 	.projectDescription {
-		margin-top: 0;
+		margin-top: 24px;
 		font-size: 15px;
 		max-width: none;
 	}
@@ -551,7 +553,7 @@
 	}
 
 	.section {
-		margin-top: clamp(60px, 10vw, 76px);
+		margin-top: 32px;
 	}
 
 	.sectionTitle {
