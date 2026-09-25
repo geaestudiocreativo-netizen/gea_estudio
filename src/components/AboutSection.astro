@@ -15,12 +15,12 @@ const content = aboutSectionContent[locale];
 ---
 
 <section id="about" class="about-section w-full -mt-[32px] bg-[#f8f8f8] px-[24px] pt-[96px] pb-[96px] md:-mt-[32px] md:px-[32px] md:pt-[120px] md:pb-[112px] lg:-mt-[40px] lg:px-[68px] lg:pt-[184px] lg:pb-[128px]" aria-labelledby="about-title">
-	<div class="mx-auto w-full max-w-[900px]">
+	<div class="about-layout mx-auto w-full max-w-[900px]">
 		<div class="about-visual-wrap relative overflow-hidden">
 			<ResponsiveImage
 				src="/images/about/about_image.png"
 				alt="Creative director reviewing editorial color and print material"
-				class="about-portrait mx-auto w-full object-cover aspect-[704/860]"
+				class="about-portrait mx-auto object-cover aspect-[704/860]"
 				loading="lazy"
 				decoding="async"
 				sizes="(max-width: 1120px) 100vw, 1120px"
@@ -43,8 +43,7 @@ const content = aboutSectionContent[locale];
 			</div>
 
 			<div id="contact" class="mt-[48px] flex flex-col items-center text-center">
-				<h3 class="m-0 font-['Satoshi'] text-[18px] font-normal tracking-[0.02em] text-[#2a2d32] md:text-[19px]">{content.contactTitle}</h3>
-				<PrimaryButton href={getLocalizedPath(locale, '/#contact')} label={content.contactButton} ariaLabel={content.contactButtonAria} variant="outline" className={`${buttonStyles.desktopFull} !mt-[16px]`} />
+				<PrimaryButton href={getLocalizedPath(locale, '/#contact')} label={content.contactButton} ariaLabel={content.contactButtonAria} variant="outline" className={buttonStyles.desktopFull} />
 			</div>
 		</div>
 	</div>
@@ -121,20 +120,64 @@ const content = aboutSectionContent[locale];
 
 	@media (min-width: 1024px) {
 		.about-section {
+			min-height: 100svh;
 			padding-top: 74px !important;
 			padding-bottom: 51px !important;
+			display: flex;
+			align-items: center;
+		}
+
+		.about-layout {
+			width: 100%;
+			max-width: 1080px;
+			display: grid;
+			grid-template-columns: minmax(120px, 16vw) minmax(0, 1fr);
+			grid-template-rows: auto auto;
+			column-gap: clamp(72px, 10vw, 160px);
+			row-gap: 18px;
+			align-items: start;
+		}
+
+		.about-visual-wrap {
+			grid-column: 1;
+			grid-row: 1 / span 2;
+			overflow: visible;
+			align-self: center;
 		}
 
 		.about-portrait {
-			width: min(4.16vw, 48px);
+			width: min(16vw, 180px);
+			margin-top: 18px;
+		}
+
+		.about-side {
+			grid-column: 2;
+			grid-row: 1 / span 2;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: flex-start;
+		}
+
+		.about-copy {
+			margin-top: 20px !important;
+			margin-inline: 0;
+			width: min(100%, 520px);
 		}
 
 		.about-mobile-name {
-			font-size: clamp(28px, 4.4vw, 56px);
+			margin: 0;
+			text-align: left;
+			font-size: clamp(36px, 4.8vw, 68px);
+			line-height: 0.92;
+			width: min(100%, 520px);
 		}
 
 		#contact {
 			margin-top: 24px !important;
+			align-items: flex-start;
+			text-align: left;
+			width: auto;
 		}
 	}
 
@@ -153,7 +196,7 @@ const content = aboutSectionContent[locale];
 		.about-mobile-name {
 			display: block;
 			width: 100%;
-			margin: 28px 0 0;
+			margin: 72px 0 0;
 			padding: 0;
 			text-align: center;
 			font-family: 'Panchang', sans-serif;

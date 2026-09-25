@@ -63,8 +63,8 @@ export const aboutSectionContent = {
 			'de esa mezcla entre lo técnico y lo creativo, y de las ganas de construir un espacio donde poder explorar todo aquello que me inspira. en gea studio hago muchas de las cosas que más disfruto:',
 		disciplines: 'branding, diseño web, fotografía, filmmaking y dirección creativa.',
 		contactTitle: '¿Hablamos sobre tu proyecto?',
-		contactButton: 'Contactar',
-		contactButtonAria: 'Contactar'
+		contactButton: '¿HABLAMOS DE TU PROYECTO?',
+		contactButtonAria: '¿HABLAMOS DE TU PROYECTO?'
 	},
 	en: {
 		title: 'ABOUT GEA',
