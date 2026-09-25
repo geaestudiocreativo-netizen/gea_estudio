@@ -28,6 +28,16 @@
 	grid-template-columns: minmax(0, 1fr);
 }
 
+.projectCarousel .imageSmall,
+.projectCarousel .imageMedium,
+.projectCarousel .imageLarge {
+	aspect-ratio: 2 / 3;
+}
+
+.details {
+	position: static;
+}
+
 .number {
 	margin: 0 0 10px;
 	font-family: 'Satoshi', sans-serif;
@@ -114,12 +124,6 @@
 }
 
 @media (min-width: 960px) {
-	.projectCarousel .imageSmall,
-	.projectCarousel .imageMedium,
-	.projectCarousel .imageLarge {
-		aspect-ratio: 2 / 3;
-	}
-
 	.projectCarousel .title {
 		margin-top: 28px;
 		font-size: 12px;
@@ -127,9 +131,67 @@
 		line-height: 1.2;
 		letter-spacing: 0.18em;
 	}
+
+	.projectCarousel .description {
+		margin-top: 0;
+	}
+
+	.projectCarousel .services {
+		margin-top: 8px;
+	}
+
+	.projectCarousel .details {
+		position: absolute;
+		top: calc((var(--project-card-width) * 1.5) + 75px);
+		left: 0;
+		right: 0;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 260ms ease, visibility 260ms ease;
+	}
+
+	.projectCarousel {
+		position: relative;
+		z-index: 0;
+		transition: transform 260ms ease;
+		transform-origin: center top;
+	}
+
+	.projectCarousel:hover {
+		z-index: 1;
+		transform: scale(1.1);
+	}
+
+	.projectCarousel:hover .image {
+		transform: none;
+	}
+
+	.projectCarousel:hover .details {
+		opacity: 1;
+		visibility: visible;
+	}
 }
 
 @media (max-width: 959px) {
+	.projectCarousel .description {
+		display: none;
+	}
+
+	.projectCarousel .services {
+		display: block;
+		margin-top: 6px;
+		font-size: 11px;
+		line-height: 1.35;
+		letter-spacing: 0.01em;
+	}
+
+	.projectCarousel .title {
+		margin-top: 28px;
+		font-size: 12px;
+		line-height: 1.2;
+		letter-spacing: 0.18em;
+	}
+
 	.number {
 		margin-bottom: 14px;
 	}

@@ -86,19 +86,21 @@ const cardAriaPrefix = projectDetailContent[locale].projectCardAriaPrefix;
 		</div>
 
 		<h3 class={styles.title}>{title}</h3>
-		{variant !== 'carousel' && <p class={styles.description}>{description}</p>}
-		<p class={styles.services} data-services-list>
-			{serviceLabels.map((service, index) => (
-				<span class={styles.serviceItem} data-service-item>
-					{index > 0 && (
-						<span class={styles.serviceSeparator} data-service-separator aria-hidden="true">
-							{index === serviceLabels.length - 1 ? (locale === 'en' ? ' and ' : ' y ') : ', '}
-						</span>
-					)}
-					{service}
-				</span>
-			))}
-		</p>
+		<div class={styles.details}>
+			<p class={styles.description}>{description}</p>
+			<p class={styles.services} data-services-list>
+				{serviceLabels.map((service, index) => (
+					<span class={styles.serviceItem} data-service-item>
+						{index > 0 && (
+							<span class={styles.serviceSeparator} data-service-separator aria-hidden="true">
+								{index === serviceLabels.length - 1 ? (locale === 'en' ? ' and ' : ' y ') : ', '}
+							</span>
+						)}
+						{service}
+					</span>
+				))}
+			</p>
+		</div>
 	</article>
 </a>
 
