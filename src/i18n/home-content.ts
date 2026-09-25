@@ -60,7 +60,7 @@ export const aboutSectionContent = {
 			'Mi formación empezó en la ingeniería y mi camino profesional ha estado muy ligado al mundo de la tecnología, un entorno de lógica, estructuras y soluciones. pero siempre he sentido una necesidad muy fuerte de crear, de explorar lo visual y de dar forma a las ideas de una manera más libre.',
 		statement: 'GEA NACE DE AHÍ.',
 		body:
-			'de esa mezcla entre lo técnico y lo creativo, y de las ganas de construir un espacio donde poder explorar todo aquello que me inspira. en gea studio hago muchas de las cosas que más disfruto:',
+			'De esa mezcla entre lo técnico y lo creativo, y de las ganas de construir un espacio donde poder explorar todo aquello que me inspira. en gea studio hago muchas de las cosas que más disfruto:',
 		disciplines: 'branding, diseño web, fotografía, filmmaking y dirección creativa.',
 		contactTitle: '¿Hablamos sobre tu proyecto?',
 		contactButton: '¿HABLAMOS DE TU PROYECTO?',
