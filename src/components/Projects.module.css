@@ -116,19 +116,21 @@
 
 @media (min-width: 960px) {
 	.layout {
-		--projects-inline-offset: 0px;
-		--project-card-width: 508px;
+		--projects-inline-offset: clamp(20px, 2vw, 32px);
 		--project-card-gap: 16px;
-		grid-template-columns: minmax(0, 35%) minmax(0, 65%);
+		--project-card-width: calc((100vw - (2 * var(--projects-inline-offset)) - (3 * var(--project-card-gap))) / 4);
+		grid-template-columns: minmax(0, 1fr);
 		column-gap: 0;
-		padding-left: 0;
+		padding-left: var(--projects-inline-offset);
+		padding-right: var(--projects-inline-offset);
 	}
 
 	.title {
+		display: none;
 		justify-self: start;
 		align-self: center;
 		font-family: 'Panchang', sans-serif;
-		font-size: clamp(48px, 5vw, 150px);
+		font-size: clamp(40px, 4vw, 120px);
 		font-weight: 900;
 		line-height: 0.74;
 		letter-spacing: 0.01em;
@@ -142,18 +144,31 @@
 	}
 
 	.cta {
-		grid-column: 2;
-		justify-self: start;
-		width: var(--project-card-width) !important;
+		grid-column: 1;
+		grid-row: 2;
+		display: flex;
+		justify-self: stretch;
+		justify-content: flex-end;
+		align-items: start;
+		gap: 16px;
+		width: 100% !important;
+		margin-top: 56px;
 		margin-left: 0;
 		left: 0;
 	}
 
 	.ctaButton {
-		width: 100% !important;
+		flex: 0 0 auto;
+		width: auto !important;
+		padding-inline: 24px;
+	}
+
+	.carouselArrow {
+		flex: 0 0 52px;
 	}
 
 	.carousel {
+		grid-column: 1;
 		margin-left: 0;
 	}
 }
@@ -190,8 +205,8 @@
 
 	.cta {
 		display: block;
-		width: var(--project-card-width);
-		max-width: var(--project-card-width);
+		width: max-content;
+		max-width: none;
 		justify-self: start;
 		left: 0;
 		margin-left: 56px;
@@ -202,7 +217,8 @@
 	}
 
 	.ctaButton {
-		width: 100% !important;
+		width: auto !important;
+		padding-inline: 24px;
 	}
 }
 

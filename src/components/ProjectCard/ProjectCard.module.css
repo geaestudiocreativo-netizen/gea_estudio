@@ -101,7 +101,6 @@
 
 .serviceSeparator {
 	white-space: pre;
-	margin-left: 0.25em;
 }
 
 .serviceSeparator[data-hidden='true'] {
@@ -115,11 +114,18 @@
 }
 
 @media (min-width: 960px) {
-	.title {
-		font-size: 20px;
+	.projectCarousel .imageSmall,
+	.projectCarousel .imageMedium,
+	.projectCarousel .imageLarge {
+		aspect-ratio: 2 / 3;
+	}
+
+	.projectCarousel .title {
+		margin-top: 28px;
+		font-size: 12px;
 		font-weight: 400;
-		line-height: 1;
-		letter-spacing: 0.2em;
+		line-height: 1.2;
+		letter-spacing: 0.18em;
 	}
 }
 

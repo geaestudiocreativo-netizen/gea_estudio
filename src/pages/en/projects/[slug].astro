@@ -41,6 +41,8 @@ const encodeSegments = (...segments: string[]) => segments.map((segment) => enco
 
 const toProjectImageUrl = (...segments: string[]) => `/images/projects/${encodeSegments(...segments)}`;
 
+const formatServiceTitle = (service: string) => `${service.charAt(0).toUpperCase()}${service.slice(1).toLowerCase()}`;
+
 const isPhotographySection = (name: string) => {
 	const normalized = name
 		.normalize('NFD')
@@ -52,7 +54,7 @@ const isPhotographySection = (name: string) => {
 
 const sections = project.services.map((service) => ({
 	id: toSectionId(service.type),
-	title: service.type,
+	title: formatServiceTitle(service.type),
 	isPhotography: isPhotographySection(service.type),
 	images: (service.images ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename))
 }));

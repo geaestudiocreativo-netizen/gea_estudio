@@ -63,7 +63,9 @@ const imagePath = imageFileName.startsWith('/images/projects/')
 	: `/images/projects/${imageFileName}`;
 
 const projectHref = `${getLocalizedPath(locale, '/proyectos')}/${slug}`;
-const serviceLabels = services.map((service) => (typeof service === 'string' ? service : service.type));
+const serviceLabels = services
+	.map((service) => (typeof service === 'string' ? service : service.type))
+	.map((service) => `${service.charAt(0).toUpperCase()}${service.slice(1).toLowerCase()}`);
 const cardAriaPrefix = projectDetailContent[locale].projectCardAriaPrefix;
 ---
 
@@ -84,11 +86,15 @@ const cardAriaPrefix = projectDetailContent[locale].projectCardAriaPrefix;
 		</div>
 
 		<h3 class={styles.title}>{title}</h3>
-		<p class={styles.description}>{description}</p>
+		{variant !== 'carousel' && <p class={styles.description}>{description}</p>}
 		<p class={styles.services} data-services-list>
 			{serviceLabels.map((service, index) => (
 				<span class={styles.serviceItem} data-service-item>
-					{index > 0 && <span class={styles.serviceSeparator} data-service-separator aria-hidden="true">— </span>}
+					{index > 0 && (
+						<span class={styles.serviceSeparator} data-service-separator aria-hidden="true">
+							{index === serviceLabels.length - 1 ? (locale === 'en' ? ' and ' : ' y ') : ', '}
+						</span>
+					)}
 					{service}
 				</span>
 			))}

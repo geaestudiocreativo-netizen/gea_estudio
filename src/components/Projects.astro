@@ -38,10 +38,11 @@ const projectsHref = getLocalizedPath(locale, '/proyectos');
 			</button>
 			<PrimaryButton
 				href={projectsHref}
-				label={content.cta}
+				label={locale === 'en' ? 'VIEW ALL' : 'VER TODOS'}
 				desktopLabel={locale === 'en' ? 'VIEW ALL' : 'VER TODOS'}
 				ariaLabel={content.ctaAria}
 				variant="outline"
+				mobileFull={false}
 				className={styles.ctaButton}
 			/>
 			<button class={styles.carouselArrow} type="button" aria-label={locale === 'en' ? 'Next projects' : 'Siguientes proyectos'} data-carousel-direction="next">
@@ -55,6 +56,17 @@ const projectsHref = getLocalizedPath(locale, '/proyectos');
 	const projectCarousel = document.querySelector('[data-project-carousel]');
 	const carouselDirections = document.querySelectorAll<HTMLButtonElement>('[data-carousel-direction]');
 
+	const updateCarouselControls = () => {
+		if (!projectCarousel) return;
+
+		const isAtStart = projectCarousel.scrollLeft <= 1;
+		const isAtEnd = projectCarousel.scrollLeft + projectCarousel.clientWidth >= projectCarousel.scrollWidth - 1;
+
+		carouselDirections.forEach((button) => {
+			button.hidden = button.dataset.carouselDirection === 'previous' ? isAtStart : isAtEnd;
+		});
+	};
+
 	carouselDirections.forEach((button) => {
 		button.addEventListener('click', () => {
 			const direction = button.dataset.carouselDirection === 'previous' ? -1 : 1;
@@ -64,4 +76,8 @@ const projectsHref = getLocalizedPath(locale, '/proyectos');
 			projectCarousel?.scrollBy({ left: direction * scrollDistance, behavior: 'smooth' });
 		});
 	});
+
+	projectCarousel?.addEventListener('scroll', updateCarouselControls, { passive: true });
+	window.addEventListener('resize', updateCarouselControls);
+	updateCarouselControls();
 </script>

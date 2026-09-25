@@ -10,10 +10,7 @@ const project: ProjectFolderMetadata = {
 	description: 'Paellas de autor que revolucionan la forma de ver la comida tradicional valenciana.',
 	subtitle: 'Contenido visual para una marca gastronómica contemporánea con alma mediterránea.',
 	services: [
-		{ type: 'Redes Sociales', gallery: 'stack' },
-		{ type: 'Fotografía', gallery: 'stack' },
-		{ type: 'Filmmaking', gallery: 'stack' },
-		{ type: 'Papelería', gallery: 'stack' }
+		{ type: 'Branding', gallery: 'stack' }
 	],
 	gallery: {
 		layouts: ['editorial', 'gallery', 'hero']
