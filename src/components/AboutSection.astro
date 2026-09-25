@@ -14,13 +14,13 @@ const content = aboutSectionContent[locale];
 
 ---
 
-<section id="about" class="about-section w-full -mt-[32px] bg-[#f8f8f8] bg-cover bg-center bg-[url('/images/about/about_image.png')] px-[24px] pt-[96px] pb-[96px] md:-mt-[32px] md:px-[32px] md:pt-[120px] md:pb-[112px] lg:-mt-[40px] lg:min-h-[100svh] lg:px-[68px] lg:pt-[184px] lg:pb-[128px]" aria-labelledby="about-title">
-	<div class="mx-auto w-full max-w-[1120px] lg:min-h-[calc(100svh-312px)] lg:max-w-none lg:grid lg:grid-cols-2 lg:gap-x-0">
-		<div class="relative overflow-hidden lg:contents">
+<section id="about" class="about-section w-full -mt-[32px] bg-[#f8f8f8] px-[24px] pt-[96px] pb-[96px] md:-mt-[32px] md:px-[32px] md:pt-[120px] md:pb-[112px] lg:-mt-[40px] lg:px-[68px] lg:pt-[184px] lg:pb-[128px]" aria-labelledby="about-title">
+	<div class="mx-auto w-full max-w-[900px]">
+		<div class="about-visual-wrap relative overflow-hidden">
 			<ResponsiveImage
 				src="/images/about/about_image.png"
 				alt="Creative director reviewing editorial color and print material"
-				class="hidden w-full object-cover aspect-[704/860] lg:col-start-2 lg:h-full lg:aspect-auto"
+				class="about-portrait mx-auto w-full object-cover aspect-[704/860]"
 				loading="lazy"
 				decoding="async"
 				sizes="(max-width: 1120px) 100vw, 1120px"
@@ -28,21 +28,22 @@ const content = aboutSectionContent[locale];
 			/>
 			<h2
 				id="about-title"
-				class="about-title m-0 font-['Panchang'] text-[24px] font-black uppercase leading-[0.74] tracking-[0.01em] text-[#0f1115] md:text-[33px] lg:text-[84px]"
+				class="about-title"
 			>
 				<a href={getLocalizedPath(locale, '/#about')} aria-label={content.titleAria} style="color: inherit; text-decoration: none;"><span>Sobre</span> <span>Gea</span></a>
 			</h2>
+			<h3 class="about-mobile-name" aria-label="Ángela Contreras">Ángela Contreras</h3>
 		</div>
 
-		<div class="about-side lg:flex lg:min-h-full lg:flex-col lg:justify-between">
-			<div class="about-copy mt-[32px] md:mt-[40px] lg:mt-0">
-				<p class="about-copy__label"><strong>{content.intro}<br />{content.introSecondLine}</strong></p>
+		<div class="about-side">
+			<div class="about-copy mt-[32px] md:mt-[40px]">
+				<p class="about-copy__label">{content.intro}<br />{content.introSecondLine}</p>
 				<p class="about-copy__transition">{content.context}</p>
-				<p class="about-copy__body"><strong>{content.statement}</strong> {content.body} <strong>{content.disciplines}</strong></p>
+				<p class="about-copy__body">{content.statement} {content.body} {content.disciplines}</p>
 			</div>
 
-			<div id="contact" class="mt-[48px] flex flex-col items-center text-center lg:mt-auto lg:items-start lg:text-left">
-				<h3 class="m-0 font-['Satoshi'] text-[18px] font-normal tracking-[0.02em] text-[#2a2d32] md:text-[19px] lg:text-[28px]">{content.contactTitle}</h3>
+			<div id="contact" class="mt-[48px] flex flex-col items-center text-center">
+				<h3 class="m-0 font-['Satoshi'] text-[18px] font-normal tracking-[0.02em] text-[#2a2d32] md:text-[19px]">{content.contactTitle}</h3>
 				<PrimaryButton href={getLocalizedPath(locale, '/#contact')} label={content.contactButton} ariaLabel={content.contactButtonAria} variant="outline" className={`${buttonStyles.desktopFull} !mt-[16px]`} />
 			</div>
 		</div>
@@ -51,23 +52,39 @@ const content = aboutSectionContent[locale];
 
 <style>
 	.about-copy {
+		width: min(100%, 760px);
+		margin-inline: auto;
 		color: #2a2d32;
 	}
 
-	.about-section {
-		background-image: url('/images/about/about_image.png');
-		background-position: center;
-		background-size: cover;
+	.about-mobile-name {
+		display: block;
+		width: 100%;
+		margin: 28px 0 0;
+		padding: 0;
+		text-align: center;
+		font-family: 'Panchang', sans-serif;
+		font-size: clamp(20px, 7.2vw, 40px);
+		font-weight: 500;
+		line-height: 0.95;
+		letter-spacing: 0;
+		white-space: normal;
+		color: #0f1115;
+		text-transform: none;
 	}
 
-	.about-section :global(img) {
-		display: none;
+	.about-visual-wrap {
+		overflow: hidden;
+	}
+
+	.about-portrait {
+		display: block;
+		margin-inline: auto;
+		width: min(36vw, 260px);
 	}
 
 	.about-title {
-		position: absolute;
-		top: 9%;
-		right: 24px;
+		display: none;
 	}
 
 	.about-copy p {
@@ -76,16 +93,15 @@ const content = aboutSectionContent[locale];
 
 	.about-copy__label {
 		font-family: 'Satoshi', sans-serif;
-		font-size: 12px;
-		font-weight: 500;
-		line-height: 1.2;
-		letter-spacing: 0.16em;
-		text-transform: uppercase;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 1.35;
+		letter-spacing: 0.01em;
 	}
 
 	.about-copy__transition {
 		max-width: none;
-		margin-top: clamp(42px, 5vw, 72px) !important;
+		margin-top: 24px !important;
 		font-family: 'Satoshi', sans-serif;
 		font-size: 14px;
 		font-weight: 400;
@@ -95,7 +111,7 @@ const content = aboutSectionContent[locale];
 
 	.about-copy__body {
 		max-width: none;
-		margin-top: clamp(48px, 6vw, 88px) !important;
+		margin-top: 24px !important;
 		font-family: 'Satoshi', sans-serif;
 		font-size: 14px;
 		font-weight: 400;
@@ -104,57 +120,21 @@ const content = aboutSectionContent[locale];
 	}
 
 	@media (min-width: 1024px) {
-		#about :global(img) {
-			transform: scale(1.5);
-			transform-origin: center;
+		.about-section {
+			padding-top: 74px !important;
+			padding-bottom: 51px !important;
 		}
 
-		.about-title {
-			position: static;
-			grid-area: 1 / 3 / 2 / 4 !important;
-			align-self: start;
-			justify-self: stretch;
-			width: 100%;
-			margin: 0;
-			text-align: right;
+		.about-portrait {
+			width: min(4.16vw, 48px);
 		}
 
-		.about-title span {
-			display: block;
-			width: max-content;
-			text-align: right;
-		}
-
-		.about-title a {
-		display: flex;
-			flex-direction: column;
-			align-items: flex-end;
-			width: 100%;
-			text-align: right;
-		}
-
-		.about-copy {
-			width: min(100%, 440px);
-			max-width: 440px;
-		}
-
-		.about-side {
-			grid-column: 1 / 2;
-			grid-row: 1;
-			justify-content: flex-end;
-		}
-
-		.about-copy__transition {
-			margin-top: 24px !important;
-		}
-
-		.about-copy__body {
-			margin-top: 32px !important;
+		.about-mobile-name {
+			font-size: clamp(28px, 4.4vw, 56px);
 		}
 
 		#contact {
-			margin-top: 32px !important;
-			width: min(100%, 440px);
+			margin-top: 24px !important;
 		}
 	}
 
@@ -165,25 +145,39 @@ const content = aboutSectionContent[locale];
 
 		#about :global(img) {
 			display: block;
+			margin-top: 72px;
+			margin-inline: auto;
+			width: min(40vw, 200px) !important;
 		}
 
-		.about-title {
-			top: 6%;
+		.about-mobile-name {
+			display: block;
+			width: 100%;
+			margin: 28px 0 0;
+			padding: 0;
+			text-align: center;
 			font-family: 'Panchang', sans-serif;
-			font-size: clamp(27px, calc(8.8vw - 4px), 70px);
-			font-weight: 900;
-			line-height: 0.84;
-			letter-spacing: 0 !important;
+			font-size: clamp(20px, 7.2vw, 30px);
+			font-weight: 500;
+			line-height: 0.95;
+			letter-spacing: 0;
+			white-space: normal;
+			color: #0f1115;
+			text-transform: none;
+		}
+
+		.about-visual-wrap {
+			overflow: visible;
+		}
+
+		.about-copy {
+			margin-top: 30px !important;
 		}
 	}
 
 	@media (max-width: 639px) {
-		.about-title {
-			line-height: 0.85;
-		}
-
 		#about :global(img) {
-			width: 50% !important;
+			width: min(46vw, 180px) !important;
 			max-width: none;
 		}
 
@@ -205,11 +199,5 @@ const content = aboutSectionContent[locale];
 			margin-top: 24px !important;
 		}
 
-	}
-
-	@media (max-width: 420px) {
-		.about-title {
-			font-size: clamp(24px, 7.6vw, 40px);
-		}
 	}
 </style>
