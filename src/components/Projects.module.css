@@ -124,12 +124,12 @@
 	border-radius: 0;
 	background: transparent !important;
 	color: #74665f !important;
-	font-size: 11px;
-	line-height: 1.2;
-	letter-spacing: 0.16em;
-	text-decoration: underline;
-	text-decoration-thickness: 1px;
-	text-underline-offset: 8px;
+	font-size: 11px !important;
+	line-height: 1.2 !important;
+	letter-spacing: 0.16em !important;
+	text-decoration: underline !important;
+	text-decoration-thickness: 1px !important;
+	text-underline-offset: 8px !important;
 }
 
 @media (min-width: 960px) {
@@ -231,6 +231,7 @@
 	.carousel {
 		grid-column: 1 / -1;
 		grid-row: 2;
+		margin-top: 32px;
 		margin-left: 0;
 		padding-right: 26px;
 	}
@@ -238,6 +239,11 @@
 	.track {
 		gap: 18px;
 		padding-right: 0;
+	}
+
+	.track::after {
+		content: '';
+		flex: 0 0 max(0px, calc(100vw - var(--projects-inline-offset) - var(--project-card-width)));
 	}
 
 	.item {
@@ -274,6 +280,7 @@
 
 @media (max-width: 767px) {
 	.layout {
+		--project-card-width: 293px;
 		column-gap: 10px;
 	}
 
@@ -282,13 +289,9 @@
 	}
 
 	.carousel {
-		grid-column: 2;
+		grid-column: 1 / -1;
 		grid-row: 2;
 		scroll-snap-type: x mandatory;
 		margin-left: 0;
-	}
-
-	.item {
-		width: 293px;
 	}
 }
