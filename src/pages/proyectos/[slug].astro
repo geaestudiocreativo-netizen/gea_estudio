@@ -53,6 +53,7 @@ const sections = project.services.map((service) => ({
 	id: toSectionId(service.type),
 	title: formatServiceTitle(service.type),
 	isPhotography: isPhotographySection(service.type),
+	isSocialMedia: service.type === 'Redes Sociales',
 	isWeb: service.type === 'Web' && service.gallery === 'web',
 		websiteUrl: service.type === 'Web' && service.gallery === 'web' ? service.url : undefined,
 	background: service.type === 'Web' && service.gallery === 'web' && service.background
@@ -61,7 +62,8 @@ const sections = project.services.map((service) => ({
 	video: service.type === 'Web' && service.gallery === 'web' && service.video
 		? toProjectImageUrl(project.assetsFolder, service.gallery, service.video)
 		: undefined,
-	images: (service.images ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename))
+	images: (service.images ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename)),
+	videos: (service.videos ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename))
 }));
 ---
 
@@ -73,6 +75,7 @@ const sections = project.services.map((service) => ({
 			<div class={styles.headerDivider} aria-hidden="true"></div>
 		</header>
 
+		<div class={styles.projectContent}>
 		{
 			sections.length > 0 && (
 				<nav class={styles.sectionTabsWrap} aria-label="Secciones del proyecto">
@@ -99,10 +102,10 @@ const sections = project.services.map((service) => ({
 				>
 					<h2 id={`section-${section.id}`} class={styles.sectionTitle}>{section.title}</h2>
 					{
-						section.isWeb && section.background ? (
+						section.isWeb && (section.background || section.video) ? (
 							<div
-								class={styles.webComposition}
-								style={`--web-background-image: url("${section.background}")`}
+								class={`${styles.webComposition} ${!section.background ? styles.webCompositionPlain : ''}`}
+								style={section.background ? `--web-background-image: url("${section.background}")` : '--web-background-image: none'}
 							>
 								{section.video ? (
 									<video
@@ -147,7 +150,9 @@ const sections = project.services.map((service) => ({
 								<EditorialGallery
 									images={section.images}
 									projectTitle={project.title}
-									layout={section.isPhotography ? 'vertical' : 'editorial'}
+									layout={section.isPhotography || section.isSocialMedia ? 'vertical' : 'editorial'}
+									singleColumn={section.isSocialMedia}
+									videos={section.videos}
 									frameFirstImages={project.slug === 'g' && section.id === 'branding'}
 									insertBrandStatement={project.slug === 'g' && section.id === 'branding'}
 									containLastImage={project.slug === 'talleres-alonso' && section.id === 'branding'}
@@ -161,7 +166,6 @@ const sections = project.services.map((service) => ({
 
 		<nav class={`${styles.projectNav} ${project.slug === 'talleres-alonso' ? styles.projectNavTalleres : ''}`} aria-label="Navegación de proyectos">
 			<a class={styles.projectLink} href={`/proyectos/${previousProject.slug}`}>
-				<span class={styles.projectNavArrow} aria-hidden="true">‹</span>
 				<span class={styles.projectNavBody}>
 					<span class={styles.projectNavTitle}>{previousProject.title}</span>
 					<span class={styles.projectNavLabel}>Proyecto anterior</span>
@@ -172,9 +176,9 @@ const sections = project.services.map((service) => ({
 					<span class={styles.projectNavTitle}>{nextProject.title}</span>
 					<span class={styles.projectNavLabel}>Proyecto siguiente</span>
 				</span>
-				<span class={styles.projectNavArrow} aria-hidden="true">›</span>
 			</a>
 		</nav>
+		</div>
 	</main>
 	<script>
 		const tabs = Array.from(document.querySelectorAll('[data-project-tab]')) as HTMLButtonElement[];

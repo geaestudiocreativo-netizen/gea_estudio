@@ -21,16 +21,16 @@ export const projectDetailContent = {
 	es: {
 		sectionsAria: 'Secciones del proyecto',
 		navAria: 'Navegacion de proyectos',
-		previous: '← Proyecto anterior',
-		next: 'Proyecto siguiente →',
+		previous: 'Anterior',
+		next: 'Siguiente',
 		tabsAria: 'Navegacion de secciones del proyecto',
 		projectCardAriaPrefix: 'Ver proyecto'
 	},
 	en: {
 		sectionsAria: 'Project sections',
 		navAria: 'Project navigation',
-		previous: '← Previous project',
-		next: 'Next project →',
+		previous: 'Previous',
+		next: 'Next',
 		tabsAria: 'Project section navigation',
 		projectCardAriaPrefix: 'View project'
 	}

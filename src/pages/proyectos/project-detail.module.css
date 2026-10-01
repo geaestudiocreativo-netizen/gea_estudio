@@ -4,6 +4,14 @@
 	padding: clamp(34px, 6vw, 88px) clamp(16px, 3vw, 42px) 0;
 }
 
+.projectContent {
+	width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	background: #ffffff;
+	padding-top: 1px;
+}
+
 .projectHeader {
 	max-width: 860px;
 	margin: 0 auto;
@@ -23,7 +31,7 @@
 	height: 1px;
 	background: #111111;
 	width: 100vw;
-	margin: 32px calc(50% - 50vw);
+	margin: 32px calc(50% - 50vw) 0;
 }
 
 .logoMark {
@@ -97,7 +105,7 @@
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
 	padding: 10px 0 12px;
-	background: #f8f8f8;
+	background: #ffffff;
 }
 
 .sectionTabsWrap::before {
@@ -107,7 +115,7 @@
 	left: 0;
 	width: 100%;
 	height: 4px;
-	background: #f8f8f8;
+	background: #ffffff;
 }
 
 .sectionTabs {
@@ -130,6 +138,7 @@
 .section {
 	max-width: 1120px;
 	margin: clamp(60px, 7vw, 80px) auto 0;
+	background: #ffffff;
 }
 
 .fullBleedGallery {
@@ -148,6 +157,16 @@
 	padding: 0 clamp(16px, 3vw, 42px);
 	box-sizing: border-box;
 	background: #20252b var(--web-background-image) center bottom / cover no-repeat;
+}
+
+.webCompositionPlain {
+	background: transparent;
+	margin-top: clamp(96px, 12vw, 180px);
+	margin-bottom: clamp(96px, 12vw, 180px);
+}
+
+.webCompositionPlain::before {
+	display: none;
 }
 
 .webComposition::before {
@@ -363,11 +382,13 @@
 	max-width: none;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
+	margin-bottom: clamp(48px, 8vw, 96px);
 	padding: 0;
 	box-sizing: border-box;
 	display: grid;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 20px;
+	border-bottom: 1px solid #111111;
 }
 
 .projectNavTalleres .projectLink {
@@ -381,7 +402,7 @@
 	color: #1d2026;
 	display: flex;
 	align-items: center;
-	gap: 28px;
+	gap: 8px;
 	transition: color 200ms ease;
 }
 
@@ -401,40 +422,46 @@
 	text-align: left;
 }
 
+.projectLink:first-child .projectNavBody {
+	margin-left: clamp(16px, 3vw, 42px);
+}
+
 .projectLink:last-child {
 	justify-content: flex-end;
 	justify-items: end;
 	text-align: right;
 }
 
+.projectLink:last-child .projectNavBody {
+	margin-right: clamp(16px, 3vw, 42px);
+}
+
 .projectNavBody {
 	display: grid;
-	gap: 8px;
+	gap: 2px;
 	align-content: center;
+	align-self: center;
+	margin-top: 24px;
 }
 
 .projectNavArrow {
 	display: inline-flex;
 	align-items: center;
-	align-self: stretch;
-	margin-bottom: -18px;
+	align-self: center;
+	margin-bottom: 0;
 	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(42px, 6vw, 84px);
+	font-size: clamp(64px, 9vw, 128px);
 	font-weight: 300;
 	line-height: 1;
 }
 
 .projectLink:first-child .projectNavArrow {
 	margin-left: clamp(16px, 3vw, 42px);
-	padding-right: 24px;
-	border-right: 1px solid #111111;
 }
 
 
 .projectLink:last-child .projectNavArrow {
 	margin-right: clamp(16px, 3vw, 42px);
-	padding-left: 24px;
-	border-left: 1px solid #111111;
 }
 
 .projectNavLabel {
@@ -448,10 +475,11 @@
 
 .projectNavTitle {
 	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(18px, 2.1vw, 26px);
+	font-size: 14px;
 	font-weight: 400;
-	letter-spacing: 0.02em;
+	letter-spacing: 0.18em;
 	line-height: 1.2;
+	text-transform: uppercase;
 	margin-top: 0;
 }
 
@@ -460,9 +488,6 @@
 		font-size: 22px;
 	}
 
-	.projectNavTitle {
-		font-size: clamp(34px, calc(4.2vw - 2px), 50px);
-	}
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -473,13 +498,13 @@
 
 @media (max-width: 767px) {
 	.projectNavBody {
-		transform: translateY(13px);
+		transform: none;
 	}
 
 	.projectNavArrow {
-		font-size: 32px;
+		font-size: 56px;
 		color: #111111;
-		margin-bottom: -26px;
+		margin-bottom: 0;
 	}
 
 	.projectNavLabel {

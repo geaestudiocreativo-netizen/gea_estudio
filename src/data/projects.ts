@@ -11,19 +11,22 @@ type ProjectService =
 			gallery: 'branding';
 			layout: BrandingLayout;
 			images?: string[];
+			videos?: string[];
 	  }
 	| {
 			type: 'Web';
 			gallery: 'web';
 			images?: string[];
+			videos?: string[];
 			background?: string;
 			video?: string;
 			url?: string;
 	  }
 	| {
 			type: Exclude<ServiceName, 'Branding'>;
-			gallery: 'stack' | 'fotografia';
+			gallery: 'stack' | 'fotografia' | 'redes-sociales';
 			images?: string[];
+			videos?: string[];
 	  };
 
 export interface Project {
@@ -74,7 +77,8 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 				type: service.type,
 				gallery: 'branding',
 				layout: service.layout,
-				images: service.images
+				images: service.images,
+				videos: service.videos
 			};
 		}
 
@@ -92,7 +96,8 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 		return {
 			type: service.type,
 			gallery: service.gallery,
-			images: service.images
+			images: service.images,
+			videos: service.videos
 		};
 	});
 

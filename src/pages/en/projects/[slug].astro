@@ -56,7 +56,9 @@ const sections = project.services.map((service) => ({
 	id: toSectionId(service.type),
 	title: formatServiceTitle(service.type),
 	isPhotography: isPhotographySection(service.type),
-	images: (service.images ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename))
+	isSocialMedia: service.type === 'Redes Sociales',
+	images: (service.images ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename)),
+	videos: (service.videos ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename))
 }));
 ---
 
@@ -69,6 +71,7 @@ const sections = project.services.map((service) => ({
 			<p class={styles.projectMetaLine}>BY {clientLabel}</p>
 		</header>
 
+		<div class={styles.projectContent}>
 		{
 			sections.length > 0 && (
 				<nav class={styles.sectionTabsWrap} aria-label={content.sectionsAria}>
@@ -98,7 +101,9 @@ const sections = project.services.map((service) => ({
 						<EditorialGallery
 							images={section.images}
 							projectTitle={project.title}
-							layout={section.isPhotography ? 'vertical' : 'editorial'}
+							layout={section.isPhotography || section.isSocialMedia ? 'vertical' : 'editorial'}
+									videos={section.videos}
+							singleColumn={section.isSocialMedia}
 						/>
 					</div>
 				</section>
@@ -115,6 +120,7 @@ const sections = project.services.map((service) => ({
 				<span class={styles.projectNavTitle}>{nextProject.title}</span>
 			</a>
 		</nav>
+		</div>
 	</main>
 	<script>
 		const tabs = Array.from(document.querySelectorAll('[data-project-tab]')) as HTMLButtonElement[];

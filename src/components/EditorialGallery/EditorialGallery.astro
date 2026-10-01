@@ -9,6 +9,8 @@ interface Props {
 	frameFirstImages?: boolean;
 	insertBrandStatement?: boolean;
 	containLastImage?: boolean;
+	singleColumn?: boolean;
+	videos?: readonly string[];
 }
 
 const {
@@ -17,7 +19,9 @@ const {
 	layout = 'editorial',
 	frameFirstImages = false,
 	insertBrandStatement = false,
-	containLastImage = false
+	containLastImage = false,
+	singleColumn = false,
+	videos = []
 } = Astro.props as Props;
 const IMAGES_PER_BLOCK = 7;
 
@@ -39,8 +43,8 @@ const blocks = toOrderedBlocks(images);
 
 {
 	layout === 'vertical' ? (
-		<div class={styles.verticalStack} data-photography-masonry>
-			{images.map((image, index) => (
+		<div class={`${styles.verticalStack} ${singleColumn ? styles.singleColumn : ''}`} data-photography-masonry={!singleColumn ? true : undefined} data-single-column={singleColumn ? 'true' : undefined}>
+			{images.slice(0, 2).map((image, index) => (
 				<figure class={styles.verticalItem} data-masonry-item>
 					<ResponsiveImage
 						src={image}
@@ -48,6 +52,34 @@ const blocks = toOrderedBlocks(images);
 						loading="lazy"
 						decoding="async"
 						sizes={layout === 'vertical' ? '(max-width: 767px) 100vw, 33vw' : '100vw'}
+						widths={[640, 960, 1280, 1600, 1920]}
+					/>
+				</figure>
+			))}
+			{videos.length > 0 && (
+				<section class={styles.videoRow} aria-label={`${projectTitle} social media videos`}>
+					{videos.map((video, index) => (
+						<video
+							class={styles.socialVideo}
+							src={video}
+							autoplay
+							loop
+							muted
+							playsinline
+							preload="auto"
+							aria-label={`${projectTitle} social media video ${index + 1}`}
+						/>
+					))}
+				</section>
+			)}
+			{images.slice(2).map((image, index) => (
+				<figure class={styles.verticalItem} data-masonry-item>
+					<ResponsiveImage
+						src={image}
+						alt={`${projectTitle} editorial ${index + 3}`}
+						loading="lazy"
+						decoding="async"
+						sizes="100vw"
 						widths={[640, 960, 1280, 1600, 1920]}
 					/>
 				</figure>
@@ -210,10 +242,10 @@ const blocks = toOrderedBlocks(images);
 	<script>
 		const masonryStacks = Array.from(document.querySelectorAll('[data-photography-masonry]'));
 
-		const arrangeMasonry = (stack: Element) => {
+		const arrangeMasonry = (stack: HTMLElement) => {
 			const items = Array.from(stack.querySelectorAll('[data-masonry-item]'));
 			const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-			const columnCount = isDesktop ? 3 : 2;
+			const columnCount = stack.dataset.singleColumn === 'true' ? 1 : (isDesktop ? 3 : 2);
 			const columns = Array.from({ length: columnCount }, () => document.createElement('div'));
 			const gap = isDesktop ? Math.min(Math.max(window.innerWidth * 0.02, 16), 32) : 10;
 			const heights = columns.map(() => 0);
@@ -254,7 +286,7 @@ const blocks = toOrderedBlocks(images);
 			Promise.all(images.map((image) => image.complete
 				? Promise.resolve()
 				: new Promise<void>((resolve) => image.addEventListener('load', () => resolve(), { once: true }))))
-				.then(() => arrangeMasonry(stack));
+				.then(() => arrangeMasonry(stack as HTMLElement));
 
 			let resizeFrame = 0;
 			let lastWidth = stack.getBoundingClientRect().width;
@@ -265,7 +297,7 @@ const blocks = toOrderedBlocks(images);
 				}
 				lastWidth = width;
 				cancelAnimationFrame(resizeFrame);
-				resizeFrame = requestAnimationFrame(() => arrangeMasonry(stack));
+				resizeFrame = requestAnimationFrame(() => arrangeMasonry(stack as HTMLElement));
 			});
 			resizeObserver.observe(stack);
 		}

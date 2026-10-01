@@ -36,8 +36,9 @@ export type ProjectServiceMetadata =
 	  }
 	| {
 			type: NonBrandingServiceName;
-			gallery: 'stack' | 'fotografia';
+			gallery: 'stack' | 'fotografia' | 'redes-sociales';
 			images?: string[];
+			videos?: string[];
 	  };
 
 export interface ProjectFolderMetadata {

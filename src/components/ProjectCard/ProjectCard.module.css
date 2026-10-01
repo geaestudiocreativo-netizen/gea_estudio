@@ -84,6 +84,13 @@
 	color: #1e1e1e;
 }
 
+.projectGrid .title {
+	margin-top: 28px;
+	font-size: 14px;
+	line-height: 1.2;
+	letter-spacing: 0.18em;
+}
+
 .description {
 	margin: 8px 0 0;
 	font-family: 'Satoshi', sans-serif;
@@ -92,6 +99,14 @@
 	line-height: 1.4;
 	letter-spacing: 0;
 	color: #1e1e1e;
+}
+
+.projectGrid .description {
+	min-height: calc(1.4em * 3);
+	display: -webkit-box;
+	overflow: hidden;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
 }
 
 .services {
@@ -233,13 +248,21 @@
 		text-overflow: ellipsis;
 	}
 
+	.projectGrid.compactMobile .title {
+		margin-top: 12px;
+	}
+
 	.compactMobile .description {
 		margin-top: 4px;
-		font-size: 10px;
+		font-size: 14px;
 		font-weight: 300;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+	}
+
+	.projectGrid.compactMobile .description {
+		white-space: normal;
 	}
 
 	.compactMobile .services {
