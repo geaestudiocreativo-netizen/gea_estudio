@@ -14,12 +14,27 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 ---
 
 <div class="serviceMarquee" aria-label={marqueeItems.join(' · ')}>
-	<div class="serviceMarquee__track">
-		<div class="serviceMarquee__group" aria-hidden="true">
-			{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
+	<div class="serviceMarquee__band">
+		<div class="serviceMarquee__track">
+			<div class="serviceMarquee__group" aria-hidden="true">
+				{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
+			</div>
+			<div class="serviceMarquee__group" aria-hidden="true">
+				{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
+			</div>
 		</div>
-		<div class="serviceMarquee__group" aria-hidden="true">
-			{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
+	</div>
+	<p class="serviceMarquee__statement">
+		{locale === 'en' ? 'Make your brand unique' : <><span class="serviceMarquee__statement-phrase">Hacemos que tu<br />marca sea </span><span class="serviceMarquee__statement-word">ÚNICA</span></>}
+	</p>
+	<div class="serviceMarquee__band serviceMarquee__band--bottom">
+		<div class="serviceMarquee__track">
+			<div class="serviceMarquee__group" aria-hidden="true">
+				{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
+			</div>
+			<div class="serviceMarquee__group" aria-hidden="true">
+				{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
+			</div>
 		</div>
 	</div>
 </div>
@@ -36,6 +51,20 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 		justify-content: center;
 		overflow: hidden;
 		background: #000;
+		flex-direction: column;
+		gap: clamp(8px, 2vw, 24px);
+	}
+
+	.serviceMarquee__band {
+		width: 100%;
+		flex: 1 1 0;
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+	}
+
+	.serviceMarquee__band--bottom .serviceMarquee__track {
+		animation-direction: reverse;
 	}
 
 	.serviceMarquee__track,
@@ -45,7 +74,6 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 	}
 
 	.serviceMarquee__track {
-		height: 100%;
 		width: max-content;
 		animation: serviceMarqueeScroll 26s linear infinite;
 	}
@@ -70,6 +98,43 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 		font-family: 'Panchang', sans-serif;
 		font-size: clamp(15px, 3.1vw, 40px);
 		letter-spacing: 0.08em;
+	}
+
+	.serviceMarquee__statement {
+		flex: 0 0 auto;
+		width: 100vw;
+		max-width: none;
+		margin: 0;
+		color: #f8f8f8;
+		font-family: 'Panchang', sans-serif;
+		font-size: clamp(48px, 9.6vw, 136px);
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 0.02em;
+		text-align: center;
+	}
+
+	.serviceMarquee__statement-word {
+		display: block;
+		width: 100vw;
+		position: relative;
+		left: 50%;
+		transform: translateX(-50%);
+		padding-top: clamp(16px, 2.5vw, 40px);
+		font-size: clamp(64px, 20vw, 240px);
+		font-weight: 700;
+		text-transform: uppercase;
+		line-height: 0.8;
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	.serviceMarquee__statement-phrase {
+		display: inline-block;
+		font-size: clamp(20px, 5vw, 72px);
+		line-height: 0.98;
+		vertical-align: middle;
+		white-space: nowrap;
 	}
 
 	.serviceMarquee__item--light {

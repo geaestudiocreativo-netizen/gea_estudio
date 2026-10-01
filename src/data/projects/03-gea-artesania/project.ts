@@ -32,7 +32,7 @@ const project: ProjectFolderMetadata = {
 	logo: '/images/projects/03-gea-artesania/logo.png',
 	heroImage: '/images/projects/03-gea-artesania/hero.jpg',
 	imageSize: 'large',
-	cardImage: '/images/projects/03-gea-artesania/card.jpg'
+	cardImage: '/images/projects/project-03.jpg'
 };
 
 export default project;
