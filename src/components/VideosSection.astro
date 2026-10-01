@@ -12,14 +12,10 @@ const videos = [
 	{ file: 'video-03.mp4', label: 'Contenido para IG' }
 ];
 const label = locale === 'en' ? 'Videos' : 'Videos';
-const statement = 'We make your brand unique.';
 ---
 
 <section class="videos-section" aria-labelledby="videos-title">
 	<h2 id="videos-title" class="sr-only">{label}</h2>
-	<p class="videos-section__statement">
-		{locale === 'en' ? statement : <><span class="videos-section__statement-satoshi">HACEMOS QUE TU MARCA SEA </span><span class="videos-section__statement-panchang">ÚNICA</span></>}
-	</p>
 	<div class="videos-section__row">
 		{videos.map((video, index) => (
 			<div class="videos-section__card">
@@ -54,9 +50,8 @@ const statement = 'We make your brand unique.';
 <style>
 	.videos-section {
 		width: 100%;
-		padding-top: clamp(40px, 7vw, 100px);
-		padding-bottom: clamp(96px, 14vw, 220px);
-		background: #fff;
+		padding-block: clamp(96px, 14vw, 220px);
+		background: #f8f8f8;
 	}
 
 	.videos-section__row {
@@ -64,32 +59,6 @@ const statement = 'We make your brand unique.';
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: clamp(12px, 2vw, 28px);
 		padding: clamp(36px, 5vw, 72px) clamp(16px, 4vw, 64px);
-	}
-
-	.videos-section__statement {
-		margin: 0;
-		padding: clamp(72px, 10vw, 160px) clamp(24px, 8vw, 120px) clamp(100px, 12vw, 180px);
-		color: #0f1115;
-		font-family: 'Panchang', sans-serif;
-		font-size: clamp(44px, 8vw, 112px);
-		font-weight: 500;
-		line-height: 0.98;
-		letter-spacing: 0;
-		text-align: center;
-	}
-
-	.videos-section__statement-satoshi {
-		font-family: 'Satoshi', sans-serif;
-		font-size: clamp(20px, 3vw, 44px);
-		font-weight: 400;
-		letter-spacing: clamp(0.04em, 0.8vw, 0.12em);
-		text-transform: uppercase;
-		white-space: nowrap;
-	}
-
-	.videos-section__statement-panchang {
-		font-family: 'Panchang', sans-serif;
-		font-weight: 700;
 	}
 
 	.videos-section__video {
@@ -127,15 +96,6 @@ const statement = 'We make your brand unique.';
 	}
 
 	@media (max-width: 600px) {
-		.videos-section__statement-panchang {
-			display: block;
-			max-width: 100%;
-			margin-top: clamp(18px, 4vw, 36px);
-			font-size: clamp(44px, 18vw, 100px);
-			line-height: 0.9;
-			white-space: nowrap;
-		}
-
 		.videos-section__row {
 			gap: 8px;
 			padding: 24px 8px;
