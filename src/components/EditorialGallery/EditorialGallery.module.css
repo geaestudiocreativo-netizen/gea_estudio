@@ -81,11 +81,17 @@
 	object-fit: contain;
 }
 
+.paddedFirstImage {
+	padding: clamp(24px, 6vw, 96px);
+	box-sizing: border-box;
+	background: #f8f8f8;
+}
+
 .videoRow {
 	display: grid;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: clamp(12px, 2vw, 28px);
-	padding: clamp(36px, 5vw, 72px) clamp(16px, 4vw, 64px);
+	padding: clamp(96px, 12vw, 180px) clamp(32px, 8vw, 128px);
 	background: #ffffff;
 }
 
@@ -128,6 +134,26 @@
 	gap: 0;
 	row-gap: 0;
 	column-gap: 0;
+}
+
+.stackMobile {
+	display: block;
+}
+
+.stackMobile .pairBlock,
+.stackMobile .middleBlock {
+	display: block;
+}
+
+.stackMobile .item {
+	width: 100%;
+	height: auto;
+	aspect-ratio: auto;
+}
+
+.stackMobile .item img {
+	height: auto;
+	object-fit: contain;
 }
 
 .layout7 .item {

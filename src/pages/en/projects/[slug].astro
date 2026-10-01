@@ -102,8 +102,10 @@ const sections = project.services.map((service) => ({
 							images={section.images}
 							projectTitle={project.title}
 							layout={section.isPhotography || section.isSocialMedia ? 'vertical' : 'editorial'}
+									paddedImage={project.slug === 'gea-artesania' && section.isSocialMedia ? 'ig_1.png' : undefined}
 									videos={section.videos}
 							singleColumn={section.isSocialMedia}
+								stackMobile={project.slug === 'gea-artesania' && section.id === 'branding'}
 						/>
 					</div>
 				</section>

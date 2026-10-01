@@ -46,39 +46,53 @@
 		'e f f';
 }
 
+.branding-d {
+	grid-template-areas:
+		'a a a'
+		'a a a'
+		'a a a'
+		'a a a';
+}
+
 .branding-a .brandingItem:nth-child(1),
 .branding-b .brandingItem:nth-child(1),
-.branding-c .brandingItem:nth-child(1) {
+.branding-c .brandingItem:nth-child(1),
+.branding-d .brandingItem:nth-child(1) {
 	grid-area: a;
 }
 
 .branding-a .brandingItem:nth-child(2),
 .branding-b .brandingItem:nth-child(2),
-.branding-c .brandingItem:nth-child(2) {
+.branding-c .brandingItem:nth-child(2),
+.branding-d .brandingItem:nth-child(2) {
 	grid-area: b;
 }
 
 .branding-a .brandingItem:nth-child(3),
 .branding-b .brandingItem:nth-child(3),
-.branding-c .brandingItem:nth-child(3) {
+.branding-c .brandingItem:nth-child(3),
+.branding-d .brandingItem:nth-child(3) {
 	grid-area: c;
 }
 
 .branding-a .brandingItem:nth-child(4),
 .branding-b .brandingItem:nth-child(4),
-.branding-c .brandingItem:nth-child(4) {
+.branding-c .brandingItem:nth-child(4),
+.branding-d .brandingItem:nth-child(4) {
 	grid-area: d;
 }
 
 .branding-a .brandingItem:nth-child(5),
 .branding-b .brandingItem:nth-child(5),
-.branding-c .brandingItem:nth-child(5) {
+.branding-c .brandingItem:nth-child(5),
+.branding-d .brandingItem:nth-child(5) {
 	grid-area: e;
 }
 
 .branding-a .brandingItem:nth-child(6),
 .branding-b .brandingItem:nth-child(6),
-.branding-c .brandingItem:nth-child(6) {
+.branding-c .brandingItem:nth-child(6),
+.branding-d .brandingItem:nth-child(6) {
 	grid-area: f;
 }
 
@@ -123,7 +137,11 @@
 .branding-c .brandingItem:nth-child(1),
 .branding-c .brandingItem:nth-child(3),
 .branding-c .brandingItem:nth-child(5),
-.branding-c .brandingItem:nth-child(6) {
+.branding-c .brandingItem:nth-child(6),
+.branding-d .brandingItem:nth-child(1),
+.branding-d .brandingItem:nth-child(3),
+.branding-d .brandingItem:nth-child(5),
+.branding-d .brandingItem:nth-child(6) {
 	--slot-ratio: var(--slot-square);
 }
 
@@ -131,7 +149,15 @@
 	--slot-ratio: var(--slot-portrait);
 }
 
+.branding-d .brandingItem:nth-child(2) {
+	--slot-ratio: var(--slot-portrait);
+}
+
 .branding-c .brandingItem:nth-child(4) {
+	--slot-ratio: var(--slot-landscape);
+}
+
+.branding-d .brandingItem:nth-child(4) {
 	--slot-ratio: var(--slot-landscape);
 }
 

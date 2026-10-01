@@ -7,7 +7,7 @@ export type ServiceName =
 	| 'Filmmaking'
 	| 'Decoración';
 
-export type BrandingLayout = 'branding-a' | 'branding-b' | 'branding-c';
+export type BrandingLayout = 'branding-a' | 'branding-b' | 'branding-c' | 'branding-d';
 
 export type ServiceGalleryType = 'branding' | 'stack';
 

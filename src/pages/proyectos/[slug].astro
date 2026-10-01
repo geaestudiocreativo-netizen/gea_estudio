@@ -152,6 +152,8 @@ const sections = project.services.map((service) => ({
 									projectTitle={project.title}
 									layout={section.isPhotography || section.isSocialMedia ? 'vertical' : 'editorial'}
 									singleColumn={section.isSocialMedia}
+									stackMobile={project.slug === 'gea-artesania' && section.id === 'branding'}
+									paddedImage={project.slug === 'gea-artesania' && section.isSocialMedia ? 'ig_1.png' : undefined}
 									videos={section.videos}
 									frameFirstImages={project.slug === 'g' && section.id === 'branding'}
 									insertBrandStatement={project.slug === 'g' && section.id === 'branding'}

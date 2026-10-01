@@ -10,6 +10,8 @@ interface Props {
 	insertBrandStatement?: boolean;
 	containLastImage?: boolean;
 	singleColumn?: boolean;
+	stackMobile?: boolean;
+	 paddedImage?: string;
 	videos?: readonly string[];
 }
 
@@ -21,6 +23,8 @@ const {
 	insertBrandStatement = false,
 	containLastImage = false,
 	singleColumn = false,
+	stackMobile = false,
+	paddedImage,
 	videos = []
 } = Astro.props as Props;
 const IMAGES_PER_BLOCK = 7;
@@ -73,7 +77,7 @@ const blocks = toOrderedBlocks(images);
 				</section>
 			)}
 			{images.slice(2).map((image, index) => (
-				<figure class={styles.verticalItem} data-masonry-item>
+				<figure class={`${styles.verticalItem} ${paddedImage === image ? styles.paddedFirstImage : ''}`} data-masonry-item>
 					<ResponsiveImage
 						src={image}
 						alt={`${projectTitle} editorial ${index + 3}`}
@@ -87,7 +91,7 @@ const blocks = toOrderedBlocks(images);
 		</div>
 	) : (
 		blocks.map((blockImages, blockIndex) => (
-			<div class={`${styles.layout7} ${frameFirstImages && blockIndex === 0 ? styles.frameFirstImages : ''}`}>
+			<div class={`${styles.layout7} ${stackMobile ? styles.stackMobile : ''} ${frameFirstImages && blockIndex === 0 ? styles.frameFirstImages : ''}`}>
 				{
 					blockImages.length === 1 ? (
 						<figure class={`${styles.item} ${styles.itemSingle}`}>

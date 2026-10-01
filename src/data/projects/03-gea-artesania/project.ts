@@ -10,8 +10,8 @@ const project: ProjectFolderMetadata = {
 	description: 'Bisutería artesanal con piezas de diseño hechas en arcilla polimérica.',
 	subtitle: 'Universo visual para una marca de bisutería artesanal de edición limitada.',
 	services: [
-		{ type: 'Branding', gallery: 'branding', layout: 'branding-c', images: [
-				'branding-01.png', 'branding-03.png'
+		{ type: 'Branding', gallery: 'branding', layout: 'branding-d', images: [
+				'branding-02.jpg', 'branding-03.png','branding-04.png',
 			] },
 		{ type: 'Fotografía', gallery: 'fotografia', images: [
 				'IMG_0143.jpg', 'IMG_0568.jpg', 'IMG_0743.JPG', 'IMG_0856.jpg',
@@ -21,7 +21,7 @@ const project: ProjectFolderMetadata = {
 				'IMG_8274.JPG', 'IMG_8832.JPG'
 			] },
 		{ type: 'Redes Sociales', gallery: 'redes-sociales', images: [
-				'ig_1.jpg', 'ig_2.jpg', 'ig_3.jpg', 'ig_4.jpg'
+				'ig_1.png', 'ig_2.jpg', 'ig_3.jpg', 'ig_4.jpg'
 			], videos: ['video-01.mov', 'video-02.mov', 'video-03.mov'] }
 	],
 	gallery: {
