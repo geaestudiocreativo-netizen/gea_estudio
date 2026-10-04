@@ -93,7 +93,7 @@ const sections = project.services.map((service) => ({
 			sections.map((section, index) => (
 				<section
 					id={`panel-${section.id}`}
-					class={styles.section}
+					class={`${styles.section} ${section.isSocialMedia ? styles.socialMediaSection : ''}`}
 					role="tabpanel"
 					aria-labelledby={`tab-${section.id}`}
 					data-project-panel
@@ -104,7 +104,7 @@ const sections = project.services.map((service) => ({
 					{
 						section.isWeb && (section.background || section.video) ? (
 							<div
-								class={`${styles.webComposition} ${!section.background ? styles.webCompositionPlain : ''}`}
+								class={`${styles.webComposition} ${!section.background ? styles.webCompositionPlain : ''} ${project.slug === 'g' ? styles.webCompositionG : ''}`}
 								style={section.background ? `--web-background-image: url("${section.background}")` : '--web-background-image: none'}
 							>
 								{section.video ? (

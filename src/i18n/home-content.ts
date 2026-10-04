@@ -2,7 +2,7 @@ import type { Locale } from './site';
 
 export const heroContent = {
 	es: {
-		eyebrow: 'ESTUDIO CREATIVO',
+		eyebrow: 'STUDIO CREATIVO',
 		headingMain: 'Creamos universos visuales para marcas',
 		headingSecondary:
 			'Diseñamos identidades que cobran vida a través del branding, la fotografía, el diseño web, el editorial, la decoración y las redes sociales.',
@@ -55,7 +55,7 @@ export const aboutSectionContent = {
 		title: 'SOBRE GEA',
 		titleAria: 'Sobre Gea',
 		intro: 'Soy Ángela,',
-		introSecondLine: 'la persona detrás de gea estudio.',
+		introSecondLine: 'la persona detrás de Gea Estudio.',
 		context:
 			'Mi formación empezó en la ingeniería y mi camino profesional ha estado muy ligado al mundo de la tecnología, un entorno de lógica, estructuras y soluciones. Pero siempre he sentido una necesidad muy fuerte de crear, de explorar lo visual y de dar forma a las ideas de una manera más libre.',
 		statement: 'Gea Estudio nace de ahí.',
@@ -85,7 +85,7 @@ export const aboutSectionContent = {
 
 export const footerContent = {
 	es: {
-		instagramAria: 'Instagram de Gea Estudio',
+		instagramAria: 'Instagram de Gea Studio',
 		footerNavAria: 'Enlaces de pie de pagina',
 		privacy: 'POLITICA DE PRIVACIDAD'
 	},

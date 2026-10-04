@@ -148,6 +148,10 @@
 	margin-right: calc(50% - 50vw);
 }
 
+.socialMediaSection .fullBleedGallery {
+	margin-top: clamp(16px, 2vw, 24px);
+}
+
 .webComposition {
 	position: relative;
 	width: 100vw;
@@ -210,6 +214,13 @@
 	.webVideo {
 		width: 100%;
 		max-width: none;
+	}
+}
+
+@media (min-width: 1024px) {
+	.webCompositionG .webVideo {
+		width: 70%;
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 	}
 }
 
@@ -465,8 +476,8 @@
 }
 
 .projectNavLabel {
-	font-family: 'Panchang', sans-serif;
-	font-size: 12px;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
@@ -474,8 +485,8 @@
 }
 
 .projectNavTitle {
-	font-family: 'Satoshi', sans-serif;
-	font-size: 14px;
+	font-family: 'Panchang', sans-serif;
+	font-size: 12px;
 	font-weight: 400;
 	letter-spacing: 0.18em;
 	line-height: 1.2;
@@ -485,6 +496,10 @@
 
 @media (min-width: 768px) {
 	.projectNavLabel {
+		font-size: 14px;
+	}
+
+	.projectNavTitle {
 		font-size: 22px;
 	}
 
@@ -501,8 +516,12 @@
 		transform: none;
 	}
 
+	.projectLink {
+		padding: 16px 0;
+	}
+
 	.projectNavArrow {
-		font-size: 56px;
+		font-size: 44px;
 		color: #111111;
 		margin-bottom: 0;
 	}
@@ -510,7 +529,21 @@
 	.projectNavLabel {
 		font-size: 8px;
 	}
+
+	.projectNavTitle {
+		font-size: 14px;
+	}
 }
+
+	@media (min-width: 1024px) {
+		.projectDescription {
+			width: min(60%, 620px);
+			margin-top: clamp(36px, 4vw, 64px);
+			margin-left: auto;
+			margin-right: auto;
+			font-size: clamp(8.5px, 1.05vw, 13px);
+		}
+	}
 
 @media (max-width: 959px) {
 	.brandingGrid {

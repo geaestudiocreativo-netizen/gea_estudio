@@ -317,3 +317,9 @@
 		color: #5f5f5f;
 	}
 }
+
+@media (min-width: 901px) {
+	.list {
+		gap: clamp(84px, 10vw, 140px);
+	}
+}

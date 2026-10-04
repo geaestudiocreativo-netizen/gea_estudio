@@ -47,7 +47,7 @@ const blocks = toOrderedBlocks(images);
 
 {
 	layout === 'vertical' ? (
-		<div class={`${styles.verticalStack} ${singleColumn ? styles.singleColumn : ''}`} data-photography-masonry={!singleColumn ? true : undefined} data-single-column={singleColumn ? 'true' : undefined}>
+		<div class={`${styles.verticalStack} ${singleColumn ? styles.singleColumn : ''} ${paddedImage ? styles.paddedSocialGallery : ''}`} data-photography-masonry={!singleColumn ? true : undefined} data-single-column={singleColumn ? 'true' : undefined}>
 			{images.slice(0, 2).map((image, index) => (
 				<figure class={styles.verticalItem} data-masonry-item>
 					<ResponsiveImage
