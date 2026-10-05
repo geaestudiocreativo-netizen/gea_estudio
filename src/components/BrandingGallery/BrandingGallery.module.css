@@ -150,7 +150,7 @@
 }
 
 .branding-d .brandingItem:nth-child(2) {
-	--slot-ratio: var(--slot-portrait);
+	--slot-ratio: var(--slot-square);
 }
 
 .branding-c .brandingItem:nth-child(4) {

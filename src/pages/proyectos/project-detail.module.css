@@ -89,6 +89,12 @@
 	max-width: 1120px;
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+	.page {
+		padding-top: clamp(104px, 12vw, 132px);
+	}
+}
+
 @media (min-width: 768px) {
 	.cover {
 		width: 50%;

@@ -11,9 +11,9 @@ const project: ProjectFolderMetadata = {
 	subtitle: 'Universo visual para una marca de bisutería artesanal de edición limitada.',
 	services: [
 		// TODO
-		/*{ type: 'Branding', gallery: 'branding', layout: 'branding-d', images: [
-				'branding-02.jpg', 'branding-03.png','branding-04.png',
-			] },*/
+		{ type: 'Branding', gallery: 'branding', layout: 'branding-d', images: [
+				'branding-02.jpg', 'branding-03.png','branding-05.jpg'
+			] },
 		{ type: 'Fotografía', gallery: 'fotografia', images: [
 				'IMG_0143.jpg', 'IMG_0568.jpg', 'IMG_0743.JPG', 'IMG_0856.jpg',
 				'IMG_1886.JPG', 'IMG_2193.JPG', 'IMG_3467.JPG', 'IMG_4067.jpg',
