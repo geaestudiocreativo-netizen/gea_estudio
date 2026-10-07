@@ -14,7 +14,10 @@ const { locale = 'es' } = Astro.props as Props;
 	<div class="serviceMarquee__content">
 		<div class="serviceMarquee__statement">
 			<p class="serviceMarquee__eyebrow">UNA MARCA NO SOLO</p>
-			<h2 id="brand-statement-title">SE DISEÑA.<br />SE CONSTRUYE.</h2>
+			<h2 id="brand-statement-title">
+				<span class="serviceMarquee__headlineLine">SE DISEÑA.</span>
+				<span class="serviceMarquee__headlineLine">SE CONSTRUYE.</span>
+			</h2>
 			<p class="serviceMarquee__support">A través de la dirección creativa y el branding damos forma al universo visual de tu marca.</p>
 		</div>
 		<VideosSection locale={locale} embedded />
@@ -72,10 +75,15 @@ const { locale = 'es' } = Astro.props as Props;
 		letter-spacing: 0;
 	}
 
+	.serviceMarquee__headlineLine {
+		display: block;
+		white-space: nowrap;
+	}
+
 	.serviceMarquee__support {
 		max-width: 100%;
 		margin: clamp(36px, 5vw, 72px) 0 0;
-		font-size: clamp(18px, 1.5vw, 22px);
+		font-size: 19px;
 		font-weight: 300;
 		line-height: 1.35;
 		letter-spacing: 0;
@@ -93,6 +101,12 @@ const { locale = 'es' } = Astro.props as Props;
 		margin-inline: 0;
 	}
 
+	@media (max-width: 900px) {
+		.serviceMarquee__support {
+			font-size: 14px;
+		}
+	}
+
 	@media (min-width: 1024px) {
 		.serviceMarquee :global(.videos-section--embedded .videos-section__row) {
 			padding-block: 0;
@@ -104,12 +118,16 @@ const { locale = 'es' } = Astro.props as Props;
 			--content-width: 100%;
 		}
 
+		.serviceMarquee__support {
+			font-size: 14px;
+		}
+
 		.serviceMarquee__eyebrow {
 			margin-bottom: 28px;
 		}
 
 		.serviceMarquee__statement h2 {
-			font-size: clamp(38px, 10.5vw, 62px);
+			font-size: clamp(30px, 10vw, 62px);
 		}
 	}
 </style>

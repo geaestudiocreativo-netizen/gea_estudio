@@ -122,6 +122,10 @@
 		padding-right: 10px;
 	}
 
+	.title {
+		font-size: clamp(26px, 8vw, 34px);
+	}
+
 	.filtersSticky {
 		padding-top: 9px;
 		padding-bottom: 7px;

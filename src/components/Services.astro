@@ -494,7 +494,8 @@ const getServiceName = (serviceTitle: string) => {
 			justify-content: center;
 			width: 100%;
 			max-width: 100%;
-			font-size: clamp(27px, calc(8.8vw - 4px), 70px);
+			min-width: 0;
+			font-size: clamp(27px, calc(8.2vw - 4px), 66px);
 			line-height: 0.84;
 			letter-spacing: 0;
 			word-break: normal;
@@ -508,16 +509,12 @@ const getServiceName = (serviceTitle: string) => {
 		}
 
 		.services-editorial__name[data-service-name='photography'] {
-			font-size: clamp(25px, calc(8.1vw - 4px), 64px);
-		}
-
-		.services-editorial__name[data-service-name='photography'] .services-editorial__name-line {
-			white-space: nowrap;
+			font-size: clamp(25px, calc(7.6vw - 4px), 60px);
 		}
 
 		.services-editorial__name[data-service-name='interior-design'],
 		.services-editorial__name[data-service-name='social-media'] {
-			font-size: clamp(26px, calc(8.35vw - 4px), 66px);
+			font-size: clamp(26px, calc(7.8vw - 4px), 62px);
 		}
 
 		.services-editorial__description {
@@ -542,7 +539,7 @@ const getServiceName = (serviceTitle: string) => {
 		}
 
 		.services-editorial__name {
-			font-size: clamp(24px, 7.6vw, 40px);
+			font-size: clamp(24px, 7.2vw, 38px);
 			line-height: 0.85;
 		}
 
@@ -551,12 +548,12 @@ const getServiceName = (serviceTitle: string) => {
 		}
 
 		.services-editorial__name[data-service-name='photography'] {
-			font-size: clamp(23px, 6.7vw, 36px);
+			font-size: clamp(20px, 6vw, 32px);
 		}
 
 		.services-editorial__name[data-service-name='interior-design'],
 		.services-editorial__name[data-service-name='social-media'] {
-			font-size: clamp(23px, 7.4vw, 39px);
+			font-size: clamp(23px, 7vw, 37px);
 		}
 
 		.services-editorial__description {
