@@ -3,9 +3,10 @@ import type { Locale } from '../i18n/site';
 
 interface Props {
 	locale?: Locale;
+	embedded?: boolean;
 }
 
-const { locale = 'es' } = Astro.props as Props;
+const { locale = 'es', embedded = false } = Astro.props as Props;
 const videos = [
 	{ file: 'video-01.mp4', label: 'Filmmaking' },
 	{ file: 'video-02.mp4', label: 'Photoshoot' },
@@ -14,7 +15,7 @@ const videos = [
 const label = locale === 'en' ? 'Videos' : 'Videos';
 ---
 
-<section class="videos-section" aria-labelledby="videos-title">
+<section class:list={['videos-section', embedded && 'videos-section--embedded']} aria-labelledby="videos-title">
 	<h2 id="videos-title" class="sr-only">{label}</h2>
 	<div class="videos-section__row">
 		{videos.map((video, index) => (
@@ -52,6 +53,16 @@ const label = locale === 'en' ? 'Videos' : 'Videos';
 		width: 100%;
 		padding-block: clamp(96px, 14vw, 220px);
 		background: #f8f8f8;
+	}
+
+	.videos-section--embedded {
+		padding-block: clamp(24px, 4vw, 56px);
+		background: transparent;
+	}
+
+	.videos-section--embedded .videos-section__row {
+		width: 100%;
+		padding: 0 clamp(16px, 4vw, 64px);
 	}
 
 	.videos-section__row {
@@ -110,6 +121,11 @@ const label = locale === 'en' ? 'Videos' : 'Videos';
 		.videos-section__row {
 			width: 78%;
 			margin-inline: auto;
+		}
+
+		.videos-section--embedded .videos-section__row {
+			width: 78%;
+			padding-inline: 0;
 		}
 	}
 </style>

@@ -2,6 +2,7 @@
 import { services } from '../data/services';
 import { servicesEn } from '../data/services-en';
 import type { Locale } from '../i18n/site';
+import VideosSection from './VideosSection.astro';
 
 interface Props {
 	locale?: Locale;
@@ -25,8 +26,9 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 		</div>
 	</div>
 	<p class="serviceMarquee__statement">
-		{locale === 'en' ? 'Make your brand unique' : <><span class="serviceMarquee__statement-phrase">Hacemos que tu<span class="serviceMarquee__statement-space"> </span><br />marca sea </span><span class="serviceMarquee__statement-word">ÚNICA</span></>}
+		{locale === 'en' ? 'Make your brand unique' : <><span class="serviceMarquee__statement-phrase">Hacemos que tu marca sea </span><span class="serviceMarquee__statement-word">ÚNICA</span></>}
 	</p>
+	<VideosSection locale={locale} embedded />
 	<div class="serviceMarquee__band serviceMarquee__band--bottom">
 		<div class="serviceMarquee__track">
 			<div class="serviceMarquee__group" aria-hidden="true">
@@ -44,20 +46,21 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 		position: relative;
 		z-index: 4;
 		width: 100vw;
-		height: 100svh;
+		height: auto;
+		min-height: 100svh;
 		margin-left: calc(50% - 50vw);
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-between;
 		overflow: hidden;
 		background: #000;
 		flex-direction: column;
-		gap: clamp(8px, 2vw, 24px);
+		gap: clamp(24px, 4vw, 64px);
 	}
 
 	.serviceMarquee__band {
 		width: 100%;
-		flex: 1 1 0;
+		flex: 0 0 clamp(56px, 9vw, 112px);
 		display: flex;
 		align-items: center;
 		overflow: hidden;
@@ -79,25 +82,26 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 	}
 
 	.serviceMarquee__group {
-		gap: clamp(40px, 4vw, 72px);
-		padding-right: clamp(40px, 4vw, 72px);
+		gap: 0;
+		padding-right: 0;
 		white-space: nowrap;
 	}
 
 	.serviceMarquee__item {
 		color: #f8f8f8;
 		font-family: 'Satoshi', sans-serif;
-		font-size: clamp(17px, 3.6vw, 46px);
+		font-size: clamp(24px, 5vw, 64px);
 		font-weight: 300;
-		letter-spacing: 0.04em;
+		letter-spacing: 0;
+		word-spacing: 0;
 		line-height: 1;
 		text-transform: none;
 	}
 
 	.serviceMarquee__item--panchang {
 		font-family: 'Panchang', sans-serif;
-		font-size: clamp(15px, 3.1vw, 40px);
-		letter-spacing: 0.08em;
+		font-size: clamp(22px, 4.5vw, 58px);
+		letter-spacing: 0;
 	}
 
 	.serviceMarquee__statement {
@@ -116,30 +120,36 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 
 	.serviceMarquee__statement-word {
 		display: block;
-		width: 100vw;
+		width: calc(100vw - 24px);
+		max-width: calc(100vw - 24px);
+		box-sizing: border-box;
 		position: relative;
 		left: 50%;
 		transform: translateX(-50%);
-		padding-top: clamp(16px, 2.5vw, 40px);
-		font-size: clamp(64px, 20vw, 240px);
+		padding-top: clamp(8px, 1.5vw, 20px);
+		font-size: clamp(48px, 15vw, 190px);
 		font-weight: 700;
 		text-transform: uppercase;
-		line-height: 0.8;
+		line-height: 0.88;
 		text-align: center;
 		vertical-align: middle;
 	}
 
 	.serviceMarquee__statement-phrase {
 		display: inline-block;
-		font-size: clamp(20px, 5vw, 72px);
-		line-height: 0.98;
+		font-family: 'Satoshi', sans-serif !important;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 1.2;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
 		vertical-align: middle;
 		white-space: nowrap;
 	}
 
 	.serviceMarquee__item--light {
 		font-weight: 400;
-		letter-spacing: 0.1em;
+		letter-spacing: 0;
 	opacity: 0.82;
 	}
 
@@ -153,20 +163,12 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 
 	@media (min-width: 1024px) {
 		.serviceMarquee__item {
-			font-size: clamp(11px, calc(3.6vw - 6px), 40px);
+			font-size: clamp(22px, 4vw, 56px);
 			font-weight: 300;
 		}
 
 		.serviceMarquee__item--panchang {
-			font-size: clamp(9px, calc(3.1vw - 6px), 34px);
-		}
-
-		.serviceMarquee__statement-phrase {
-			font-size: clamp(16px, 3vw, 44px);
-		}
-
-		.serviceMarquee__statement-phrase br {
-			display: none;
+			font-size: clamp(20px, 3.6vw, 50px);
 		}
 
 		.serviceMarquee__track {
