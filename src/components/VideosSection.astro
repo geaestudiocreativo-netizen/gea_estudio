@@ -8,9 +8,9 @@ interface Props {
 
 const { locale = 'es', embedded = false } = Astro.props as Props;
 const videos = [
-	{ file: 'video-01.mp4', label: 'Filmmaking' },
-	{ file: 'video-02.mp4', label: 'Photoshoot' },
-	{ file: 'video-03.mp4', label: 'Contenido para IG' }
+	{ file: 'video-01.optimized.mp4', label: 'Filmmaking' },
+	{ file: 'video-02.optimized.mp4', label: 'Photoshoot' },
+	{ file: 'video-03.optimized.mp4', label: 'Contenido para IG' }
 ];
 const label = locale === 'en' ? 'Videos' : 'Videos';
 ---
@@ -22,12 +22,12 @@ const label = locale === 'en' ? 'Videos' : 'Videos';
 			<div class="videos-section__card">
 				<video
 					class="videos-section__video"
-					src={`/images/videos/${video.file}`}
+					data-video-src={`/images/videos/${video.file}`}
 					autoplay
 					loop
 					muted
 					playsinline
-					preload="auto"
+					preload="none"
 					aria-label={`${label} ${index + 1}`}
 				/>
 				<span class="videos-section__label">{video.label}</span>
@@ -38,13 +38,27 @@ const label = locale === 'en' ? 'Videos' : 'Videos';
 
 <script>
 	const videos = document.querySelectorAll<HTMLVideoElement>('.videos-section__video');
+	const loadVideo = (video: HTMLVideoElement) => {
+		const source = video.dataset.videoSrc;
+		if (!source || video.src) return;
+		video.src = source;
+		video.load();
+		void video.play().catch(() => undefined);
+	};
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				const video = entry.target as HTMLVideoElement;
+				loadVideo(video);
+				observer.unobserve(video);
+			}
+		});
+	}, { rootMargin: '300px 0px' });
 
 	videos.forEach((video) => {
 		video.muted = true;
 		video.defaultMuted = true;
-		video.addEventListener('canplay', () => {
-			void video.play().catch(() => undefined);
-		}, { once: true });
+		observer.observe(video);
 	});
 </script>
 

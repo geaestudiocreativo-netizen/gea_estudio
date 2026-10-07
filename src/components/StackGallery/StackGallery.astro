@@ -1,5 +1,6 @@
 ---
 import styles from './StackGallery.module.css';
+import ResponsiveImage from '../ResponsiveImage.astro';
 
 interface Props {
 	images: string[];
@@ -14,7 +15,14 @@ const { images, projectTitle, serviceType } = Astro.props as Props;
 	{
 		images.map((image, index) => (
 			<figure class={styles.galleryItem}>
-				<img src={image} alt={`${projectTitle} ${serviceType} ${index + 1}`} loading="lazy" decoding="async" />
+				<ResponsiveImage
+					src={image}
+					alt={`${projectTitle} ${serviceType} ${index + 1}`}
+					loading="lazy"
+					decoding="async"
+					sizes="(max-width: 767px) 100vw, 50vw"
+					widths={[480, 768, 960, 1280, 1600]}
+				/>
 			</figure>
 		))
 	}

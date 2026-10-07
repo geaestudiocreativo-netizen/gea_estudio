@@ -1,5 +1,6 @@
 ---
 import styles from './VisualChapter.module.css';
+import ResponsiveImage from './ResponsiveImage.astro';
 
 const imageSrc = '/images/others/Galaxia.png';
 ---
@@ -8,7 +9,15 @@ const imageSrc = '/images/others/Galaxia.png';
 	<div class={styles.wordmarkDock} data-wordmark-dock aria-hidden="true"></div>
 	<div class={styles.stickyStage}>
 		<div class={styles.frame} data-visual-frame>
-			<img class={styles.image} src={imageSrc} alt="" loading="lazy" decoding="async" />
+			<ResponsiveImage
+				class={styles.image}
+				src={imageSrc}
+				alt=""
+				loading="lazy"
+				decoding="async"
+				sizes="100vw"
+				widths={[640, 960, 1280, 1600, 1920]}
+			/>
 			<p class={styles.copy} aria-hidden="true">
 				<span class={styles.mainLineA}>Qué hacemos</span>
 				<span class={styles.mainLineB}>

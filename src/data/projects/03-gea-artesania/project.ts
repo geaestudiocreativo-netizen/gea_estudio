@@ -23,7 +23,7 @@ const project: ProjectFolderMetadata = {
 			] },
 		{ type: 'Redes Sociales', gallery: 'redes-sociales', images: [
 				'ig_1.png', 'ig_2.jpg', 'ig_3.jpg', 'ig_4.jpg'
-			], videos: ['video-01.mov', 'video-02.mov', 'video-03.mov'] }
+			], videos: ['video-01.optimized.mp4', 'video-02.optimized.mp4', 'video-03.optimized.mp4'] }
 	],
 	gallery: {
 		layouts: ['editorial', 'gallery', 'hero']

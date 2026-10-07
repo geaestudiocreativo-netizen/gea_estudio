@@ -1,5 +1,6 @@
 ---
 import styles from './BrandingGallery.module.css';
+import ResponsiveImage from '../ResponsiveImage.astro';
 
 interface Props {
 	images: string[];
@@ -17,7 +18,14 @@ const layoutClass = styles[layout] ?? styles['branding-a'];
 	{
 		images.map((image, index) => (
 			<figure class={styles.brandingItem}>
-				<img src={image} alt={`${projectTitle} ${serviceType} ${index + 1}`} loading="lazy" decoding="async" />
+				<ResponsiveImage
+					src={image}
+					alt={`${projectTitle} ${serviceType} ${index + 1}`}
+					loading="lazy"
+					decoding="async"
+					sizes="(max-width: 767px) 100vw, 50vw"
+					widths={[480, 768, 960, 1280, 1600]}
+				/>
 			</figure>
 		))
 	}

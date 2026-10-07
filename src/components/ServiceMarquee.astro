@@ -1,6 +1,4 @@
 ---
-import { services } from '../data/services';
-import { servicesEn } from '../data/services-en';
 import type { Locale } from '../i18n/site';
 import VideosSection from './VideosSection.astro';
 
@@ -9,37 +7,17 @@ interface Props {
 }
 
 const { locale = 'es' } = Astro.props as Props;
-const serviceTitles = (locale === 'en' ? servicesEn : services).map((service) => service.homeTitle);
-const marqueeItems = ['Gea Studio — Studio Creativo', ...serviceTitles];
-const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 ---
 
-<div class="serviceMarquee" aria-label={marqueeItems.join(' · ')}>
-	<div class="serviceMarquee__band">
-		<div class="serviceMarquee__track">
-			<div class="serviceMarquee__group" aria-hidden="true">
-				{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
-			</div>
-			<div class="serviceMarquee__group" aria-hidden="true">
-				{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
-			</div>
-		</div>
+
+<section class="serviceMarquee" aria-labelledby="brand-statement-title">
+	<div class="serviceMarquee__statement">
+		<p class="serviceMarquee__eyebrow">UNA MARCA NO SOLO</p>
+		<h2 id="brand-statement-title">SE DISEÑA.<br />SE CONSTRUYE.</h2>
+		<p class="serviceMarquee__support">A través de la dirección creativa y el branding damos forma al universo visual de tu marca.</p>
 	</div>
-	<p class="serviceMarquee__statement">
-		{locale === 'en' ? 'Make your brand unique' : <><span class="serviceMarquee__statement-phrase">Hacemos que tu marca sea </span><span class="serviceMarquee__statement-word">ÚNICA</span></>}
-	</p>
 	<VideosSection locale={locale} embedded />
-	<div class="serviceMarquee__band serviceMarquee__band--bottom">
-		<div class="serviceMarquee__track">
-			<div class="serviceMarquee__group" aria-hidden="true">
-				{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
-			</div>
-			<div class="serviceMarquee__group" aria-hidden="true">
-				{marqueeItems.map((item, index) => <span class={`serviceMarquee__item serviceMarquee__item--${styleVariants[index % styleVariants.length]}`}>{item}</span>)}
-			</div>
-		</div>
-	</div>
-</div>
+</section>
 
 <style>
 	.serviceMarquee {
@@ -51,143 +29,74 @@ const styleVariants = ['panchang', 'light', 'uppercase', 'lowercase'];
 		margin-left: calc(50% - 50vw);
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: center;
 		overflow: hidden;
-		background: #000;
+		background: #160c07;
 		flex-direction: column;
-		gap: clamp(24px, 4vw, 64px);
-	}
-
-	.serviceMarquee__band {
-		width: 100%;
-		flex: 0 0 clamp(56px, 9vw, 112px);
-		display: flex;
-		align-items: center;
-		overflow: hidden;
-	}
-
-	.serviceMarquee__band--bottom .serviceMarquee__track {
-		animation-direction: reverse;
-	}
-
-	.serviceMarquee__track,
-	.serviceMarquee__group {
-		display: flex;
-		align-items: center;
-	}
-
-	.serviceMarquee__track {
-		width: max-content;
-		animation: serviceMarqueeScroll 26s linear infinite;
-	}
-
-	.serviceMarquee__group {
-		gap: 0;
-		padding-right: 0;
-		white-space: nowrap;
-	}
-
-	.serviceMarquee__item {
-		color: #f8f8f8;
-		font-family: 'Satoshi', sans-serif;
-		font-size: clamp(24px, 5vw, 64px);
-		font-weight: 300;
-		letter-spacing: 0;
-		word-spacing: 0;
-		line-height: 1;
-		text-transform: none;
-	}
-
-	.serviceMarquee__item--panchang {
-		font-family: 'Panchang', sans-serif;
-		font-size: clamp(22px, 4.5vw, 58px);
-		letter-spacing: 0;
+		gap: clamp(64px, 8vw, 120px);
+		padding-block: clamp(112px, 14vw, 208px);
 	}
 
 	.serviceMarquee__statement {
-		flex: 0 0 auto;
-		width: 100vw;
-		max-width: none;
-		margin: 0;
-		color: #f8f8f8;
-		font-family: 'Panchang', sans-serif;
-		font-size: clamp(48px, 9.6vw, 136px);
-		font-weight: 700;
+		width: min(78%, 1120px);
+		margin: 0 auto;
+		color: #f5ecdf;
+		font-family: 'Satoshi', sans-serif;
+		text-align: left;
+	}
+
+	.serviceMarquee__eyebrow {
+		margin: 0 0 clamp(28px, 4vw, 52px);
+		color: #f5ecdf;
+		font-size: clamp(14px, 1.25vw, 18px);
+		font-weight: 300;
 		line-height: 1;
-		letter-spacing: 0.02em;
-		text-align: center;
-	}
-
-	.serviceMarquee__statement-word {
-		display: block;
-		width: calc(100vw - 24px);
-		max-width: calc(100vw - 24px);
-		box-sizing: border-box;
-		position: relative;
-		left: 50%;
-		transform: translateX(-50%);
-		padding-top: clamp(8px, 1.5vw, 20px);
-		font-size: clamp(48px, 15vw, 190px);
-		font-weight: 700;
-		text-transform: uppercase;
-		line-height: 0.88;
-		text-align: center;
-		vertical-align: middle;
-	}
-
-	.serviceMarquee__statement-phrase {
-		display: inline-block;
-		font-family: 'Satoshi', sans-serif !important;
-		font-size: 14px;
-		font-weight: 500;
-		line-height: 1.2;
 		letter-spacing: 0.2em;
 		text-transform: uppercase;
-		vertical-align: middle;
-		white-space: nowrap;
 	}
 
-	.serviceMarquee__item--light {
-		font-weight: 400;
+	.serviceMarquee__statement h2 {
+		margin: 0;
+		font-size: clamp(42px, 6.5vw, 96px);
+		font-weight: 700;
+		line-height: 0.96;
 		letter-spacing: 0;
-	opacity: 0.82;
 	}
 
-	.serviceMarquee__item--uppercase {
-		text-transform: uppercase;
+	.serviceMarquee__support {
+		max-width: 100%;
+		margin: clamp(36px, 5vw, 72px) 0 0;
+		font-size: clamp(18px, 1.5vw, 22px);
+		font-weight: 300;
+		line-height: 1.35;
+		letter-spacing: 0;
 	}
 
-	.serviceMarquee__item--lowercase {
-		text-transform: lowercase;
+	.serviceMarquee .videos-section--embedded {
+		padding-block: 0;
+	}
+
+	.serviceMarquee .videos-section--embedded .videos-section__row {
+		padding-block: 0;
 	}
 
 	@media (min-width: 1024px) {
-		.serviceMarquee__item {
-			font-size: clamp(22px, 4vw, 56px);
-			font-weight: 300;
-		}
-
-		.serviceMarquee__item--panchang {
-			font-size: clamp(20px, 3.6vw, 50px);
-		}
-
-		.serviceMarquee__track {
-			animation: serviceMarqueeScroll 32s linear infinite;
+		.serviceMarquee .videos-section--embedded .videos-section__row {
+			padding-block: 0;
 		}
 	}
 
-	@keyframes serviceMarqueeScroll {
-		from {
-			transform: translateX(0);
+	@media (max-width: 767px) {
+		.serviceMarquee__statement {
+			width: calc(100% - 32px);
 		}
-		to {
-			transform: translateX(-50%);
-		}
-	}
 
-	@media (prefers-reduced-motion: reduce) {
-		.serviceMarquee__track {
-			animation: none;
+		.serviceMarquee__eyebrow {
+			margin-bottom: 28px;
+		}
+
+		.serviceMarquee__statement h2 {
+			font-size: clamp(38px, 10.5vw, 62px);
 		}
 	}
 </style>

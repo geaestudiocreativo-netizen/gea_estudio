@@ -110,12 +110,12 @@ const sections = project.services.map((service) => ({
 								{section.video ? (
 									<video
 										class={styles.webVideo}
-										src={section.video}
+										data-video-src={section.video}
 										autoplay
 										loop
 										muted
 										playsinline
-										preload="metadata"
+										preload="none"
 										aria-label={`${project.title} web design`}
 									/>
 								) : (
@@ -167,6 +167,25 @@ const sections = project.services.map((service) => ({
 		}
 
 		<nav class={`${styles.projectNav} ${project.slug === 'talleres-alonso' ? styles.projectNavTalleres : ''}`} aria-label="Navegación de proyectos">
+
+<script>
+	const projectVideos = document.querySelectorAll<HTMLVideoElement>('[data-video-src]');
+	const projectVideoObserver = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (!entry.isIntersecting) return;
+			const video = entry.target as HTMLVideoElement;
+			const source = video.dataset.videoSrc;
+			if (source && !video.src) {
+				video.src = source;
+				video.load();
+				void video.play().catch(() => undefined);
+			}
+			projectVideoObserver.unobserve(video);
+		});
+	}, { rootMargin: '300px 0px' });
+
+	projectVideos.forEach((video) => projectVideoObserver.observe(video));
+</script>
 			<a class={styles.projectLink} href={`/proyectos/${previousProject.slug}`}>
 				<span class={styles.projectNavBody}>
 					<span class={styles.projectNavTitle}>{previousProject.title}</span>

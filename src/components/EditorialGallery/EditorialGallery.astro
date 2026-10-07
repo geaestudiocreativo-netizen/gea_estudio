@@ -65,12 +65,12 @@ const blocks = toOrderedBlocks(images);
 					{videos.map((video, index) => (
 						<video
 							class={styles.socialVideo}
-							src={video}
+							data-video-src={video}
 							autoplay
 							loop
 							muted
 							playsinline
-							preload="auto"
+							preload="none"
 							aria-label={`${projectTitle} social media video ${index + 1}`}
 						/>
 					))}
@@ -182,6 +182,25 @@ const blocks = toOrderedBlocks(images);
 									<div class={styles.brandStatement}>
 										<p>Hechas a mano, pensadas para quedarse.</p>
 									</div>
+
+									<script>
+										const galleryVideos = document.querySelectorAll<HTMLVideoElement>('[data-video-src]');
+										const galleryObserver = new IntersectionObserver((entries) => {
+											entries.forEach((entry) => {
+												if (!entry.isIntersecting) return;
+												const video = entry.target as HTMLVideoElement;
+												const source = video.dataset.videoSrc;
+												if (source && !video.src) {
+													video.src = source;
+													video.load();
+													void video.play().catch(() => undefined);
+												}
+												galleryObserver.unobserve(video);
+											});
+										}, { rootMargin: '300px 0px' });
+
+										galleryVideos.forEach((video) => galleryObserver.observe(video));
+									</script>
 								)
 							}
 
