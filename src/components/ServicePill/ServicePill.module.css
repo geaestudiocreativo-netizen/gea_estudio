@@ -4,11 +4,11 @@
 	border-radius: 0;
 	width: fit-content;
 	flex: 0 0 auto;
-	padding: 7px 16px;
+	padding: clamp(6px, 1.7vw, 7px) clamp(10px, 3vw, 16px);
 	background: #ffffff;
 	color: #16181d;
 	font-family: 'Satoshi', sans-serif;
-	font-size: 14px;
+	font-size: var(--type-label);
 	font-weight: 400;
 	line-height: 1;
 	white-space: nowrap;
@@ -29,7 +29,6 @@
 
 @media (max-width: 767px) {
 	.pill {
-		padding: 6px 12px;
-		font-size: 12px;
+		padding: clamp(5px, 1.6vw, 6px) clamp(9px, 3vw, 12px);
 	}
 }

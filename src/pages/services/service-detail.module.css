@@ -59,7 +59,8 @@
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 	color: #1f2126;
-	overflow-wrap: anywhere;
+	overflow-wrap: normal;
+	word-break: normal;
 }
 
 @media (min-width: 768px) {
@@ -354,7 +355,7 @@
 	}
 
 	.title {
-		font-size: clamp(27px, calc(8.8vw - 4px), 70px);
+		font-size: clamp(18px, 5.6vw, 70px);
 		font-weight: 900;
 		line-height: 0.84;
 		letter-spacing: 0;
@@ -397,7 +398,7 @@
 		grid-template-columns: 30px minmax(0, 1fr);
 		gap: 12px;
 		padding: 22px 0;
-		font-size: 16px;
+		font-size: clamp(14px, 4.3vw, 16px);
 		letter-spacing: 0.035em;
 	}
 
@@ -407,7 +408,7 @@
 	}
 
 	.universeTitle {
-		font-size: 32px;
+		font-size: clamp(24px, 7vw, 32px);
 		line-height: 1.08;
 		letter-spacing: 0.06em;
 		color: #23262c;
@@ -430,7 +431,7 @@
 
 	.relatedList a {
 		padding: 16px 44px;
-		font-size: 14px;
+		font-size: clamp(12px, 3.5vw, 14px);
 		letter-spacing: 0.095em;
 		color: #1f2126;
 	}
@@ -446,7 +447,7 @@
 	}
 
 	.contactTitle {
-		font-size: 26px;
+		font-size: clamp(24px, 6.8vw, 30px);
 		font-weight: 700;
 		line-height: 1.1;
 		letter-spacing: 0.06em;
@@ -454,7 +455,7 @@
 
 	.contactText {
 		margin-top: 28px;
-		font-size: 12px;
+		font-size: clamp(11px, 3.5vw, 12px);
 		line-height: 1.42;
 		letter-spacing: 0.075em;
 		max-width: 430px;

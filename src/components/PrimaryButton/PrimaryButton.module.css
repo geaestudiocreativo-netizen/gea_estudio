@@ -4,9 +4,10 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 240px;
-	height: 52px;
-	padding-inline: 34px;
+	width: min(240px, 100%);
+	min-height: clamp(44px, 12vw, 52px);
+	height: auto;
+	padding: clamp(12px, 2.8vw, 17px) clamp(16px, 5vw, 34px);
 	box-sizing: border-box;
 	border: 1px solid #111111;
 	border-radius: 1px;
@@ -15,12 +16,13 @@
 	text-align: center;
 	text-decoration: none;
 	font-family: 'Satoshi', sans-serif;
-	font-size: 13px;
+	font-size: var(--type-control);
 	font-weight: 400;
-	line-height: 1;
-	letter-spacing: 0.2em;
+	line-height: 1.15;
+	letter-spacing: clamp(0.08em, 0.8vw, 0.2em);
 	text-transform: uppercase;
-	white-space: nowrap;
+	white-space: normal;
+	text-wrap: balance;
 	transition: background-color 180ms ease, color 180ms ease;
 }
 

@@ -243,6 +243,7 @@
 
 	.compactMobile .title {
 		margin-top: 5px;
+		font-size: clamp(11px, 3.2vw, 12px);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -254,7 +255,7 @@
 
 	.compactMobile .description {
 		margin-top: 4px;
-		font-size: 14px;
+		font-size: clamp(12px, 3.5vw, 14px);
 		font-weight: 300;
 		white-space: nowrap;
 		overflow: hidden;

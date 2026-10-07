@@ -233,6 +233,13 @@
 	white-space: nowrap;
 }
 
+@media (max-width: 767px) {
+	.brandStatement p {
+		max-width: 100%;
+		white-space: normal;
+	}
+}
+
 .layout7 .item4,
 .layout7 .item7 {
 	aspect-ratio: var(--slot-landscape);
