@@ -2,7 +2,7 @@ import type { Locale } from './site';
 
 export const heroContent = {
 	es: {
-		eyebrow: 'STUDIO CREATIVO',
+		eyebrow: 'ESTUDIO CREATIVO',
 		headingMain: 'Creamos universos visuales para marcas',
 		headingSecondary:
 			'Diseñamos identidades que cobran vida a través del branding, la fotografía, el diseño web, el editorial, la decoración y las redes sociales.',
