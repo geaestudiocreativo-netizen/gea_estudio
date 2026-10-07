@@ -11,16 +11,19 @@ const { locale = 'es' } = Astro.props as Props;
 
 
 <section class="serviceMarquee" aria-labelledby="brand-statement-title">
-	<div class="serviceMarquee__statement">
-		<p class="serviceMarquee__eyebrow">UNA MARCA NO SOLO</p>
-		<h2 id="brand-statement-title">SE DISEÑA.<br />SE CONSTRUYE.</h2>
-		<p class="serviceMarquee__support">A través de la dirección creativa y el branding damos forma al universo visual de tu marca.</p>
+	<div class="serviceMarquee__content">
+		<div class="serviceMarquee__statement">
+			<p class="serviceMarquee__eyebrow">UNA MARCA NO SOLO</p>
+			<h2 id="brand-statement-title">SE DISEÑA.<br />SE CONSTRUYE.</h2>
+			<p class="serviceMarquee__support">A través de la dirección creativa y el branding damos forma al universo visual de tu marca.</p>
+		</div>
+		<VideosSection locale={locale} embedded />
 	</div>
-	<VideosSection locale={locale} embedded />
 </section>
 
 <style>
 	.serviceMarquee {
+		--content-width: 78%;
 		position: relative;
 		z-index: 4;
 		width: 100vw;
@@ -33,13 +36,19 @@ const { locale = 'es' } = Astro.props as Props;
 		overflow: hidden;
 		background: #160c07;
 		flex-direction: column;
+		padding: clamp(160px, 18vw, 280px) clamp(16px, 5vw, 72px);
+		box-sizing: border-box;
+	}
+
+	.serviceMarquee__content {
+		width: var(--content-width);
+		display: flex;
+		flex-direction: column;
 		gap: clamp(64px, 8vw, 120px);
-		padding-block: clamp(112px, 14vw, 208px);
 	}
 
 	.serviceMarquee__statement {
-		width: min(78%, 1120px);
-		margin: 0 auto;
+		width: 100%;
 		color: #f5ecdf;
 		font-family: 'Satoshi', sans-serif;
 		text-align: left;
@@ -72,23 +81,27 @@ const { locale = 'es' } = Astro.props as Props;
 		letter-spacing: 0;
 	}
 
-	.serviceMarquee .videos-section--embedded {
+	.serviceMarquee :global(.videos-section--embedded) {
+		width: 100%;
 		padding-block: 0;
 	}
 
-	.serviceMarquee .videos-section--embedded .videos-section__row {
+	.serviceMarquee :global(.videos-section--embedded .videos-section__row) {
+		width: 100%;
 		padding-block: 0;
+		padding-inline: 0;
+		margin-inline: 0;
 	}
 
 	@media (min-width: 1024px) {
-		.serviceMarquee .videos-section--embedded .videos-section__row {
+		.serviceMarquee :global(.videos-section--embedded .videos-section__row) {
 			padding-block: 0;
 		}
 	}
 
 	@media (max-width: 767px) {
-		.serviceMarquee__statement {
-			width: calc(100% - 32px);
+		.serviceMarquee {
+			--content-width: 100%;
 		}
 
 		.serviceMarquee__eyebrow {
