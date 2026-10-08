@@ -1,11 +1,16 @@
 ---
 import styles from './VisualChapter.module.css';
 import ResponsiveImage from './ResponsiveImage.astro';
+import { visualChapterContent } from '../i18n/home-content';
+import type { Locale } from '../i18n/site';
 
 const imageSrc = '/images/others/Galaxia.png';
+interface Props { locale?: Locale }
+const { locale = 'es' } = Astro.props as Props;
+const content = visualChapterContent[locale];
 ---
 
-<section class={styles.chapter} aria-label="Visual chapter" data-visual-chapter data-state="idle">
+<section class={styles.chapter} aria-label={content.ariaLabel} data-visual-chapter data-state="idle">
 	<div class={styles.wordmarkDock} data-wordmark-dock aria-hidden="true"></div>
 	<div class={styles.stickyStage}>
 		<div class={styles.frame} data-visual-frame>
@@ -19,10 +24,9 @@ const imageSrc = '/images/others/Galaxia.png';
 				widths={[640, 960, 1280, 1600, 1920]}
 			/>
 			<p class={styles.copy} aria-hidden="true">
-				<span class={styles.mainLineA}>Qué hacemos</span>
+					<span class={styles.mainLineA}>{content.heading}</span>
 				<span class={styles.mainLineB}>
-					<span class={styles.mainLineBLine}>Seis disciplinas.</span>
-					<span class={styles.mainLineBLine}>Un mismo universo visual.</span>
+						{content.lines.map((line) => <span class={styles.mainLineBLine}>{line}</span>)}
 				</span>
 			</p>
 		</div>

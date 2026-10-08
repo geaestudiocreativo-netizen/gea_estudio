@@ -32,8 +32,8 @@ const content = servicePageContent.en;
 			<p class={styles.intro} data-branding-intro>{service.intro}</p>
 		</section>
 
-		<figure class={`${styles.heroImage} ${isBrandingExperiment ? styles.brandingImageStage : ''}`} data-branding-stage={isBrandingExperiment ? 'true' : undefined}>
-			<div class={styles.brandingViewport} data-branding-viewport>
+		{!isBrandingExperiment && (
+			<figure class={styles.heroImage}>
 				<ResponsiveImage
 					src={service.heroImage}
 					alt={service.title}
@@ -43,8 +43,8 @@ const content = servicePageContent.en;
 					sizes="100vw"
 					widths={[768, 1280, 1600, 1920]}
 				/>
-			</div>
-		</figure>
+			</figure>
+		)}
 
 		<section class={styles.systems} aria-labelledby="service-systems-title">
 			<h2 id="service-systems-title" class={styles.sectionTitle}>{service.sectionTitle}</h2>

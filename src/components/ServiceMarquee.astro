@@ -1,24 +1,25 @@
 ---
 import type { Locale } from '../i18n/site';
 import VideosSection from './VideosSection.astro';
+import { serviceMarqueeContent } from '../i18n/home-content';
 
 interface Props {
 	locale?: Locale;
 }
 
 const { locale = 'es' } = Astro.props as Props;
+const content = serviceMarqueeContent[locale];
 ---
 
 
 <section class="serviceMarquee" aria-labelledby="brand-statement-title">
 	<div class="serviceMarquee__content">
 		<div class="serviceMarquee__statement">
-			<p class="serviceMarquee__eyebrow">UNA MARCA NO SOLO</p>
+			<p class="serviceMarquee__eyebrow">{content.eyebrow}</p>
 			<h2 id="brand-statement-title">
-				<span class="serviceMarquee__headlineLine">SE DISEÑA.</span>
-				<span class="serviceMarquee__headlineLine">SE CONSTRUYE.</span>
+				{content.headline.map((line) => <span class="serviceMarquee__headlineLine">{line}</span>)}
 			</h2>
-			<p class="serviceMarquee__support">A través de la dirección creativa y el branding damos forma al universo visual de tu marca.</p>
+			<p class="serviceMarquee__support">{content.support}</p>
 		</div>
 		<VideosSection locale={locale} embedded />
 	</div>

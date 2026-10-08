@@ -18,6 +18,9 @@ const projectDescriptionTranslations: Record<string, string> = {
 	'gea-artesania': 'Handcrafted jewelry with design-led pieces made in polymer clay.'
 };
 
+export const getLocalizedProjectDescription = (project: Project, locale: Locale): string =>
+	locale === 'en' ? projectDescriptionTranslations[project.slug] ?? project.description : project.description;
+
 export const localizeServiceType = (serviceType: string, locale: Locale): string => {
 	if (locale === 'es') return serviceType;
 	return serviceTypeTranslations[serviceType as ServiceName] ?? serviceType;
@@ -28,10 +31,6 @@ export const getLocalizedProjects = (locale: Locale): Project[] => {
 
 	return projects.map((project) => ({
 		...project,
-		description: projectDescriptionTranslations[project.slug] ?? project.description,
-		services: project.services.map((service) => ({
-			...service,
-			type: localizeServiceType(service.type, locale)
-		})) as Project['services']
+		description: getLocalizedProjectDescription(project, locale)
 	}));
 };

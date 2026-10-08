@@ -1,5 +1,6 @@
 ---
 import type { Locale } from '../i18n/site';
+import { videoContent } from '../i18n/home-content';
 
 interface Props {
 	locale?: Locale;
@@ -7,12 +8,13 @@ interface Props {
 }
 
 const { locale = 'es', embedded = false } = Astro.props as Props;
+const content = videoContent[locale];
 const videos = [
-	{ file: 'video-01.optimized.mp4', label: 'Filmmaking' },
-	{ file: 'video-02.optimized.mp4', label: 'Photoshoot' },
-	{ file: 'video-03.optimized.mp4', label: 'Contenido para IG' }
+	{ file: 'video-01.optimized.mp4', label: content.labels[0] },
+	{ file: 'video-02.optimized.mp4', label: content.labels[1] },
+	{ file: 'video-03.optimized.mp4', label: content.labels[2] }
 ];
-const label = locale === 'en' ? 'Videos' : 'Videos';
+const label = content.sectionLabel;
 ---
 
 <section class:list={['videos-section', embedded && 'videos-section--embedded']} aria-labelledby="videos-title">

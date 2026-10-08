@@ -25,6 +25,7 @@ export type ProjectServiceMetadata =
 			gallery: 'branding';
 			layout: BrandingLayout;
 			images?: string[];
+			videos?: string[];
 	  }
 	| {
 			type: 'Web';

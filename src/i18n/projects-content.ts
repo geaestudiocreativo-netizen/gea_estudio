@@ -24,7 +24,9 @@ export const projectDetailContent = {
 		previous: 'Anterior',
 		next: 'Siguiente',
 		tabsAria: 'Navegacion de secciones del proyecto',
-		projectCardAriaPrefix: 'Ver proyecto'
+		projectCardAriaPrefix: 'Ver proyecto',
+		visitWeb: 'Visitar web',
+		brandStatement: 'Hechas a mano, pensadas para quedarse.',
 	},
 	en: {
 		sectionsAria: 'Project sections',
@@ -32,6 +34,8 @@ export const projectDetailContent = {
 		previous: 'Previous',
 		next: 'Next',
 		tabsAria: 'Project section navigation',
-		projectCardAriaPrefix: 'View project'
+		projectCardAriaPrefix: 'View project',
+		visitWeb: 'Visit website',
+		brandStatement: 'Handmade, designed to last.',
 	}
 } as const;

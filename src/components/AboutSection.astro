@@ -19,7 +19,7 @@ const content = aboutSectionContent[locale];
 		<div class="about-visual-wrap relative overflow-hidden">
 			<ResponsiveImage
 				src="/images/about/about_image.png"
-				alt="Creative director reviewing editorial color and print material"
+				alt={locale === 'en' ? 'Creative director reviewing editorial color and print material' : 'Directora creativa revisando color editorial y material impreso'}
 				class="about-portrait mx-auto object-cover aspect-[704/860]"
 				loading="lazy"
 				decoding="async"
@@ -30,7 +30,7 @@ const content = aboutSectionContent[locale];
 				id="about-title"
 				class="about-title"
 			>
-				<a href={getLocalizedPath(locale, '/#about')} aria-label={content.titleAria} style="color: inherit; text-decoration: none;"><span>Sobre</span> <span>Gea</span></a>
+				<a href={getLocalizedPath(locale, '/#about')} aria-label={content.titleAria} style="color: inherit; text-decoration: none;"><span>{locale === 'en' ? 'About' : 'Sobre'}</span> <span>Gea</span></a>
 			</h2>
 		</div>
 

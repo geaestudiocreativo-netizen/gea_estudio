@@ -2,18 +2,20 @@
 import Layout from '../../../layouts/Layout.astro';
 import ProjectTabs from '../../../components/ProjectTabs/ProjectTabs.astro';
 import EditorialGallery from '../../../components/EditorialGallery/EditorialGallery.astro';
-import { getLocalizedProjects } from '../../../data/projects-i18n';
+import ResponsiveImage from '../../../components/ResponsiveImage.astro';
+import { getLocalizedProjectDescription, localizeServiceType } from '../../../data/projects-i18n';
+import { projects as baseProjects } from '../../../data/projects';
 import styles from '../../proyectos/project-detail.module.css';
 import { projectDetailContent } from '../../../i18n/projects-content';
 
 export function getStaticPaths() {
-	return getLocalizedProjects('en').map((project) => ({
+	return baseProjects.map((project) => ({
 		params: { slug: project.slug },
 		props: { slug: project.slug }
 	}));
 }
 
-const projects = getLocalizedProjects('en');
+const projects = baseProjects;
 
 const { slug } = Astro.props as { slug: string };
 
@@ -26,8 +28,8 @@ if (projectIndex === -1) {
 const project = projects[projectIndex];
 const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
 const nextProject = projects[(projectIndex + 1) % projects.length];
-const clientLabel = project.client.replace(/^by\s+/i, '').toUpperCase();
 const content = projectDetailContent.en;
+const projectDescription = getLocalizedProjectDescription(project, 'en');
 
 const toSectionId = (name: string) =>
 	name
@@ -41,8 +43,6 @@ const encodeSegments = (...segments: string[]) => segments.map((segment) => enco
 
 const toProjectImageUrl = (...segments: string[]) => `/images/projects/${encodeSegments(...segments)}`;
 
-const formatServiceTitle = (service: string) => `${service.charAt(0).toUpperCase()}${service.slice(1).toLowerCase()}`;
-
 const isPhotographySection = (name: string) => {
 	const normalized = name
 		.normalize('NFD')
@@ -54,21 +54,28 @@ const isPhotographySection = (name: string) => {
 
 const sections = project.services.map((service) => ({
 	id: toSectionId(service.type),
-	title: formatServiceTitle(service.type),
-	isPhotography: isPhotographySection(service.type),
-	isSocialMedia: service.type === 'Redes Sociales',
+	title: localizeServiceType(service.type, 'en'),
+	isPhotography: service.gallery === 'fotografia' || isPhotographySection(service.type),
+	isSocialMedia: service.gallery === 'redes-sociales',
+	isWeb: service.gallery === 'web',
+	websiteUrl: service.gallery === 'web' ? service.url : undefined,
+	background: service.gallery === 'web' && service.background
+		? toProjectImageUrl(project.assetsFolder, service.gallery, service.background)
+		: undefined,
+	video: service.gallery === 'web' && service.video
+		? toProjectImageUrl(project.assetsFolder, service.gallery, service.video)
+		: undefined,
 	images: (service.images ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename)),
 	videos: (service.videos ?? []).map((filename) => toProjectImageUrl(project.assetsFolder, service.gallery, filename))
 }));
 ---
 
-<Layout title={`${project.title} | Gea Studio`} description={project.description}>
+<Layout title={`${project.title} | Gea Studio`} description={projectDescription}>
 	<main class={styles.page}>
 		<header class={styles.projectHeader}>
 			<img class={styles.projectLogo} src={project.logo} alt={project.title} loading="eager" decoding="async" />
+			<p class={styles.projectDescription}>{projectDescription}</p>
 			<div class={styles.headerDivider} aria-hidden="true"></div>
-			<p class={styles.projectDescription}>{project.description}</p>
-			<p class={styles.projectMetaLine}>BY {clientLabel}</p>
 		</header>
 
 		<div class={styles.projectContent}>
@@ -89,7 +96,7 @@ const sections = project.services.map((service) => ({
 			sections.map((section, index) => (
 				<section
 					id={`panel-${section.id}`}
-					class={styles.section}
+					class={`${styles.section} ${section.isSocialMedia ? styles.socialMediaSection : ''}`}
 					role="tabpanel"
 					aria-labelledby={`tab-${section.id}`}
 					data-project-panel
@@ -97,22 +104,64 @@ const sections = project.services.map((service) => ({
 					hidden={index !== 0}
 				>
 					<h2 id={`section-${section.id}`} class={styles.sectionTitle}>{section.title}</h2>
-					<div class={styles.fullBleedGallery}>
+					{
+						section.isWeb && (section.background || section.video) ? (
+							<div
+								class={`${styles.webComposition} ${!section.background ? styles.webCompositionPlain : ''} ${project.slug === 'g' ? styles.webCompositionG : ''}`}
+								style={section.background ? `--web-background-image: url("${section.background}")` : '--web-background-image: none'}
+							>
+								{section.video ? (
+									<video
+										class={styles.webVideo}
+										data-video-src={section.video}
+										autoplay
+										loop
+										muted
+										playsinline
+										preload="none"
+										aria-label={`${project.title} web design`}
+									/>
+								) : (
+									<ResponsiveImage
+										src={section.images[0]}
+										alt={`${project.title} web design`}
+										loading="lazy"
+										decoding="async"
+										sizes="(max-width: 767px) 92vw, 78vw"
+										widths={[480, 768, 960, 1280, 1600]}
+									/>
+								)}
+								{section.websiteUrl && (
+									<a class={styles.webVisitButton} href={section.websiteUrl} target="_blank" rel="noreferrer">
+										<span class={styles.webVisitLabel}><span>{content.visitWeb}</span></span>
+										<span class={styles.webVisitDomain}>{section.websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}</span>
+										<span class={styles.webVisitArrow} aria-hidden="true">&#8594;</span>
+									</a>
+								)}
+							</div>
+						) : (
+							<div class={styles.fullBleedGallery}>
 						<EditorialGallery
 							images={section.images}
 							projectTitle={project.title}
 							layout={section.isPhotography || section.isSocialMedia ? 'vertical' : 'editorial'}
 									paddedImage={project.slug === 'gea-artesania' && section.isSocialMedia ? 'ig_1.png' : undefined}
 									videos={section.videos}
-							singleColumn={section.isSocialMedia}
-								stackMobile={project.slug === 'gea-artesania' && section.id === 'branding'}
+									locale="en"
+											frameFirstImages={project.slug === 'g' && section.id === 'branding'}
+											insertBrandStatement={project.slug === 'g' && section.id === 'branding'}
+											containLastImage={project.slug === 'talleres-alonso' && section.id === 'branding'}
+											singleColumn={section.isSocialMedia}
+											stackMobile={project.slug === 'gea-artesania' && section.id === 'branding'}
 						/>
-					</div>
+							</div>
+						)
+					}
 				</section>
 			))
 		}
 
-		<nav class={styles.projectNav} aria-label={content.navAria}>
+		<nav class={`${styles.projectNav} ${project.slug === 'talleres-alonso' ? styles.projectNavTalleres : ''}`} aria-label={content.navAria}>
 			<a class={styles.projectLink} href={`/en/projects/${previousProject.slug}`}>
 				<span class={styles.projectNavLabel}>{content.previous}</span>
 				<span class={styles.projectNavTitle}>{previousProject.title}</span>

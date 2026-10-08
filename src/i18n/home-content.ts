@@ -95,3 +95,40 @@ export const footerContent = {
 		privacy: 'PRIVACY POLICY'
 	}
 } as const;
+
+export const visualChapterContent = {
+	es: {
+		ariaLabel: 'Capítulo visual',
+		heading: 'Qué hacemos',
+		lines: ['Seis disciplinas.', 'Un mismo universo visual.']
+	},
+	en: {
+		ariaLabel: 'Visual chapter',
+		heading: 'What we do',
+		lines: ['Six disciplines.', 'One visual universe.']
+	}
+} as const;
+
+export const serviceMarqueeContent = {
+	es: {
+		eyebrow: 'UNA MARCA NO SOLO',
+		headline: ['SE DISEÑA.', 'SE CONSTRUYE.'],
+		support: 'A través de la dirección creativa y el branding damos forma al universo visual de tu marca.'
+	},
+	en: {
+		eyebrow: 'A BRAND IS NOT ONLY',
+		headline: ['DESIGNED.', 'IT IS BUILT.'],
+		support: 'Through creative direction and branding, we shape your brand visual universe.'
+	}
+} as const;
+
+export const videoContent = {
+	es: {
+		sectionLabel: 'Vídeos',
+		labels: ['Filmmaking', 'Sesión de fotos', 'Contenido para IG']
+	},
+	en: {
+		sectionLabel: 'Videos',
+		labels: ['Filmmaking', 'Photoshoot', 'Content for Instagram']
+	}
+} as const;

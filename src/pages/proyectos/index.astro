@@ -2,10 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 import ProjectCard from '../../components/ProjectCard/ProjectCard.astro';
 import ServicePill from '../../components/ServicePill/ServicePill.astro';
-import { projects } from '../../data/projects';
+import { getLocalizedProjects, localizeServiceType } from '../../data/projects-i18n';
 import type { ServiceName } from '../../data/projects/types';
+import { projectsPageContent } from '../../i18n/projects-content';
 import styles from './projects.module.css';
 
+const projects = getLocalizedProjects('es');
 const availableServices = new Set(projects.flatMap((project) => project.services.map((service) => service.type)));
 const serviceOrder: ServiceName[] = [
 	'Branding',
@@ -27,22 +29,24 @@ const normalizeService = (value: string) =>
 		.toLowerCase()
 		.trim();
 
+const content = projectsPageContent.es;
+
 ---
 
 <Layout>
 	<main class={styles.page}>
 		<header class={styles.header}>
-			<h1 class={styles.title}>PROYECTOS</h1>
-			<p class={styles.intro}>Así como construimos universos visuales para marcas.</p>
+			<h1 class={styles.title}>{content.title}</h1>
+			<p class={styles.intro}>{content.intro}</p>
 		</header>
 
 		<div class={styles.filtersSticky}>
-			<div class={styles.filtersBar} role="group" aria-label="Filtrar proyectos por servicio" data-filter-bar>
-				<ServicePill label="Todos" pressed buttonRole="project-filter" dataService="all" />
+			<div class={styles.filtersBar} role="group" aria-label={content.filterAria} data-filter-bar>
+				<ServicePill label={content.allFilter} pressed buttonRole="project-filter" dataService="all" />
 				{
 					serviceFilters.map((service) => (
 						<ServicePill
-							label={service}
+							label={localizeServiceType(service, 'es')}
 							buttonRole="project-filter"
 							dataService={normalizeService(service)}
 						/>
@@ -51,7 +55,7 @@ const normalizeService = (value: string) =>
 			</div>
 		</div>
 
-		<ul class={styles.grid} role="list" aria-label="Listado de proyectos">
+		<ul class={styles.grid} role="list" aria-label={content.listAria}>
 			{
 				projects.map((project) => (
 					<li

@@ -1,6 +1,8 @@
 ---
 import styles from './EditorialGallery.module.css';
 import ResponsiveImage from '../ResponsiveImage.astro';
+import { projectDetailContent } from '../../i18n/projects-content';
+import type { Locale } from '../../i18n/site';
 
 interface Props {
 	images: readonly string[];
@@ -13,6 +15,7 @@ interface Props {
 	stackMobile?: boolean;
 	 paddedImage?: string;
 	videos?: readonly string[];
+	locale?: Locale;
 }
 
 const {
@@ -25,8 +28,10 @@ const {
 	singleColumn = false,
 	stackMobile = false,
 	paddedImage,
-	videos = []
+	videos = [],
+	locale = 'es'
 } = Astro.props as Props;
+const content = projectDetailContent[locale];
 const IMAGES_PER_BLOCK = 7;
 
 const toOrderedBlocks = (orderedImages: readonly string[]) => {
@@ -180,7 +185,7 @@ const blocks = toOrderedBlocks(images);
 							{
 								insertBrandStatement && blockIndex === 0 && blockImages[4] && (
 									<div class={styles.brandStatement}>
-										<p>Hechas a mano, pensadas para quedarse.</p>
+														<p>{content.brandStatement}</p>
 									</div>
 
 									<script>

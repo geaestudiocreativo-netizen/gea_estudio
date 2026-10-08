@@ -2,6 +2,7 @@ import type { Locale } from './site';
 
 export const servicePageContent = {
 	es: {
+		systemsTitle: 'QUÉ INCLUYE',
 		relatedAria: 'Otros servicios',
 		viewProjects: 'Explorar proyectos',
 		viewProjectsAria: 'Explorar proyectos',
@@ -9,6 +10,7 @@ export const servicePageContent = {
 		consultationAria: 'Solicitar una consulta'
 	},
 	en: {
+		systemsTitle: 'WHAT IT INCLUDES',
 		relatedAria: 'Other services',
 		viewProjects: 'Explore projects',
 		viewProjectsAria: 'Explore projects',

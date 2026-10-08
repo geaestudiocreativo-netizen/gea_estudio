@@ -4,6 +4,7 @@ import ProjectTabs from '../../components/ProjectTabs/ProjectTabs.astro';
 import EditorialGallery from '../../components/EditorialGallery/EditorialGallery.astro';
 import ResponsiveImage from '../../components/ResponsiveImage.astro';
 import { projects } from '../../data/projects';
+import { projectDetailContent } from '../../i18n/projects-content';
 import styles from './project-detail.module.css';
 
 export function getStaticPaths() {
@@ -24,7 +25,7 @@ if (projectIndex === -1) {
 const project = projects[projectIndex];
 const previousProject = projects[(projectIndex - 1 + projects.length) % projects.length];
 const nextProject = projects[(projectIndex + 1) % projects.length];
-const clientLabel = project.client.replace(/^by\s+/i, '').toUpperCase();
+const content = projectDetailContent.es;
 
 const toSectionId = (name: string) =>
 	name
@@ -78,11 +79,11 @@ const sections = project.services.map((service) => ({
 		<div class={styles.projectContent}>
 		{
 			sections.length > 0 && (
-				<nav class={styles.sectionTabsWrap} aria-label="Secciones del proyecto">
+				<nav class={styles.sectionTabsWrap} aria-label={content.sectionsAria}>
 					<div class={styles.sectionTabs}>
 						<ProjectTabs
 							sections={sections.map((section) => ({ id: section.id, label: section.title }))}
-							ariaLabel="Navegación de secciones del proyecto"
+							ariaLabel={content.tabsAria}
 						/>
 					</div>
 				</nav>
@@ -116,7 +117,7 @@ const sections = project.services.map((service) => ({
 										muted
 										playsinline
 										preload="none"
-										aria-label={`${project.title} web design`}
+										aria-label={`${project.title} ${content.visitWeb.toLowerCase()}`}
 									/>
 								) : (
 									<ResponsiveImage
@@ -136,7 +137,7 @@ const sections = project.services.map((service) => ({
 										rel="noreferrer"
 									>
 										<span class={styles.webVisitLabel}>
-											<span>VISITAR WEB</span>
+											<span>{content.visitWeb}</span>
 										</span>
 										<span class={styles.webVisitDomain}>
 											{section.websiteUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}
@@ -166,7 +167,7 @@ const sections = project.services.map((service) => ({
 			))
 		}
 
-		<nav class={`${styles.projectNav} ${project.slug === 'talleres-alonso' ? styles.projectNavTalleres : ''}`} aria-label="Navegación de proyectos">
+		<nav class={`${styles.projectNav} ${project.slug === 'talleres-alonso' ? styles.projectNavTalleres : ''}`} aria-label={content.navAria}>
 
 <script>
 	const projectVideos = document.querySelectorAll<HTMLVideoElement>('[data-video-src]');
@@ -189,13 +190,13 @@ const sections = project.services.map((service) => ({
 			<a class={styles.projectLink} href={`/proyectos/${previousProject.slug}`}>
 				<span class={styles.projectNavBody}>
 					<span class={styles.projectNavTitle}>{previousProject.title}</span>
-					<span class={styles.projectNavLabel}>Proyecto anterior</span>
+					<span class={styles.projectNavLabel}>{content.previous}</span>
 				</span>
 			</a>
 			<a class={styles.projectLink} href={`/proyectos/${nextProject.slug}`}>
 				<span class={styles.projectNavBody}>
 					<span class={styles.projectNavTitle}>{nextProject.title}</span>
-					<span class={styles.projectNavLabel}>Proyecto siguiente</span>
+					<span class={styles.projectNavLabel}>{content.next}</span>
 				</span>
 			</a>
 		</nav>
