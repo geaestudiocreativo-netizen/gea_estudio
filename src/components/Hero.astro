@@ -16,6 +16,10 @@ const getHeadingLines = (heading: string) => {
 		return ['Creamos universos', 'visuales para marcas'];
 	}
 
+	if (heading === 'We create visual universes for brands') {
+		return ['We create visual universes', 'for brands'];
+	}
+
 	return [heading, ''];
 };
 
@@ -49,7 +53,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 		<div class={styles.copy}>
 			<h1>
 				<span class={styles.eyebrow}>{content.eyebrow}</span>
-				<span class={styles.headingMain} data-hero-headline data-full-text={content.headingMain} data-line-one={headingLineOne} data-line-two={headingLineTwo}>
+				<span class={styles.headingMain} data-hero-headline data-fit-text data-full-text={content.headingMain} data-line-one={headingLineOne} data-line-two={headingLineTwo}>
 					<span class={styles.headingMainLine} data-hero-headline-line="one">{headingLineOne}</span>
 					{headingLineTwo && <span class={styles.headingMainLine} data-hero-headline-line="two">{headingLineTwo}</span>}
 				</span>
@@ -79,6 +83,17 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 		const siteNav = document.querySelector('[data-site-nav]');
 		const mobileQuery = window.matchMedia('(max-width: 767px)');
 		const tabletQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
+		const fitLocalizedHeadings = () => {
+			if (!(headline instanceof HTMLElement)) return;
+
+			headline.style.removeProperty('font-size');
+			const availableWidth = headline.parentElement?.clientWidth ?? headline.clientWidth;
+			const renderedWidth = headline.scrollWidth;
+			if (availableWidth > 0 && renderedWidth > availableWidth) {
+				const currentSize = Number.parseFloat(window.getComputedStyle(headline).fontSize);
+				headline.style.fontSize = `${currentSize * (availableWidth / renderedWidth)}px`;
+			}
+		};
 		let syncRaf = 0;
 		let watchRaf = 0;
 		let lastSplit = '';
@@ -421,6 +436,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 		});
 
 		const onViewportUpdate = () => {
+			fitLocalizedHeadings();
 			if (hero.dataset.entrance === 'done') {
 				syncWordmarkViewportPosition();
 				return;
@@ -434,6 +450,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 		window.addEventListener('resize', onViewportUpdate);
 		window.addEventListener('scroll', onViewportUpdate, { passive: true });
 		window.addEventListener('DOMContentLoaded', onViewportUpdate, { once: true });
+		fitLocalizedHeadings();
 		requestSplitSync();
 		ensureSplitWatcher();
 
@@ -506,6 +523,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 							const secondLineCursor = Math.max(cursor - lineOneText.length, 0);
 							headlineLineTwo.textContent = lineTwoText.slice(0, secondLineCursor);
 						}
+						fitLocalizedHeadings();
 
 						const nextDelay = Math.floor(35 + Math.random() * 26);
 						window.setTimeout(typeNextChar, nextDelay);

@@ -1,9 +1,7 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import PrimaryButton from '../../components/PrimaryButton/PrimaryButton.astro';
+import ServiceDetailPage from '../../components/ServiceDetailPage.astro';
 import { services } from '../../data/services';
 import { servicePageContent } from '../../i18n/services-content';
-import styles from './service-detail.module.css';
 
 export function getStaticPaths() {
 	return services.map((service) => ({
@@ -19,73 +17,13 @@ if (!service) {
 	throw new Response('Service not found', { status: 404 });
 }
 
-const relatedServices = services.filter((item) => item.slug !== service.slug);
 const content = servicePageContent.es;
 ---
-
-<Layout title={service.seo.title} description={service.seo.description}>
-	<main class={styles.page}>
-		<section class={styles.hero}>
-			<h1 class={styles.title}>{service.title}</h1>
-		</section>
-
-		<section class={styles.systems}>
-			<p class={styles.systemsEyebrow}>{content.systemsTitle}</p>
-			<ul class={styles.systemsList} role="list">
-				{
-					service.services.map((item) => (
-						<li class={styles.systemItem}>{item}</li>
-					))
-				}
-			</ul>
-		</section>
-
-		<section class={styles.universe} aria-labelledby="service-universe-title">
-			<h2 id="service-universe-title" class={styles.universeTitle}>{service.universeTitle}</h2>
-			<p class={styles.universeText}>{service.universeText}</p>
-
-			<nav class={styles.relatedNav} aria-label={content.relatedAria}>
-				<ul class={styles.relatedList} role="list">
-					{
-						relatedServices.map((related) => (
-							<li>
-									<a href={`/services/${related.slug}`}>
-										{related.title}
-									</a>
-							</li>
-						))
-					}
-				</ul>
-			</nav>
-
-			<PrimaryButton
-				href="/proyectos"
-				label={content.viewProjects}
-				ariaLabel={content.viewProjectsAria}
-				className={styles.servicesCta}
-			/>
-		</section>
-
-		<section class={styles.contact} aria-labelledby="service-contact-title">
-			<h2 id="service-contact-title" class={styles.contactTitle}>{service.ctaTitle}</h2>
-			<p class={styles.contactText}>
-				{service.ctaText.split(/(?<=\.)\s+/).map((sentence, index, sentences) => (
-					<>
-						{index === 0 ? <strong>{sentence}</strong> : sentence}
-						{index < sentences.length - 1 && (
-							<>
-								{' '}<br />
-							</>
-						)}
-					</>
-				))}
-			</p>
-			<PrimaryButton
-				href="/#contact"
-				label={content.consultation}
-				ariaLabel={content.consultationAria}
-				className={styles.contactButton}
-			/>
-		</section>
-	</main>
-</Layout>
+<ServiceDetailPage
+	service={service}
+	services={services}
+	content={content}
+	servicesPath="/services"
+	projectsPath="/proyectos"
+	contactPath="/#contact"
+/>

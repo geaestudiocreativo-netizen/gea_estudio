@@ -23,6 +23,10 @@ const getServiceNameLines = (serviceTitle: string) => {
 		return ['PHOTOGRAPHY &', 'FILMMAKING'];
 	}
 
+	if (serviceTitle === 'Photography & Cinematography') {
+		return ['PHOTOGRAPHY &', 'CINEMATOGRAPHY'];
+	}
+
 	return [getServiceName(serviceTitle)];
 };
 
