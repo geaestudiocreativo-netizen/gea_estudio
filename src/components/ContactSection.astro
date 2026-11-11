@@ -69,39 +69,32 @@ const copy = {
 		<p class="contact__lead">{copy.lead}</p>
 
 		<form class="contact__form" novalidate>
-			<p class="contact__sentence">
-				<span>{copy.hello}</span>
+			<div class="contact__sentence">
+				<span data-k="hello">{copy.hello}</span>
 				<input name="name" type="text" autocomplete="name" placeholder={copy.namePh} aria-label={copy.namePh} required />
-				<span>{copy.business}</span>
-				<input name="business" type="text" placeholder={copy.businessPh} aria-label={copy.businessPh} />
-			</p>
-
-			<fieldset class="contact__group">
-				<legend>{copy.need}</legend>
-				<div class="contact__chips">
+				<span data-k="business">{copy.business}</span>
+				<input name="business" type="text" placeholder={copy.businessPh} aria-label={copy.businessPh} />.
+				<span class="contact__break" aria-hidden="true"></span>
+				<span data-k="need">{copy.need}</span>
+				<span class="contact__opts" role="group" aria-label={copy.need}>
 					{copy.services.map((s) => (
-						<label class="contact__chip"><input type="checkbox" name="services" value={s} /><span>{s}</span></label>
+						<label class="contact__opt"><input type="checkbox" name="services" value={s} /><span>{s}</span></label>
 					))}
-				</div>
-			</fieldset>
-
-			<fieldset class="contact__group">
-				<legend>{copy.budget}</legend>
-				<div class="contact__chips">
+				</span>
+				<span data-k="budget">{copy.budget}</span>
+				<span class="contact__opts" role="radiogroup" aria-label={copy.budget}>
 					{copy.budgets.map((b) => (
-						<label class="contact__chip"><input type="radio" name="budget" value={b} /><span>{b}</span></label>
+						<label class="contact__opt"><input type="radio" name="budget" value={b} /><span>{b}</span></label>
 					))}
-				</div>
-			</fieldset>
-
-			<label class="contact__more">
-				<span>{copy.more}</span>
-				<textarea name="message" rows="3" placeholder={copy.morePh}></textarea>
-			</label>
+				</span>.
+				<span class="contact__break" aria-hidden="true"></span>
+				<span data-k="more">{copy.more}</span>
+				<textarea name="message" rows="1" placeholder={copy.morePh} aria-label={copy.more}></textarea>
+			</div>
 
 			<div class="contact__actions">
-				<button type="submit" name="via" value="wa" class="contact__btn contact__btn--solid">{copy.sendWa}</button>
-				<button type="submit" name="via" value="mail" class="contact__btn">{copy.sendMail}</button>
+				<button type="submit" name="via" value="wa" class="contact__btn contact__btn--solid">{copy.sendWa} <span aria-hidden="true">→</span></button>
+				<button type="submit" name="via" value="mail" class="contact__btn">{copy.sendMail} <span aria-hidden="true">→</span></button>
 			</div>
 			<p class="contact__hint">{copy.hint}</p>
 		</form>
@@ -125,7 +118,8 @@ const copy = {
 		const email = section.dataset.email ?? '';
 		const subject = section.dataset.subject ?? '';
 		const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-		const t = (sel: string) => section.querySelector(sel)?.textContent?.trim() ?? '';
+		const ta = form.querySelector('textarea');
+		ta?.addEventListener('input', () => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; });
 		form.addEventListener('submit', (event) => {
 			event.preventDefault();
 			const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
@@ -135,11 +129,11 @@ const copy = {
 			const services = data.getAll('services').map(String);
 			const budget = String(data.get('budget') ?? '');
 			const message = String(data.get('message') ?? '').trim();
-			const spans = section.querySelectorAll('.contact__sentence > span');
+			const k = (key: string) => section.querySelector(`[data-k="${key}"]`)?.textContent?.trim() ?? '';
 			const lines = [
-				`${spans[0]?.textContent?.trim() ?? ''} ${name || '…'}${business ? ` ${spans[1]?.textContent?.trim() ?? ''} ${business}` : ''}.`,
-				services.length ? `${t('.contact__group:nth-of-type(1) legend')}: ${services.join(', ')}.` : '',
-				budget ? `${cap(t('.contact__group:nth-of-type(2) legend'))} ${budget}.` : '',
+				`${k('hello')} ${name || '…'}${business ? ` ${k('business')} ${business}` : ''}.`,
+				services.length ? `${cap(k('need'))}: ${services.join(', ')}.` : '',
+				budget ? `${cap(k('budget').replace(/^y\s+|^and\s+/i, ''))} ${budget}.` : '',
 				message
 			].filter(Boolean);
 			const text = lines.join('\n');
@@ -185,54 +179,42 @@ const copy = {
 		color: rgba(26, 24, 22, 0.75);
 		max-width: 520px;
 	}
-	.contact__form { font-family: 'Manrope', 'Satoshi', sans-serif; font-size: clamp(20px, 2.6vw, 30px); line-height: 1.6; letter-spacing: -0.02em; }
+	.contact__form { font-family: 'Manrope', 'Satoshi', sans-serif; font-size: clamp(20px, 2.6vw, 32px); line-height: 1.9; letter-spacing: -0.02em; }
 	.contact__sentence { margin: 0; }
-	.contact__sentence input {
+	.contact__break { display: block; height: 0.4em; }
+	.contact__sentence input[type='text'], .contact__sentence textarea {
 		font: inherit;
 		color: inherit;
 		background: transparent;
 		border: 0;
-		border-bottom: 1px solid rgba(26, 24, 22, 0.4);
+		border-bottom: 1px solid rgba(26, 24, 22, 0.35);
+		border-radius: 0;
 		padding: 0 4px;
-		margin: 0 6px;
-		width: min(100%, 11em);
+		margin: 0 4px;
+		width: 9em;
+		max-width: 100%;
 		outline: none;
+		transition: border-color 200ms ease;
 	}
-	.contact__sentence input:focus { border-bottom-color: #1A1816; }
-	.contact__sentence input::placeholder, .contact__more textarea::placeholder { color: rgba(26, 24, 22, 0.35); }
-	.contact__group { border: 0; margin: 28px 0 0; padding: 0; }
-	.contact__group legend { padding: 0; margin-bottom: 12px; }
-	.contact__chips { display: flex; flex-wrap: wrap; gap: 10px; }
-	.contact__chip { position: relative; cursor: pointer; }
-	.contact__chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
-	.contact__chip span {
+	.contact__sentence textarea { display: block; width: 100%; margin: 0; resize: none; overflow: hidden; line-height: 1.5; padding: 4px 0; }
+	.contact__sentence input:focus, .contact__sentence textarea:focus { border-bottom-color: #1A1816; }
+	.contact__sentence input::placeholder, .contact__sentence textarea::placeholder { color: rgba(26, 24, 22, 0.3); }
+	.contact__opts { display: inline; }
+	.contact__opt { position: relative; display: inline-block; margin: 0 2px; cursor: pointer; vertical-align: baseline; }
+	.contact__opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+	.contact__opt span {
 		display: inline-block;
-		font-family: 'Satoshi', sans-serif;
-		font-size: 14px;
-		line-height: 1;
-		letter-spacing: 0.04em;
-		padding: 12px 18px;
-		border: 1px solid rgba(26, 24, 22, 0.3);
+		line-height: 1.15;
+		padding: 0.08em 0.45em 0.12em;
 		border-radius: 999px;
-		transition: background 200ms ease, color 200ms ease;
+		color: rgba(26, 24, 22, 0.38);
+		border: 1px solid rgba(26, 24, 22, 0.18);
+		transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
 	}
-	.contact__chip input:checked + span { background: #1A1816; color: #F2EFE9; border-color: #1A1816; }
-	.contact__chip input:focus-visible + span { outline: 2px solid #1A1816; outline-offset: 2px; }
-	.contact__more { display: block; margin-top: 28px; }
-	.contact__more span { display: block; margin-bottom: 8px; }
-	.contact__more textarea {
-		width: 100%;
-		font-family: 'Satoshi', sans-serif;
-		font-size: 16px;
-		line-height: 1.5;
-		color: inherit;
-		background: transparent;
-		border: 1px solid rgba(26, 24, 22, 0.25);
-		padding: 14px 16px;
-		resize: vertical;
-		box-sizing: border-box;
-	}
-	.contact__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+	.contact__opt:hover span { color: #1A1816; border-color: rgba(26, 24, 22, 0.5); }
+	.contact__opt input:checked + span { background: #1A1816; color: #F2EFE9; border-color: #1A1816; }
+	.contact__opt input:focus-visible + span { outline: 2px solid #1A1816; outline-offset: 2px; }
+	.contact__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 48px; }
 	.contact__btn {
 		font-family: 'Satoshi', sans-serif;
 		font-size: 13px;
@@ -243,7 +225,7 @@ const copy = {
 		background: transparent;
 		color: #1A1816;
 		cursor: pointer;
-		flex: 1 1 220px;
+		flex: 0 1 auto;
 	}
 	.contact__btn--solid { background: #1A1816; color: #F2EFE9; }
 	.contact__btn:hover { opacity: 0.85; }
