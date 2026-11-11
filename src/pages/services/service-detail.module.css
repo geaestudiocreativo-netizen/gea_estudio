@@ -2,7 +2,7 @@
 @import url('https://api.fontshare.com/v2/css?f[]=panchang@400,600,700,800,900&display=swap');
 
 .page {
-	background: #f8f8f8;
+	background: #F2EFE9;
 	min-height: 100svh;
 	color: #1b1b1b;
 }
@@ -68,7 +68,7 @@
 		position: relative;
 		isolation: isolate;
 		background: #111111;
-		color: #f8f8f8;
+		color: #F2EFE9;
 	}
 
 	.page::before {
@@ -86,7 +86,7 @@
 	.universeTitle,
 	.relatedList a,
 	.contactTitle {
-		color: #f8f8f8;
+		color: #F2EFE9;
 	}
 
 	.universe {
@@ -95,12 +95,12 @@
 
 	.systems {
 		background: transparent;
-		color: #f8f8f8;
+		color: #F2EFE9;
 	}
 
 	.systemItem,
 	.systemItem::before {
-		color: #f8f8f8;
+		color: #F2EFE9;
 	}
 
 	.universeText,
@@ -132,7 +132,7 @@
 .systems {
 	margin-top: 0;
 	padding: 104px 24px clamp(72px, 9vw, 128px);
-	background: #f8f8f8;
+	background: #F2EFE9;
 	color: #111111;
 }
 
@@ -351,7 +351,7 @@
 	.universeTitle,
 	.relatedList a,
 	.contactTitle {
-		color: #f8f8f8;
+		color: #F2EFE9;
 	}
 
 	.title {
@@ -373,7 +373,7 @@
 		margin-top: 0;
 		padding-top: 76px;
 		background: transparent;
-		color: #f8f8f8;
+		color: #F2EFE9;
 	}
 
 	.systemsEyebrow,
@@ -486,15 +486,15 @@
 	.systemsEyebrow,
 	.systemItem,
 	.systemItem::before {
-		color: #f8f8f8;
+		color: #F2EFE9;
 	}
 
 	.contactTitle {
-		color: #f8f8f8;
+		color: #F2EFE9;
 	}
 
 	.contactText {
-		color: #f8f8f8;
+		color: #F2EFE9;
 	}
 
 	.relatedList a {

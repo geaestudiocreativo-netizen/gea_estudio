@@ -6,7 +6,7 @@
 	--editorial-block-gap: clamp(72px, 9vw, 120px);
 	position: relative;
 	z-index: 3;
-	background: #f8f8f8;
+	background: #F2EFE9;
 	border-top-left-radius: clamp(22px, 2.6vw, 38px);
 	border-top-right-radius: clamp(22px, 2.6vw, 38px);
 	margin-top: 0;

@@ -49,7 +49,7 @@ export const services: ServicePageItem[] = [
 		ctaText:
 			'Cada proyecto es diferente. Cuéntame qué tienes en mente y prepararemos una propuesta adaptada a tu marca, tus objetivos y la forma en la que quieres comunicar.',
 		seo: {
-			title: 'Branding | Gea Studio',
+			title: 'Branding | Gea Estudio',
 			description:
 				'Servicio de branding de Gea Studio: sistemas visuales completos para marcas con identidad coherente y reconocible.'
 		}
@@ -80,7 +80,7 @@ export const services: ServicePageItem[] = [
 		ctaText:
 			'Cada proyecto es diferente. Cuéntame qué tienes en mente y prepararemos una propuesta adaptada a tu marca, tus objetivos y la forma en la que quieres comunicar.',
 		seo: {
-			title: 'Fotografía y Filmmaking | Gea Studio',
+			title: 'Fotografía y Filmmaking | Gea Estudio',
 			description:
 				'Servicio de fotografía y filmmaking para marcas: contenido visual editorial y coherente en todos los puntos de contacto.'
 		}
@@ -111,7 +111,7 @@ export const services: ServicePageItem[] = [
 		ctaText:
 			'Cada proyecto es diferente. Cuéntame qué tienes en mente y prepararemos una propuesta adaptada a tu marca, tus objetivos y la forma en la que quieres comunicar.',
 		seo: {
-			title: 'Diseño Web | Gea Studio',
+			title: 'Diseño Web | Gea Estudio',
 			description:
 				'Servicio de diseño web para marcas que buscan una presencia digital coherente con su identidad visual y estrategia.'
 		}
@@ -142,7 +142,7 @@ export const services: ServicePageItem[] = [
 		ctaText:
 			'Cada proyecto es diferente. Cuéntame qué tienes en mente y prepararemos una propuesta adaptada a tu marca, tus objetivos y la forma en la que quieres comunicar.',
 		seo: {
-			title: 'Editorial | Gea Studio',
+			title: 'Editorial | Gea Estudio',
 			description:
 				'Servicio editorial para marcas: diseño de piezas impresas y sistemas visuales que sostienen una identidad coherente.'
 		}
@@ -173,7 +173,7 @@ export const services: ServicePageItem[] = [
 		ctaText:
 			'Cada proyecto es diferente. Cuéntame qué tienes en mente y prepararemos una propuesta adaptada a tu marca, tus objetivos y la forma en la que quieres comunicar.',
 		seo: {
-			title: 'Decoración e Interiorismo | Gea Studio',
+			title: 'Decoración e Interiorismo | Gea Estudio',
 			description:
 				'Servicio de interior design para marcas: espacios coherentes con la identidad visual y la experiencia que quieres proyectar.'
 		}
@@ -204,7 +204,7 @@ export const services: ServicePageItem[] = [
 		ctaText:
 			'Cada proyecto es diferente. Cuéntame qué tienes en mente y prepararemos una propuesta adaptada a tu marca, tus objetivos y la forma en la que quieres comunicar.',
 		seo: {
-			title: 'Social Media | Gea Studio',
+			title: 'Social Media | Gea Estudio',
 			description:
 				'Servicio de social media orientado a mantener una identidad visual consistente y editorial en todos los canales.'
 		}

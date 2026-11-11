@@ -1,0 +1,231 @@
+---
+import { type Locale } from '../i18n/site';
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props as Props;
+
+const PHONE_DISPLAY = '+34 613 39 98 25';
+const PHONE_E164 = '34613399825';
+const EMAIL = 'geaestudiocreativo@gmail.com';
+const INSTAGRAM = 'gea.estudio__';
+
+const copy = {
+	es: {
+		kicker: 'CONTACTO',
+		title: 'Hablemos de tu',
+		titleItalic: 'marca',
+		lead: 'Rellena la frase y te respondo en menos de 48 horas.',
+		hello: 'Hola, me llamo',
+		namePh: 'tu nombre',
+		business: 'y mi negocio es',
+		businessPh: 'nombre o @instagram',
+		need: 'Necesito ayuda con',
+		services: ['Web', 'Fotografía y vídeo', 'Redes sociales', 'Branding'],
+		budget: 'y tengo un presupuesto de',
+		budgets: ['menos de 1.000 €', '1.000 – 2.500 €', '2.500 – 5.000 €', 'más de 5.000 €'],
+		more: 'Te cuento un poco más:',
+		morePh: 'Cuéntame un poco más (opcional): qué quieres conseguir, plazos…',
+		sendWa: 'Enviar por WhatsApp',
+		sendMail: 'Enviar por email',
+		direct: 'O escríbeme directamente',
+		phoneLabel: 'Teléfono y WhatsApp',
+		subject: 'Nuevo proyecto para Gea Estudio',
+		areaLabel: 'Ámbito',
+		hint: 'Se abrirá WhatsApp o tu email con el mensaje ya escrito.'
+	},
+	en: {
+		kicker: 'CONTACT',
+		title: "Let's talk about your",
+		titleItalic: 'brand',
+		lead: "Fill in the sentence and I'll reply within 48 hours.",
+		hello: 'Hi, my name is',
+		namePh: 'your name',
+		business: 'and my business is',
+		businessPh: 'name or @instagram',
+		need: 'I need help with',
+		services: ['Web', 'Photo & video', 'Social media', 'Branding'],
+		budget: 'and my budget is',
+		budgets: ['under €1,000', '€1,000 – 2,500', '€2,500 – 5,000', 'over €5,000'],
+		more: 'A bit more about it:',
+		morePh: 'Tell me a bit more (optional): goals, timing…',
+		sendWa: 'Send via WhatsApp',
+		sendMail: 'Send via email',
+		direct: 'Or write to me directly',
+		phoneLabel: 'Phone & WhatsApp',
+		subject: 'New project for Gea Studio',
+		areaLabel: 'Area',
+		hint: 'WhatsApp or your email app will open with the message ready.'
+	}
+}[locale];
+---
+
+<section id="contact" class="contact" aria-labelledby="contact-title" data-phone={PHONE_E164} data-email={EMAIL} data-subject={copy.subject}>
+	<div class="contact__inner">
+		<p class="contact__kicker">{copy.kicker}</p>
+		<h2 id="contact-title" class="contact__title">{copy.title} <em>{copy.titleItalic}</em></h2>
+		<p class="contact__lead">{copy.lead}</p>
+
+		<form class="contact__form" novalidate>
+			<div class="contact__sentence">
+				<span data-k="hello">{copy.hello}</span>
+				<input name="name" type="text" autocomplete="name" placeholder={copy.namePh} aria-label={copy.namePh} required />
+				<span data-k="business">{copy.business}</span>
+				<input name="business" type="text" placeholder={copy.businessPh} aria-label={copy.businessPh} />.{" "}
+				<span data-k="need">{copy.need}</span>
+				<span class="contact__opts" role="group" aria-label={copy.need}>
+					{copy.services.map((s) => (
+						<label class="contact__opt"><input type="checkbox" name="services" value={s} /><span>{s}</span></label>
+					))}
+				</span>
+				<span data-k="budget">{copy.budget}</span>
+				<span class="contact__opts" role="radiogroup" aria-label={copy.budget}>
+					{copy.budgets.map((b) => (
+						<label class="contact__opt"><input type="radio" name="budget" value={b} /><span>{b}</span></label>
+					))}
+				</span>.
+				<textarea name="message" rows="1" placeholder={copy.morePh} aria-label={copy.more}></textarea>
+			</div>
+
+			<div class="contact__actions">
+				<button type="submit" name="via" value="wa" class="contact__btn contact__btn--solid">{copy.sendWa} <span aria-hidden="true">→</span></button>
+				<button type="submit" name="via" value="mail" class="contact__btn">{copy.sendMail} <span aria-hidden="true">→</span></button>
+			</div>
+		</form>
+
+		<p class="contact__direct">
+			<a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+			<span aria-hidden="true">·</span>
+			<a href={`https://wa.me/${PHONE_E164}`} target="_blank" rel="noreferrer">{PHONE_DISPLAY}</a>
+			<span aria-hidden="true">·</span>
+			<a href={`https://www.instagram.com/${INSTAGRAM}`} target="_blank" rel="noreferrer">@{INSTAGRAM}</a>
+		</p>
+	</div>
+</section>
+
+<script>
+	document.querySelectorAll<HTMLElement>('section.contact').forEach((section) => {
+		const form = section.querySelector('form');
+		if (!form) return;
+		const phone = section.dataset.phone ?? '';
+		const email = section.dataset.email ?? '';
+		const subject = section.dataset.subject ?? '';
+		const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+		const ta = form.querySelector('textarea');
+		ta?.addEventListener('input', () => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; });
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
+			const data = new FormData(form);
+			const name = String(data.get('name') ?? '').trim();
+			const business = String(data.get('business') ?? '').trim();
+			const services = data.getAll('services').map(String);
+			const budget = String(data.get('budget') ?? '');
+			const message = String(data.get('message') ?? '').trim();
+			const k = (key: string) => section.querySelector(`[data-k="${key}"]`)?.textContent?.trim() ?? '';
+			const lines = [
+				`${k('hello')} ${name || '…'}${business ? ` ${k('business')} ${business}` : ''}.`,
+				services.length ? `${cap(k('need'))}: ${services.join(', ')}.` : '',
+				budget ? `${cap(k('budget').replace(/^y\s+|^and\s+/i, ''))} ${budget}.` : '',
+				message
+			].filter(Boolean);
+			const text = lines.join('\n');
+			const url = submitter?.value === 'mail'
+				? `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`
+				: `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+			if (submitter?.value === 'mail') window.location.href = url;
+			else window.open(url, '_blank', 'noopener');
+		});
+	});
+</script>
+
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap');
+	.contact {
+		background: #F2EFE9;
+		color: #1A1816;
+		padding: clamp(64px, 9vw, 120px) clamp(24px, 6vw, 68px);
+		border-top: 1px solid rgba(26, 24, 22, 0.12);
+	}
+	.contact__inner { max-width: 720px; margin: 0 auto; }
+	.contact__kicker {
+		margin: 0 0 20px;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 12px;
+		letter-spacing: 0.22em;
+		color: rgba(26, 24, 22, 0.6);
+	}
+	.contact__title {
+		margin: 0;
+		font-family: 'Panchang', sans-serif;
+		font-weight: 400;
+		font-size: clamp(20px, 2.6vw, 30px);
+		line-height: 1.05;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+	.contact__title em { font-style: normal; }
+	.contact__lead {
+		margin: 12px 0 32px;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 14px;
+		color: rgba(26, 24, 22, 0.75);
+		max-width: 520px;
+	}
+	.contact__form { font-family: 'Manrope', 'Satoshi', sans-serif; font-size: clamp(16px, 1.5vw, 19px); line-height: 2.1; letter-spacing: -0.02em; }
+	.contact__sentence { margin: 0; }
+	.contact__break { display: block; height: 0.4em; }
+	.contact__sentence input[type='text'], .contact__sentence textarea {
+		font: inherit;
+		color: inherit;
+		background: transparent;
+		border: 0;
+		border-bottom: 1px solid rgba(26, 24, 22, 0.35);
+		border-radius: 0;
+		padding: 0 4px;
+		margin: 0 4px;
+		width: 8em;
+		max-width: 100%;
+		outline: none;
+		transition: border-color 200ms ease;
+	}
+	.contact__sentence textarea { display: block; width: 100%; margin: 12px 0 0; resize: none; overflow: hidden; line-height: 1.5; padding: 4px 0; font-size: 0.9em; }
+	.contact__sentence input:focus, .contact__sentence textarea:focus { border-bottom-color: #1A1816; }
+	.contact__sentence input::placeholder, .contact__sentence textarea::placeholder { color: rgba(26, 24, 22, 0.3); }
+	.contact__opts { display: inline; }
+	.contact__opt { position: relative; display: inline-block; margin: 0 2px; cursor: pointer; vertical-align: baseline; }
+	.contact__opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+	.contact__opt span {
+		display: inline-block;
+		line-height: 1.15;
+		padding: 0.08em 0.45em 0.12em;
+		border-radius: 999px;
+		color: rgba(26, 24, 22, 0.38);
+		border: 1px solid rgba(26, 24, 22, 0.18);
+		transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+	}
+	.contact__opt:hover span { color: #1A1816; border-color: rgba(26, 24, 22, 0.5); }
+	.contact__opt input:checked + span { background: #1A1816; color: #F2EFE9; border-color: #1A1816; }
+	.contact__opt input:focus-visible + span { outline: 2px solid #1A1816; outline-offset: 2px; }
+	.contact__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+	.contact__btn {
+		font-family: 'Satoshi', sans-serif;
+		font-size: 11px;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		padding: 13px 20px;
+		border: 1px solid #1A1816;
+		background: transparent;
+		color: #1A1816;
+		cursor: pointer;
+		flex: 0 1 auto;
+	}
+	.contact__btn--solid { background: #1A1816; color: #F2EFE9; }
+	.contact__btn:hover { opacity: 0.85; }
+	.contact__hint { margin: 12px 0 0; font-family: 'Satoshi', sans-serif; font-size: 12px; color: rgba(26, 24, 22, 0.55); }
+	.contact__direct { margin: 40px 0 0; display: flex; flex-wrap: wrap; gap: 6px 10px; font-family: 'Satoshi', sans-serif; font-size: 13px; color: rgba(26, 24, 22, 0.45); }
+	.contact__direct a { color: rgba(26, 24, 22, 0.75); text-decoration: none; border-bottom: 1px solid rgba(26, 24, 22, 0.2); }
+	.contact__direct a:hover { color: #1A1816; }
+</style>

@@ -84,7 +84,7 @@
 .paddedFirstImage {
 	padding: clamp(24px, 6vw, 96px);
 	box-sizing: border-box;
-	background: #f8f8f8;
+	background: #F2EFE9;
 }
 
 .videoRow {
@@ -207,7 +207,7 @@
 .frameFirstImages .topBlock .item2 {
 	padding: clamp(18px, 3vw, 48px);
 	box-sizing: border-box;
-	background: #f8f8f8;
+	background: #F2EFE9;
 }
 
 .brandStatement {
@@ -273,7 +273,7 @@
 		height: auto;
 		object-fit: contain;
 		object-position: top;
-		background: #f8f8f8;
+		background: #F2EFE9;
 	}
 
 	.middleBlock .containLastImage {

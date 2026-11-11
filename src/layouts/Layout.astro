@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-	title = 'Gea | Estudio creativo de branding, diseño web, fotografía, papelería, decoración, filmmaking y redes sosicales.',
-	description = 'Gea es un estudio creativo especializado en branding, diseño web, fotografía, decoración, filmmaking, papelería, redes sociales y dirección creativa para marcas y empresas.'
+	title = 'Gea Estudio | Diseño web, fotografía, redes sociales y branding',
+	description = 'Gea Estudio: todo lo visual de tu marca en una sola persona. Diseño web, fotografía, vídeo, redes sociales y branding para negocios de toda España.'
 } = Astro.props as Props;
 
 const pathname = Astro.url.pathname;
@@ -27,7 +27,7 @@ const locale = getLocaleFromPath(pathname);
   		name="description"
 	 		content={description}
 		/>
-		<meta name="theme-color" content="#F8F8F8" />
+		<meta name="theme-color" content="#F2EFE9" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon_io/favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon_io/favicon-16x16.png" />
@@ -51,7 +51,7 @@ const locale = getLocaleFromPath(pathname);
 		min-height: 100svh;
 		display: flex;
 		flex-direction: column;
-		background: #F8F8F8;
+		background: #F2EFE9;
 	}
 
 	main {

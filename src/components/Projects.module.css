@@ -3,7 +3,7 @@
 .projects {
 	position: relative;
 	z-index: 2;
-	background: #f8f8f8;
+	background: #F2EFE9;
 	padding: clamp(144px, 16vw, 192px) 0;
 }
 
