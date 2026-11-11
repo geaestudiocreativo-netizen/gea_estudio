@@ -36,7 +36,7 @@
 
 .logoMark {
 	margin: 0;
-	font-family: 'Bodoni Moda', Georgia, serif;
+	font-family: 'Panchang', sans-serif;
 	font-size: clamp(56px, 12vw, 132px);
 	font-weight: 400;
 	line-height: 0.92;
@@ -294,7 +294,7 @@
 
 .sectionTitle {
 	margin: 0;
-	font-family: 'Bodoni Moda', Georgia, serif;
+	font-family: 'Panchang', sans-serif;
 	font-size: clamp(30px, 4.2vw, 54px);
 	font-weight: 400;
 	line-height: 1;
@@ -492,7 +492,7 @@
 }
 
 .projectNavTitle {
-	font-family: 'Bodoni Moda', Georgia, serif;
+	font-family: 'Panchang', sans-serif;
 	font-size: 12px;
 	font-weight: 400;
 	letter-spacing: 0.18em;

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
 
 .footer {
 	position: relative;
@@ -56,7 +57,7 @@
 
 .instagram span {
 	display: block;
-	font-family: 'Satoshi', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 }
 
@@ -65,7 +66,7 @@
 	margin-top: 10px;
 	color: rgba(239, 239, 239, 0.78);
 	text-decoration: none;
-	font-family: 'Satoshi', sans-serif;
+	font-family: 'Panchang', sans-serif;
 	font-size: clamp(9px, 1.2vw, 14px);
 	font-weight: 400;
 	line-height: 1.2;

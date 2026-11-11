@@ -153,6 +153,7 @@ const copy = {
 </script>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap');
 	.contact {
 		background: #F2EFE9;
 		color: #1A1816;
@@ -169,13 +170,14 @@ const copy = {
 	}
 	.contact__title {
 		margin: 0;
-		font-family: 'Bodoni Moda', Georgia, serif;
+		font-family: 'Panchang', sans-serif;
 		font-weight: 400;
-		font-size: clamp(40px, 7vw, 88px);
-		line-height: 1;
-		letter-spacing: -0.02em;
+		font-size: clamp(28px, 5vw, 56px);
+		line-height: 1.05;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
 	}
-	.contact__title em { font-style: italic; }
+	.contact__title em { font-style: normal; }
 	.contact__lead {
 		margin: 24px 0 56px;
 		font-family: 'Satoshi', sans-serif;
@@ -183,11 +185,10 @@ const copy = {
 		color: rgba(26, 24, 22, 0.75);
 		max-width: 520px;
 	}
-	.contact__form { font-family: 'Bodoni Moda', Georgia, serif; font-size: clamp(22px, 3vw, 34px); line-height: 1.6; }
+	.contact__form { font-family: 'Manrope', 'Satoshi', sans-serif; font-size: clamp(20px, 2.6vw, 30px); line-height: 1.6; letter-spacing: -0.02em; }
 	.contact__sentence { margin: 0; }
 	.contact__sentence input {
 		font: inherit;
-		font-style: italic;
 		color: inherit;
 		background: transparent;
 		border: 0;
