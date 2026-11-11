@@ -17,7 +17,7 @@ const copy = {
 		kicker: 'CONTACTO',
 		title: 'Hablemos de tu',
 		titleItalic: 'marca',
-		lead: 'Cuéntame en una frase qué necesitas. Te respondo en menos de 48 horas.',
+		lead: 'Rellena la frase y te respondo en menos de 48 horas.',
 		hello: 'Hola, me llamo',
 		namePh: 'tu nombre',
 		business: 'y mi negocio es',
@@ -27,7 +27,7 @@ const copy = {
 		budget: 'y tengo un presupuesto de',
 		budgets: ['menos de 1.000 €', '1.000 – 2.500 €', '2.500 – 5.000 €', 'más de 5.000 €'],
 		more: 'Te cuento un poco más:',
-		morePh: 'qué quieres conseguir, plazos, ideas…',
+		morePh: 'Cuéntame un poco más (opcional): qué quieres conseguir, plazos…',
 		sendWa: 'Enviar por WhatsApp',
 		sendMail: 'Enviar por email',
 		direct: 'O escríbeme directamente',
@@ -40,7 +40,7 @@ const copy = {
 		kicker: 'CONTACT',
 		title: "Let's talk about your",
 		titleItalic: 'brand',
-		lead: "Tell me in one sentence what you need. I'll reply within 48 hours.",
+		lead: "Fill in the sentence and I'll reply within 48 hours.",
 		hello: 'Hi, my name is',
 		namePh: 'your name',
 		business: 'and my business is',
@@ -50,7 +50,7 @@ const copy = {
 		budget: 'and my budget is',
 		budgets: ['under €1,000', '€1,000 – 2,500', '€2,500 – 5,000', 'over €5,000'],
 		more: 'A bit more about it:',
-		morePh: 'goals, timing, ideas…',
+		morePh: 'Tell me a bit more (optional): goals, timing…',
 		sendWa: 'Send via WhatsApp',
 		sendMail: 'Send via email',
 		direct: 'Or write to me directly',
@@ -73,8 +73,7 @@ const copy = {
 				<span data-k="hello">{copy.hello}</span>
 				<input name="name" type="text" autocomplete="name" placeholder={copy.namePh} aria-label={copy.namePh} required />
 				<span data-k="business">{copy.business}</span>
-				<input name="business" type="text" placeholder={copy.businessPh} aria-label={copy.businessPh} />.
-				<span class="contact__break" aria-hidden="true"></span>
+				<input name="business" type="text" placeholder={copy.businessPh} aria-label={copy.businessPh} />.{" "}
 				<span data-k="need">{copy.need}</span>
 				<span class="contact__opts" role="group" aria-label={copy.need}>
 					{copy.services.map((s) => (
@@ -87,8 +86,6 @@ const copy = {
 						<label class="contact__opt"><input type="radio" name="budget" value={b} /><span>{b}</span></label>
 					))}
 				</span>.
-				<span class="contact__break" aria-hidden="true"></span>
-				<span data-k="more">{copy.more}</span>
 				<textarea name="message" rows="1" placeholder={copy.morePh} aria-label={copy.more}></textarea>
 			</div>
 
@@ -96,17 +93,15 @@ const copy = {
 				<button type="submit" name="via" value="wa" class="contact__btn contact__btn--solid">{copy.sendWa} <span aria-hidden="true">→</span></button>
 				<button type="submit" name="via" value="mail" class="contact__btn">{copy.sendMail} <span aria-hidden="true">→</span></button>
 			</div>
-			<p class="contact__hint">{copy.hint}</p>
 		</form>
 
-		<div class="contact__direct">
-			<p class="contact__kicker">{copy.direct}</p>
-			<ul>
-				<li><span>Email</span><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
-				<li><span>{copy.phoneLabel}</span><a href={`https://wa.me/${PHONE_E164}`} target="_blank" rel="noreferrer">{PHONE_DISPLAY}</a></li>
-				<li><span>Instagram</span><a href={`https://www.instagram.com/${INSTAGRAM}`} target="_blank" rel="noreferrer">@{INSTAGRAM}</a></li>
-			</ul>
-		</div>
+		<p class="contact__direct">
+			<a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+			<span aria-hidden="true">·</span>
+			<a href={`https://wa.me/${PHONE_E164}`} target="_blank" rel="noreferrer">{PHONE_DISPLAY}</a>
+			<span aria-hidden="true">·</span>
+			<a href={`https://www.instagram.com/${INSTAGRAM}`} target="_blank" rel="noreferrer">@{INSTAGRAM}</a>
+		</p>
 	</div>
 </section>
 
@@ -151,10 +146,10 @@ const copy = {
 	.contact {
 		background: #F2EFE9;
 		color: #1A1816;
-		padding: clamp(80px, 12vw, 160px) clamp(24px, 6vw, 68px);
+		padding: clamp(64px, 9vw, 120px) clamp(24px, 6vw, 68px);
 		border-top: 1px solid rgba(26, 24, 22, 0.12);
 	}
-	.contact__inner { max-width: 880px; margin: 0 auto; }
+	.contact__inner { max-width: 720px; margin: 0 auto; }
 	.contact__kicker {
 		margin: 0 0 20px;
 		font-family: 'Satoshi', sans-serif;
@@ -166,20 +161,20 @@ const copy = {
 		margin: 0;
 		font-family: 'Panchang', sans-serif;
 		font-weight: 400;
-		font-size: clamp(28px, 5vw, 56px);
+		font-size: clamp(20px, 2.6vw, 30px);
 		line-height: 1.05;
 		letter-spacing: 0.04em;
 		text-transform: uppercase;
 	}
 	.contact__title em { font-style: normal; }
 	.contact__lead {
-		margin: 24px 0 56px;
+		margin: 12px 0 32px;
 		font-family: 'Satoshi', sans-serif;
-		font-size: clamp(15px, 1.6vw, 18px);
+		font-size: 14px;
 		color: rgba(26, 24, 22, 0.75);
 		max-width: 520px;
 	}
-	.contact__form { font-family: 'Manrope', 'Satoshi', sans-serif; font-size: clamp(20px, 2.6vw, 32px); line-height: 1.9; letter-spacing: -0.02em; }
+	.contact__form { font-family: 'Manrope', 'Satoshi', sans-serif; font-size: clamp(16px, 1.5vw, 19px); line-height: 2.1; letter-spacing: -0.02em; }
 	.contact__sentence { margin: 0; }
 	.contact__break { display: block; height: 0.4em; }
 	.contact__sentence input[type='text'], .contact__sentence textarea {
@@ -191,12 +186,12 @@ const copy = {
 		border-radius: 0;
 		padding: 0 4px;
 		margin: 0 4px;
-		width: 9em;
+		width: 8em;
 		max-width: 100%;
 		outline: none;
 		transition: border-color 200ms ease;
 	}
-	.contact__sentence textarea { display: block; width: 100%; margin: 0; resize: none; overflow: hidden; line-height: 1.5; padding: 4px 0; }
+	.contact__sentence textarea { display: block; width: 100%; margin: 12px 0 0; resize: none; overflow: hidden; line-height: 1.5; padding: 4px 0; font-size: 0.9em; }
 	.contact__sentence input:focus, .contact__sentence textarea:focus { border-bottom-color: #1A1816; }
 	.contact__sentence input::placeholder, .contact__sentence textarea::placeholder { color: rgba(26, 24, 22, 0.3); }
 	.contact__opts { display: inline; }
@@ -214,13 +209,13 @@ const copy = {
 	.contact__opt:hover span { color: #1A1816; border-color: rgba(26, 24, 22, 0.5); }
 	.contact__opt input:checked + span { background: #1A1816; color: #F2EFE9; border-color: #1A1816; }
 	.contact__opt input:focus-visible + span { outline: 2px solid #1A1816; outline-offset: 2px; }
-	.contact__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 48px; }
+	.contact__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 	.contact__btn {
 		font-family: 'Satoshi', sans-serif;
-		font-size: 13px;
+		font-size: 11px;
 		letter-spacing: 0.16em;
 		text-transform: uppercase;
-		padding: 18px 28px;
+		padding: 13px 20px;
 		border: 1px solid #1A1816;
 		background: transparent;
 		color: #1A1816;
@@ -230,9 +225,7 @@ const copy = {
 	.contact__btn--solid { background: #1A1816; color: #F2EFE9; }
 	.contact__btn:hover { opacity: 0.85; }
 	.contact__hint { margin: 12px 0 0; font-family: 'Satoshi', sans-serif; font-size: 12px; color: rgba(26, 24, 22, 0.55); }
-	.contact__direct { margin-top: 80px; padding-top: 32px; border-top: 1px solid rgba(26, 24, 22, 0.12); }
-	.contact__direct ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
-	.contact__direct li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-family: 'Satoshi', sans-serif; font-size: 15px; }
-	.contact__direct li span { color: rgba(26, 24, 22, 0.55); letter-spacing: 0.04em; }
-	.contact__direct a { color: #1A1816; text-decoration: none; border-bottom: 1px solid rgba(26, 24, 22, 0.3); }
+	.contact__direct { margin: 40px 0 0; display: flex; flex-wrap: wrap; gap: 6px 10px; font-family: 'Satoshi', sans-serif; font-size: 13px; color: rgba(26, 24, 22, 0.45); }
+	.contact__direct a { color: rgba(26, 24, 22, 0.75); text-decoration: none; border-bottom: 1px solid rgba(26, 24, 22, 0.2); }
+	.contact__direct a:hover { color: #1A1816; }
 </style>
