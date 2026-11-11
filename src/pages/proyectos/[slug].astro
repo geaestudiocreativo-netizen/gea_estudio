@@ -68,7 +68,7 @@ const sections = project.services.map((service) => ({
 }));
 ---
 
-<Layout>
+<Layout title={`${project.title} | Gea Estudio`} description={project.description}>
 	<main class={styles.page}>
 		<header class={styles.projectHeader}>
 			<img class={styles.projectLogo} src={project.logo} alt={project.title} loading="eager" decoding="async" />

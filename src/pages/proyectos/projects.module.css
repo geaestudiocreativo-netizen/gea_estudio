@@ -1,5 +1,5 @@
 .page {
-	background: #f8f8f8;
+	background: #F2EFE9;
 	padding: clamp(92px, 10vw, 132px) clamp(10px, 2.4vw, 24px) clamp(72px, 9vw, 110px);
 }
 
@@ -11,7 +11,7 @@
 
 .title {
 	margin: 0;
-	font-family: 'Panchang', sans-serif;
+	font-family: 'Bodoni Moda', Georgia, serif;
 	font-size: clamp(34px, 5.2vw, 52px);
 	font-weight: 400;
 	line-height: 1;
@@ -36,7 +36,7 @@
 	z-index: 8;
 	margin: clamp(54px, 7vw, 78px) auto 0;
 	padding: 12px 0 9px;
-	background: #f8f8f8;
+	background: #F2EFE9;
 
 }
 
@@ -47,7 +47,7 @@
 	left: 50%;
 	width: 100vw;
 	height: 17px;
-	background: #f8f8f8;
+	background: #F2EFE9;
 	border-bottom: 1px solid #111111;
 	box-sizing: border-box;
 	transform: translateX(-50%);
@@ -60,7 +60,7 @@
 	left: 50%;
 	width: 100vw;
 	height: 4px;
-	background: #f8f8f8;
+	background: #F2EFE9;
 	transform: translateX(-50%);
 }
 

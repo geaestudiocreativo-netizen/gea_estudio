@@ -30,6 +30,8 @@ const getServiceNameLines = (serviceTitle: string) => {
 	return [getServiceName(serviceTitle)];
 };
 
+const toSentenceCase = (text: string) => text.charAt(0) + text.slice(1).toLocaleLowerCase(locale);
+
 const getServiceName = (serviceTitle: string) => {
 	if (serviceTitle === 'Fotografía & Filmmaking' || serviceTitle === 'Photography & Filmmaking') {
 		return locale === 'en' ? 'PHOTOGRAPHY & FILMMAKING' : 'FOTOGRAFÍA Y\u00A0FILMMAKING';
@@ -64,7 +66,7 @@ const getServiceName = (serviceTitle: string) => {
 							<span class="services-editorial__content">
 								<span class="services-editorial__name" data-service-name={service.slug}>
 									{getServiceNameLines(service.homeTitle).map((line, lineIndex) => (
-										<span class:list={["services-editorial__name-line", lineIndex === 0 && "services-editorial__name-line--first"]}>{line}</span>
+										<span class:list={["services-editorial__name-line", lineIndex === 0 && "services-editorial__name-line--first"]}>{lineIndex === 0 ? toSentenceCase(line) : line.toLocaleLowerCase(locale)}</span>
 									))}
 								</span>
 								<span class="services-editorial__description">{service.homeDescription}</span>
@@ -245,12 +247,12 @@ const getServiceName = (serviceTitle: string) => {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		font-family: 'Panchang', sans-serif;
-		font-size: clamp(62px, 7vw, 210px);
-		font-weight: 900;
-		line-height: 0.74;
-		letter-spacing: 0.01em;
-		text-transform: uppercase;
+		font-family: 'Bodoni Moda', Georgia, serif;
+		font-size: clamp(56px, 6.5vw, 190px);
+		font-weight: 400;
+		line-height: 0.92;
+		letter-spacing: -0.02em;
+		text-transform: none;
 		color: #111111;
 		transition: color 260ms ease, opacity 260ms ease, transform 260ms ease;
 		will-change: transform, color;

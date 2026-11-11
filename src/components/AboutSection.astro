@@ -14,7 +14,7 @@ const content = aboutSectionContent[locale];
 
 ---
 
-<section id="about" class="about-section w-full -mt-[32px] bg-[#f8f8f8] px-[24px] pt-[96px] pb-[96px] md:-mt-[32px] md:px-[32px] md:pt-[120px] md:pb-[112px] lg:-mt-[40px] lg:px-[68px] lg:pt-[184px] lg:pb-[128px]" aria-labelledby="about-title">
+<section id="about" class="about-section w-full -mt-[32px] bg-[#F2EFE9] px-[24px] pt-[96px] pb-[96px] md:-mt-[32px] md:px-[32px] md:pt-[120px] md:pb-[112px] lg:-mt-[40px] lg:px-[68px] lg:pt-[184px] lg:pb-[128px]" aria-labelledby="about-title">
 	<div class="about-layout mx-auto w-full max-w-[900px]">
 		<div class="about-visual-wrap relative overflow-hidden">
 			<ResponsiveImage
@@ -42,7 +42,7 @@ const content = aboutSectionContent[locale];
 				<p class="about-copy__body">{content.statement} {content.body} {content.disciplines}</p>
 			</div>
 
-			<div id="contact" class="mt-[48px] flex flex-col items-center text-center">
+			<div id="about-contact" class="mt-[48px] flex flex-col items-center text-center">
 				<PrimaryButton href={getLocalizedPath(locale, '/#contact')} label={content.contactButton} ariaLabel={content.contactButtonAria} variant="outline" className={buttonStyles.desktopFull} />
 			</div>
 		</div>
@@ -62,7 +62,7 @@ const content = aboutSectionContent[locale];
 		margin: 28px 0 0;
 		padding: 0;
 		text-align: center;
-		font-family: 'Panchang', sans-serif;
+		font-family: 'Bodoni Moda', Georgia, serif;
 		font-size: clamp(20px, 7.2vw, 40px);
 		font-weight: 500;
 		line-height: 0.95;
@@ -176,7 +176,7 @@ const content = aboutSectionContent[locale];
 			white-space: nowrap;
 		}
 
-		#contact {
+		#about-contact {
 			margin-top: 24px !important;
 			align-items: flex-start;
 			text-align: left;
@@ -202,7 +202,7 @@ const content = aboutSectionContent[locale];
 			margin: 112px 0 0;
 			padding: 0;
 			text-align: center;
-			font-family: 'Panchang', sans-serif;
+			font-family: 'Bodoni Moda', Georgia, serif;
 			font-size: clamp(20px, 7.2vw, 30px);
 			font-weight: 500;
 			line-height: 0.95;
@@ -227,7 +227,7 @@ const content = aboutSectionContent[locale];
 			max-width: none;
 		}
 
-		#contact {
+		#about-contact {
 			margin-top: 72px !important;
 		}
 

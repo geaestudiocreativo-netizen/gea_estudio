@@ -6,7 +6,7 @@
 	left: 0;
 	right: 0;
 	z-index: 80;
-	background: #f8f8f8;
+	background: #F2EFE9;
 	transition: background-color 220ms ease;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .nav[data-scrolled='true'] {
-	background: #f8f8f8;
+	background: #F2EFE9;
 }
 
 .nav[data-scrolled='true'] .inner {

@@ -1,5 +1,5 @@
 .page {
-	background: #f8f8f8;
+	background: #F2EFE9;
 	overflow-anchor: none;
 	padding: clamp(34px, 6vw, 88px) clamp(16px, 3vw, 42px) 0;
 }
@@ -36,7 +36,7 @@
 
 .logoMark {
 	margin: 0;
-	font-family: 'Panchang', sans-serif;
+	font-family: 'Bodoni Moda', Georgia, serif;
 	font-size: clamp(56px, 12vw, 132px);
 	font-weight: 400;
 	line-height: 0.92;
@@ -246,7 +246,7 @@
 	width: 100vw;
 	box-sizing: border-box;
 	border: 1px solid #171a20;
-	background: #f8f8f8;
+	background: #F2EFE9;
 	color: #171a20;
 	font-family: 'Satoshi', sans-serif;
 	font-size: clamp(12px, 3.8vw, 16px);
@@ -287,14 +287,14 @@
 @media (hover: hover) and (pointer: fine) {
 	.webVisitButton:hover {
 		background: #171a20;
-		color: #f8f8f8;
+		color: #F2EFE9;
 		transform: translateY(-3px);
 	}
 }
 
 .sectionTitle {
 	margin: 0;
-	font-family: 'Panchang', sans-serif;
+	font-family: 'Bodoni Moda', Georgia, serif;
 	font-size: clamp(30px, 4.2vw, 54px);
 	font-weight: 400;
 	line-height: 1;
@@ -492,7 +492,7 @@
 }
 
 .projectNavTitle {
-	font-family: 'Panchang', sans-serif;
+	font-family: 'Bodoni Moda', Georgia, serif;
 	font-size: 12px;
 	font-weight: 400;
 	letter-spacing: 0.18em;
