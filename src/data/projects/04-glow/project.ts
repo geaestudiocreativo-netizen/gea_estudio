@@ -16,7 +16,14 @@ const project: ProjectFolderMetadata = {
 			type: 'Branding',
 			gallery: 'branding',
 			layout: 'branding-b',
-			images: ['01-glow-firma.jpg', '03-glow-final.jpg']
+			images: [
+				'02-glow-logo-color.jpg',
+				'03-glow-simbolo.jpg',
+				'glow-pelo.jpg',
+				'04-glow-firma-ancha.jpg',
+				'05-glow-silla.jpg',
+				'06-glow-frasco.jpg'
+			]
 		},
 		{
 			type: 'Web',
