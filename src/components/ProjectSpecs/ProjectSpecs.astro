@@ -20,10 +20,10 @@ const rows = [
 ].filter(Boolean) as { label: string; value: string }[];
 ---
 
-<dl class={styles.specs} style={`--cols:${rows.length}`}>
-	{rows.map((row, i) => (
+<dl class={styles.specs}>
+	{rows.map((row) => (
 		<div class={styles.spec}>
-			<dt class={styles.label}><span class={styles.n}>{String(i + 1).padStart(2, '0')}</span>{row.label}</dt>
+			<dt class={styles.label}>{row.label}</dt>
 			<dd class={styles.value}>{row.value}</dd>
 		</div>
 	))}
