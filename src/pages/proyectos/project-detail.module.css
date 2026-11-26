@@ -143,8 +143,14 @@
 
 .section {
 	max-width: 1120px;
-	margin: clamp(60px, 7vw, 80px) auto 0;
+	margin: clamp(32px, 4vw, 52px) auto 0;
 	background: #ffffff;
+}
+
+/* Sin título visible, la galería arranca justo después de las tabs */
+.section > .fullBleedGallery,
+.section > .webComposition {
+	margin-top: 0;
 }
 
 .fullBleedGallery {
@@ -293,6 +299,15 @@
 }
 
 .sectionTitle {
+	/* Oculto a la vista: las tabs ya nombran la sección. Se mantiene para lectores de pantalla y SEO. */
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
 	margin: 0;
 	font-family: 'Panchang', sans-serif;
 	font-size: clamp(30px, 4.2vw, 54px);
