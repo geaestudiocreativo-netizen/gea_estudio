@@ -78,6 +78,9 @@
 	object-position: 50% 35%;
 }
 
+/* hover */
+.heroCta:hover { color: #1A1816; }
+
 .heroCta {
 	display: block;
 	width: fit-content;
@@ -87,9 +90,11 @@
 	font-weight: 300;
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
-	color: #1A1816;
+	color: rgba(26, 24, 22, 0.55);
 	text-decoration: underline;
+	text-decoration-color: rgba(26, 24, 22, 0.25);
 	text-decoration-thickness: 1px;
+	transition: color 200ms ease;
 	text-underline-offset: 4px;
 }
 
