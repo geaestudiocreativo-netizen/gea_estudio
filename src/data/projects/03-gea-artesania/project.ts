@@ -6,6 +6,8 @@ const project: ProjectFolderMetadata = {
 	title: 'Gea Artesanía',
 	client: 'Gea Artesanía',
 	location: 'Madrid, España',
+	sector: 'Joyería artesanal',
+	sectorEn: 'Handmade jewellery',
 	year: 2023,
 	description: 'Bisutería artesanal con piezas de diseño hechas en arcilla polimérica.',
 	subtitle: 'Universo visual para una marca de bisutería artesanal de edición limitada.',

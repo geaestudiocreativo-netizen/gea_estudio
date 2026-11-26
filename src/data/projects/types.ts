@@ -48,6 +48,8 @@ export interface ProjectFolderMetadata {
 	title: string;
 	client: string;
 	location: string;
+	sector?: string;
+	sectorEn?: string;
 	year: number;
 	description: string;
 	subtitle?: string;

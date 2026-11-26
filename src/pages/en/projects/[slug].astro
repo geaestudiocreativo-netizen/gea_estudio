@@ -2,6 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import ProjectTabs from '../../../components/ProjectTabs/ProjectTabs.astro';
 import EditorialGallery from '../../../components/EditorialGallery/EditorialGallery.astro';
+import ProjectSpecs from '../../../components/ProjectSpecs/ProjectSpecs.astro';
 import ResponsiveImage from '../../../components/ResponsiveImage.astro';
 import { getLocalizedProjectDescription, localizeServiceType } from '../../../data/projects-i18n';
 import { projects as baseProjects } from '../../../data/projects';
@@ -75,7 +76,7 @@ const sections = project.services.map((service) => ({
 		<header class={styles.projectHeader}>
 			<img class={styles.projectLogo} src={project.logo} alt={project.title} loading="eager" decoding="async" />
 			<p class={styles.projectDescription}>{projectDescription}</p>
-			{project.concept && <span class="concept-tag">Concept project · AI-generated images</span>}
+			<ProjectSpecs project={project} locale={'en'} />
 			<div class={styles.headerDivider} aria-hidden="true"></div>
 		</header>
 

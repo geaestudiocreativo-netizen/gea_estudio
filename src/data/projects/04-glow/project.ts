@@ -6,6 +6,8 @@ const project: ProjectFolderMetadata = {
 	title: 'GLOW22',
 	client: 'GLOW22',
 	location: 'Collado Villalba, Madrid',
+	sector: 'Tienda de peluquería y cosmética',
+	sectorEn: 'Hair and beauty shop',
 	year: 2026,
 	description:
 		'Logotipo y web para una tienda de peluquería y cosmética profesional que aún no existía. Una firma geométrica y redonda, donde la W son dos 22.',

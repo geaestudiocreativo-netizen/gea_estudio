@@ -6,6 +6,8 @@ const project: ProjectFolderMetadata = {
 	title: 'Talleres Alonso',
 	client: 'Talleres Alonso',
 	location: 'Valencia, España',
+	sector: 'Taller mecánico',
+	sectorEn: 'Car repair workshop',
 	year: 2026,
 	description: 'Una identidad sólida para un taller con más de 40 años de historia. El taller de toda la vida, ahora con una identidad visual y ecosistema digital que refleja su legado familiar.',
 	subtitle: 'Una identidad sólida para un taller con más de 40 años de historia. El taller de toda la vida, ahora con una identidad visual y ecosistema digital que refleja su legado familiar.	',

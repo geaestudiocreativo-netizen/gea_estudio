@@ -6,6 +6,8 @@ const project: ProjectFolderMetadata = {
 	title: '.G',
 	client: '.G By Gabriel García',
 	location: 'Valencia, España',
+	sector: 'Pastelería',
+	sectorEn: 'Bakery',
 	year: 2026,
 	description:
 		'Una marca de pastelería artesanal con sensibilidad editorial y carácter contemporáneo.',
