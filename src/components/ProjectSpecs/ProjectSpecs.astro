@@ -13,18 +13,7 @@ const en = locale === 'en';
 
 const sector = en ? project.sectorEn ?? project.sector : project.sector;
 
-const rows = [
-	sector && { label: en ? 'Sector' : 'Sector', value: sector },
-	{ label: en ? 'Location' : 'Lugar', value: project.location },
-	project.concept && { label: en ? 'Type' : 'Tipo', value: en ? 'Concept · AI' : 'Concepto · IA' }
-].filter(Boolean) as { label: string; value: string }[];
+const parts = [sector, project.location, project.concept ? (en ? 'Concept · AI' : 'Concepto · IA') : null].filter(Boolean);
 ---
 
-<dl class={styles.specs}>
-	{rows.map((row) => (
-		<div class={styles.spec}>
-			<dt class={styles.label}>{row.label}</dt>
-			<dd class={styles.value}>{row.value}</dd>
-		</div>
-	))}
-</dl>
+<p class={styles.line}>{parts.join('  ·  ')}</p>
