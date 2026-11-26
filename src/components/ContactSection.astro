@@ -75,14 +75,14 @@ const copy = {
 
 		<form class="contact__form" novalidate>
 			<fieldset class="step">
-				<legend class="step__head"><span class="step__n">01</span><span class="step__t">{copy.steps[0]}</span></legend>
+				<legend class="sr-only">{copy.steps[0]}</legend>
 				<div class="step__body contact__sentence">
 					<label class="contact__line"><span data-k="hello">{copy.hello}</span><input name="name" type="text" autocomplete="name" placeholder={copy.namePh} required /></label>
 					<label class="contact__line"><span data-k="business">{copy.business}</span><input name="business" type="text" placeholder={copy.businessPh} /></label>
 				</div>
 			</fieldset>
 			<fieldset class="step">
-				<legend class="step__head"><span class="step__n">02</span><span class="step__t">{copy.steps[1]}</span><span class="step__note" data-k="need" hidden>{copy.need}</span><span class="step__note">{copy.multi}</span></legend>
+				<legend class="step__head"><span class="step__n">01</span><span class="step__t">{copy.steps[1]}</span><span class="step__note" data-k="need" hidden>{copy.need}</span><span class="step__note">{copy.multi}</span></legend>
 				<div class="step__body contact__opts" role="group" aria-label={copy.need}>
 					{copy.services.map((s) => (
 						<label class="contact__opt"><input type="checkbox" name="services" value={s} /><span>{s}</span></label>
@@ -90,7 +90,7 @@ const copy = {
 				</div>
 			</fieldset>
 			<fieldset class="step">
-				<legend class="step__head"><span class="step__n">03</span><span class="step__t" data-k="budget">{copy.steps[2]}</span><span class="step__note">{copy.optional}</span></legend>
+				<legend class="step__head"><span class="step__n">02</span><span class="step__t" data-k="budget">{copy.steps[2]}</span><span class="step__note">{copy.optional}</span></legend>
 				<div class="step__body contact__opts" role="radiogroup" aria-label={copy.budget}>
 					{copy.budgets.map((b) => (
 						<label class="contact__opt contact__opt--radio"><input type="radio" name="budget" value={b} /><span>{b}</span></label>
@@ -98,7 +98,7 @@ const copy = {
 				</div>
 			</fieldset>
 			<fieldset class="step">
-				<legend class="step__head"><span class="step__n">04</span><span class="step__t">{copy.steps[3]}</span><span class="step__note">{copy.optional}</span></legend>
+				<legend class="step__head"><span class="step__n">03</span><span class="step__t">{copy.steps[3]}</span><span class="step__note">{copy.optional}</span></legend>
 				<div class="step__body contact__sentence">
 					<textarea name="message" rows="1" placeholder={copy.morePh} aria-label={copy.more}></textarea>
 				</div>
@@ -175,6 +175,9 @@ const copy = {
 	.step { margin: 0; padding: 22px 0; border: 0; display: grid; grid-template-columns: 290px 1fr; gap: 16px 32px; align-items: start; min-width: 0; }
 	.step__head { float: left; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 8px; font-family: 'Satoshi', sans-serif; }
 	.step__n { flex-basis: 100%; }
+	.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+	.step:first-of-type { padding-top: 0; }
+	.step:first-of-type .step__body { grid-column: 2; }
 	.step__note::before { content: '— '; }
 	.step__n { font-size: 11px; letter-spacing: 0.2em; color: var(--mute); font-variant-numeric: tabular-nums; }
 	.step__t { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
@@ -225,6 +228,7 @@ const copy = {
 	.contact__direct a:hover { color: var(--ink); border-color: var(--ink); }
 	@media (max-width: 700px) {
 		.step { grid-template-columns: 1fr; gap: 14px; padding: 22px 0; }
+		.step:first-of-type .step__body { grid-column: auto; }
 		.step__head { flex-direction: row; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 		.contact__line { flex-direction: column; align-items: stretch; gap: 2px; }
 		.contact__actions { grid-template-columns: 1fr; gap: 8px; }
