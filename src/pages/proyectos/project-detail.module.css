@@ -26,6 +26,8 @@
 	height: auto;
 	max-height: clamp(64px, 10vw, 122px);
 	object-fit: contain;
+	filter: brightness(0) saturate(100%);
+	opacity: 0.9;
 }
 
 .headerDivider {
