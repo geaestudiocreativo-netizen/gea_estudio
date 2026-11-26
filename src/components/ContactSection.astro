@@ -17,14 +17,14 @@ const copy = {
 		kicker: 'CONTACTO',
 		title: 'Hablemos de tu',
 		titleItalic: 'marca',
-		lead: 'Rellena la frase y te respondo en menos de 48 horas.',
+		lead: 'Cuéntame qué necesitas y te respondo en menos de 48 horas.',
 		hello: 'Hola, me llamo',
 		namePh: 'tu nombre',
 		business: 'y mi negocio es',
 		businessPh: 'nombre o @instagram',
 		need: 'Necesito ayuda con',
 		services: ['Web', 'Fotografía y vídeo', 'Redes sociales', 'Branding'],
-		budget: 'y tengo un presupuesto de',
+		budget: 'Presupuesto aproximado',
 		budgets: ['menos de 1.000 €', '1.000 – 2.500 €', '2.500 – 5.000 €', 'más de 5.000 €'],
 		more: 'Te cuento un poco más:',
 		morePh: 'Cuéntame un poco más (opcional): qué quieres conseguir, plazos…',
@@ -40,14 +40,14 @@ const copy = {
 		kicker: 'CONTACT',
 		title: "Let's talk about your",
 		titleItalic: 'brand',
-		lead: "Fill in the sentence and I'll reply within 48 hours.",
+		lead: "Tell me what you need and I'll reply within 48 hours.",
 		hello: 'Hi, my name is',
 		namePh: 'your name',
 		business: 'and my business is',
 		businessPh: 'name or @instagram',
 		need: 'I need help with',
 		services: ['Web', 'Photo & video', 'Social media', 'Branding'],
-		budget: 'and my budget is',
+		budget: 'Approximate budget',
 		budgets: ['under €1,000', '€1,000 – 2,500', '€2,500 – 5,000', 'over €5,000'],
 		more: 'A bit more about it:',
 		morePh: 'Tell me a bit more (optional): goals, timing…',
@@ -73,19 +73,25 @@ const copy = {
 				<span data-k="hello">{copy.hello}</span>
 				<input name="name" type="text" autocomplete="name" placeholder={copy.namePh} aria-label={copy.namePh} required />
 				<span data-k="business">{copy.business}</span>
-				<input name="business" type="text" placeholder={copy.businessPh} aria-label={copy.businessPh} />.{" "}
-				<span data-k="need">{copy.need}</span>
-				<span class="contact__opts" role="group" aria-label={copy.need}>
+				<input name="business" type="text" class="contact__wide" placeholder={copy.businessPh} aria-label={copy.businessPh} />
+			</div>
+			<div class="contact__group">
+				<p class="contact__label" data-k="need">{copy.need}</p>
+				<div class="contact__opts" role="group" aria-label={copy.need}>
 					{copy.services.map((s) => (
 						<label class="contact__opt"><input type="checkbox" name="services" value={s} /><span>{s}</span></label>
 					))}
-				</span>
-				<span data-k="budget">{copy.budget}</span>
-				<span class="contact__opts" role="radiogroup" aria-label={copy.budget}>
+				</div>
+			</div>
+			<div class="contact__group">
+				<p class="contact__label" data-k="budget">{copy.budget}</p>
+				<div class="contact__opts" role="radiogroup" aria-label={copy.budget}>
 					{copy.budgets.map((b) => (
 						<label class="contact__opt"><input type="radio" name="budget" value={b} /><span>{b}</span></label>
 					))}
-				</span>.
+				</div>
+			</div>
+			<div class="contact__sentence">
 				<textarea name="message" rows="1" placeholder={copy.morePh} aria-label={copy.more}></textarea>
 			</div>
 
@@ -128,7 +134,7 @@ const copy = {
 			const lines = [
 				`${k('hello')} ${name || '…'}${business ? ` ${k('business')} ${business}` : ''}.`,
 				services.length ? `${cap(k('need'))}: ${services.join(', ')}.` : '',
-				budget ? `${cap(k('budget').replace(/^y\s+|^and\s+/i, ''))} ${budget}.` : '',
+				budget ? `${k('budget')}: ${budget}.` : '',
 				message
 			].filter(Boolean);
 			const text = lines.join('\n');
@@ -191,19 +197,23 @@ const copy = {
 		outline: none;
 		transition: border-color 200ms ease;
 	}
-	.contact__sentence textarea { display: block; width: 100%; margin: 12px 0 0; resize: none; overflow: hidden; line-height: 1.5; padding: 4px 0; font-size: 0.9em; }
+	.contact__sentence textarea { display: block; width: 100%; margin: 26px 0 0; resize: none; overflow: hidden; line-height: 1.5; padding: 4px 0; font-size: 0.9em; }
 	.contact__sentence input:focus, .contact__sentence textarea:focus { border-bottom-color: #1A1816; }
 	.contact__sentence input::placeholder, .contact__sentence textarea::placeholder { color: rgba(26, 24, 22, 0.3); }
-	.contact__opts { display: inline; }
-	.contact__opt { position: relative; display: inline-block; margin: 0 2px; cursor: pointer; vertical-align: baseline; }
+	.contact__wide { width: 12em !important; }
+	.contact__group { margin-top: 22px; }
+	.contact__label { margin: 0 0 10px; font-family: 'Satoshi', sans-serif; font-size: 11px; line-height: 1.4; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(26, 24, 22, 0.6); }
+	.contact__opts { display: flex; flex-wrap: wrap; gap: 8px; line-height: 1.2; }
+	.contact__opt { position: relative; display: inline-block; cursor: pointer; }
 	.contact__opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 	.contact__opt span {
 		display: inline-block;
 		line-height: 1.15;
-		padding: 0.08em 0.45em 0.12em;
+		padding: 7px 14px;
+		font-size: 14px;
 		border-radius: 999px;
-		color: rgba(26, 24, 22, 0.38);
-		border: 1px solid rgba(26, 24, 22, 0.18);
+		color: rgba(26, 24, 22, 0.75);
+		border: 1px solid rgba(26, 24, 22, 0.25);
 		transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
 	}
 	.contact__opt:hover span { color: #1A1816; border-color: rgba(26, 24, 22, 0.5); }
@@ -221,6 +231,12 @@ const copy = {
 		color: #1A1816;
 		cursor: pointer;
 		flex: 0 1 auto;
+	}
+	@media (max-width: 600px) {
+		.contact__sentence input[type='text'] { width: 100% !important; margin: 4px 0 8px; display: block; }
+		.contact__btn { flex: 1 1 100%; text-align: center; }
+		.contact__direct { flex-direction: column; align-items: flex-start; gap: 10px; }
+		.contact__direct span[aria-hidden] { display: none; }
 	}
 	.contact__btn--solid { background: #1A1816; color: #F2EFE9; }
 	.contact__btn:hover { opacity: 0.85; }
