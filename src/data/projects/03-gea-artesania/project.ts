@@ -2,7 +2,7 @@ import type { ProjectFolderMetadata } from '../types';
 
 const project: ProjectFolderMetadata = {
 	slug: 'gea-artesania',
-	number: '03',
+	number: '02',
 	title: 'Gea Artesanía',
 	client: 'Gea Artesanía',
 	location: 'Madrid, España',
