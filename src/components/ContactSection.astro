@@ -237,4 +237,13 @@ const copy = {
 		.contact__direct span[aria-hidden] { display: none; }
 	}
 	@media (prefers-reduced-motion: reduce) { .contact__kicker::before { animation: none; } }
+	/* Desktop: formulario al 80% del ancho, opciones en una sola fila */
+	@media (min-width: 1024px) {
+		.contact__inner { width: 80vw; max-width: 1400px; }
+		.step { grid-template-columns: 220px 1fr; }
+	}
+	@media (min-width: 1280px) {
+		.contact__opts { flex-wrap: nowrap; }
+		.contact__opt span { padding-left: 10px; padding-right: 12px; white-space: nowrap; }
+	}
 </style>
