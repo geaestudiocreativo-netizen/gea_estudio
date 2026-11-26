@@ -2,7 +2,7 @@ import type { ProjectFolderMetadata } from '../types';
 
 const project: ProjectFolderMetadata = {
 	slug: 'talleres-alonso',
-	number: '04',
+	number: '03',
 	title: 'Talleres Alonso',
 	client: 'Talleres Alonso',
 	location: 'Valencia, España',
