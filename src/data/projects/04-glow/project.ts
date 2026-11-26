@@ -23,7 +23,8 @@ const project: ProjectFolderMetadata = {
 				'04-glow-firma-ancha.jpg',
 				'05-glow-silla.jpg',
 				'06-glow-frasco.jpg'
-			]
+			],
+			videos: ['glow-logo-presentacion.mp4']
 		},
 		{
 			type: 'Web',

@@ -266,6 +266,23 @@ const blocks = toOrderedBlocks(images);
 	)
 }
 
+{layout === 'editorial' && videos.length > 0 && (
+	<section class={styles.editorialVideoBand} aria-label={`${projectTitle} vídeo`}>
+		{videos.map((video, index) => (
+			<video
+				class={styles.editorialVideo}
+				data-video-src={video}
+				autoplay
+				loop
+				muted
+				playsinline
+				preload="none"
+				aria-label={`${projectTitle} vídeo ${index + 1}`}
+			/>
+		))}
+	</section>
+)}
+
 {layout === 'vertical' && (
 	<script>
 		const masonryStacks = Array.from(document.querySelectorAll('[data-photography-masonry]'));
