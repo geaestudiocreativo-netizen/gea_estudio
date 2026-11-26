@@ -20,7 +20,7 @@ const project: ProjectFolderMetadata = {
 			layout: 'branding-b',
 			images: [
 				'02-glow-logo-color.jpg',
-				'03-glow-simbolo.jpg',
+				'03-glow-champu.jpg',
 				'glow-pelo.jpg',
 				'04-glow-w22.jpg',
 				'05-glow-silla.jpg',
