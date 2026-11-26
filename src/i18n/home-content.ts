@@ -5,17 +5,17 @@ export const heroContent = {
 		eyebrow: 'ESTUDIO CREATIVO',
 		headingMain: 'Creamos universos visuales para marcas',
 		headingSecondary:
-			'Todo lo visual de tu marca, en una sola persona: diseño web, fotografía, vídeo, redes sociales y branding.',
+			'Todo lo visual de tu marca, en un solo estudio: diseño web, fotografía, vídeo, redes sociales y branding.',
 		primaryImageAlt: 'Person by a vintage car at sunset',
-		secondaryImageAlt: 'Close-up architectural texture'
+		secondaryImageAlt: 'Mujer con una orquídea moteada junto al rostro'
 	},
 	en: {
 		eyebrow: 'CREATIVE STUDIO',
 		headingMain: 'We create visual universes for brands',
 		headingSecondary:
-			'Everything visual for your brand, from one person: web design, photography, video, social media and branding.',
+			'Everything visual for your brand, in one studio: web design, photography, video, social media and branding.',
 		primaryImageAlt: 'Person by a vintage car at sunset',
-		secondaryImageAlt: 'Close-up architectural texture'
+		secondaryImageAlt: 'Woman holding a spotted orchid to her face'
 	}
 } as const;
 
