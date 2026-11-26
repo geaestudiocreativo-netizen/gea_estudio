@@ -172,8 +172,10 @@ const copy = {
 	.contact__title em { font-style: normal; }
 	.contact__lead { margin: 14px 0 48px; font-family: 'Satoshi', sans-serif; font-size: 14px; color: rgba(26, 24, 22, 0.7); }
 	.contact__form { font-family: 'Manrope', 'Satoshi', sans-serif; letter-spacing: -0.01em; }
-	.step { margin: 0; padding: 22px 0; border: 0; display: grid; grid-template-columns: 200px 1fr; gap: 16px 32px; align-items: start; min-width: 0; }
-	.step__head { float: left; padding: 0; display: flex; flex-direction: column; gap: 6px; font-family: 'Satoshi', sans-serif; }
+	.step { margin: 0; padding: 22px 0; border: 0; display: grid; grid-template-columns: 290px 1fr; gap: 16px 32px; align-items: start; min-width: 0; }
+	.step__head { float: left; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 8px; font-family: 'Satoshi', sans-serif; }
+	.step__n { flex-basis: 100%; }
+	.step__note::before { content: '— '; }
 	.step__n { font-size: 11px; letter-spacing: 0.2em; color: var(--mute); font-variant-numeric: tabular-nums; }
 	.step__t { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
 	.step__note { font-size: 11px; color: var(--mute); }
