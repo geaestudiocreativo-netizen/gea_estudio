@@ -15,6 +15,8 @@ const serviceTypeTranslations: Record<ServiceName, string> = {
 const projectDescriptionTranslations: Record<string, string> = {
 	'talleres-alonso': 'A strong identity for a workshop with more than 40 years of history.',
 	g: 'An artisanal pastry brand with editorial sensitivity and contemporary character.',
+	glow: 'Logo and website for a professional hair and beauty shop that did not exist yet. A geometric, rounded signature where the W is two 22s.',
+	mercurio: 'Concept jewellery brand in molten silver. Art direction and campaign created by Gea to explore its own visual language, from the painter\'s studio to the museum.',
 	'gea-artesania': 'Handcrafted jewelry with design-led pieces made in polymer clay.'
 };
 

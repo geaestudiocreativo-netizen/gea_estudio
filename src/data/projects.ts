@@ -30,6 +30,7 @@ type ProjectService =
 	  };
 
 export interface Project {
+	concept?: boolean;
 	id: string;
 	slug: string;
 	assetsFolder: string;
@@ -116,6 +117,7 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 		client: meta.client,
 		location: meta.location,
 		services,
+		concept: meta.concept ?? false,
 		image: cardImage,
 		imageSize: meta.imageSize,
 		coverImage,

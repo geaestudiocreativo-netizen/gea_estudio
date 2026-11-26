@@ -75,6 +75,7 @@ const sections = project.services.map((service) => ({
 		<header class={styles.projectHeader}>
 			<img class={styles.projectLogo} src={project.logo} alt={project.title} loading="eager" decoding="async" />
 			<p class={styles.projectDescription}>{projectDescription}</p>
+			{project.concept && <span class="concept-tag">Concept project · AI-generated images</span>}
 			<div class={styles.headerDivider} aria-hidden="true"></div>
 		</header>
 

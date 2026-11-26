@@ -59,4 +59,5 @@ export interface ProjectFolderMetadata {
 	heroImage: string;
 	imageSize: 'small' | 'medium' | 'large';
 	cardImage?: string;
+	concept?: boolean;
 }

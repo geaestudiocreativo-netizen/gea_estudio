@@ -17,6 +17,7 @@ interface Props {
 	image?: string;
 	imageSize: 'small' | 'medium' | 'large';
 	compactMobile?: boolean;
+	concept?: boolean;
 	variant?: 'carousel' | 'grid';
 	locale?: Locale;
 }
@@ -31,6 +32,7 @@ const {
 	image,
 	imageSize,
 	compactMobile = false,
+	concept = false,
 	variant = 'carousel',
 	locale = 'es'
 } = Astro.props as Props;
@@ -102,6 +104,7 @@ const cardAriaPrefix = projectDetailContent[locale].projectCardAriaPrefix;
 					</span>
 				))}
 			</p>
+			{concept && <span class="concept-tag">{locale === 'en' ? 'Concept project' : 'Proyecto conceptual'}</span>}
 		</div>
 	</article>
 </a>
