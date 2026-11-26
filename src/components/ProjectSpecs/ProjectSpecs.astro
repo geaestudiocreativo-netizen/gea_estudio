@@ -13,7 +13,10 @@ const en = locale === 'en';
 
 const sector = en ? project.sectorEn ?? project.sector : project.sector;
 
-const parts = [sector, project.location, project.concept ? (en ? 'Concept · AI' : 'Concepto · IA') : null].filter(Boolean);
+const first = [sector, project.concept ? (en ? 'Concept · AI' : 'Concepto · IA') : null].filter(Boolean).join('  ·  ');
 ---
 
-<p class={styles.line}>{parts.join('  ·  ')}</p>
+<div class={styles.specs}>
+	{first && <p class={styles.line}>{first}</p>}
+	<p class={styles.sub}>{project.location} — {project.year}</p>
+</div>

@@ -22,7 +22,7 @@ const project: ProjectFolderMetadata = {
 				'02-glow-logo-color.jpg',
 				'03-glow-simbolo.jpg',
 				'glow-pelo.jpg',
-				'04-glow-firma-ancha.jpg',
+				'04-glow-w22.jpg',
 				'05-glow-silla.jpg',
 				'06-glow-frasco.jpg'
 			],
