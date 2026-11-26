@@ -14,8 +14,8 @@ const INSTAGRAM = 'gea.estudio__';
 
 const copy = {
 	es: {
-		kicker: 'CONTACTO',
-		title: 'Hablemos de tu',
+		title: 'Hablemos',
+		titleRest: 'de tu',
 		titleItalic: 'marca',
 		lead: 'Cuéntame qué necesitas y te respondo en menos de 48 horas.',
 		hello: 'Hola, me llamo',
@@ -40,8 +40,8 @@ const copy = {
 		hint: 'Se abrirá WhatsApp o tu email con el mensaje ya escrito.'
 	},
 	en: {
-		kicker: 'CONTACT',
-		title: "Let's talk about your",
+		title: "Let's talk",
+		titleRest: 'about your',
 		titleItalic: 'brand',
 		lead: "Tell me what you need and I'll reply within 48 hours.",
 		hello: 'Hi, my name is',
@@ -70,8 +70,7 @@ const copy = {
 
 <section id="contact" class="contact" aria-labelledby="contact-title" data-phone={PHONE_E164} data-email={EMAIL} data-subject={copy.subject}>
 	<div class="contact__inner">
-		<p class="contact__kicker">{copy.kicker}</p>
-		<h2 id="contact-title" class="contact__title">{copy.title} <em>{copy.titleItalic}</em></h2>
+		<h2 id="contact-title" class="contact__title">{copy.title}<br />{copy.titleRest} <em>{copy.titleItalic}</em></h2>
 		<p class="contact__lead">{copy.lead}</p>
 
 		<form class="contact__form" novalidate>
@@ -173,13 +172,13 @@ const copy = {
 	.contact__title em { font-style: normal; }
 	.contact__lead { margin: 14px 0 48px; font-family: 'Satoshi', sans-serif; font-size: 14px; color: rgba(26, 24, 22, 0.7); }
 	.contact__form { font-family: 'Manrope', 'Satoshi', sans-serif; letter-spacing: -0.01em; }
-	.step { margin: 0; padding: 26px 0; border: 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: 200px 1fr; gap: 16px 32px; align-items: start; min-width: 0; }
+	.step { margin: 0; padding: 22px 0; border: 0; display: grid; grid-template-columns: 200px 1fr; gap: 16px 32px; align-items: start; min-width: 0; }
 	.step__head { float: left; padding: 0; display: flex; flex-direction: column; gap: 6px; font-family: 'Satoshi', sans-serif; }
 	.step__n { font-size: 11px; letter-spacing: 0.2em; color: var(--mute); font-variant-numeric: tabular-nums; }
 	.step__t { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
 	.step__note { font-size: 11px; color: var(--mute); }
 	.step__body { min-width: 0; }
-	.contact__line { display: flex; align-items: baseline; gap: 12px; font-size: clamp(17px, 1.6vw, 20px); font-weight: 300; }
+	.contact__line { display: flex; align-items: baseline; gap: 12px; font-size: clamp(14px, 1.15vw, 15px); font-weight: 300; }
 	.contact__line + .contact__line { margin-top: 10px; }
 	.contact__line span { white-space: nowrap; }
 	.contact__sentence input[type='text'], .contact__sentence textarea {
@@ -189,7 +188,7 @@ const copy = {
 		transition: background-size 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
 	}
 	.contact__sentence input:focus, .contact__sentence textarea:focus { background-size: 100% 1px; }
-	.contact__sentence textarea { display: block; width: 100%; resize: none; overflow: hidden; line-height: 1.5; font-size: clamp(15px, 1.4vw, 17px); font-weight: 300; }
+	.contact__sentence textarea { display: block; width: 100%; resize: none; overflow: hidden; line-height: 1.5; font-size: clamp(14px, 1.15vw, 15px); font-weight: 300; }
 	.contact__sentence input::placeholder, .contact__sentence textarea::placeholder { color: rgba(26, 24, 22, 0.28); }
 	.contact__opts { display: flex; flex-wrap: wrap; gap: 8px; }
 	.contact__opt { position: relative; cursor: pointer; }
@@ -206,7 +205,7 @@ const copy = {
 	.contact__opt input:checked + span { background: var(--ink); color: #F2EFE9; border-color: var(--ink); }
 	.contact__opt input:checked + span::before { background: #F2EFE9; opacity: 1; border-color: #F2EFE9; }
 	.contact__opt input:focus-visible + span { outline: 1px solid var(--ink); outline-offset: 3px; }
-	.contact__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 8px; border-top: 1px solid var(--line); padding-top: 32px; }
+	.contact__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 8px; padding-top: 24px; }
 	.contact__btn {
 		display: flex; justify-content: space-between; align-items: center;
 		font-family: 'Satoshi', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
