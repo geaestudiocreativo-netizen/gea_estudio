@@ -4,7 +4,7 @@ import ResponsiveImage from './ResponsiveImage.astro';
 import { visualChapterContent } from '../i18n/home-content';
 import type { Locale } from '../i18n/site';
 
-const imageSrc = '/images/others/Galaxia.png';
+const imageSrc = '/images/others/hf_20261106_211311_983e9157-4695-45af-bcef-f3dd623ec9ed.png';
 interface Props { locale?: Locale }
 const { locale = 'es' } = Astro.props as Props;
 const content = visualChapterContent[locale];
@@ -23,11 +23,12 @@ const content = visualChapterContent[locale];
 				sizes="100vw"
 				widths={[640, 960, 1280, 1600, 1920]}
 			/>
-			<p class={styles.copy} aria-hidden="true">
-					<span class={styles.mainLineA}>{content.heading}</span>
+			<p class={styles.copy}>
+				<span class={styles.mainLineA}>{content.heading}</span>
 				<span class={styles.mainLineB}>
-						{content.lines.map((line) => <span class={styles.mainLineBLine}>{line}</span>)}
+					{content.lines.map((line) => <span class={styles.mainLineBLine}>{line}</span>)}
 				</span>
+				<span class={styles.support}>{content.support}</span>
 			</p>
 		</div>
 	</div>
