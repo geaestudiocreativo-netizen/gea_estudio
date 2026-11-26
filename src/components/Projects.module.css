@@ -295,3 +295,27 @@
 		margin-left: 0;
 	}
 }
+
+/* Desktop: flechas pequeñas y alineadas con el borde derecho de las tarjetas */
+@media (min-width: 960px) {
+	.cta {
+		gap: 10px;
+		height: auto;
+		margin-bottom: 14px;
+		padding-right: var(--project-hover-bleed);
+		box-sizing: border-box;
+	}
+
+	.carouselArrow {
+		flex: 0 0 30px;
+		width: 30px;
+		height: 30px;
+		font-size: 13px;
+		border-color: rgba(17, 17, 17, 0.5);
+	}
+
+	.ctaButton {
+		margin-inline: 4px;
+	}
+}
+
