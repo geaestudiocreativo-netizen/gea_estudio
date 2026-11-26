@@ -42,9 +42,6 @@ const content = aboutSectionContent[locale];
 				<p class="about-copy__body">{content.statement} {content.body} {content.disciplines}</p>
 			</div>
 
-			<div id="about-contact" class="mt-[48px] flex flex-col items-center text-center">
-				<PrimaryButton href={getLocalizedPath(locale, '/#contact')} label={content.contactButton} ariaLabel={content.contactButtonAria} variant="outline" className={buttonStyles.desktopFull} />
-			</div>
 		</div>
 	</div>
 </section>
