@@ -2,7 +2,7 @@
 	background: #F2EFE9;
 	overflow-anchor: none;
 	overflow-x: clip;
-	padding: clamp(34px, 6vw, 88px) clamp(16px, 3vw, 42px) 0;
+	padding: clamp(24px, 6.4vw, 96px) clamp(16px, 3vw, 42px) 0;
 }
 
 .projectContent {
@@ -22,9 +22,9 @@
 .projectLogo {
 	display: block;
 	margin: 0 auto;
-	width: clamp(132px, 18vw, 240px);
+	width: clamp(110px, 12vw, 170px);
 	height: auto;
-	max-height: clamp(64px, 10vw, 122px);
+	max-height: clamp(48px, 6vw, 80px);
 	object-fit: contain;
 	filter: brightness(0) saturate(100%);
 	opacity: 0.9;
@@ -34,7 +34,7 @@
 	height: 1px;
 	background: #111111;
 	width: 100vw;
-	margin: 32px calc(50% - 50vw) 0;
+	margin: 24px calc(50% - 50vw) 0;
 }
 
 .logoMark {
@@ -571,8 +571,8 @@
 	}
 
 	.projectLogo {
-		width: clamp(110px, 34vw, 180px);
-		max-height: 84px;
+		width: clamp(96px, 30vw, 140px);
+		max-height: 56px;
 	}
 
 	.projectDescription {

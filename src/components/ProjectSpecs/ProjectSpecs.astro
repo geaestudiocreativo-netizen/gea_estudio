@@ -1,7 +1,6 @@
 ---
 import styles from './ProjectSpecs.module.css';
 import type { Project } from '../../data/projects';
-import { localizeServiceType } from '../../data/projects-i18n';
 import type { Locale } from '../../i18n/site';
 
 interface Props {
@@ -12,14 +11,11 @@ interface Props {
 const { project, locale = 'es' } = Astro.props as Props;
 const en = locale === 'en';
 
-const services = [...new Set(project.services.map((s) => localizeServiceType(s.type, locale)))].join(' · ');
 const sector = en ? project.sectorEn ?? project.sector : project.sector;
 
 const rows = [
 	sector && { label: en ? 'Sector' : 'Sector', value: sector },
 	{ label: en ? 'Location' : 'Lugar', value: project.location },
-	{ label: en ? 'Year' : 'Año', value: project.year },
-	{ label: en ? 'Services' : 'Servicios', value: services },
 	project.concept && { label: en ? 'Type' : 'Tipo', value: en ? 'Concept · AI' : 'Concepto · IA' }
 ].filter(Boolean) as { label: string; value: string }[];
 ---
