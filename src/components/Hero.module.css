@@ -81,10 +81,10 @@
 .heroCta {
 	display: block;
 	width: fit-content;
-	margin-top: 20px;
+	margin-top: 44px;
 	font-family: 'Satoshi', sans-serif;
-	font-size: 13px;
-	font-weight: 500;
+	font-size: 12px;
+	font-weight: 300;
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: #1A1816;
