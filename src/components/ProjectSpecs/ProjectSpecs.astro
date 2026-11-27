@@ -18,17 +18,20 @@ const first = sector;
 // Texto breve del caso: el reto, qué hicimos y el resultado
 const caseText = getLocalizedProjectDescription(project, locale);
 // Folio de revista: número del proyecto y servicios
-const folioServices = [...new Set(project.services.map((service) => localizeServiceType(service.type, locale)))].join(' · ');
+const folioServices = [...new Set(project.services.map((service) => localizeServiceType(service.type, locale)))].join(' — ');
 ---
 
 <div class={styles.specs}>
 	{project.concept && <span class="concept-tag">{en ? 'Concept project - AI' : 'Proyecto conceptual - IA'}</span>}
 	<div class={styles.article}>
 		<dl class={styles.folio}>
-			<div><dt class="sr-only">{en ? 'Project' : 'Proyecto'}</dt><dd>N.º {project.id}{sector && ` · ${sector}`}</dd></div>
-			<div><dt class="sr-only">{en ? 'Services' : 'Servicios'}</dt><dd>{folioServices}</dd></div>
-			<div><dt class="sr-only">{en ? 'Location' : 'Lugar'}</dt><dd>{project.location ?? ''}</dd></div>
-			<div><dt class="sr-only">{en ? 'Year' : 'Año'}</dt><dd>{project.year}</dd></div>
+			<div class={styles.folioRow}>
+				<div><dt class="sr-only">{en ? 'Business' : 'Negocio'}</dt><dd>{sector}</dd></div>
+				<div><dt class="sr-only">{en ? 'Location' : 'Lugar'}</dt><dd>{project.location ? `${project.location} · ${project.year}` : project.year}</dd></div>
+			</div>
+			<div class={styles.folioRow}>
+				<div><dt class="sr-only">{en ? 'Services' : 'Servicios'}</dt><dd>{folioServices}</dd></div>
+			</div>
 		</dl>
 		{caseText && <p class={styles.case}>{caseText}</p>}
 	</div>
