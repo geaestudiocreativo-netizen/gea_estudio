@@ -148,6 +148,18 @@ const sections = project.services.map((service) => ({
 										widths={[480, 768, 960, 1280, 1600]}
 									/>
 								)}
+								{section.video && section.images.length > 0 && (
+									<figure class={styles.webScene}>
+										<ResponsiveImage
+											src={section.images[0]}
+											alt={`${project.title} web`}
+											loading="lazy"
+											decoding="async"
+											sizes="(max-width: 767px) 92vw, 34vw"
+											widths={[480, 768, 960, 1152]}
+										/>
+									</figure>
+								)}
 								{section.websiteUrl && (
 									<a
 										class={styles.webVisitButton}

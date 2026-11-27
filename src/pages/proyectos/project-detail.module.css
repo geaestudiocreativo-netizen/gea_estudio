@@ -771,3 +771,16 @@
 .webCompositionBrowser::before {
 	background: rgba(20, 14, 10, 0.45);
 }
+
+/* Foto de ambiente de la web (.G): debajo del vídeo, centrada y sin sombra */
+.webScene {
+	position: relative;
+	z-index: 1;
+	width: min(100%, 520px);
+	margin: clamp(56px, 8vw, 120px) auto 0;
+}
+
+.webComposition .webScene img {
+	width: 100%;
+	box-shadow: none;
+}
