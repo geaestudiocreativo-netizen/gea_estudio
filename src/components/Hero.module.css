@@ -466,10 +466,9 @@
 		margin-top: 0;
 	}
 
-	/* Foto de la chica más alta en móvil, mismo ancho: se ve más cielo por arriba, sin acercarla */
+	/* Foto de la chica entera en móvil, sin recortes (se ve todo lo posible de ella) */
 	.primaryImage {
-		aspect-ratio: 10 / 14.4;
-		object-position: 50% 100%;
+		aspect-ratio: 1164 / 1402;
 	}
 
 	.copy {
