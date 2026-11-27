@@ -60,7 +60,7 @@ const getServiceName = (serviceTitle: string) => {
 				{list.map((service, index) => (
 					<li class="services-editorial__item" data-index={index}>
 						<a class="services-editorial__link" href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
-							<span class="services-editorial__index">{String(index + 1).padStart(2, '0')} /</span>
+							<span class="services-editorial__index">[{String(index + 1).padStart(2, '0')}]</span>
 							<span class="services-editorial__content">
 								<span class="services-editorial__name" data-service-name={service.slug}>
 									{getServiceNameLines(service.homeTitle).map((line, lineIndex) => (
@@ -653,6 +653,37 @@ const getServiceName = (serviceTitle: string) => {
 			visibility: visible;
 		}
 	}
+
+	/* Títulos de servicios más finos, en la línea del resto de la web (misma tipografía, menos peso y tamaño) */
+	.services-editorial .services-editorial__name {
+		font-weight: 600;
+		line-height: 0.98;
+		letter-spacing: 0;
+	}
+
+	/* Descripciones con menos interlineado */
+	.services-editorial .services-editorial__description {
+		line-height: 1.2;
+	}
+
+	@media (min-width: 901px) {
+		.services-editorial .services-editorial__name {
+			font-size: clamp(34px, 3.6vw, 68px);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.services-editorial .services-editorial__name,
+		.services-editorial .services-editorial__name[data-service-name='photography'] {
+			font-size: clamp(22px, 6.4vw, 40px);
+		}
+	}
+	/* Números como en la tarjeta de visita: [01] en verde oliva */
+	.services-editorial .services-editorial__index { color: #787836; letter-spacing: 0.04em; }
+	/* Números centrados con la primera línea del título */
+	.services-editorial { --svc-title-size: clamp(34px, 3.6vw, 68px); }
+	@media (max-width: 900px) { .services-editorial { --svc-title-size: clamp(22px, 6.4vw, 40px); } }
+	.services-editorial .services-editorial__index { line-height: 1; margin-top: calc((var(--svc-title-size) * 0.98 - 1em) / 2); }
 </style>
 
 
