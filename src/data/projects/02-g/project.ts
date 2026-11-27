@@ -69,7 +69,7 @@ const project: ProjectFolderMetadata = {
 	},
 	assetsFolder: '02-punto-g',
 	coverImage: 'hero.JPG',
-	logo: 'logo.svg',
+	logo: 'logo-solo.svg',
 	heroImage: 'hero.JPG',
 	imageSize: 'small',
 	cardImage: '/images/projects/project-02.jpg',
