@@ -27,12 +27,12 @@ const folioServices = [...new Set(project.services.map((service) => localizeServ
 		<dl class={styles.folio}>
 			<div class={styles.folioRow}>
 				<div><dt class="sr-only">{en ? 'Business' : 'Negocio'}</dt><dd class={styles.sector}>{sector}</dd></div>
-				<div><dt class="sr-only">{en ? 'Location' : 'Lugar'}</dt><dd class={styles.place}>{project.location ? `${project.location} · ${project.year}` : project.year}</dd></div>
 			</div>
 			<div class={styles.folioRow}>
 				<div><dt class="sr-only">{en ? 'Services' : 'Servicios'}</dt><dd class={styles.services}>{folioServices}</dd></div>
 			</div>
 		</dl>
 		{caseText && <p class={styles.case}>{caseText}</p>}
+		<p class={styles.signature}>{project.location ? `${project.location} · ${project.year}` : project.year}</p>
 	</div>
 </div>
