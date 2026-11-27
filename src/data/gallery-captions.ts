@@ -36,3 +36,18 @@ export const getGalleryCaption = (src: string, locale: Locale = 'es') => {
 	const key = Object.keys(captions).find((candidate) => path.endsWith(candidate));
 	return key ? captions[key][locale] : undefined;
 };
+
+// Frase destacada que corta la galería de branding (una por proyecto).
+// La clave es la carpeta del proyecto.
+const statements: Record<string, Caption> = {
+	'01-talleres-alonso': { es: 'Cuarenta años de oficio, ahora con una imagen a su altura.', en: 'Forty years of craft, now with an image to match.' },
+	'02-punto-g': { es: 'Hechas a mano, pensadas para quedarse.', en: 'Handmade, designed to last.' },
+	'04-glow': { es: 'Dos 22 que forman una firma.', en: 'Two 22s that make a signature.' }
+};
+
+export const getGalleryStatement = (src: string | undefined, locale: Locale = 'es') => {
+	if (!src) return undefined;
+	const path = decodeURIComponent(src);
+	const key = Object.keys(statements).find((folder) => path.includes(`/${folder}/`));
+	return key ? statements[key][locale] : undefined;
+};

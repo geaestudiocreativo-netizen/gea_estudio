@@ -3,7 +3,7 @@ import styles from './EditorialGallery.module.css';
 import ResponsiveImage from '../ResponsiveImage.astro';
 import { projectDetailContent } from '../../i18n/projects-content';
 import type { Locale } from '../../i18n/site';
-import { getGalleryCaption } from '../../data/gallery-captions';
+import { getGalleryCaption, getGalleryStatement } from '../../data/gallery-captions';
 
 interface Props {
 	images: readonly string[];
@@ -55,6 +55,7 @@ const caption = (src: string | undefined, position: number) => {
 	const text = getGalleryCaption(src, locale);
 	return text ? `${String(position).padStart(2, '0')} — ${text}` : undefined;
 };
+const statement = layout === 'editorial' ? getGalleryStatement(images[0], locale) ?? (insertBrandStatement ? content.brandStatement : undefined) : undefined;
 const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryCaption(image, locale));
 ---
 
@@ -198,9 +199,9 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 							}
 
 							{
-								insertBrandStatement && blockIndex === 0 && blockImages[4] && (
+								statement && blockIndex === 0 && blockImages[4] && (
 									<div class={styles.brandStatement}>
-														<p>{content.brandStatement}</p>
+														<p>{statement}</p>
 									</div>
 
 									<script>

@@ -17,7 +17,7 @@ const project: ProjectFolderMetadata = {
 			type: 'Branding',
 			gallery: 'branding',
 			layout: 'branding-a',
-			images: ['01.jpg', '02.jpg', '03.jpg', '04.jpg', '06.svg', '05.jpg']
+			images: ['02.jpg', '01.jpg', '03.jpg', '04.jpg', '06.svg', '05.jpg']
 		},
 		{
 			type: 'Web',
