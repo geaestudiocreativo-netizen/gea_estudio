@@ -1,5 +1,5 @@
 .page {
-	background: #ffffff;
+	background: #F2EFE9;
 	overflow-anchor: none;
 	overflow-x: clip;
 	padding: clamp(24px, 6.4vw, 96px) clamp(16px, 3vw, 42px) 0;
@@ -9,7 +9,7 @@
 	width: 100vw;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
-	background: #ffffff;
+	background: #F2EFE9;
 	padding-top: 1px;
 }
 
@@ -111,7 +111,7 @@
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
 	padding: 10px 0 12px;
-	background: #ffffff;
+	background: #F2EFE9;
 }
 
 .sectionTabsWrap::before {
@@ -121,7 +121,7 @@
 	left: 0;
 	width: 100%;
 	height: 4px;
-	background: #ffffff;
+	background: #F2EFE9;
 }
 
 .sectionTabs {
@@ -144,7 +144,7 @@
 .section {
 	max-width: 1120px;
 	margin: clamp(20px, 2.6vw, 36px) auto 0;
-	background: #ffffff;
+	background: #F2EFE9;
 }
 
 /* Sin título visible, la galería arranca justo después de las tabs */
@@ -655,9 +655,9 @@
 
 }
 
-/* Project pages: white nav to match the white header */
+/* Project pages: cream nav to match the cream page */
 :global(body):has(.page) :global([data-site-nav]) {
-	background: #ffffff;
+	background: #F2EFE9;
 }
 
 /* Logos muy horizontales (Mercurio, solo texto): más ancho para que tenga presencia */
