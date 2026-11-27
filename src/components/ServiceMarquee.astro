@@ -1,6 +1,5 @@
 ---
 import type { Locale } from '../i18n/site';
-import VideosSection from './VideosSection.astro';
 import { serviceMarqueeContent } from '../i18n/home-content';
 
 interface Props {
@@ -9,38 +8,125 @@ interface Props {
 
 const { locale = 'es' } = Astro.props as Props;
 const content = serviceMarqueeContent[locale];
+const featured = {
+	src: '/images/videos/mercurio-campana.optimized.mp4',
+	poster: '/images/videos/mercurio-campana-poster.jpg',
+	...content.featured
+};
+const videos = [
+	{ src: '/images/videos/video-01.optimized.mp4', ...content.videos[0] },
+	{ src: '/images/videos/video-02.optimized.mp4', ...content.videos[1] },
+	{ src: '/images/videos/video-03.optimized.mp4', ...content.videos[2] }
+];
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
-
 
 <section class="serviceMarquee" aria-labelledby="brand-statement-title">
 	<div class="serviceMarquee__content">
-		<div class="serviceMarquee__statement">
-			<p class="serviceMarquee__eyebrow">{content.eyebrow}</p>
-			<h2 id="brand-statement-title">
-				{content.headline.map((line) => <span class="serviceMarquee__headlineLine">{line}</span>)}
-			</h2>
-			<p class="serviceMarquee__support">{content.support}</p>
+		<div class="serviceMarquee__top">
+			<div class="serviceMarquee__statement">
+				<p class="serviceMarquee__eyebrow">{content.eyebrow}</p>
+				<h2 id="brand-statement-title">
+					{content.headline.map((line, i) => (
+						<span class:list={['serviceMarquee__headlineLine', i === content.headline.length - 1 && 'is-accent']}>{line}</span>
+					))}
+				</h2>
+				<p class="serviceMarquee__support">{content.support}</p>
+			</div>
+
+			<figure class="serviceMarquee__film serviceMarquee__film--featured">
+				<div class="serviceMarquee__frame">
+					<video
+						class="serviceMarquee__video"
+						data-video-src={featured.src}
+						poster={featured.poster}
+						autoplay
+						loop
+						muted
+						playsinline
+						preload="none"
+						aria-label={`${featured.title} · ${featured.meta}`}
+					/>
+				</div>
+				<figcaption class="serviceMarquee__caption">
+					<span class="serviceMarquee__num">[{pad(1)}]</span>
+					<span class="serviceMarquee__title">{featured.title}</span>
+					<span class="serviceMarquee__meta">{featured.meta}</span>
+				</figcaption>
+			</figure>
 		</div>
-		<VideosSection locale={locale} embedded />
+
+		<div class="serviceMarquee__row">
+			{videos.map((video, index) => (
+				<figure class="serviceMarquee__film">
+					<div class="serviceMarquee__frame">
+						<video
+							class="serviceMarquee__video"
+							data-video-src={video.src}
+							autoplay
+							loop
+							muted
+							playsinline
+							preload="none"
+							aria-label={video.title}
+						/>
+					</div>
+					<figcaption class="serviceMarquee__caption">
+						<span class="serviceMarquee__num">[{pad(index + 2)}]</span>
+						<span class="serviceMarquee__title">{video.title}</span>
+						{video.meta && <span class="serviceMarquee__meta">{video.meta}</span>}
+					</figcaption>
+				</figure>
+			))}
+		</div>
 	</div>
 </section>
 
+<script>
+	const videos = document.querySelectorAll<HTMLVideoElement>('.serviceMarquee__video');
+	const loadVideo = (video: HTMLVideoElement) => {
+		const source = video.dataset.videoSrc;
+		if (!source || video.src) return;
+		video.src = source;
+		video.load();
+		void video.play().catch(() => undefined);
+	};
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				const video = entry.target as HTMLVideoElement;
+				loadVideo(video);
+				observer.unobserve(video);
+			}
+		});
+	}, { rootMargin: '300px 0px' });
+
+	videos.forEach((video) => {
+		video.muted = true;
+		video.defaultMuted = true;
+		observer.observe(video);
+	});
+</script>
+
 <style>
 	.serviceMarquee {
+		/* Colores de la tarjeta de visita: fondo espresso + verde oliva dorado */
+		--sm-bg: #160c07;
+		--sm-ink: #f5ecdf;
+		--sm-muted: rgb(245 236 223 / 55%);
+		--sm-accent: #ada175;
 		--content-width: 78%;
 		position: relative;
 		z-index: 4;
 		width: 100vw;
-		height: auto;
 		min-height: 100svh;
 		margin-left: calc(50% - 50vw);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
-		background: #160c07;
-		flex-direction: column;
-		padding: clamp(160px, 18vw, 280px) clamp(16px, 5vw, 72px);
+		background: var(--sm-bg);
+		padding: clamp(120px, 14vw, 220px) clamp(16px, 5vw, 72px);
 		box-sizing: border-box;
 	}
 
@@ -48,20 +134,25 @@ const content = serviceMarqueeContent[locale];
 		width: var(--content-width);
 		display: flex;
 		flex-direction: column;
-		gap: clamp(64px, 8vw, 120px);
+		gap: clamp(56px, 7vw, 112px);
+	}
+
+	.serviceMarquee__top {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: clamp(48px, 6vw, 80px);
 	}
 
 	.serviceMarquee__statement {
-		width: 100%;
-		color: #f5ecdf;
+		color: var(--sm-ink);
 		font-family: 'Satoshi', sans-serif;
 		text-align: left;
 	}
 
 	.serviceMarquee__eyebrow {
-		margin: 0 0 clamp(28px, 4vw, 52px);
-		color: #f5ecdf;
-		font-size: clamp(14px, 1.25vw, 18px);
+		margin: 0 0 clamp(24px, 3vw, 44px);
+		color: var(--sm-ink);
+		font-size: clamp(13px, 1.1vw, 16px);
 		font-weight: 300;
 		line-height: 1;
 		letter-spacing: 0.2em;
@@ -70,7 +161,7 @@ const content = serviceMarqueeContent[locale];
 
 	.serviceMarquee__statement h2 {
 		margin: 0;
-		font-size: clamp(42px, 6.5vw, 96px);
+		font-size: clamp(30px, 10vw, 62px);
 		font-weight: 700;
 		line-height: 0.96;
 		letter-spacing: 0;
@@ -81,37 +172,64 @@ const content = serviceMarqueeContent[locale];
 		white-space: nowrap;
 	}
 
+	.serviceMarquee__headlineLine.is-accent {
+		color: var(--sm-accent);
+	}
+
 	.serviceMarquee__support {
-		max-width: 100%;
-		margin: clamp(36px, 5vw, 72px) 0 0;
-		font-size: clamp(14px, 2.2vw, 19px);
+		max-width: 34ch;
+		margin: clamp(28px, 4vw, 56px) 0 0;
+		color: var(--sm-muted);
+		font-size: clamp(14px, 3.8vw, 16px);
 		font-weight: 300;
-		line-height: 1.35;
-		letter-spacing: 0;
+		line-height: 1.45;
 	}
 
-	.serviceMarquee :global(.videos-section--embedded) {
+	.serviceMarquee__film {
+		margin: 0;
+	}
+
+	.serviceMarquee__frame {
+		position: relative;
+		overflow: hidden;
+		border-radius: 4px;
+		background: #24180f;
+		transform: translateZ(0);
+	}
+
+	.serviceMarquee__video {
+		display: block;
 		width: 100%;
-		padding-block: 0;
+		aspect-ratio: 9 / 16;
+		object-fit: cover;
 	}
 
-	.serviceMarquee :global(.videos-section--embedded .videos-section__row) {
-		width: 100%;
-		padding-block: 0;
-		padding-inline: 0;
-		margin-inline: 0;
+	.serviceMarquee__caption {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 4px 10px;
+		margin-top: 14px;
+		font-family: 'Satoshi', sans-serif;
+		font-size: clamp(12px, 1.05vw, 15px);
+		line-height: 1.3;
 	}
 
-	@media (max-width: 900px) {
-		.serviceMarquee__support {
-			font-size: clamp(12px, 3.8vw, 14px);
-		}
+	.serviceMarquee__num,
+	.serviceMarquee__title {
+		color: var(--sm-accent);
 	}
 
-	@media (min-width: 1024px) {
-		.serviceMarquee :global(.videos-section--embedded .videos-section__row) {
-			padding-block: 0;
-		}
+	.serviceMarquee__meta {
+		color: var(--sm-muted);
+		font-style: italic;
+		font-weight: 300;
+	}
+
+	.serviceMarquee__row {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(10px, 2vw, 28px);
 	}
 
 	@media (max-width: 767px) {
@@ -119,16 +237,40 @@ const content = serviceMarqueeContent[locale];
 			--content-width: 100%;
 		}
 
-		.serviceMarquee__support {
-			font-size: clamp(12px, 3.8vw, 14px);
+		.serviceMarquee__film--featured {
+			width: 78%;
+			margin-left: auto;
 		}
 
-		.serviceMarquee__eyebrow {
-			margin-bottom: 28px;
+		.serviceMarquee__row .serviceMarquee__caption {
+			font-size: 11px;
+		}
+
+		.serviceMarquee__row .serviceMarquee__meta {
+			display: none;
+		}
+	}
+
+	@media (min-width: 768px) {
+		.serviceMarquee__top {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+			align-items: end;
+		}
+
+		.serviceMarquee__statement {
+			padding-bottom: clamp(40px, 6vw, 96px);
 		}
 
 		.serviceMarquee__statement h2 {
-			font-size: clamp(30px, 10vw, 62px);
+			font-size: clamp(36px, 4.6vw, 76px);
+		}
+
+		.serviceMarquee__support {
+			font-size: clamp(15px, 1.3vw, 19px);
+		}
+
+		.serviceMarquee__row {
+			width: 80%;
 		}
 	}
 </style>
