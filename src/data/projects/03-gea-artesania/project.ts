@@ -2,10 +2,12 @@ import type { ProjectFolderMetadata } from '../types';
 
 const project: ProjectFolderMetadata = {
 	slug: 'gea-artesania',
-	number: '03',
+	number: '05',
 	title: 'Gea Artesanía',
 	client: 'Gea Artesanía',
 	location: 'Madrid, España',
+	sector: 'Joyería artesanal',
+	sectorEn: 'Handmade jewellery',
 	year: 2023,
 	description: 'Bisutería artesanal con piezas de diseño hechas en arcilla polimérica.',
 	subtitle: 'Universo visual para una marca de bisutería artesanal de edición limitada.',

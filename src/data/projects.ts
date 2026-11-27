@@ -30,6 +30,7 @@ type ProjectService =
 	  };
 
 export interface Project {
+	concept?: boolean;
 	id: string;
 	slug: string;
 	assetsFolder: string;
@@ -39,6 +40,8 @@ export interface Project {
 	year: string;
 	client: string;
 	location: string;
+	sector?: string;
+	sectorEn?: string;
 	services: ProjectService[];
 	image: string;
 	imageSize: 'small' | 'medium' | 'large';
@@ -115,7 +118,10 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 		year: String(meta.year),
 		client: meta.client,
 		location: meta.location,
+		sector: meta.sector,
+		sectorEn: meta.sectorEn,
 		services,
+		concept: meta.concept ?? false,
 		image: cardImage,
 		imageSize: meta.imageSize,
 		coverImage,

@@ -1,0 +1,22 @@
+---
+import styles from './ProjectSpecs.module.css';
+import type { Project } from '../../data/projects';
+import type { Locale } from '../../i18n/site';
+
+interface Props {
+	project: Project;
+	locale?: Locale;
+}
+
+const { project, locale = 'es' } = Astro.props as Props;
+const en = locale === 'en';
+
+const sector = en ? project.sectorEn ?? project.sector : project.sector;
+
+const first = [sector, project.concept ? (en ? 'Concept · AI' : 'Concepto · IA') : null].filter(Boolean).join('  ·  ');
+---
+
+<div class={styles.specs}>
+	{first && <p class={styles.line}>{first}</p>}
+	<p class={styles.sub}>{project.location} — {project.year}</p>
+</div>

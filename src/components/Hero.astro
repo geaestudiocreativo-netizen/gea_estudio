@@ -41,7 +41,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 			/>
 			<ResponsiveImage
 				class={styles.secondaryImage}
-				src="/images/hero/hero_second.png"
+				src="/images/hero/hero_orquidea.jpg"
 				alt={content.secondaryImageAlt}
 				loading="lazy"
 				sizes="(max-width: 767px) 100vw, 18vw"
@@ -57,7 +57,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 					<span class={styles.headingMainLine} data-hero-headline-line="one">{headingLineOne}</span>
 					{headingLineTwo && <span class={styles.headingMainLine} data-hero-headline-line="two">{headingLineTwo}</span>}
 				</span>
-				<span class={styles.headingSecondary} data-hero-support>{content.headingSecondary}</span>
+				<span class={styles.headingSecondary} data-hero-support>{content.headingSecondary}<a class={styles.heroCta} href={locale === 'en' ? '/en/#contact' : '/#contact'}>{locale === 'en' ? 'Tell me about your project →' : 'Cuéntame tu proyecto →'}</a></span>
 			</h1>
 		</div>
 	</div>

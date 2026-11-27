@@ -5,17 +5,17 @@ export const heroContent = {
 		eyebrow: 'ESTUDIO CREATIVO',
 		headingMain: 'Creamos universos visuales para marcas',
 		headingSecondary:
-			'Diseñamos identidades que cobran vida a través del branding, la fotografía, el diseño web, el editorial, la decoración y las redes sociales.',
+			'Todo lo visual de tu marca en un solo estudio: diseño web, fotografía, vídeo, redes sociales y branding.',
 		primaryImageAlt: 'Person by a vintage car at sunset',
-		secondaryImageAlt: 'Close-up architectural texture'
+		secondaryImageAlt: 'Mujer con una orquídea moteada junto al rostro'
 	},
 	en: {
 		eyebrow: 'CREATIVE STUDIO',
 		headingMain: 'We create visual universes for brands',
 		headingSecondary:
-			'We design identities that come alive through branding, photography, web design, editorial design, interior styling, and social media.',
+			'Everything visual for your brand in one studio: web design, photography, video, social media and branding.',
 		primaryImageAlt: 'Person by a vintage car at sunset',
-		secondaryImageAlt: 'Close-up architectural texture'
+		secondaryImageAlt: 'Woman holding a spotted orchid to her face'
 	}
 } as const;
 
@@ -60,7 +60,7 @@ export const aboutSectionContent = {
 			'Mi formación empezó en la ingeniería y mi camino profesional ha estado muy ligado al mundo de la tecnología, un entorno de lógica, estructuras y soluciones. Pero siempre he sentido una necesidad muy fuerte de crear, de explorar lo visual y de dar forma a las ideas de una manera más libre.',
 		statement: 'Gea Estudio nace de ahí.',
 		body:
-			'De esa mezcla entre lo técnico y lo creativo, y de las ganas de construir un espacio donde poder explorar todo aquello que me inspira. en gea studio hago muchas de las cosas que más disfruto:',
+			'De esa mezcla entre lo técnico y lo creativo, y de las ganas de construir un espacio donde poder explorar todo aquello que me inspira. En Gea Estudio hago muchas de las cosas que más disfruto:',
 		disciplines: 'branding, diseño web, fotografía, filmmaking y dirección creativa.',
 		contactTitle: '¿Hablamos sobre tu proyecto?',
 		contactButton: '¿HABLAMOS DE TU PROYECTO?',
@@ -101,13 +101,13 @@ export const visualChapterContent = {
 		ariaLabel: 'Capítulo visual',
 		heading: 'Qué hacemos',
 		lines: ['Seis disciplinas.', 'Un mismo universo visual.'],
-		support: 'todo lo visual de tu marca en una sola persona.'
+		support: 'Todo lo visual de tu marca, en un solo estudio.'
 	},
 	en: {
 		ariaLabel: 'Visual chapter',
 		heading: 'What we do',
 		lines: ['Six disciplines.', 'One visual universe.'],
-		support: 'everything visual for your brand, handled by one person.'
+		support: 'Everything visual for your brand, in one studio.'
 	}
 } as const;
 

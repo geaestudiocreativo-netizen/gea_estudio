@@ -1,0 +1,249 @@
+---
+import { type Locale } from '../i18n/site';
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = 'es' } = Astro.props as Props;
+
+const PHONE_DISPLAY = '+34 613 39 98 25';
+const PHONE_E164 = '34613399825';
+const EMAIL = 'geaestudiocreativo@gmail.com';
+const INSTAGRAM = 'gea.estudio__';
+
+const copy = {
+	es: {
+		title: 'Hablemos',
+		titleRest: 'de tu',
+		titleItalic: 'marca',
+		lead: 'Cuéntame qué necesitas y te respondo en menos de 48 horas.',
+		hello: 'Hola, me llamo',
+		namePh: 'tu nombre',
+		business: 'y mi negocio es',
+		businessPh: 'nombre o @instagram',
+		need: 'Necesito ayuda con',
+		services: ['Branding', 'Fotografía y filmmaking', 'Web', 'Editorial', 'Decoración', 'Redes sociales', 'Aún no lo sé, me orientas'],
+		multi: 'una o varias',
+		budget: 'Presupuesto aproximado',
+		budgets: ['menos de 500 €', '500 – 1.000 €', '1.000 – 2.500 €', 'más de 2.500 €', 'Aún no lo sé'],
+		steps: ['Tú', 'Qué necesitas', 'Presupuesto', 'Tu proyecto'],
+		optional: 'opcional',
+		more: 'Te cuento un poco más:',
+		morePh: 'Cuéntame un poco de tu negocio: a qué te dedicas, qué te gustaría mejorar o conseguir y para cuándo lo necesitas…',
+		sendWa: 'Enviar por WhatsApp',
+		sendMail: 'Enviar por email',
+		direct: 'O escríbeme directamente',
+		phoneLabel: 'Teléfono y WhatsApp',
+		subject: 'Nuevo proyecto para Gea Estudio',
+		areaLabel: 'Ámbito',
+		hint: 'Se abrirá WhatsApp o tu email con el mensaje ya escrito.'
+	},
+	en: {
+		title: "Let's talk",
+		titleRest: 'about your',
+		titleItalic: 'brand',
+		lead: "Tell me what you need and I'll reply within 48 hours.",
+		hello: 'Hi, my name is',
+		namePh: 'your name',
+		business: 'and my business is',
+		businessPh: 'name or @instagram',
+		need: 'I need help with',
+		services: ['Branding', 'Photography & film', 'Web', 'Editorial', 'Interior design', 'Social media', "Not sure yet, guide me"],
+		multi: 'one or more',
+		budget: 'Approximate budget',
+		budgets: ['under €500', '€500 – 1,000', '€1,000 – 2,500', 'over €2,500', 'Not sure yet'],
+		steps: ['You', 'What you need', 'Budget', 'Your project'],
+		optional: 'optional',
+		more: 'A bit more about it:',
+		morePh: 'Tell me a bit about your business: what you do, what you’d like to improve or achieve, and when you need it…',
+		sendWa: 'Send via WhatsApp',
+		sendMail: 'Send via email',
+		direct: 'Or write to me directly',
+		phoneLabel: 'Phone & WhatsApp',
+		subject: 'New project for Gea Studio',
+		areaLabel: 'Area',
+		hint: 'WhatsApp or your email app will open with the message ready.'
+	}
+}[locale];
+---
+
+<section id="contact" class="contact" aria-labelledby="contact-title" data-phone={PHONE_E164} data-email={EMAIL} data-subject={copy.subject}>
+	<div class="contact__inner">
+		<h2 id="contact-title" class="contact__title">{copy.title}<br />{copy.titleRest} <em>{copy.titleItalic}</em></h2>
+		<p class="contact__lead">{copy.lead}</p>
+
+		<form class="contact__form" novalidate>
+			<fieldset class="step">
+				<legend class="sr-only">{copy.steps[0]}</legend>
+				<div class="step__body contact__sentence">
+					<label class="contact__line"><span data-k="hello">{copy.hello}</span><input name="name" type="text" autocomplete="name" placeholder={copy.namePh} required /></label>
+					<label class="contact__line"><span data-k="business">{copy.business}</span><input name="business" type="text" placeholder={copy.businessPh} /></label>
+				</div>
+			</fieldset>
+			<fieldset class="step">
+				<legend class="step__head"><span class="step__n">01</span><span class="step__t">{copy.steps[1]}</span><span class="step__note" data-k="need" hidden>{copy.need}</span><span class="step__note">{copy.multi}</span></legend>
+				<div class="step__body contact__opts" role="group" aria-label={copy.need}>
+					{copy.services.map((s) => (
+						<label class="contact__opt"><input type="checkbox" name="services" value={s} /><span>{s}</span></label>
+					))}
+				</div>
+			</fieldset>
+			<fieldset class="step">
+				<legend class="step__head"><span class="step__n">02</span><span class="step__t" data-k="budget">{copy.steps[2]}</span><span class="step__note">{copy.optional}</span></legend>
+				<div class="step__body contact__opts" role="radiogroup" aria-label={copy.budget}>
+					{copy.budgets.map((b) => (
+						<label class="contact__opt contact__opt--radio"><input type="radio" name="budget" value={b} /><span>{b}</span></label>
+					))}
+				</div>
+			</fieldset>
+			<fieldset class="step">
+				<legend class="step__head"><span class="step__n">03</span><span class="step__t">{copy.steps[3]}</span><span class="step__note">{copy.optional}</span></legend>
+				<div class="step__body contact__sentence">
+					<textarea name="message" rows="1" placeholder={copy.morePh} aria-label={copy.more}></textarea>
+				</div>
+			</fieldset>
+
+			<div class="contact__actions">
+				<button type="submit" name="via" value="wa" class="contact__btn contact__btn--solid"><span>{copy.sendWa}</span><span class="contact__arrow" aria-hidden="true">→</span></button>
+				<button type="submit" name="via" value="mail" class="contact__btn"><span>{copy.sendMail}</span><span class="contact__arrow" aria-hidden="true">→</span></button>
+			</div>
+		</form>
+
+		<p class="contact__direct">
+			<a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+			<span aria-hidden="true">·</span>
+			<a href={`https://wa.me/${PHONE_E164}`} target="_blank" rel="noreferrer">{PHONE_DISPLAY}</a>
+			<span aria-hidden="true">·</span>
+			<a href={`https://www.instagram.com/${INSTAGRAM}`} target="_blank" rel="noreferrer">@{INSTAGRAM}</a>
+		</p>
+	</div>
+</section>
+
+<script>
+	document.querySelectorAll<HTMLElement>('section.contact').forEach((section) => {
+		const form = section.querySelector('form');
+		if (!form) return;
+		const phone = section.dataset.phone ?? '';
+		const email = section.dataset.email ?? '';
+		const subject = section.dataset.subject ?? '';
+		const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+		const ta = form.querySelector('textarea');
+		ta?.addEventListener('input', () => { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; });
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const submitter = (event as SubmitEvent).submitter as HTMLButtonElement | null;
+			const data = new FormData(form);
+			const name = String(data.get('name') ?? '').trim();
+			const business = String(data.get('business') ?? '').trim();
+			const services = data.getAll('services').map(String);
+			const budget = String(data.get('budget') ?? '');
+			const message = String(data.get('message') ?? '').trim();
+			const k = (key: string) => section.querySelector(`[data-k="${key}"]`)?.textContent?.trim() ?? '';
+			const lines = [
+				`${k('hello')} ${name || '…'}${business ? ` ${k('business')} ${business}` : ''}.`,
+				services.length ? `${cap(k('need'))}: ${services.join(', ')}.` : '',
+				budget ? `${k('budget')}: ${budget}.` : '',
+				message
+			].filter(Boolean);
+			const text = lines.join('\n');
+			const url = submitter?.value === 'mail'
+				? `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`
+				: `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+			if (submitter?.value === 'mail') window.location.href = url;
+			else window.open(url, '_blank', 'noopener');
+		});
+	});
+</script>
+
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500&display=swap');
+	.contact {
+		--ink: #1A1816; --line: rgba(26, 24, 22, 0.14); --mute: rgba(26, 24, 22, 0.5);
+		background: #F2EFE9; color: var(--ink);
+		padding: clamp(72px, 10vw, 140px) clamp(20px, 6vw, 68px);
+		border-top: 1px solid var(--line);
+	}
+	.contact__inner { max-width: 880px; margin: 0 auto; }
+	.contact__kicker { margin: 0 0 18px; font-family: 'Satoshi', sans-serif; font-size: 11px; letter-spacing: 0.28em; color: var(--mute); }
+	.contact__kicker::before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 10px; border-radius: 50%; background: var(--ink); vertical-align: 1px; animation: contactPulse 2.4s ease-in-out infinite; }
+	@keyframes contactPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+	.contact__title { margin: 0; font-family: 'Panchang', sans-serif; font-weight: 400; font-size: clamp(22px, 3.2vw, 40px); line-height: 1.05; letter-spacing: 0.03em; text-transform: uppercase; }
+	.contact__title em { font-style: normal; }
+	.contact__lead { margin: 14px 0 48px; font-family: 'Satoshi', sans-serif; font-size: 14px; color: rgba(26, 24, 22, 0.7); }
+	.contact__form { font-family: 'Manrope', 'Satoshi', sans-serif; letter-spacing: -0.01em; }
+	.step { margin: 0; padding: 22px 0; border: 0; display: grid; grid-template-columns: 290px 1fr; gap: 16px 32px; align-items: start; min-width: 0; }
+	.step__head { float: left; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 8px; font-family: 'Satoshi', sans-serif; }
+	.step__n { flex-basis: 100%; }
+	.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+	.step:first-of-type { padding-top: 0; }
+	.step:first-of-type .step__body { grid-column: 1 / -1; }
+	.step__note::before { content: '— '; }
+	.step__n { font-size: 11px; letter-spacing: 0.2em; color: var(--mute); font-variant-numeric: tabular-nums; }
+	.step__t { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+	.step__note { font-size: 11px; color: var(--mute); }
+	.step__body { min-width: 0; }
+	.contact__line { display: flex; align-items: baseline; gap: 12px; font-size: clamp(14px, 1.15vw, 15px); font-weight: 300; }
+	.contact__line + .contact__line { margin-top: 10px; }
+	.contact__line span { white-space: nowrap; }
+	.contact__sentence input[type='text'], .contact__sentence textarea {
+		flex: 1; min-width: 0; font: inherit; color: inherit; background: transparent;
+		border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding: 4px 0; outline: none;
+		background-image: linear-gradient(var(--ink), var(--ink)); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 1px;
+		transition: background-size 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+	.contact__sentence input:focus, .contact__sentence textarea:focus { background-size: 100% 1px; }
+	.contact__sentence textarea { display: block; width: 100%; resize: none; overflow: hidden; line-height: 1.5; font-size: clamp(14px, 1.15vw, 15px); font-weight: 300; }
+	.contact__sentence input::placeholder, .contact__sentence textarea::placeholder { color: rgba(26, 24, 22, 0.28); }
+	.contact__opts { display: flex; flex-wrap: wrap; gap: 8px; }
+	.contact__opt { position: relative; cursor: pointer; }
+	.contact__opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+	.contact__opt span {
+		display: inline-flex; align-items: center; gap: 8px;
+		padding: 9px 14px 9px 12px; font-size: 13px; line-height: 1;
+		color: rgba(26, 24, 22, 0.8); border: 1px solid var(--line); border-radius: 2px; background: rgba(255, 255, 255, 0.25);
+		transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+	}
+	.contact__opt span::before { content: ''; width: 7px; height: 7px; border: 1px solid currentColor; border-radius: 1px; opacity: 0.5; transition: background 220ms ease, opacity 220ms ease; }
+	.contact__opt--radio span::before { border-radius: 50%; }
+	.contact__opt:hover span { border-color: var(--ink); color: var(--ink); }
+	.contact__opt input:checked + span { background: var(--ink); color: #F2EFE9; border-color: var(--ink); }
+	.contact__opt input:checked + span::before { background: #F2EFE9; opacity: 1; border-color: #F2EFE9; }
+	.contact__opt input:focus-visible + span { outline: 1px solid var(--ink); outline-offset: 3px; }
+	.contact__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 8px; padding-top: 24px; }
+	.contact__btn {
+		display: flex; justify-content: space-between; align-items: center;
+		font-family: 'Satoshi', sans-serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+		padding: 20px 22px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; border-radius: 2px;
+		transition: background 220ms ease, color 220ms ease;
+	}
+	.contact__btn + .contact__btn { margin-left: 8px; }
+	.contact__btn--solid { background: var(--ink); color: #F2EFE9; }
+	.contact__btn:hover { background: var(--ink); color: #F2EFE9; }
+	.contact__btn--solid:hover { background: #000; }
+	.contact__arrow { display: inline-block; transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+	.contact__btn:hover .contact__arrow { transform: translateX(6px); }
+	.contact__direct { margin: 40px 0 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: 'Satoshi', sans-serif; font-size: 12px; letter-spacing: 0.04em; color: var(--mute); }
+	.contact__direct a { color: rgba(26, 24, 22, 0.75); text-decoration: none; border-bottom: 1px solid var(--line); }
+	.contact__direct a:hover { color: var(--ink); border-color: var(--ink); }
+	@media (max-width: 700px) {
+		.step { grid-template-columns: 1fr; gap: 14px; padding: 22px 0; }
+		.step:first-of-type .step__body { grid-column: auto; }
+		.step__head { flex-direction: row; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+		.contact__line { flex-direction: column; align-items: stretch; gap: 2px; }
+		.contact__actions { grid-template-columns: 1fr; gap: 8px; }
+		.contact__btn + .contact__btn { margin-left: 0; }
+		.contact__direct { flex-direction: column; align-items: flex-start; gap: 10px; }
+		.contact__direct span[aria-hidden] { display: none; }
+	}
+	@media (prefers-reduced-motion: reduce) { .contact__kicker::before { animation: none; } }
+	/* Desktop: formulario al 80% del ancho, opciones en una sola fila */
+	@media (min-width: 1024px) {
+		.contact__inner { width: 80vw; max-width: 1400px; }
+		.step { grid-template-columns: 220px 1fr; }
+	}
+	@media (min-width: 1280px) {
+		.contact__opts { flex-wrap: nowrap; }
+		.contact__opt span { padding-left: 10px; padding-right: 12px; white-space: nowrap; }
+	}
+</style>

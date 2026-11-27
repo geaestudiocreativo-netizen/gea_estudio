@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import ProjectTabs from '../../components/ProjectTabs/ProjectTabs.astro';
 import EditorialGallery from '../../components/EditorialGallery/EditorialGallery.astro';
+import ProjectSpecs from '../../components/ProjectSpecs/ProjectSpecs.astro';
 import ResponsiveImage from '../../components/ResponsiveImage.astro';
 import { projects } from '../../data/projects';
 import { projectDetailContent } from '../../i18n/projects-content';
@@ -68,12 +69,11 @@ const sections = project.services.map((service) => ({
 }));
 ---
 
-<Layout>
+<Layout title={`${project.title} | Gea Estudio`} description={project.description}>
 	<main class={styles.page}>
 		<header class={styles.projectHeader}>
 			<img class={styles.projectLogo} src={project.logo} alt={project.title} loading="eager" decoding="async" />
-			<p class={styles.projectDescription}>{project.description}</p>
-			<div class={styles.headerDivider} aria-hidden="true"></div>
+			<ProjectSpecs project={project} locale={'es'} />
 		</header>
 
 		<div class={styles.projectContent}>

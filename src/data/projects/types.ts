@@ -48,6 +48,8 @@ export interface ProjectFolderMetadata {
 	title: string;
 	client: string;
 	location: string;
+	sector?: string;
+	sectorEn?: string;
 	year: number;
 	description: string;
 	subtitle?: string;
@@ -59,4 +61,5 @@ export interface ProjectFolderMetadata {
 	heroImage: string;
 	imageSize: 'small' | 'medium' | 'large';
 	cardImage?: string;
+	concept?: boolean;
 }
