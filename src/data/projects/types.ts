@@ -61,5 +61,7 @@ export interface ProjectFolderMetadata {
 	heroImage: string;
 	imageSize: 'small' | 'medium' | 'large';
 	cardImage?: string;
+	/** object-position de la imagen en la tarjeta del listado (p. ej. 'center 60%') */
+	cardPosition?: string;
 	concept?: boolean;
 }

@@ -44,6 +44,7 @@ export interface Project {
 	sectorEn?: string;
 	services: ProjectService[];
 	image: string;
+	cardPosition?: string;
 	imageSize: 'small' | 'medium' | 'large';
 	coverImage: string;
 	logo: string;
@@ -123,6 +124,7 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 		services,
 		concept: meta.concept ?? false,
 		image: cardImage,
+		cardPosition: meta.cardPosition,
 		imageSize: meta.imageSize,
 		coverImage,
 		logo: resolveAssetPath(meta, meta.logo),

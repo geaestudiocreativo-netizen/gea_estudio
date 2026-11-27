@@ -21,6 +21,7 @@ interface Props {
 	locale?: Locale;
 	concept?: boolean;
 	sector?: string;
+	cardPosition?: string;
 	sectorEn?: string;
 }
 
@@ -38,6 +39,7 @@ const {
 	locale = 'es',
 	concept = false,
 	sector,
+	cardPosition,
 	sectorEn
 } = Astro.props as Props;
 
@@ -89,6 +91,7 @@ const cardAriaPrefix = projectDetailContent[locale].projectCardAriaPrefix;
 				src={imagePath}
 				alt={title}
 				class={styles.image}
+				style={cardPosition ? `object-position: ${cardPosition}` : undefined}
 				loading="lazy"
 				decoding="async"
 				sizes="(max-width: 767px) 46vw, 248px"
