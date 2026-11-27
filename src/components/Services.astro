@@ -60,7 +60,7 @@ const getServiceName = (serviceTitle: string) => {
 				{list.map((service, index) => (
 					<li class="services-editorial__item" data-index={index}>
 						<a class="services-editorial__link" href={`${serviceBasePath}/${service.slug}`} aria-label={`${content.serviceAriaPrefix} ${service.homeTitle}`}>
-							<span class="services-editorial__index">{String(index + 1).padStart(2, '0')} /</span>
+							<span class="services-editorial__index">[{String(index + 1).padStart(2, '0')}]</span>
 							<span class="services-editorial__content">
 								<span class="services-editorial__name" data-service-name={service.slug}>
 									{getServiceNameLines(service.homeTitle).map((line, lineIndex) => (
@@ -678,6 +678,8 @@ const getServiceName = (serviceTitle: string) => {
 			font-size: clamp(22px, 6.4vw, 40px);
 		}
 	}
+	/* Números como en la tarjeta de visita: [01] en verde oliva */
+	.services-editorial .services-editorial__index { color: #787836; letter-spacing: 0.04em; }
 </style>
 
 
