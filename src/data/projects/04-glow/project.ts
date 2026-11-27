@@ -31,7 +31,7 @@ const project: ProjectFolderMetadata = {
 		{
 			type: 'Web',
 			gallery: 'web',
-			background: 'background_glow.jpg',
+			background: 'background_glow_blur.jpg',
 			url: 'https://www.glow22.es',
 			images: ['glow-web-brilla.jpg', 'glow-web-proximamente.jpg']
 		}
