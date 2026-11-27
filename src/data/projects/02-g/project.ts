@@ -21,9 +21,9 @@ const project: ProjectFolderMetadata = {
 			images: [
 				'Color_ivory.jpg',
 				'Color_brown.jpg',
-				'Mockup_poste.png',
-				'Mockup_packaging_cajas.png',
-				'Mockup_bolsa.png',
+				'logo-sobre-foto.jpg',
+				'tartas-mesa.jpg',
+				'Mockup_poste.png'
 			]
 		},
 		{
