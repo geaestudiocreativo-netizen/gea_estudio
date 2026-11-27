@@ -9,7 +9,8 @@ const project: ProjectFolderMetadata = {
 	sector: 'Taller mecánico',
 	sectorEn: 'Car repair workshop',
 	year: 2026,
-	description: 'Una identidad sólida para un taller con más de 40 años de historia. El taller de toda la vida, ahora con una identidad visual y ecosistema digital que refleja su legado familiar.',
+	description:
+		'Un taller familiar con más de 40 años en Las Rozas que aún no tenía una imagen a su altura. Renovamos su logotipo y creamos una web clara, para que sus clientes lo encuentren y confíen en él antes de cruzar la puerta.',
 	subtitle: 'Una identidad sólida para un taller con más de 40 años de historia. El taller de toda la vida, ahora con una identidad visual y ecosistema digital que refleja su legado familiar.	',
 	services: [
 		{

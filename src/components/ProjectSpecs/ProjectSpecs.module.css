@@ -32,3 +32,16 @@
 	letter-spacing: 0.02em;
 	color: rgba(26, 24, 22, 0.5);
 }
+
+.case {
+	max-width: 56ch;
+	margin: clamp(22px, 2.4vw, 32px) auto 0;
+	padding-inline: 20px;
+	font-family: 'Satoshi', sans-serif;
+	font-size: clamp(14px, 1.05vw, 16px);
+	font-weight: 300;
+	line-height: 1.6;
+	text-align: center;
+	text-wrap: pretty;
+	color: rgba(26, 24, 22, 0.78);
+}

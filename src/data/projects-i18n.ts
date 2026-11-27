@@ -13,11 +13,11 @@ const serviceTypeTranslations: Record<ServiceName, string> = {
 };
 
 const projectDescriptionTranslations: Record<string, string> = {
-	'talleres-alonso': 'A strong identity for a workshop with more than 40 years of history.',
-	g: 'An artisanal pastry brand with editorial sensitivity and contemporary character.',
-	glow: 'Logo and website for a professional hair and beauty shop that did not exist yet. A geometric, rounded signature where the W is two 22s.',
-	mercurio: 'Concept jewellery brand in molten silver. Art direction and campaign created by Gea to explore its own visual language, from the painter\'s studio to the museum.',
-	'gea-artesania': 'Handcrafted jewelry with design-led pieces made in polymer clay.'
+	'talleres-alonso': 'A family workshop in Las Rozas with more than 40 years of history that still lacked an image to match. We refreshed its logo and built a clear website, so customers can find it and trust it before walking in.',
+	g: 'Artisan cakes that deserved to look as good as they taste. We created a simple identity, two photo shoots and an editorial website, plus cards and stickers for everyday use.',
+	glow: 'A professional hair and beauty shop that did not exist yet. We designed its logo, a geometric signature where the W is two 22s, and the website it opens its doors with.',
+	mercurio: 'A molten-silver jewellery brand created to explore a visual language of its own. Art direction, photography and a video campaign, from the painter\'s studio to the museum.',
+	'gea-artesania': 'Where Gea began: my own brand of polymer clay earrings. Logo, product photography and Instagram; this is where I learned to build a brand from scratch.'
 };
 
 export const getLocalizedProjectDescription = (project: Project, locale: Locale): string =>

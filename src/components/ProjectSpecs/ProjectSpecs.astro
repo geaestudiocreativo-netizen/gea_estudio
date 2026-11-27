@@ -2,6 +2,7 @@
 import styles from './ProjectSpecs.module.css';
 import type { Project } from '../../data/projects';
 import type { Locale } from '../../i18n/site';
+import { getLocalizedProjectDescription } from '../../data/projects-i18n';
 
 interface Props {
 	project: Project;
@@ -14,10 +15,13 @@ const en = locale === 'en';
 const sector = en ? project.sectorEn ?? project.sector : project.sector;
 
 const first = sector;
+// Texto breve del caso: el reto, qué hicimos y el resultado
+const caseText = getLocalizedProjectDescription(project, locale);
 ---
 
 <div class={styles.specs}>
 	{first && <p class={styles.line}>{first}</p>}
 	<p class={styles.sub}>{project.location ? `${project.location} — ${project.year}` : project.year}</p>
 	{project.concept && <span class="concept-tag">{en ? 'Concept project - AI' : 'Proyecto conceptual - IA'}</span>}
+	{caseText && <p class={styles.case}>{caseText}</p>}
 </div>

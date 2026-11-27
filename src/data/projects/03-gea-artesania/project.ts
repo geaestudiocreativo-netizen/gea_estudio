@@ -9,7 +9,8 @@ const project: ProjectFolderMetadata = {
 	sector: 'Joyería artesanal',
 	sectorEn: 'Handmade jewellery',
 	year: 2023,
-	description: 'Bisutería artesanal con piezas de diseño hechas en arcilla polimérica.',
+	description:
+		'El origen de Gea: mi propia marca de pendientes de arcilla polimérica. Logotipo, fotografía de producto e Instagram; aquí aprendí a construir una marca desde cero.',
 	subtitle: 'Universo visual para una marca de bisutería artesanal de edición limitada.',
 	services: [
 		// TODO

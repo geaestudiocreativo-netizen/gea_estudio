@@ -11,7 +11,7 @@ const project: ProjectFolderMetadata = {
 	year: 2026,
 	concept: true,
 	description:
-		'Marca conceptual de joyería en plata fundida. Dirección de arte y campaña creadas por Gea para explorar un lenguaje visual propio, del taller de la pintora al museo.',
+		'Una marca de joyería en plata fundida creada para explorar un lenguaje visual propio. Dirección de arte, fotografía y campaña en vídeo, del taller de la pintora al museo.',
 	subtitle: 'Marca conceptual de joyería en plata fundida.',
 	services: [
 		{

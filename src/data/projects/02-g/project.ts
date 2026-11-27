@@ -10,7 +10,7 @@ const project: ProjectFolderMetadata = {
 	sectorEn: 'Bakery',
 	year: 2026,
 	description:
-		'Una marca de pastelería artesanal con sensibilidad editorial y carácter contemporáneo.',
+		'Tartas artesanales que merecían verse como se saborean. Creamos una identidad sencilla, dos sesiones de fotografía y una web editorial, junto con tarjetas y pegatinas para el día a día.',
 	subtitle:
 		'Una marca de pastelería artesanal con sensibilidad editorial y carácter contemporáneo.',
 	services: [
