@@ -436,3 +436,36 @@
 .captioned.frameFirstImages .topBlock .item2 {
 	padding-bottom: var(--caption-space, 31px);
 }
+
+/* Fotografía tipo Pinterest: 4 columnas, huecos finos y formatos variados */
+.verticalStack[data-photography-masonry]:not(.singleColumn) {
+	gap: 8px;
+	column-gap: 8px;
+	padding-inline: 8px;
+}
+
+.verticalStack[data-photography-masonry]:not(.singleColumn) > [data-masonry-column] {
+	gap: 8px;
+}
+
+.verticalStack[data-photography-masonry]:not(.singleColumn) .verticalItem[data-pin-ratio] {
+	aspect-ratio: var(--pin);
+	border-radius: 14px;
+}
+
+.verticalStack[data-photography-masonry]:not(.singleColumn) .verticalItem[data-pin-ratio] img {
+	height: 100%;
+	object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+	.verticalStack[data-photography-masonry]:not(.singleColumn) {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		column-gap: 12px;
+		padding-inline: clamp(16px, 3vw, 48px);
+	}
+
+	.verticalStack[data-photography-masonry]:not(.singleColumn) > [data-masonry-column] {
+		gap: 12px;
+	}
+}

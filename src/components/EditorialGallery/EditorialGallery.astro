@@ -62,6 +62,13 @@ const caption = (src: string | undefined, _position?: number) => {
 	return text && number ? `${String(number).padStart(2, '0')} — ${text}` : undefined;
 };
 const statement = layout === 'editorial' ? getGalleryStatement(images[0], locale) ?? (insertBrandStatement ? content.brandStatement : undefined) : undefined;
+// Fotografía tipo Pinterest: cada foto con un formato distinto según un patrón fijo
+const PIN_RATIOS = [[2, 3], [4, 5], [3, 4], [1, 1], [3, 5], [4, 5], [2, 3], [5, 6]];
+const pin = (index: number) => {
+	if (singleColumn || layout !== 'vertical') return {};
+	const [w, h] = PIN_RATIOS[index % PIN_RATIOS.length];
+	return { style: `--pin: ${w} / ${h}`, 'data-pin-ratio': String(h / w) };
+};
 const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryCaption(image, locale));
 ---
 
@@ -69,7 +76,7 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 	layout === 'vertical' ? (
 		<div class={`${styles.verticalStack} ${singleColumn ? styles.singleColumn : ''} ${paddedImage ? styles.paddedSocialGallery : ''}`} data-photography-masonry={!singleColumn ? true : undefined} data-single-column={singleColumn ? 'true' : undefined}>
 			{images.slice(0, 2).map((image, index) => (
-				<figure class={styles.verticalItem} data-masonry-item>
+				<figure class={styles.verticalItem} data-masonry-item {...pin(index)}>
 					<ResponsiveImage
 						src={image}
 						alt={`${projectTitle} editorial ${index + 1}`}
@@ -97,7 +104,7 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 				</section>
 			)}
 			{images.slice(2).map((image, index) => (
-				<figure class={`${styles.verticalItem} ${paddedImage === image ? styles.paddedFirstImage : ''}`} data-masonry-item>
+				<figure class={`${styles.verticalItem} ${paddedImage === image ? styles.paddedFirstImage : ''}`} data-masonry-item {...pin(index + 2)}>
 					<ResponsiveImage
 						src={image}
 						alt={`${projectTitle} editorial ${index + 3}`}
@@ -335,9 +342,9 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 		const arrangeMasonry = (stack: HTMLElement) => {
 			const items = Array.from(stack.querySelectorAll('[data-masonry-item]'));
 			const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-			const columnCount = stack.dataset.singleColumn === 'true' ? 1 : (isDesktop ? 3 : 2);
+			const columnCount = stack.dataset.singleColumn === 'true' ? 1 : (isDesktop ? 4 : 2);
 			const columns = Array.from({ length: columnCount }, () => document.createElement('div'));
-			const gap = isDesktop ? Math.min(Math.max(window.innerWidth * 0.02, 16), 32) : 10;
+			const gap = isDesktop ? 12 : 8;
 			const heights = columns.map(() => 0);
 
 			for (const column of Array.from(stack.querySelectorAll('[data-masonry-column]'))) {
@@ -349,13 +356,16 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 				stack.append(column);
 			}
 
-			if (isDesktop) {
+			if (isDesktop || stack.dataset.singleColumn !== 'true') {
 				const columnWidth = (stack.clientWidth - gap * (columnCount - 1)) / columnCount;
 				for (const item of items) {
 					const image = item.querySelector('img');
-					const aspectRatio = image?.naturalWidth && image.naturalHeight
-						? image.naturalHeight / image.naturalWidth
-						: 1;
+					const pinRatio = Number((item as HTMLElement).dataset.pinRatio);
+					const aspectRatio = pinRatio > 0
+						? pinRatio
+						: image?.naturalWidth && image.naturalHeight
+							? image.naturalHeight / image.naturalWidth
+							: 1;
 					const shortestColumn = heights.indexOf(Math.min(...heights));
 					columns[shortestColumn].append(item);
 					heights[shortestColumn] += columnWidth * aspectRatio + gap;
