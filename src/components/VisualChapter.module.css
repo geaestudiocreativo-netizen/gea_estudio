@@ -106,6 +106,15 @@
 	white-space: nowrap;
 }
 
+.support {
+	max-width: 34rem;
+	margin-top: 18px;
+	font-family: 'Satoshi', sans-serif;
+	font-size: clamp(16px, 1.4vw, 20px);
+	font-weight: 400;
+	line-height: 1.4;
+}
+
 .mainLineB em {
 	font-family: 'Panchang', 'Satoshi', sans-serif;
 	font-style: normal;
@@ -218,6 +227,7 @@
 
 	.image {
 		height: auto;
+		max-height: 100svh;
 		transform: none;
 	}
 

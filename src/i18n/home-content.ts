@@ -100,12 +100,14 @@ export const visualChapterContent = {
 	es: {
 		ariaLabel: 'Capítulo visual',
 		heading: 'Qué hacemos',
-		lines: ['Seis disciplinas.', 'Un mismo universo visual.']
+		lines: ['Seis disciplinas.', 'Un mismo universo visual.'],
+		support: 'Todo lo visual de tu marca, en un solo estudio.'
 	},
 	en: {
 		ariaLabel: 'Visual chapter',
 		heading: 'What we do',
-		lines: ['Six disciplines.', 'One visual universe.']
+		lines: ['Six disciplines.', 'One visual universe.'],
+		support: 'Everything visual for your brand, in one studio.'
 	}
 } as const;
 
