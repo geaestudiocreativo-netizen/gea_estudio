@@ -57,11 +57,11 @@ export const aboutSectionContent = {
 		intro: 'Soy Ángela,',
 		introSecondLine: 'la persona detrás de Gea Estudio.',
 		context:
-			'Mi formación empezó en la ingeniería y mi camino profesional ha estado muy ligado al mundo de la tecnología, un entorno de lógica, estructuras y soluciones. Pero siempre he sentido una necesidad muy fuerte de crear, de explorar lo visual y de dar forma a las ideas de una manera más libre.',
-		statement: 'Gea Estudio nace de ahí.',
+			'Vengo de la ingeniería y la tecnología, pero siempre he necesitado crear y dar forma a las ideas de una manera más libre.',
+		statement: 'Gea nace de esa mezcla entre lo técnico y lo creativo.',
 		body:
-			'De esa mezcla entre lo técnico y lo creativo, y de las ganas de construir un espacio donde poder explorar todo aquello que me inspira. En Gea Estudio hago muchas de las cosas que más disfruto:',
-		disciplines: 'branding, diseño web, fotografía, filmmaking y dirección creativa.',
+			'Por eso me ocupo de todo lo visual de tu marca:',
+		disciplines: 'branding, web, fotografía, filmmaking y dirección creativa.',
 		contactTitle: '¿Hablamos sobre tu proyecto?',
 		contactButton: '¿HABLAMOS DE TU PROYECTO?',
 		contactButtonAria: '¿HABLAMOS DE TU PROYECTO?'
@@ -72,11 +72,11 @@ export const aboutSectionContent = {
 		intro: 'I am Ángela,',
 		introSecondLine: 'the person behind Gea Studio.',
 		context:
-			'My background began in engineering and my professional path has been closely linked to technology, a world of logic, structures, and solutions. But I have always felt a strong need to create, explore the visual, and shape ideas in a freer way.',
-		statement: 'Gea was born from that.',
+			'I come from engineering and technology, but I have always needed to create and shape ideas in a freer way.',
+		statement: 'Gea was born from that mix of the technical and the creative.',
 		body:
-			'From that mix of the technical and the creative, and from the desire to build a space where I can explore everything that inspires me. At Gea Studio I do many of the things I enjoy most:',
-		disciplines: 'branding, web design, photography, filmmaking, and creative direction.',
+			'That is why I take care of everything visual for your brand:',
+		disciplines: 'branding, web, photography, filmmaking, and creative direction.',
 		contactTitle: 'Shall we talk?',
 		contactButton: 'Contact',
 		contactButtonAria: 'Contact'
