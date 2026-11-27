@@ -5,7 +5,7 @@ const project: ProjectFolderMetadata = {
 	number: '01',
 	title: '.G',
 	client: '.G By Gabriel García',
-	location: 'Valencia, España',
+	location: 'Las Rozas, Madrid',
 	sector: 'Pastelería',
 	sectorEn: 'Bakery',
 	year: 2026,

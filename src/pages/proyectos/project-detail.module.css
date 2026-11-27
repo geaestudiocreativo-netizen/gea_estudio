@@ -449,23 +449,23 @@
 	background: #111111;
 }
 
-.projectLink:first-child {
+.projectLink:first-of-type {
 	justify-content: flex-start;
 	justify-items: start;
 	text-align: left;
 }
 
-.projectLink:first-child .projectNavBody {
+.projectLink:first-of-type .projectNavBody {
 	margin-left: clamp(16px, 3vw, 42px);
 }
 
-.projectLink:last-child {
+.projectLink:last-of-type {
 	justify-content: flex-end;
 	justify-items: end;
 	text-align: right;
 }
 
-.projectLink:last-child .projectNavBody {
+.projectLink:last-of-type .projectNavBody {
 	margin-right: clamp(16px, 3vw, 42px);
 }
 
@@ -488,12 +488,12 @@
 	line-height: 1;
 }
 
-.projectLink:first-child .projectNavArrow {
+.projectLink:first-of-type .projectNavArrow {
 	margin-left: clamp(16px, 3vw, 42px);
 }
 
 
-.projectLink:last-child .projectNavArrow {
+.projectLink:last-of-type .projectNavArrow {
 	margin-right: clamp(16px, 3vw, 42px);
 }
 
