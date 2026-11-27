@@ -3,6 +3,7 @@ import styles from './EditorialGallery.module.css';
 import ResponsiveImage from '../ResponsiveImage.astro';
 import { projectDetailContent } from '../../i18n/projects-content';
 import type { Locale } from '../../i18n/site';
+import { getGalleryCaption } from '../../data/gallery-captions';
 
 interface Props {
 	images: readonly string[];
@@ -48,6 +49,13 @@ const toOrderedBlocks = (orderedImages: readonly string[]) => {
 };
 
 const blocks = toOrderedBlocks(images);
+// Pie de foto tipo revista: "01 — Logotipo"
+const caption = (src: string | undefined, position: number) => {
+	if (!src) return undefined;
+	const text = getGalleryCaption(src, locale);
+	return text ? `${String(position).padStart(2, '0')} — ${text}` : undefined;
+};
+const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryCaption(image, locale));
 ---
 
 {
@@ -96,7 +104,7 @@ const blocks = toOrderedBlocks(images);
 		</div>
 	) : (
 		blocks.map((blockImages, blockIndex) => (
-			<div class={`${styles.layout7} ${stackMobile ? styles.stackMobile : ''} ${frameFirstImages && blockIndex === 0 ? styles.frameFirstImages : ''}`}>
+			<div class={`${styles.layout7} ${hasCaptions ? styles.captioned : ''} ${stackMobile ? styles.stackMobile : ''} ${frameFirstImages && blockIndex === 0 ? styles.frameFirstImages : ''}`}>
 				{
 					blockImages.length === 1 ? (
 						<figure class={`${styles.item} ${styles.itemSingle}`}>
@@ -108,6 +116,7 @@ const blocks = toOrderedBlocks(images);
 								sizes="100vw"
 								widths={[640, 960, 1280, 1600, 1920]}
 							/>
+							{caption(blockImages[0], blockIndex * IMAGES_PER_BLOCK + 1) && <figcaption class={styles.caption}>{caption(blockImages[0], blockIndex * IMAGES_PER_BLOCK + 1)}</figcaption>}
 						</figure>
 					) : blockImages.length === 2 ? (
 						<div class={styles.pairBlock}>
@@ -120,6 +129,7 @@ const blocks = toOrderedBlocks(images);
 									sizes="(max-width: 767px) 100vw, 50vw"
 									widths={[480, 768, 960, 1280]}
 								/>
+								{caption(blockImages[0], blockIndex * IMAGES_PER_BLOCK + 1) && <figcaption class={styles.caption}>{caption(blockImages[0], blockIndex * IMAGES_PER_BLOCK + 1)}</figcaption>}
 							</figure>
 							<figure class={`${styles.item} ${styles.itemPair}`}>
 								<ResponsiveImage
@@ -130,6 +140,7 @@ const blocks = toOrderedBlocks(images);
 									sizes="(max-width: 767px) 100vw, 50vw"
 									widths={[480, 768, 960, 1280]}
 								/>
+								{caption(blockImages[1], blockIndex * IMAGES_PER_BLOCK + 2) && <figcaption class={styles.caption}>{caption(blockImages[1], blockIndex * IMAGES_PER_BLOCK + 2)}</figcaption>}
 							</figure>
 						</div>
 					) : (
@@ -144,6 +155,7 @@ const blocks = toOrderedBlocks(images);
 										sizes="(max-width: 767px) 100vw, 38vw"
 										widths={[360, 520, 768, 960]}
 									/>
+									{caption(blockImages[0], blockIndex * IMAGES_PER_BLOCK + 1) && <figcaption class={styles.caption}>{caption(blockImages[0], blockIndex * IMAGES_PER_BLOCK + 1)}</figcaption>}
 								</figure>
 								<figure class={`${styles.item} ${styles.item2}`}>
 									<ResponsiveImage
@@ -154,6 +166,7 @@ const blocks = toOrderedBlocks(images);
 										sizes="(max-width: 767px) 100vw, 38vw"
 										widths={[360, 520, 768, 960]}
 									/>
+									{caption(blockImages[1], blockIndex * IMAGES_PER_BLOCK + 2) && <figcaption class={styles.caption}>{caption(blockImages[1], blockIndex * IMAGES_PER_BLOCK + 2)}</figcaption>}
 								</figure>
 								<figure class={`${styles.item} ${styles.item3}`}>
 									<ResponsiveImage
@@ -164,6 +177,7 @@ const blocks = toOrderedBlocks(images);
 										sizes="(max-width: 767px) 100vw, 62vw"
 										widths={[520, 768, 960, 1280, 1600]}
 									/>
+									{caption(blockImages[2], blockIndex * IMAGES_PER_BLOCK + 3) && <figcaption class={styles.caption}>{caption(blockImages[2], blockIndex * IMAGES_PER_BLOCK + 3)}</figcaption>}
 								</figure>
 							</div>
 
@@ -178,6 +192,7 @@ const blocks = toOrderedBlocks(images);
 											sizes="100vw"
 											widths={[640, 960, 1280, 1600, 1920]}
 										/>
+										{caption(blockImages[3], blockIndex * IMAGES_PER_BLOCK + 4) && <figcaption class={styles.caption}>{caption(blockImages[3], blockIndex * IMAGES_PER_BLOCK + 4)}</figcaption>}
 									</figure>
 								)
 							}
@@ -223,6 +238,7 @@ const blocks = toOrderedBlocks(images);
 														sizes="(max-width: 767px) 100vw, 50vw"
 														widths={[480, 768, 960, 1280]}
 													/>
+													{caption(blockImages[4], blockIndex * IMAGES_PER_BLOCK + 5) && <figcaption class={styles.caption}>{caption(blockImages[4], blockIndex * IMAGES_PER_BLOCK + 5)}</figcaption>}
 												</figure>
 											)
 										}
@@ -237,6 +253,7 @@ const blocks = toOrderedBlocks(images);
 														sizes="(max-width: 767px) 100vw, 50vw"
 														widths={[480, 768, 960, 1280]}
 													/>
+													{caption(blockImages[5], blockIndex * IMAGES_PER_BLOCK + 6) && <figcaption class={styles.caption}>{caption(blockImages[5], blockIndex * IMAGES_PER_BLOCK + 6)}</figcaption>}
 												</figure>
 											)
 										}
@@ -255,6 +272,7 @@ const blocks = toOrderedBlocks(images);
 											sizes="100vw"
 											widths={[640, 960, 1280, 1600, 1920]}
 										/>
+										{caption(blockImages[6], blockIndex * IMAGES_PER_BLOCK + 7) && <figcaption class={styles.caption}>{caption(blockImages[6], blockIndex * IMAGES_PER_BLOCK + 7)}</figcaption>}
 									</figure>
 								)
 							}
