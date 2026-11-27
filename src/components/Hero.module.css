@@ -169,16 +169,16 @@
 }
 
 @keyframes wordmarkBuild {
-	/* Todo el bloque (punto + logo) está a escala 0.05 mientras el punto parpadea.
-	   Después el punto se funde en el logo, que nace de su tamaño, crece y baja a su sitio. */
-	0%, 41.6% {
+	/* Todo el bloque (punto + logo) está a escala 0.05 mientras el punto parpadea (0-1 s).
+	   Después el punto se funde en el logo, que nace de su tamaño y crece despacio (1 s), y baja a su sitio. */
+	0%, 33.3% {
 		transform: var(--wordmark-transform-start) scale(0.05);
-		animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+		animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1);
 	}
-	58% {
+	66.7% {
 		transform: var(--wordmark-transform-start) scale(1.06);
 	}
-	66% {
+	73.3% {
 		transform: var(--wordmark-transform-start) scale(1.06);
 		animation-timing-function: cubic-bezier(0.2, 0.63, 0.22, 1);
 	}
@@ -188,18 +188,18 @@
 }
 
 @keyframes wordmarkInk {
-	0%, 41.6% { opacity: 0; }
-	46%, 100% { opacity: 1; }
+	0%, 33.3% { opacity: 0; }
+	38%, 100% { opacity: 1; }
 }
 
 @keyframes wordmarkDot {
 	0% { opacity: 0; }
-	3%, 11% { opacity: 1; }
-	14%, 19% { opacity: 0; }
-	22%, 29% { opacity: 1; }
-	32%, 35% { opacity: 0; }
-	37%, 41.6% { opacity: 1; transform: translate(-50%, -50%) scale(1, 1); }
-	46%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4, 0.35); }
+	2.4%, 8.8% { opacity: 1; }
+	11.2%, 15.2% { opacity: 0; }
+	17.6%, 23.2% { opacity: 1; }
+	25.6%, 28% { opacity: 0; }
+	29.6%, 33.3% { opacity: 1; transform: translate(-50%, -50%) scale(1, 1); }
+	38%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4, 0.35); }
 }
 
 /* Punto negro desde el que nace el logo */
@@ -271,28 +271,28 @@
 }
 
 .hero[data-entrance='start'] .wordmark {
-	animation: wordmarkBuild 2400ms linear 150ms both;
+	animation: wordmarkBuild 3000ms linear 150ms both;
 	transform-origin: 50% 50%;
 }
 
 .hero[data-entrance='start'] .wordmarkBase {
-	animation: wordmarkInk 2400ms linear 150ms both;
+	animation: wordmarkInk 3000ms linear 150ms both;
 }
 
 .hero[data-entrance='start'] .wordmark::before {
-	animation: wordmarkDot 2400ms linear 150ms both;
+	animation: wordmarkDot 3000ms linear 150ms both;
 }
 
 .hero[data-entrance='start'] .primaryImage {
-	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 1500ms both;
+	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 2000ms both;
 }
 
 .hero[data-entrance='start'] .secondaryImage {
-	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 1660ms both;
+	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 2160ms both;
 }
 
 .hero[data-entrance='start'] .copy {
-	animation: heroElementReveal 500ms cubic-bezier(0.22, 0.61, 0.36, 1) 1800ms both;
+	animation: heroElementReveal 500ms cubic-bezier(0.22, 0.61, 0.36, 1) 2300ms both;
 }
 
 .hero[data-entrance='prepare'] .copy {
@@ -318,7 +318,7 @@
 }
 
 .hero[data-entrance='start'] .eyebrow {
-	animation: heroElementReveal 380ms cubic-bezier(0.22, 0.61, 0.36, 1) 1900ms both;
+	animation: heroElementReveal 380ms cubic-bezier(0.22, 0.61, 0.36, 1) 2400ms both;
 }
 
 .hero[data-entrance='start'] .headingMain {
