@@ -5,7 +5,7 @@ const project: ProjectFolderMetadata = {
 	number: '04',
 	title: 'Mercurio',
 	client: 'Proyecto conceptual de Gea Estudio',
-	location: 'Madrid, España',
+	location: '',
 	sector: 'Joyería',
 	sectorEn: 'Jewellery',
 	year: 2026,

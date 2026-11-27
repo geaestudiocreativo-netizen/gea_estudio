@@ -18,6 +18,6 @@ const first = sector;
 
 <div class={styles.specs}>
 	{first && <p class={styles.line}>{first}</p>}
-	<p class={styles.sub}>{project.location} — {project.year}</p>
+	<p class={styles.sub}>{project.location ? `${project.location} — ${project.year}` : project.year}</p>
 	{project.concept && <span class="concept-tag">{en ? 'Concept project - AI' : 'Proyecto conceptual - IA'}</span>}
 </div>
