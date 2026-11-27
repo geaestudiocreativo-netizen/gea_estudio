@@ -120,3 +120,33 @@
 		font-size: 12px;
 	}
 }
+
+/* Cabecera compacta: negocio y servicios en una sola fila, menos márgenes */
+.specs {
+	margin-top: 12px;
+}
+
+.article {
+	margin-top: 12px;
+}
+
+.folioRow {
+	padding: 7px 0 6px;
+}
+
+.folioRowJoined {
+	flex-wrap: wrap;
+	row-gap: 4px;
+}
+
+.folioRowJoined > div:last-child {
+	margin-left: auto;
+	white-space: nowrap;
+	text-align: right;
+}
+
+.case {
+	margin-top: 10px;
+	padding-bottom: 12px;
+	line-height: 1.3;
+}
