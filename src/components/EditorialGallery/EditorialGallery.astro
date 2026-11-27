@@ -233,7 +233,7 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 
 							{
 								naturalTail && blockImages.length > 4 && (
-									<div class={styles.tailRow}>
+									<div class={styles.tailRow} style={`--tail-cols: ${Math.min(blockImages.length - 4, 3)}`}>
 										{blockImages.slice(4).map((image, i) => (
 											<figure class={`${styles.item} ${styles.tailItem}`}>
 												<ResponsiveImage

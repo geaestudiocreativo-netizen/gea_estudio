@@ -408,7 +408,7 @@
 /* .G: últimas piezas enteras, sin recorte, en una fila de tres */
 .tailRow {
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-columns: repeat(var(--tail-cols, 3), minmax(0, 1fr));
 	align-items: start;
 	gap: var(--gutter, 8px);
 	padding: var(--gutter, 0) 0 0;
