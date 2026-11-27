@@ -42,7 +42,8 @@
 
 .folio {
 	margin: 0;
-	border-top: 1px solid rgba(26, 24, 22, 0.22);
+	/* Divisores a sangre: ocupan todo el ancho sin crear scroll horizontal */
+	border-image: conic-gradient(rgba(26, 24, 22, 0.12) 0 0) 1 / 1px 0 0 / 0 100vw;
 	font-size: 9.5px;
 	font-weight: 400;
 	letter-spacing: 0.2em;
@@ -58,7 +59,7 @@
 	align-items: baseline;
 	gap: 16px;
 	padding: 10px 0 9px;
-	border-bottom: 1px solid rgba(26, 24, 22, 0.22);
+	border-image: conic-gradient(rgba(26, 24, 22, 0.12) 0 0) 1 / 0 0 1px / 0 100vw;
 }
 
 .folioRow > div:last-child:not(:first-child) {
@@ -81,7 +82,7 @@
 .signature {
 	margin: 18px 0 0;
 	padding-top: 9px;
-	border-top: 1px solid rgba(26, 24, 22, 0.22);
+	border-image: conic-gradient(rgba(26, 24, 22, 0.12) 0 0) 1 / 1px 0 0 / 0 100vw;
 	text-align: right;
 }
 
