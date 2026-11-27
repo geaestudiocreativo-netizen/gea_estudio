@@ -160,6 +160,9 @@ const films = [
 	}
 
 	.serviceMarquee__grid {
+		/* Ancho limitado por el alto de pantalla para que los 4 vídeos quepan a la vez */
+		width: min(100%, calc((100svh - 190px) * 0.5625));
+		margin-inline: auto;
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: clamp(20px, 2.2vw, 32px) clamp(12px, 1.4vw, 20px);
@@ -216,9 +219,13 @@ const films = [
 
 	@media (min-width: 768px) {
 		.serviceMarquee__top {
-			grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+			grid-template-columns: minmax(0, 1fr) min(420px, calc((100svh - 190px) * 0.5625));
 			column-gap: clamp(48px, 7vw, 120px);
 			align-items: center;
+		}
+
+		.serviceMarquee__grid {
+			width: 100%;
 		}
 
 		.serviceMarquee__statement {
