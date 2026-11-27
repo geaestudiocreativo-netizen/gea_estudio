@@ -6,7 +6,7 @@ export const heroContent = {
 		headingMain: 'Creamos universos visuales para marcas',
 		headingSecondary:
 			'Todo lo visual de tu marca en un solo estudio: diseño web, fotografía, vídeo, redes sociales y branding.',
-		primaryImageAlt: 'Person by a vintage car at sunset',
+		primaryImageAlt: 'Ángela, fundadora de Gea, revisando un libro de diseño en el estudio',
 		secondaryImageAlt: 'Mujer con una orquídea moteada junto al rostro'
 	},
 	en: {
@@ -14,7 +14,7 @@ export const heroContent = {
 		headingMain: 'We create visual universes for brands',
 		headingSecondary:
 			'Everything visual for your brand in one studio: web design, photography, video, social media and branding.',
-		primaryImageAlt: 'Person by a vintage car at sunset',
+		primaryImageAlt: 'Ángela, founder of Gea, looking through a design book in the studio',
 		secondaryImageAlt: 'Woman holding a spotted orchid to her face'
 	}
 } as const;
