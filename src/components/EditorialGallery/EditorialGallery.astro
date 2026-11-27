@@ -189,22 +189,6 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 							</div>
 
 							{
-								blockImages[3] && (
-									<figure class={`${styles.item} ${styles.item4}`}>
-										<ResponsiveImage
-											src={blockImages[3]}
-											alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 4}`}
-											loading="lazy"
-											decoding="async"
-											sizes="100vw"
-											widths={[640, 960, 1280, 1600, 1920]}
-										/>
-										{caption(blockImages[3], blockIndex * IMAGES_PER_BLOCK + 4) && <figcaption class={styles.caption}>{caption(blockImages[3], blockIndex * IMAGES_PER_BLOCK + 4)}</figcaption>}
-									</figure>
-								)
-							}
-
-							{
 								statement && blockIndex === 0 && blockImages[4] && (
 									<div class={styles.brandStatement}>
 														<p>{statement}</p>
@@ -228,6 +212,22 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 
 										galleryVideos.forEach((video) => galleryObserver.observe(video));
 									</script>
+								)
+							}
+
+							{
+								blockImages[3] && (
+									<figure class={`${styles.item} ${styles.item4}`}>
+										<ResponsiveImage
+											src={blockImages[3]}
+											alt={`${projectTitle} editorial ${blockIndex * IMAGES_PER_BLOCK + 4}`}
+											loading="lazy"
+											decoding="async"
+											sizes="100vw"
+											widths={[640, 960, 1280, 1600, 1920]}
+										/>
+										{caption(blockImages[3], blockIndex * IMAGES_PER_BLOCK + 4) && <figcaption class={styles.caption}>{caption(blockImages[3], blockIndex * IMAGES_PER_BLOCK + 4)}</figcaption>}
+									</figure>
 								)
 							}
 
