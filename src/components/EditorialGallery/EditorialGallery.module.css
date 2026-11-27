@@ -408,3 +408,29 @@
 .captioned.frameFirstImages .topBlock .item2 {
 	padding-bottom: var(--caption-space, 31px);
 }
+
+/* .G: últimas piezas enteras, sin recorte, en una fila de tres */
+.tailRow {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	align-items: start;
+	gap: var(--gutter, 8px);
+	padding: var(--gutter, 0) var(--gutter, 0) 0;
+}
+
+.layout7 .tailItem,
+.tailItem {
+	aspect-ratio: auto;
+	height: auto;
+}
+
+.tailItem img {
+	height: auto;
+	object-fit: contain;
+}
+
+@media (max-width: 767px) {
+	.tailRow {
+		grid-template-columns: 1fr;
+	}
+}
