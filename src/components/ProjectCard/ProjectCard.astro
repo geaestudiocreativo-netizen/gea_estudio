@@ -20,6 +20,8 @@ interface Props {
 	variant?: 'carousel' | 'grid';
 	locale?: Locale;
 	concept?: boolean;
+	sector?: string;
+	sectorEn?: string;
 }
 
 const {
@@ -34,8 +36,13 @@ const {
 	compactMobile = false,
 	variant = 'carousel',
 	locale = 'es',
-	concept = false
+	concept = false,
+	sector,
+	sectorEn
 } = Astro.props as Props;
+
+// Qué es la marca (p. ej. "Tienda de peluquería y cosmética"); sustituye a la descripción larga
+const brandType = locale === 'en' ? sectorEn ?? sector : sector;
 
 const sizeClassByKey = {
 	small: styles.imageSmall,
@@ -92,7 +99,7 @@ const cardAriaPrefix = projectDetailContent[locale].projectCardAriaPrefix;
 		<h3 class={styles.title}>{title}</h3>
 		{concept && <span class={`concept-tag ${styles.conceptTag}`}>{locale === 'en' ? 'Concept project - AI' : 'Proyecto conceptual - IA'}</span>}
 		<div class={styles.details}>
-			<p class={styles.description}>{description}</p>
+			{brandType && <p class={styles.description}>{brandType}</p>}
 			<p class={styles.services} data-services-list>
 				{serviceLabels.map((service, index) => (
 					<span class={styles.serviceItem} data-service-item>
