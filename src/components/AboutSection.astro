@@ -26,6 +26,7 @@ const content = aboutSectionContent[locale];
 				sizes="(max-width: 1120px) 100vw, 1120px"
 				widths={[640, 960, 1280, 1600]}
 			/>
+			<p class="about-caption">{locale === 'en' ? 'Ángela Contreras, founder' : 'Ángela Contreras, fundadora'}<br />Madrid · Logroño</p>
 			<h2
 				id="about-title"
 				class="about-title"
@@ -35,6 +36,7 @@ const content = aboutSectionContent[locale];
 		</div>
 
 		<div class="about-side">
+			<p class="about-folio"><span>{locale === 'en' ? 'About Gea' : 'Sobre Gea'}</span><span>{locale === 'en' ? 'The studio' : 'El estudio'}</span></p>
 			<h3 class="about-mobile-name" aria-label="Ángela Contreras">Ángela Contreras</h3>
 			<div class="about-copy mt-[32px] md:mt-[40px]">
 				<p class="about-copy__label">{content.intro} {content.introSecondLine}</p>
@@ -47,6 +49,44 @@ const content = aboutSectionContent[locale];
 </section>
 
 <style>
+	/* Detalles de revista: folio, pie de foto y texto justificado */
+	.about-folio {
+		display: flex;
+		justify-content: space-between;
+		gap: 16px;
+		width: 100%;
+		margin: 56px 0 0;
+		padding: 10px 0 9px;
+		border-top: 1px solid rgba(26, 24, 22, 0.22);
+		border-bottom: 1px solid rgba(26, 24, 22, 0.22);
+		font-family: 'Satoshi', sans-serif;
+		font-size: 9.5px;
+		font-weight: 400;
+		letter-spacing: 0.2em;
+		line-height: 1.3;
+		text-transform: uppercase;
+		color: rgba(26, 24, 22, 0.6);
+	}
+
+	.about-caption {
+		margin: 12px auto 0;
+		font-family: 'Satoshi', sans-serif;
+		font-size: 9.5px;
+		font-weight: 400;
+		letter-spacing: 0.18em;
+		line-height: 1.6;
+		text-transform: uppercase;
+		text-align: center;
+		color: rgba(26, 24, 22, 0.55);
+	}
+
+	.about-copy__transition,
+	.about-copy__body {
+		text-align: justify;
+		hyphens: auto;
+		-webkit-hyphens: auto;
+	}
+
 	.about-copy {
 		width: min(100%, 760px);
 		margin-inline: auto;
@@ -164,6 +204,15 @@ const content = aboutSectionContent[locale];
 			width: 100%;
 		}
 
+		.about-folio {
+			margin: 0 0 28px;
+		}
+
+		.about-caption {
+			text-align: left;
+			padding-left: 0;
+		}
+
 		.about-mobile-name {
 			margin: 0 0 20px;
 			text-align: left;
@@ -196,7 +245,7 @@ const content = aboutSectionContent[locale];
 		.about-mobile-name {
 			display: block;
 			width: 100%;
-			margin: 112px 0 0;
+			margin: 28px 0 0;
 			padding: 0;
 			text-align: center;
 			font-family: 'Panchang', sans-serif;

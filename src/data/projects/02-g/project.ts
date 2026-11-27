@@ -10,7 +10,7 @@ const project: ProjectFolderMetadata = {
 	sectorEn: 'Bakery',
 	year: 2026,
 	description:
-		'Una marca de pastelería artesanal con sensibilidad editorial y carácter contemporáneo.',
+		'Tartas artesanales que merecían verse como se saborean. Creamos una identidad sencilla, dos sesiones de fotografía y una web editorial, junto con tarjetas y pegatinas para el día a día.',
 	subtitle:
 		'Una marca de pastelería artesanal con sensibilidad editorial y carácter contemporáneo.',
 	services: [
@@ -21,16 +21,18 @@ const project: ProjectFolderMetadata = {
 			images: [
 				'Color_ivory.jpg',
 				'Color_brown.jpg',
-				'Mockup_poste.png',
-				'Mockup_packaging_cajas.png',
-				'Mockup_bolsa.png',
+				'cajas.jpg',
+				'mesa-logo.jpg',
+				'calle.jpg',
+				'Mockup_poste.png'
 			]
 		},
 		{
 			type: 'Web',
 			gallery: 'web',
-			video: 'Vide_Web.optimized.mp4',
-			url: 'https://www.tartaspuntog.es'
+			videos: ['web-01-inicio.mp4', 'web-02-tartas.mp4', 'web-03-encargos.mp4'],
+			url: 'https://www.tartaspuntog.es',
+			images: ['web-sofa.jpg']
 		},
 		{
 			type: 'Fotografía',
@@ -66,7 +68,7 @@ const project: ProjectFolderMetadata = {
 	},
 	assetsFolder: '02-punto-g',
 	coverImage: 'hero.JPG',
-	logo: 'logo.svg',
+	logo: 'logo-solo.svg',
 	heroImage: 'hero.JPG',
 	imageSize: 'small',
 	cardImage: '/images/projects/project-02.jpg',

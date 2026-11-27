@@ -1,5 +1,5 @@
 .page {
-	background: #ffffff;
+	background: #F2EFE9;
 	overflow-anchor: none;
 	overflow-x: clip;
 	padding: clamp(24px, 6.4vw, 96px) clamp(16px, 3vw, 42px) 0;
@@ -9,7 +9,7 @@
 	width: 100vw;
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
-	background: #ffffff;
+	background: #F2EFE9;
 	padding-top: 1px;
 }
 
@@ -22,9 +22,9 @@
 .projectLogo {
 	display: block;
 	margin: 0 auto;
-	width: clamp(110px, 12vw, 170px);
+	width: clamp(84px, 9vw, 120px);
 	height: auto;
-	max-height: clamp(48px, 6vw, 80px);
+	max-height: clamp(38px, 4.4vw, 56px);
 	object-fit: contain;
 	filter: brightness(0) saturate(100%);
 	opacity: 0.9;
@@ -107,11 +107,11 @@
 	top: 60px;
 	z-index: 12;
 	width: 100vw;
-	margin-top: clamp(28px, 3.4vw, 44px);
+	margin-top: clamp(16px, 2vw, 26px);
 	margin-left: calc(50% - 50vw);
 	margin-right: calc(50% - 50vw);
 	padding: 10px 0 12px;
-	background: #ffffff;
+	background: #F2EFE9;
 }
 
 .sectionTabsWrap::before {
@@ -121,7 +121,7 @@
 	left: 0;
 	width: 100%;
 	height: 4px;
-	background: #ffffff;
+	background: #F2EFE9;
 }
 
 .sectionTabs {
@@ -143,8 +143,8 @@
 
 .section {
 	max-width: 1120px;
-	margin: clamp(20px, 2.6vw, 36px) auto 0;
-	background: #ffffff;
+	margin: clamp(10px, 1.4vw, 20px) auto 0;
+	background: #F2EFE9;
 }
 
 /* Sin título visible, la galería arranca justo después de las tabs */
@@ -581,8 +581,8 @@
 	}
 
 	.projectLogo {
-		width: clamp(96px, 30vw, 140px);
-		max-height: 56px;
+		width: clamp(80px, 24vw, 110px);
+		max-height: 44px;
 	}
 
 	.projectDescription {
@@ -623,7 +623,7 @@
 	}
 
 	.section {
-		margin-top: 32px;
+		margin-top: 18px;
 	}
 
 	.sectionTitle {
@@ -655,20 +655,20 @@
 
 }
 
-/* Project pages: white nav to match the white header */
+/* Project pages: cream nav to match the cream page */
 :global(body):has(.page) :global([data-site-nav]) {
-	background: #ffffff;
+	background: #F2EFE9;
 }
 
 /* Logos muy horizontales (Mercurio, solo texto): más ancho para que tenga presencia */
 .projectLogo.projectLogoWide {
-	width: clamp(240px, 26vw, 380px);
+	width: clamp(190px, 20vw, 290px);
 	max-height: none;
 }
 
 @media (max-width: 767px) {
 	.projectLogo.projectLogoWide {
-		width: min(72vw, 300px);
+		width: min(60vw, 240px);
 		max-height: none;
 	}
 }
@@ -770,4 +770,38 @@
 
 .webCompositionBrowser::before {
 	background: rgba(20, 14, 10, 0.45);
+}
+
+/* Foto de ambiente de la web (.G): debajo del vídeo, centrada y sin sombra */
+.webScene {
+	position: relative;
+	z-index: 1;
+	width: min(100%, 520px);
+	margin: clamp(56px, 8vw, 120px) auto 0;
+}
+
+.webComposition .webScene img {
+	width: 100%;
+	box-shadow: none;
+}
+
+/* .G: secciones de la web en vídeo dentro de marcos de navegador, sobre crema */
+.browserSoft {
+	width: min(100%, 960px);
+	box-shadow: 0 18px 48px rgba(26, 24, 22, 0.14);
+}
+
+@media (min-width: 768px) {
+	.browserSoft {
+		width: min(70vw, 960px);
+	}
+}
+
+.browserVideo {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 720 / 414;
+	background: #fff;
+	pointer-events: none;
 }

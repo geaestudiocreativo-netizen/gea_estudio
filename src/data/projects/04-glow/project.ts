@@ -10,7 +10,7 @@ const project: ProjectFolderMetadata = {
 	sectorEn: 'Hair and beauty shop',
 	year: 2026,
 	description:
-		'Logotipo y web para una tienda de peluquería y cosmética profesional que aún no existía. Una firma geométrica y redonda, donde la W son dos 22.',
+		'Una tienda de peluquería y cosmética profesional que aún no existía. Diseñamos su logotipo, una firma geométrica donde la W son dos 22, y la web con la que abre sus puertas.',
 	subtitle:
 		'Logotipo y web para una tienda de peluquería y cosmética profesional que aún no existía.',
 	services: [

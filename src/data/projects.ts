@@ -92,6 +92,7 @@ export const projects: Project[] = projectMetadata.map((meta) => {
 				gallery: 'web',
 				background: service.background,
 				video: service.video,
+				videos: service.videos,
 				url: service.url,
 				images: service.images
 			};

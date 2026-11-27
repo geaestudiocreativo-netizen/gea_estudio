@@ -8,11 +8,11 @@ interface Props {
 
 const { locale = 'es' } = Astro.props as Props;
 const content = serviceMarqueeContent[locale];
+// Arriba Mallorca en horizontal a todo el ancho; debajo dos verticales
 const films = [
-	{ src: '/images/videos/mercurio-campana.optimized.mp4', poster: '/images/videos/mercurio-campana-poster.jpg', ...content.films[0] },
-	{ src: '/images/videos/video-01.optimized.mp4', poster: undefined, ...content.films[1] },
-	{ src: '/images/videos/video-02.optimized.mp4', poster: undefined, ...content.films[2] },
-	{ src: '/images/videos/video-03.optimized.mp4', poster: undefined, ...content.films[3] }
+	{ src: '/images/videos/mallorca-horizontal.mp4', poster: undefined, wide: true, ...content.films[1] },
+	{ src: '/images/videos/mercurio-campana.optimized.mp4', poster: '/images/videos/mercurio-campana-poster.jpg', wide: false, ...content.films[0] },
+	{ src: '/images/videos/video-02.optimized.mp4', poster: undefined, wide: false, ...content.films[2] }
 ];
 ---
 
@@ -31,7 +31,7 @@ const films = [
 
 			<div class="serviceMarquee__grid">
 				{films.map((film) => (
-					<figure class="serviceMarquee__film">
+					<figure class:list={['serviceMarquee__film', film.wide && 'is-wide']}>
 						<div class="serviceMarquee__frame">
 							<video
 								class="serviceMarquee__video"
@@ -80,6 +80,24 @@ const films = [
 		video.defaultMuted = true;
 		observer.observe(video);
 	});
+
+	// Entrada suave: el titular línea a línea y los vídeos uno detrás de otro.
+	// Cada bloque se anima cuando él mismo entra bien en pantalla (no la sección entera),
+	// para que la animación se vea y no ocurra antes de llegar.
+	const section = document.querySelector<HTMLElement>('.serviceMarquee');
+	if (section) {
+		section.classList.add('is-animated');
+		const blocks = section.querySelectorAll<HTMLElement>('.serviceMarquee__statement, .serviceMarquee__grid');
+		const reveal = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-in');
+					reveal.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.2, rootMargin: '0px 0px -18% 0px' });
+		blocks.forEach((block) => reveal.observe(block));
+	}
 </script>
 
 <style>
@@ -160,6 +178,9 @@ const films = [
 	}
 
 	.serviceMarquee__grid {
+		/* Ancho limitado por el alto de pantalla para que los 4 vídeos quepan a la vez */
+		width: min(100%, calc((100svh - 300px) / 1.45));
+		margin-inline: auto;
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: clamp(20px, 2.2vw, 32px) clamp(12px, 1.4vw, 20px);
@@ -182,6 +203,14 @@ const films = [
 		width: 100%;
 		aspect-ratio: 9 / 16;
 		object-fit: cover;
+	}
+
+	.serviceMarquee__film.is-wide {
+		grid-column: 1 / -1;
+	}
+
+	.serviceMarquee__film.is-wide .serviceMarquee__video {
+		aspect-ratio: 16 / 9;
 	}
 
 	.serviceMarquee__caption {
@@ -216,9 +245,13 @@ const films = [
 
 	@media (min-width: 768px) {
 		.serviceMarquee__top {
-			grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
+			grid-template-columns: minmax(0, 1fr) min(400px, calc((100svh - 300px) / 1.45));
 			column-gap: clamp(48px, 7vw, 120px);
 			align-items: center;
+		}
+
+		.serviceMarquee__grid {
+			width: 100%;
 		}
 
 		.serviceMarquee__statement {
@@ -233,5 +266,48 @@ const films = [
 			font-size: clamp(15px, 1.3vw, 19px);
 		}
 
+	}
+	/* ---------- Animación de entrada ---------- */
+	@media (prefers-reduced-motion: no-preference) {
+		.serviceMarquee.is-animated .serviceMarquee__eyebrow,
+		.serviceMarquee.is-animated .serviceMarquee__headlineLine,
+		.serviceMarquee.is-animated .serviceMarquee__support,
+		.serviceMarquee.is-animated .serviceMarquee__film {
+			opacity: 0;
+			transform: translateY(40px);
+			transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1), transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		.serviceMarquee.is-animated .serviceMarquee__film {
+			transform: translateY(60px) scale(0.94);
+		}
+
+		.serviceMarquee.is-animated .is-in .serviceMarquee__eyebrow,
+		.serviceMarquee.is-animated .is-in .serviceMarquee__headlineLine,
+		.serviceMarquee.is-animated .is-in .serviceMarquee__support,
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film {
+			opacity: 1;
+			transform: none;
+		}
+
+		.serviceMarquee.is-animated .is-in .serviceMarquee__headlineLine:nth-child(2) { transition-delay: 120ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__headlineLine:nth-child(3) { transition-delay: 240ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__headlineLine:nth-child(4) { transition-delay: 360ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__support { transition-delay: 480ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film:nth-child(1) { transition-delay: 200ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film:nth-child(2) { transition-delay: 350ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film:nth-child(3) { transition-delay: 500ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film:nth-child(4) { transition-delay: 650ms; }
+
+		/* Al pasar el ratón, el vídeo se acerca un poco */
+		.serviceMarquee__video {
+			transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			.serviceMarquee__film:hover .serviceMarquee__video {
+				transform: scale(1.05);
+			}
+		}
 	}
 </style>

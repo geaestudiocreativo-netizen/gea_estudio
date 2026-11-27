@@ -92,7 +92,7 @@
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	gap: clamp(12px, 2vw, 28px);
 	padding: clamp(96px, 12vw, 180px) clamp(32px, 8vw, 128px);
-	background: #ffffff;
+	background: #F2EFE9;
 }
 
 .socialVideo {
@@ -216,7 +216,7 @@
 	min-height: clamp(90px, 12vw, 180px);
 	padding: clamp(20px, 3vw, 48px) clamp(16px, 5vw, 80px);
 	box-sizing: border-box;
-	background: #fff;
+	background: #F2EFE9;
 	color: #1b1917;
 	text-align: center;
 }
@@ -356,5 +356,116 @@
 	.editorialVideo {
 		height: auto;
 		width: 78vw;
+	}
+}
+
+/* ---- Galería de branding estilo revista: aire entre imágenes y pies de foto ---- */
+.captioned {
+	--gutter: clamp(6px, 0.6vw, 10px);
+	gap: var(--gutter);
+	padding: 0 var(--gutter);
+	margin-bottom: var(--gutter);
+}
+
+.captioned .topBlock,
+.captioned .pairBlock,
+.captioned .middleBlock {
+	gap: var(--gutter);
+}
+
+.captioned .item {
+	display: grid;
+	grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.captioned .item img {
+	min-height: 0;
+}
+
+.caption {
+	padding: 9px 0 12px;
+	font-family: 'Satoshi', sans-serif;
+	font-size: 9px;
+	font-weight: 400;
+	letter-spacing: 0.22em;
+	line-height: 1.3;
+	text-transform: uppercase;
+	color: rgba(26, 24, 22, 0.55);
+}
+
+.captioned .brandStatement {
+	margin-inline: calc(var(--gutter) * -1);
+}
+
+/* .G: las dos muestras de color, sin fondo y alineadas con la cartelería */
+.captioned.frameFirstImages .topBlock .item1,
+.captioned.frameFirstImages .topBlock .item2 {
+	padding: 0;
+	background: transparent;
+}
+
+
+/* .G: últimas piezas enteras, sin recorte, en una fila de tres */
+.tailRow {
+	display: grid;
+	grid-template-columns: repeat(var(--tail-cols, 3), minmax(0, 1fr));
+	align-items: start;
+	gap: var(--gutter, 8px);
+	padding: var(--gutter, 0) 0 0;
+}
+
+.layout7 .tailItem,
+.tailItem {
+	aspect-ratio: auto;
+	height: auto;
+}
+
+.tailItem img {
+	height: auto;
+	aspect-ratio: 3 / 4;
+	object-fit: cover;
+}
+
+@media (max-width: 767px) {
+	.tailRow {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* .G: la caja de la derecha lleva pie; la muestra de abajo reserva el mismo hueco para que acaben a la misma altura */
+.captioned.frameFirstImages .topBlock .item2 {
+	padding-bottom: var(--caption-space, 31px);
+}
+
+/* Fotografía tipo Pinterest: 4 columnas, huecos finos y formatos variados */
+.verticalStack[data-photography-masonry]:not(.singleColumn) {
+	gap: 8px;
+	column-gap: 8px;
+	padding-inline: 8px;
+}
+
+.verticalStack[data-photography-masonry]:not(.singleColumn) > [data-masonry-column] {
+	gap: 8px;
+}
+
+.verticalStack[data-photography-masonry]:not(.singleColumn) .verticalItem[data-pin-ratio] {
+	aspect-ratio: var(--pin);
+	border-radius: 14px;
+}
+
+.verticalStack[data-photography-masonry]:not(.singleColumn) .verticalItem[data-pin-ratio] img {
+	height: 100%;
+	object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+	.verticalStack[data-photography-masonry]:not(.singleColumn) {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		column-gap: 12px;
+		padding-inline: clamp(16px, 3vw, 48px);
+	}
+
+	.verticalStack[data-photography-masonry]:not(.singleColumn) > [data-masonry-column] {
+		gap: 12px;
 	}
 }

@@ -105,12 +105,24 @@ const sections = project.services.map((service) => ({
 				>
 					<h2 id={`section-${section.id}`} class={styles.sectionTitle}>{section.title}</h2>
 					{
-						section.isWeb && (section.background || section.video) ? (
+						section.isWeb && (section.background || section.video || section.videos.length > 0) ? (
 							<div
 								class={`${styles.webComposition} ${!section.background ? styles.webCompositionPlain : ''} ${project.slug === 'g' ? styles.webCompositionG : ''} ${project.slug === 'glow' ? styles.webCompositionBrowser : ''}`}
 								style={section.background ? `--web-background-image: url("${section.background}")` : '--web-background-image: none'}
 							>
-								{section.video ? (
+								{section.videos.length > 0 ? (
+									<div class={styles.browserStack}>
+										{section.videos.map((clip) => (
+											<figure class:list={[styles.browser, styles.browserSoft]}>
+												<div class={styles.browserBar} aria-hidden="true">
+													<span class={styles.browserDots}><i></i><i></i><i></i></span>
+													<span class={styles.browserUrl}>{(section.websiteUrl ?? '').replace(/^https?:\/\/(www\.)?/, '')}</span>
+												</div>
+												<video class={styles.browserVideo} data-video-src={clip} autoplay loop muted playsinline preload="none" aria-label={`${project.title} web`} />
+											</figure>
+										))}
+									</div>
+								) : section.video ? (
 									<video
 										class={styles.webVideo}
 										data-video-src={section.video}
@@ -150,6 +162,18 @@ const sections = project.services.map((service) => ({
 										widths={[480, 768, 960, 1280, 1600]}
 									/>
 								)}
+								{(section.video || section.videos.length > 0) && section.images.length > 0 && (
+									<figure class={styles.webScene}>
+										<ResponsiveImage
+											src={section.images[0]}
+											alt={`${project.title} web`}
+											loading="lazy"
+											decoding="async"
+											sizes="(max-width: 767px) 92vw, 34vw"
+											widths={[480, 768, 960, 1152]}
+										/>
+									</figure>
+								)}
 								{section.websiteUrl && (
 									<a class={styles.webVisitButton} href={section.websiteUrl} target="_blank" rel="noreferrer">
 										<span class={styles.webVisitLabel}><span>{content.visitWeb}</span></span>
@@ -168,6 +192,7 @@ const sections = project.services.map((service) => ({
 									videos={section.videos}
 									locale="en"
 											frameFirstImages={project.slug === 'g' && section.id === 'branding'}
+									naturalTail={project.slug === 'g' && section.id === 'branding'}
 											insertBrandStatement={project.slug === 'g' && section.id === 'branding'}
 											containLastImage={project.slug === 'talleres-alonso' && section.id === 'branding'}
 											singleColumn={section.isSocialMedia}
