@@ -1,5 +1,7 @@
 ---
 import styles from './EditorialGallery.module.css';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import ResponsiveImage from '../ResponsiveImage.astro';
 import { projectDetailContent } from '../../i18n/projects-content';
 import type { Locale } from '../../i18n/site';
@@ -70,6 +72,12 @@ const pin = (index: number) => {
 	return { style: `--pin: ${w} / ${h}`, 'data-pin-ratio': String(h / w) };
 };
 const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryCaption(image, locale));
+
+// Si existe un .jpg con el mismo nombre que el vídeo, se usa como portada (se ve aunque el móvil bloquee el autoplay).
+const videoPoster = (video: string) => {
+	const poster = video.replace(/\.mp4$/, '.jpg');
+	return poster !== video && existsSync(join(process.cwd(), 'public', poster)) ? poster : undefined;
+};
 ---
 
 {
@@ -93,6 +101,7 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 						<video
 							class={styles.socialVideo}
 							data-video-src={video}
+							poster={videoPoster(video)}
 							autoplay
 							loop
 							muted
@@ -211,7 +220,7 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 												if (source && !video.src) {
 													video.src = source;
 													video.load();
-													void video.play().catch(() => undefined);
+													void video.play().catch(() => { video.controls = true; });
 												}
 												galleryObserver.unobserve(video);
 											});
@@ -324,6 +333,7 @@ const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryC
 			<video
 				class={styles.editorialVideo}
 				data-video-src={video}
+							poster={videoPoster(video)}
 				autoplay
 				loop
 				muted

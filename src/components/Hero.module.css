@@ -169,18 +169,53 @@
 }
 
 @keyframes wordmarkBuild {
-	0% {
-		opacity: 0;
+	/* Todo el bloque (punto + logo) está a escala 0.05 mientras el punto parpadea (0-1 s).
+	   Después el punto se funde en el logo, que nace de su tamaño y crece despacio (1 s), y baja a su sitio. */
+	0%, 33.3% {
+		transform: var(--wordmark-transform-start) scale(0.05);
+		animation-timing-function: cubic-bezier(0.45, 0, 0.25, 1);
+	}
+	66.7% {
 		transform: var(--wordmark-transform-start) scale(1.06);
 	}
-	38% {
-		opacity: 1;
-		transform: var(--wordmark-transform-start) scale(1.03);
+	73.3% {
+		transform: var(--wordmark-transform-start) scale(1.06);
+		animation-timing-function: cubic-bezier(0.2, 0.63, 0.22, 1);
 	}
 	100% {
-		opacity: 1;
 		transform: var(--wordmark-transform-final) scale(1);
 	}
+}
+
+@keyframes wordmarkInk {
+	0%, 33.3% { opacity: 0; }
+	38%, 100% { opacity: 1; }
+}
+
+@keyframes wordmarkDot {
+	0% { opacity: 0; }
+	2.4%, 8.8% { opacity: 1; }
+	11.2%, 15.2% { opacity: 0; }
+	17.6%, 23.2% { opacity: 1; }
+	25.6%, 28% { opacity: 0; }
+	29.6%, 33.3% { opacity: 1; transform: translate(-50%, -50%) scale(1, 1); }
+	38%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4, 0.35); }
+}
+
+/* Punto negro desde el que nace el logo */
+.wordmark::before {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	/* Con el bloque a escala 0.05, un 40 % del ancho del logo se ve como un punto de unos 12-17 px */
+	width: 40%;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: #111;
+	opacity: 0;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
 }
 
 @keyframes heroElementReveal {
@@ -221,27 +256,43 @@
 	transform: translateY(22px);
 }
 
-.hero[data-entrance='prepare'] .wordmark {
+.hero[data-entrance='prepare'] .wordmarkBase {
 	opacity: 0;
-	transform: var(--wordmark-transform-start) scale(1.06);
+}
+
+.hero[data-typing='pending'] .headingMain {
+	visibility: hidden;
+}
+
+.hero[data-entrance='prepare'] .wordmark {
+	opacity: 1;
+	transform: var(--wordmark-transform-start) scale(0.05);
 	transform-origin: 50% 50%;
 }
 
 .hero[data-entrance='start'] .wordmark {
-	animation: wordmarkBuild 1800ms cubic-bezier(0.2, 0.63, 0.22, 1) 220ms both;
+	animation: wordmarkBuild 3000ms linear 150ms both;
 	transform-origin: 50% 50%;
 }
 
+.hero[data-entrance='start'] .wordmarkBase {
+	animation: wordmarkInk 3000ms linear 150ms both;
+}
+
+.hero[data-entrance='start'] .wordmark::before {
+	animation: wordmarkDot 3000ms linear 150ms both;
+}
+
 .hero[data-entrance='start'] .primaryImage {
-	animation: heroElementReveal 780ms cubic-bezier(0.22, 0.61, 0.36, 1) 1120ms both;
+	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 2000ms both;
 }
 
 .hero[data-entrance='start'] .secondaryImage {
-	animation: heroElementReveal 740ms cubic-bezier(0.22, 0.61, 0.36, 1) 1450ms both;
+	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 2160ms both;
 }
 
 .hero[data-entrance='start'] .copy {
-	animation: heroElementReveal 700ms cubic-bezier(0.22, 0.61, 0.36, 1) 1760ms both;
+	animation: heroElementReveal 500ms cubic-bezier(0.22, 0.61, 0.36, 1) 2300ms both;
 }
 
 .hero[data-entrance='prepare'] .copy {
@@ -267,7 +318,7 @@
 }
 
 .hero[data-entrance='start'] .eyebrow {
-	animation: heroElementReveal 460ms cubic-bezier(0.22, 0.61, 0.36, 1) 2240ms both;
+	animation: heroElementReveal 380ms cubic-bezier(0.22, 0.61, 0.36, 1) 2400ms both;
 }
 
 .hero[data-entrance='start'] .headingMain {
@@ -292,14 +343,14 @@
 
 .hero[data-support='reveal'] .headingSecondary,
 .hero[data-support='done'] .headingSecondary {
-	animation: heroElementReveal 480ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+	animation: heroElementReveal 380ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
 	opacity: 1;
 	transform: translateY(0);
 }
 
 .hero[data-support='reveal'] .heroCta,
 .hero[data-support='done'] .heroCta {
-	animation: heroElementReveal 520ms cubic-bezier(0.22, 0.61, 0.36, 1) 650ms both;
+	animation: heroElementReveal 420ms cubic-bezier(0.22, 0.61, 0.36, 1) 280ms both;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -389,10 +440,11 @@
 
 	.wordmark {
 		--wordmark-transform: translate(10%, -36%);
-		--wordmark-transform-final: translate(calc(10% - 180px), calc(-36% - 25px));
+		/* Borde derecho del logo alineado con el de la foto de la derecha (y sin pisar la de la izquierda) */
+		--wordmark-transform-final: translate(0, calc(-36% - 25px));
 		--wordmark-transform-start: translate(-47%, -216%);
 		display: block;
-		width: clamp(593px, 50vw, 842px);
+		width: min(clamp(593px, 50vw, 842px), calc(100vw - 636px));
 		max-width: none;
 		margin-top: clamp(-128px, -10svh, -56px);
 		margin-left: auto;

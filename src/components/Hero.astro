@@ -68,6 +68,17 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 	</p>
 </section>
 
+<script is:inline>
+	// Oculta el hero antes del primer pintado para que no se vea un "flash" del estado final antes del punto.
+	(function () {
+		var h = document.querySelector('[data-hero-entrance]');
+		if (h && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			h.setAttribute('data-entrance', 'prepare');
+			h.setAttribute('data-typing', 'pending');
+		}
+	})();
+</script>
+
 <script>
 	const hero = document.querySelector('[data-hero-entrance]');
 
@@ -493,18 +504,24 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 				const fullText = headline.dataset.fullText ?? '';
 				const lineOneText = headline.dataset.lineOne ?? fullText;
 				const lineTwoText = headline.dataset.lineTwo ?? '';
-				const typingStartDelay = 2360;
-				const lockCaptureDelay = 2140;
+				// En móvil el logo se fija según la altura del texto: ahí el texto espera a que el logo termine.
+				const typingStartDelay = mobileQuery.matches ? 3220 : 2500;
+				const lockCaptureDelay = 3180;
+				const lockDelay = 3200;
 
 				window.setTimeout(() => {
 					captureWordmarkLockMetrics();
 				}, lockCaptureDelay);
 
+				// El logo termina su animación (crece y baja) hacia los 3150 ms: se fija después,
+				// pero el texto empieza a escribirse antes para que el hero no se haga lento.
 				window.setTimeout(() => {
 					lockWordmarkPosition();
 					syncMobileWordmarkSticky();
 					requestSplitSync();
+				}, lockDelay);
 
+				window.setTimeout(() => {
 					hero.dataset.typing = 'active';
 					let cursor = 0;
 
@@ -525,7 +542,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 						}
 						fitLocalizedHeadings();
 
-						const nextDelay = Math.floor(35 + Math.random() * 26);
+						const nextDelay = Math.floor(16 + Math.random() * 12);
 						window.setTimeout(typeNextChar, nextDelay);
 					};
 
@@ -542,7 +559,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 				}
 
 				cleanupSplitSync();
-			}, 5600);
+			}, 4900);
 		} else {
 			hero.dataset.entrance = 'done';
 			hero.dataset.typing = 'done';
