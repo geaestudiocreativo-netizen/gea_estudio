@@ -102,11 +102,12 @@
 }
 
 .projectGrid .description {
-	min-height: calc(1.4em * 3);
-	display: -webkit-box;
-	overflow: hidden;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 3;
+	/* Solo el tipo de negocio: una línea, pegada a los servicios */
+	min-height: 0;
+}
+
+.description + .services {
+	margin-top: 2px;
 }
 
 .services {
