@@ -466,6 +466,12 @@
 		margin-top: 0;
 	}
 
+	/* Foto de la chica más alta en móvil, mismo ancho: se ve más cielo por arriba, sin acercarla */
+	.primaryImage {
+		aspect-ratio: 10 / 14.4;
+		object-position: 50% 100%;
+	}
+
 	.copy {
 		margin-top: clamp(44px, 14vw, 56px);
 		padding-left: 0;
