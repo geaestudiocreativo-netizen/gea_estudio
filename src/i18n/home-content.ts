@@ -116,23 +116,13 @@ export const serviceMarqueeContent = {
 		eyebrow: 'UNA MARCA NO SOLO',
 		headline: ['SE DISEÑA.', 'SE CONSTRUYE.'],
 		support: 'A través de la dirección creativa y el branding damos forma al universo visual de tu marca.',
-		featured: { title: 'Campaña de marca', meta: 'Mercurio · concepto de joyería' },
-		videos: [
-			{ title: 'Filmmaking', meta: 'Mallorca' },
-			{ title: 'Sesión de fotos', meta: '' },
-			{ title: 'Contenido para IG', meta: '' }
-		]
+		featured: { title: 'Campaña de marca', meta: 'Mercurio · concepto de joyería' }
 	},
 	en: {
 		eyebrow: 'A BRAND IS NOT ONLY',
 		headline: ['DESIGNED.', 'IT IS BUILT.'],
 		support: 'Through creative direction and branding, we shape your brand visual universe.',
-		featured: { title: 'Brand campaign', meta: 'Mercurio · jewellery concept' },
-		videos: [
-			{ title: 'Filmmaking', meta: 'Mallorca' },
-			{ title: 'Photoshoot', meta: '' },
-			{ title: 'Content for Instagram', meta: '' }
-		]
+		featured: { title: 'Brand campaign', meta: 'Mercurio · jewellery concept' }
 	}
 } as const;
 

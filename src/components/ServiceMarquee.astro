@@ -13,12 +13,6 @@ const featured = {
 	poster: '/images/videos/mercurio-campana-poster.jpg',
 	...content.featured
 };
-const videos = [
-	{ src: '/images/videos/video-01.optimized.mp4', ...content.videos[0] },
-	{ src: '/images/videos/video-02.optimized.mp4', ...content.videos[1] },
-	{ src: '/images/videos/video-03.optimized.mp4', ...content.videos[2] }
-];
-const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <section class="serviceMarquee" aria-labelledby="brand-statement-title">
@@ -49,35 +43,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
 					/>
 				</div>
 				<figcaption class="serviceMarquee__caption">
-					<span class="serviceMarquee__num">[{pad(1)}]</span>
 					<span class="serviceMarquee__title">{featured.title}</span>
 					<span class="serviceMarquee__meta">{featured.meta}</span>
 				</figcaption>
 			</figure>
-		</div>
-
-		<div class="serviceMarquee__row">
-			{videos.map((video, index) => (
-				<figure class="serviceMarquee__film">
-					<div class="serviceMarquee__frame">
-						<video
-							class="serviceMarquee__video"
-							data-video-src={video.src}
-							autoplay
-							loop
-							muted
-							playsinline
-							preload="none"
-							aria-label={video.title}
-						/>
-					</div>
-					<figcaption class="serviceMarquee__caption">
-						<span class="serviceMarquee__num">[{pad(index + 2)}]</span>
-						<span class="serviceMarquee__title">{video.title}</span>
-						{video.meta && <span class="serviceMarquee__meta">{video.meta}</span>}
-					</figcaption>
-				</figure>
-			))}
 		</div>
 	</div>
 </section>
@@ -119,7 +88,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 		position: relative;
 		z-index: 4;
 		width: 100vw;
-		min-height: 100svh;
+		min-height: 0;
 		margin-left: calc(50% - 50vw);
 		display: flex;
 		align-items: center;
@@ -215,7 +184,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
 		line-height: 1.3;
 	}
 
-	.serviceMarquee__num,
 	.serviceMarquee__title {
 		color: var(--sm-accent);
 	}
@@ -226,11 +194,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
 		font-weight: 300;
 	}
 
-	.serviceMarquee__row {
-		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: clamp(10px, 2vw, 28px);
-	}
 
 	@media (max-width: 767px) {
 		.serviceMarquee {
@@ -238,22 +201,16 @@ const pad = (n: number) => String(n).padStart(2, '0');
 		}
 
 		.serviceMarquee__film--featured {
-			width: 78%;
+			width: 62%;
 			margin-left: auto;
 		}
 
-		.serviceMarquee__row .serviceMarquee__caption {
-			font-size: 11px;
-		}
-
-		.serviceMarquee__row .serviceMarquee__meta {
-			display: none;
-		}
 	}
 
 	@media (min-width: 768px) {
 		.serviceMarquee__top {
-			grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+			grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+			column-gap: clamp(48px, 7vw, 120px);
 			align-items: end;
 		}
 
@@ -269,8 +226,5 @@ const pad = (n: number) => String(n).padStart(2, '0');
 			font-size: clamp(15px, 1.3vw, 19px);
 		}
 
-		.serviceMarquee__row {
-			width: 80%;
-		}
 	}
 </style>
