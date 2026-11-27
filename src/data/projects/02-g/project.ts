@@ -22,7 +22,7 @@ const project: ProjectFolderMetadata = {
 				'Color_ivory.jpg',
 				'Color_brown.jpg',
 				'gabi-chocolates.jpg',
-				'tartas-mesa.jpg',
+				'mesa-logo.jpg',
 				'cajas.jpg',
 				'calle.jpg',
 				'Mockup_poste.png'

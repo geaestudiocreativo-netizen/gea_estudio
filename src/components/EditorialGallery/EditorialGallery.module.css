@@ -404,10 +404,6 @@
 	background: transparent;
 }
 
-/* La cartelería lleva pie: la muestra de abajo reserva el mismo hueco para que sus bordes coincidan */
-.captioned.frameFirstImages .topBlock .item2 {
-	padding-bottom: var(--caption-space, 31px);
-}
 
 /* .G: últimas piezas enteras, sin recorte, en una fila de tres */
 .tailRow {
@@ -415,7 +411,7 @@
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 	align-items: start;
 	gap: var(--gutter, 8px);
-	padding: var(--gutter, 0) var(--gutter, 0) 0;
+	padding: var(--gutter, 0) 0 0;
 }
 
 .layout7 .tailItem,
@@ -426,7 +422,8 @@
 
 .tailItem img {
 	height: auto;
-	object-fit: contain;
+	aspect-ratio: 3 / 4;
+	object-fit: cover;
 }
 
 @media (max-width: 767px) {

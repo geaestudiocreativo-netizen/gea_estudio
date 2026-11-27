@@ -13,7 +13,7 @@ const captions: Record<string, Caption> = {
 	'01-talleres-alonso/branding/04.jpg': { es: 'Paleta de color', en: 'Colour palette' },
 	'01-talleres-alonso/branding/06.svg': { es: 'Rotulación de fachada', en: 'Signage' },
 	// .G
-	'02-punto-g/branding/tartas-mesa.jpg': { es: 'Logotipo', en: 'Logo' },
+	'02-punto-g/branding/mesa-logo.jpg': { es: 'Logotipo', en: 'Logo' },
 	'02-punto-g/branding/Mockup_poste.png': { es: 'Cartelería', en: 'Poster' },
 	'02-punto-g/branding/cajas.jpg': { es: 'Packaging', en: 'Packaging' },
 	'02-punto-g/branding/calle.jpg': { es: 'La marca en la calle', en: 'The brand on the street' },
