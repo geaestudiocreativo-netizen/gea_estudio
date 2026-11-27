@@ -169,16 +169,13 @@
 }
 
 @keyframes wordmarkBuild {
-	/* 0-42 %: el punto parpadea (logo invisible, sin escala).
-	   42 %: de repente aparece el logo pequeño, crece, se queda un momento y baja a su sitio. */
+	/* Todo el bloque (punto + logo) está a escala 0.05 mientras el punto parpadea.
+	   Después el punto se funde en el logo, que nace de su tamaño, crece y baja a su sitio. */
 	0%, 41.6% {
-		transform: var(--wordmark-transform-start) scale(1);
+		transform: var(--wordmark-transform-start) scale(0.05);
+		animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
 	}
-	41.7% {
-		transform: var(--wordmark-transform-start) scale(0.35);
-		animation-timing-function: cubic-bezier(0.2, 0.9, 0.3, 1.15);
-	}
-	56% {
+	58% {
 		transform: var(--wordmark-transform-start) scale(1.06);
 	}
 	66% {
@@ -192,7 +189,7 @@
 
 @keyframes wordmarkInk {
 	0%, 41.6% { opacity: 0; }
-	45%, 100% { opacity: 1; }
+	46%, 100% { opacity: 1; }
 }
 
 @keyframes wordmarkDot {
@@ -201,8 +198,8 @@
 	14%, 19% { opacity: 0; }
 	22%, 29% { opacity: 1; }
 	32%, 35% { opacity: 0; }
-	37%, 41.6% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-	41.7%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.6); }
+	37%, 41.6% { opacity: 1; transform: translate(-50%, -50%) scale(1, 1); }
+	46%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.4, 0.35); }
 }
 
 /* Punto negro desde el que nace el logo */
@@ -211,8 +208,9 @@
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	width: 16px;
-	height: 16px;
+	/* Con el bloque a escala 0.05, un 40 % del ancho del logo se ve como un punto de unos 12-17 px */
+	width: 40%;
+	aspect-ratio: 1;
 	border-radius: 50%;
 	background: #111;
 	opacity: 0;
@@ -268,7 +266,7 @@
 
 .hero[data-entrance='prepare'] .wordmark {
 	opacity: 1;
-	transform: var(--wordmark-transform-start) scale(1);
+	transform: var(--wordmark-transform-start) scale(0.05);
 	transform-origin: 50% 50%;
 }
 
