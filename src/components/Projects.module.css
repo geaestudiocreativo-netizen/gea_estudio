@@ -345,7 +345,9 @@
 }
 
 @media (min-width: 960px) {
+	/* Alineado con el borde izquierdo de la primera imagen y centrado con las flechas */
 	.layout .title {
-		margin-top: 32px;
+		margin-top: 17px;
+		margin-left: calc(-1 * var(--project-hover-bleed));
 	}
 }
