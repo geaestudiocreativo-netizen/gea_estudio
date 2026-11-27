@@ -7,10 +7,8 @@ interface Props {
 
 const { locale = 'es' } = Astro.props as Props;
 
-const PHONE_DISPLAY = '+34 613 39 98 25';
 const PHONE_E164 = '34613399825';
 const EMAIL = 'geaestudiocreativo@gmail.com';
-const INSTAGRAM = 'gea.estudio__';
 
 const copy = {
 	es: {
@@ -110,13 +108,6 @@ const copy = {
 			</div>
 		</form>
 
-		<p class="contact__direct">
-			<a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-			<span aria-hidden="true">·</span>
-			<a href={`https://wa.me/${PHONE_E164}`} target="_blank" rel="noreferrer">{PHONE_DISPLAY}</a>
-			<span aria-hidden="true">·</span>
-			<a href={`https://www.instagram.com/${INSTAGRAM}`} target="_blank" rel="noreferrer">@{INSTAGRAM}</a>
-		</p>
 	</div>
 </section>
 
@@ -223,9 +214,6 @@ const copy = {
 	.contact__btn--solid:hover { background: #000; }
 	.contact__arrow { display: inline-block; transition: transform 300ms cubic-bezier(0.2, 0.7, 0.2, 1); }
 	.contact__btn:hover .contact__arrow { transform: translateX(6px); }
-	.contact__direct { margin: 40px 0 0; display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: 'Satoshi', sans-serif; font-size: 12px; letter-spacing: 0.04em; color: var(--mute); }
-	.contact__direct a { color: rgba(26, 24, 22, 0.75); text-decoration: none; border-bottom: 1px solid var(--line); }
-	.contact__direct a:hover { color: var(--ink); border-color: var(--ink); }
 	@media (max-width: 700px) {
 		.step { grid-template-columns: 1fr; gap: 14px; padding: 22px 0; }
 		.step:first-of-type .step__body { grid-column: auto; }
@@ -233,8 +221,6 @@ const copy = {
 		.contact__line { flex-direction: column; align-items: stretch; gap: 2px; }
 		.contact__actions { grid-template-columns: 1fr; gap: 8px; }
 		.contact__btn + .contact__btn { margin-left: 0; }
-		.contact__direct { flex-direction: column; align-items: flex-start; gap: 10px; }
-		.contact__direct span[aria-hidden] { display: none; }
 	}
 	@media (prefers-reduced-motion: reduce) { .contact__kicker::before { animation: none; } }
 	/* Desktop: formulario al 80% del ancho, opciones en una sola fila */
