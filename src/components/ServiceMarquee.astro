@@ -80,6 +80,19 @@ const films = [
 		video.defaultMuted = true;
 		observer.observe(video);
 	});
+
+	// Entrada suave: el titular línea a línea y los vídeos uno detrás de otro
+	const section = document.querySelector<HTMLElement>('.serviceMarquee');
+	if (section) {
+		section.classList.add('is-animated');
+		const reveal = new IntersectionObserver((entries) => {
+			if (entries.some((entry) => entry.isIntersecting)) {
+				section.classList.add('is-in');
+				reveal.disconnect();
+			}
+		}, { threshold: 0.25 });
+		reveal.observe(section);
+	}
 </script>
 
 <style>
@@ -240,5 +253,48 @@ const films = [
 			font-size: clamp(15px, 1.3vw, 19px);
 		}
 
+	}
+	/* ---------- Animación de entrada ---------- */
+	@media (prefers-reduced-motion: no-preference) {
+		.serviceMarquee.is-animated .serviceMarquee__eyebrow,
+		.serviceMarquee.is-animated .serviceMarquee__headlineLine,
+		.serviceMarquee.is-animated .serviceMarquee__support,
+		.serviceMarquee.is-animated .serviceMarquee__film {
+			opacity: 0;
+			transform: translateY(28px);
+			transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1), transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		.serviceMarquee.is-animated .serviceMarquee__film {
+			transform: translateY(40px) scale(0.97);
+		}
+
+		.serviceMarquee.is-in .serviceMarquee__eyebrow,
+		.serviceMarquee.is-in .serviceMarquee__headlineLine,
+		.serviceMarquee.is-in .serviceMarquee__support,
+		.serviceMarquee.is-in .serviceMarquee__film {
+			opacity: 1;
+			transform: none;
+		}
+
+		.serviceMarquee.is-in .serviceMarquee__headlineLine:nth-child(2) { transition-delay: 120ms; }
+		.serviceMarquee.is-in .serviceMarquee__headlineLine:nth-child(3) { transition-delay: 240ms; }
+		.serviceMarquee.is-in .serviceMarquee__headlineLine:nth-child(4) { transition-delay: 360ms; }
+		.serviceMarquee.is-in .serviceMarquee__support { transition-delay: 480ms; }
+		.serviceMarquee.is-in .serviceMarquee__film:nth-child(1) { transition-delay: 200ms; }
+		.serviceMarquee.is-in .serviceMarquee__film:nth-child(2) { transition-delay: 350ms; }
+		.serviceMarquee.is-in .serviceMarquee__film:nth-child(3) { transition-delay: 500ms; }
+		.serviceMarquee.is-in .serviceMarquee__film:nth-child(4) { transition-delay: 650ms; }
+
+		/* Al pasar el ratón, el vídeo se acerca un poco */
+		.serviceMarquee__video {
+			transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+			.serviceMarquee__film:hover .serviceMarquee__video {
+				transform: scale(1.05);
+			}
+		}
 	}
 </style>
