@@ -431,3 +431,8 @@
 		grid-template-columns: 1fr;
 	}
 }
+
+/* .G: la caja de la derecha lleva pie; la muestra de abajo reserva el mismo hueco para que acaben a la misma altura */
+.captioned.frameFirstImages .topBlock .item2 {
+	padding-bottom: var(--caption-space, 31px);
+}
