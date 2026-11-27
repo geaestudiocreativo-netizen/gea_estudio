@@ -161,7 +161,7 @@ const films = [
 
 	.serviceMarquee__grid {
 		/* Ancho limitado por el alto de pantalla para que los 4 vídeos quepan a la vez */
-		width: min(100%, calc((100svh - 190px) * 0.5625));
+		width: min(100%, calc((100svh - 270px) * 0.5625));
 		margin-inline: auto;
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -219,7 +219,7 @@ const films = [
 
 	@media (min-width: 768px) {
 		.serviceMarquee__top {
-			grid-template-columns: minmax(0, 1fr) min(420px, calc((100svh - 190px) * 0.5625));
+			grid-template-columns: minmax(0, 1fr) min(360px, calc((100svh - 270px) * 0.5625));
 			column-gap: clamp(48px, 7vw, 120px);
 			align-items: center;
 		}
