@@ -36,7 +36,7 @@
 .article {
 	/* Bloque tipo revista: folio entre filetes y entradilla con capitular */
 	width: min(46ch, calc(100% - 40px));
-	margin: clamp(26px, 2.8vw, 36px) auto 0;
+	margin: clamp(18px, 2vw, 26px) auto 0;
 	font-family: 'Satoshi', sans-serif;
 }
 
