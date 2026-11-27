@@ -22,16 +22,14 @@ const folioServices = [...new Set(project.services.map((service) => localizeServ
 ---
 
 <div class={styles.specs}>
-	{first && <p class={styles.line}>{first}</p>}
-	<p class={styles.sub}>{project.location ? `${project.location} — ${project.year}` : project.year}</p>
 	{project.concept && <span class="concept-tag">{en ? 'Concept project - AI' : 'Proyecto conceptual - IA'}</span>}
-	{caseText && (
-		<div class={styles.article}>
-			<p class={styles.folio}>
-				<span>N.º {project.id}</span>
-				<span>{folioServices}</span>
-			</p>
-			<p class={styles.case}>{caseText}</p>
-		</div>
-	)}
+	<div class={styles.article}>
+		<dl class={styles.folio}>
+			<div><dt class="sr-only">{en ? 'Project' : 'Proyecto'}</dt><dd>N.º {project.id}{sector && ` · ${sector}`}</dd></div>
+			<div><dt class="sr-only">{en ? 'Services' : 'Servicios'}</dt><dd>{folioServices}</dd></div>
+			<div><dt class="sr-only">{en ? 'Location' : 'Lugar'}</dt><dd>{project.location ?? ''}</dd></div>
+			<div><dt class="sr-only">{en ? 'Year' : 'Año'}</dt><dd>{project.year}</dd></div>
+		</dl>
+		{caseText && <p class={styles.case}>{caseText}</p>}
+	</div>
 </div>
