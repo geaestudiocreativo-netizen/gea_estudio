@@ -184,3 +184,9 @@
 		--filters-gap: 40px;
 	}
 }
+
+/* Título y frase más juntos */
+.header .intro {
+	margin-top: 4px;
+	line-height: 1.2;
+}
