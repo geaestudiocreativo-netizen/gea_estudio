@@ -284,15 +284,15 @@
 }
 
 .hero[data-entrance='start'] .primaryImage {
-	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 2000ms both;
+	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 2350ms both;
 }
 
 .hero[data-entrance='start'] .secondaryImage {
-	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 2160ms both;
+	animation: heroElementReveal 560ms cubic-bezier(0.22, 0.61, 0.36, 1) 2500ms both;
 }
 
 .hero[data-entrance='start'] .copy {
-	animation: heroElementReveal 500ms cubic-bezier(0.22, 0.61, 0.36, 1) 2300ms both;
+	animation: heroElementReveal 500ms cubic-bezier(0.22, 0.61, 0.36, 1) 2600ms both;
 }
 
 .hero[data-entrance='prepare'] .copy {
@@ -318,7 +318,7 @@
 }
 
 .hero[data-entrance='start'] .eyebrow {
-	animation: heroElementReveal 380ms cubic-bezier(0.22, 0.61, 0.36, 1) 2400ms both;
+	animation: heroElementReveal 380ms cubic-bezier(0.22, 0.61, 0.36, 1) 2700ms both;
 }
 
 .hero[data-entrance='start'] .headingMain {
@@ -464,6 +464,12 @@
 
 	.introRow {
 		margin-top: 0;
+	}
+
+	/* Foto de la chica más alta en móvil, mismo ancho */
+	.primaryImage {
+		aspect-ratio: 10 / 14.4;
+		object-position: 50% 30%;
 	}
 
 	.copy {
