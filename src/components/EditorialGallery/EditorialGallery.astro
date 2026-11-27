@@ -50,10 +50,14 @@ const toOrderedBlocks = (orderedImages: readonly string[]) => {
 
 const blocks = toOrderedBlocks(images);
 // Pie de foto tipo revista: "01 — Logotipo"
-const caption = (src: string | undefined, position: number) => {
+// Numeración correlativa solo entre las imágenes que llevan pie
+const captionNumbers = new Map<string, number>();
+images.filter((image) => getGalleryCaption(image, locale)).forEach((image, index) => captionNumbers.set(image, index + 1));
+const caption = (src: string | undefined, _position?: number) => {
 	if (!src) return undefined;
 	const text = getGalleryCaption(src, locale);
-	return text ? `${String(position).padStart(2, '0')} — ${text}` : undefined;
+	const number = captionNumbers.get(src);
+	return text && number ? `${String(number).padStart(2, '0')} — ${text}` : undefined;
 };
 const statement = layout === 'editorial' ? getGalleryStatement(images[0], locale) ?? (insertBrandStatement ? content.brandStatement : undefined) : undefined;
 const hasCaptions = layout === 'editorial' && images.some((image) => getGalleryCaption(image, locale));

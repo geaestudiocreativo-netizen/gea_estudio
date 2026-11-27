@@ -396,3 +396,13 @@
 .captioned .brandStatement {
 	margin-inline: calc(var(--gutter) * -1);
 }
+
+/* .G: las dos muestras de color vuelven a ir juntas en un mismo panel, sin hueco entre ellas */
+.captioned.frameFirstImages .topBlock {
+	row-gap: 0;
+}
+
+.captioned.frameFirstImages .topBlock .item1,
+.captioned.frameFirstImages .topBlock .item2 {
+	background: #E9E4DB;
+}
