@@ -6,7 +6,7 @@ export const heroContent = {
 		headingMain: 'Creamos universos visuales para marcas',
 		headingSecondary:
 			'Todo lo visual de tu marca en un solo estudio: diseño web, fotografía, vídeo, redes sociales y branding.',
-		primaryImageAlt: 'Person by a vintage car at sunset',
+		primaryImageAlt: 'Ángela, fundadora de Gea, revisando un libro de diseño en el estudio',
 		secondaryImageAlt: 'Mujer con una orquídea moteada junto al rostro'
 	},
 	en: {
@@ -14,7 +14,7 @@ export const heroContent = {
 		headingMain: 'We create visual universes for brands',
 		headingSecondary:
 			'Everything visual for your brand in one studio: web design, photography, video, social media and branding.',
-		primaryImageAlt: 'Person by a vintage car at sunset',
+		primaryImageAlt: 'Ángela, founder of Gea, looking through a design book in the studio',
 		secondaryImageAlt: 'Woman holding a spotted orchid to her face'
 	}
 } as const;
@@ -57,11 +57,11 @@ export const aboutSectionContent = {
 		intro: 'Soy Ángela,',
 		introSecondLine: 'la persona detrás de Gea Estudio.',
 		context:
-			'Mi formación empezó en la ingeniería y mi camino profesional ha estado muy ligado al mundo de la tecnología, un entorno de lógica, estructuras y soluciones. Pero siempre he sentido una necesidad muy fuerte de crear, de explorar lo visual y de dar forma a las ideas de una manera más libre.',
-		statement: 'Gea Estudio nace de ahí.',
+			'Vengo de la ingeniería y la tecnología, pero siempre he necesitado crear y dar forma a las ideas de una manera más libre.',
+		statement: 'Gea nace de esa mezcla entre lo técnico y lo creativo.',
 		body:
-			'De esa mezcla entre lo técnico y lo creativo, y de las ganas de construir un espacio donde poder explorar todo aquello que me inspira. En Gea Estudio hago muchas de las cosas que más disfruto:',
-		disciplines: 'branding, diseño web, fotografía, filmmaking y dirección creativa.',
+			'Por eso me ocupo de todo lo visual de tu marca:',
+		disciplines: 'branding, web, fotografía, filmmaking y dirección creativa.',
 		contactTitle: '¿Hablamos sobre tu proyecto?',
 		contactButton: '¿HABLAMOS DE TU PROYECTO?',
 		contactButtonAria: '¿HABLAMOS DE TU PROYECTO?'
@@ -72,11 +72,11 @@ export const aboutSectionContent = {
 		intro: 'I am Ángela,',
 		introSecondLine: 'the person behind Gea Studio.',
 		context:
-			'My background began in engineering and my professional path has been closely linked to technology, a world of logic, structures, and solutions. But I have always felt a strong need to create, explore the visual, and shape ideas in a freer way.',
-		statement: 'Gea was born from that.',
+			'I come from engineering and technology, but I have always needed to create and shape ideas in a freer way.',
+		statement: 'Gea was born from that mix of the technical and the creative.',
 		body:
-			'From that mix of the technical and the creative, and from the desire to build a space where I can explore everything that inspires me. At Gea Studio I do many of the things I enjoy most:',
-		disciplines: 'branding, web design, photography, filmmaking, and creative direction.',
+			'That is why I take care of everything visual for your brand:',
+		disciplines: 'branding, web, photography, filmmaking, and creative direction.',
 		contactTitle: 'Shall we talk?',
 		contactButton: 'Contact',
 		contactButtonAria: 'Contact'
@@ -115,12 +115,24 @@ export const serviceMarqueeContent = {
 	es: {
 		eyebrow: 'UNA MARCA NO SOLO',
 		headline: ['SE DISEÑA.', 'SE CONSTRUYE.'],
-		support: 'A través de la dirección creativa y el branding damos forma al universo visual de tu marca.'
+		support: 'A través de la dirección creativa y el branding damos forma al universo visual de tu marca.',
+		films: [
+			{ title: 'Campaña de marca', meta: '' },
+			{ title: 'Filmmaking', meta: '' },
+			{ title: 'Fotografía', meta: '' },
+			{ title: 'Redes sociales', meta: '' }
+		]
 	},
 	en: {
 		eyebrow: 'A BRAND IS NOT ONLY',
 		headline: ['DESIGNED.', 'IT IS BUILT.'],
-		support: 'Through creative direction and branding, we shape your brand visual universe.'
+		support: 'Through creative direction and branding, we shape your brand visual universe.',
+		films: [
+			{ title: 'Brand campaign', meta: '' },
+			{ title: 'Filmmaking', meta: '' },
+			{ title: 'Photography', meta: '' },
+			{ title: 'Social media', meta: '' }
+		]
 	}
 } as const;
 

@@ -31,8 +31,8 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 		<div class={styles.mediaRow} aria-label="Feature imagery">
 			<ResponsiveImage
 				class={styles.primaryImage}
-				src="/images/hero/hero_first.png"
-				alt={content.primaryImageAlt}
+				src="/images/hero/hero_orquidea.jpg"
+				alt={content.secondaryImageAlt}
 				loading="eager"
 				fetchpriority="high"
 				sizes="(max-width: 767px) 100vw, 44vw"
@@ -41,8 +41,8 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 			/>
 			<ResponsiveImage
 				class={styles.secondaryImage}
-				src="/images/hero/hero_orquidea.jpg"
-				alt={content.secondaryImageAlt}
+				src="/images/hero/hero_first.png"
+				alt={content.primaryImageAlt}
 				loading="lazy"
 				sizes="(max-width: 767px) 100vw, 18vw"
 				widths={[400, 640, 960, 1280]}

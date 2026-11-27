@@ -5,7 +5,7 @@ const project: ProjectFolderMetadata = {
 	number: '03',
 	title: 'Talleres Alonso',
 	client: 'Talleres Alonso',
-	location: 'Valencia, España',
+	location: 'Las Rozas, Madrid',
 	sector: 'Taller mecánico',
 	sectorEn: 'Car repair workshop',
 	year: 2026,
