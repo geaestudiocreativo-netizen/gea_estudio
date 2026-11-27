@@ -494,15 +494,15 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 				const lineOneText = headline.dataset.lineOne ?? fullText;
 				const lineTwoText = headline.dataset.lineTwo ?? '';
 				// En móvil el logo se fija según la altura del texto: ahí el texto espera a que el logo termine.
-				const typingStartDelay = mobileQuery.matches ? 2100 : 1450;
-				const lockCaptureDelay = 2060;
-				const lockDelay = 2080;
+				const typingStartDelay = mobileQuery.matches ? 2620 : 2000;
+				const lockCaptureDelay = 2580;
+				const lockDelay = 2600;
 
 				window.setTimeout(() => {
 					captureWordmarkLockMetrics();
 				}, lockCaptureDelay);
 
-				// El logo termina su animación (crece y baja) hacia los 2020 ms: se fija después,
+				// El logo termina su animación (crece y baja) hacia los 2550 ms: se fija después,
 				// pero el texto empieza a escribirse antes para que el hero no se haga lento.
 				window.setTimeout(() => {
 					lockWordmarkPosition();
@@ -548,7 +548,7 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 				}
 
 				cleanupSplitSync();
-			}, 3600);
+			}, 4300);
 		} else {
 			hero.dataset.entrance = 'done';
 			hero.dataset.typing = 'done';
