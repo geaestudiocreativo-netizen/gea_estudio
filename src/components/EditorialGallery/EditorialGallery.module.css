@@ -397,12 +397,14 @@
 	margin-inline: calc(var(--gutter) * -1);
 }
 
-/* .G: las dos muestras de color vuelven a ir juntas en un mismo panel, sin hueco entre ellas */
-.captioned.frameFirstImages .topBlock {
-	row-gap: 0;
-}
-
+/* .G: las dos muestras de color, sin fondo y alineadas con la cartelería */
 .captioned.frameFirstImages .topBlock .item1,
 .captioned.frameFirstImages .topBlock .item2 {
+	padding: 0;
 	background: transparent;
+}
+
+/* La cartelería lleva pie: la muestra de abajo reserva el mismo hueco para que sus bordes coincidan */
+.captioned.frameFirstImages .topBlock .item2 {
+	padding-bottom: var(--caption-space, 31px);
 }
