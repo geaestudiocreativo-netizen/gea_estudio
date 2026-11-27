@@ -111,6 +111,8 @@
 	hyphens: auto;
 	-webkit-hyphens: auto;
 	color: rgba(26, 24, 22, 0.72);
+	padding-bottom: 18px;
+	border-image: conic-gradient(rgba(26, 24, 22, 0.12) 0 0) 1 / 0 0 1px / 0 100vw;
 }
 
 @media (max-width: 767px) {
