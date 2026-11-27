@@ -19,7 +19,7 @@ const serviceOrder: ServiceName[] = [
 	'Filmmaking'
 ];
 const serviceFilters = serviceOrder.filter(
-	(service) => availableServices.has(service) || service === 'Decoración'
+	(service) => availableServices.has(service)
 );
 
 const normalizeService = (value: string) =>
