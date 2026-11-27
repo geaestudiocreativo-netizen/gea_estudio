@@ -671,3 +671,16 @@
 :global(body):has(.page) :global([data-site-nav]) {
 	background: #ffffff;
 }
+
+/* Logos muy horizontales (Mercurio, solo texto): más ancho para que tenga presencia */
+.projectLogo.projectLogoWide {
+	width: clamp(240px, 26vw, 380px);
+	max-height: none;
+}
+
+@media (max-width: 767px) {
+	.projectLogo.projectLogoWide {
+		width: min(72vw, 300px);
+		max-height: none;
+	}
+}
