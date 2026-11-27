@@ -69,7 +69,8 @@ const project: ProjectFolderMetadata = {
 	logo: 'logo.svg',
 	heroImage: 'hero.JPG',
 	imageSize: 'small',
-	cardImage: '/images/projects/project-02.jpg'
+	cardImage: '/images/projects/project-02.jpg',
+	cardPosition: 'center 60%'
 };
 
 export default project;

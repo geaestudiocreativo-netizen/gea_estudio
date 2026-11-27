@@ -340,7 +340,7 @@
 	justify-content: center;
 	gap: clamp(12px, 2vw, 28px);
 	padding: clamp(56px, 8vw, 120px) 16px;
-	background: #F2EFE9;
+	background: transparent;
 }
 
 .editorialVideo {

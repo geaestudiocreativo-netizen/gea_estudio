@@ -31,9 +31,9 @@ const project: ProjectFolderMetadata = {
 		{
 			type: 'Web',
 			gallery: 'web',
-			background: 'background_glow.jpg',
+			background: 'background_glow_blur.jpg',
 			url: 'https://www.glow22.es',
-			images: ['glow-web-brilla.jpg', 'glow-web-proximamente.jpg']
+			images: ['glow-web-brilla.jpg', 'glow-web-areas.jpg', 'glow-web-proximamente.jpg', 'glow-web-conocenos.jpg']
 		}
 	],
 	gallery: {
@@ -43,7 +43,7 @@ const project: ProjectFolderMetadata = {
 	coverImage: 'hero.jpg',
 	logo: 'logo.svg',
 	heroImage: 'hero.jpg',
-	imageSize: 'small'
+	imageSize: 'medium'
 };
 
 export default project;

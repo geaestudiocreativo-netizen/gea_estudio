@@ -236,31 +236,27 @@
 	}
 }
 
+/* Botón flotante: píldora pequeña abajo a la derecha (antes era una barra a todo el ancho) */
 .webVisitButton {
 	position: fixed;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	right: clamp(16px, 2.4vw, 32px);
+	bottom: clamp(16px, 2.4vw, 32px);
 	z-index: 20;
-	display: flex;
-	flex-direction: column;
+	display: inline-flex;
 	align-items: center;
-	justify-content: center;
-	gap: 8px;
-	padding: 24px 18px 24px 20px;
-	min-height: 88px;
-	width: 100vw;
-	box-sizing: border-box;
-	border: 1px solid #171a20;
-	background: #F2EFE9;
-	color: #171a20;
+	gap: 12px;
+	padding: 12px 14px 12px 20px;
+	border-radius: 999px;
+	background: #160c07;
+	color: #f5ecdf;
 	font-family: 'Satoshi', sans-serif;
-	font-size: clamp(12px, 3.8vw, 16px);
-	font-weight: 600;
-	letter-spacing: 0.1em;
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 0.08em;
 	line-height: 1;
+	text-transform: uppercase;
 	text-decoration: none;
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+	box-shadow: 0 10px 30px rgba(22, 12, 7, 0.28);
 	transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
@@ -270,31 +266,30 @@
 }
 
 .webVisitArrow {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
 	display: grid;
 	place-items: center;
-	width: clamp(58px, 8vw, 96px);
-	border-left: 1px solid #111111;
-	font-size: 20px;
-	font-weight: 400;
-	line-height: 0.7;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: #ada175;
+	color: #160c07;
+	font-size: 17px;
+	line-height: 1;
+	transform: rotate(-45deg);
+	transition: transform 180ms ease;
 }
 
 .webVisitDomain {
-	font-size: clamp(11px, 3.2vw, 14px);
-	font-weight: 400;
-	letter-spacing: 0.04em;
-	opacity: 0.62;
+	display: none; /* la URL ya se ve en la barra del navegador del mockup */
 }
 
 @media (hover: hover) and (pointer: fine) {
 	.webVisitButton:hover {
-		background: #171a20;
-		color: #F2EFE9;
 		transform: translateY(-3px);
+	}
+
+	.webVisitButton:hover .webVisitArrow {
+		transform: rotate(0deg);
 	}
 }
 
@@ -636,18 +631,11 @@
 	}
 
 	.webVisitButton {
-		gap: 5px;
-		padding: 13px 14px 13px 16px;
-		font-size: 14px;
-	}
-
-	.webVisitDomain {
+		gap: 10px;
+		padding: 10px 10px 10px 18px;
 		font-size: 12px;
 	}
 
-	.webVisitArrow {
-		width: 58px;
-	}
 
 	.brandingGrid {
 		margin-top: 24px;
@@ -670,4 +658,116 @@
 /* Project pages: white nav to match the white header */
 :global(body):has(.page) :global([data-site-nav]) {
 	background: #ffffff;
+}
+
+/* Logos muy horizontales (Mercurio, solo texto): más ancho para que tenga presencia */
+.projectLogo.projectLogoWide {
+	width: clamp(240px, 26vw, 380px);
+	max-height: none;
+}
+
+@media (max-width: 767px) {
+	.projectLogo.projectLogoWide {
+		width: min(72vw, 300px);
+		max-height: none;
+	}
+}
+
+/* Glow: la web se muestra en ventanas de navegador sobre el fondo de espuma */
+.webComposition.webCompositionBrowser {
+	padding: clamp(56px, 8vw, 128px) 16px;
+}
+
+.browserStack {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: clamp(36px, 5vw, 80px);
+}
+
+.browser {
+	margin: 0;
+	width: min(100%, 1120px);
+	overflow: hidden;
+	border-radius: 10px;
+	background: #fff;
+	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+.browserBar {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	height: 34px;
+	padding: 0 14px;
+	background: #efece7;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.browserDots {
+	display: flex;
+	gap: 6px;
+	flex: 0 0 auto;
+}
+
+.browserDots i {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #d6d0c8;
+}
+
+.browserUrl {
+	flex: 0 1 300px;
+	margin: 0 auto;
+	padding: 4px 12px;
+	border-radius: 6px;
+	background: #fff;
+	color: rgba(26, 24, 22, 0.55);
+	font-family: 'Satoshi', sans-serif;
+	font-size: 12px;
+	line-height: 1;
+	text-align: center;
+	transform: translateX(-24px);
+}
+
+.webCompositionBrowser .browser img {
+	width: 100%;
+	max-width: none;
+	box-shadow: none;
+}
+
+@media (min-width: 768px) {
+	.browser {
+		width: min(78vw, 1120px);
+	}
+}
+
+@media (max-width: 767px) {
+	.browser {
+		border-radius: 6px;
+	}
+
+	.browserBar {
+		height: 22px;
+		padding: 0 8px;
+		gap: 8px;
+	}
+
+	.browserDots i {
+		width: 6px;
+		height: 6px;
+	}
+
+	.browserUrl {
+		padding: 2px 8px;
+		font-size: 9px;
+		transform: translateX(-12px);
+	}
+}
+
+.webCompositionBrowser::before {
+	background: rgba(20, 14, 10, 0.45);
 }
