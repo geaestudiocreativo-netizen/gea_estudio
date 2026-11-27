@@ -68,6 +68,17 @@ const [headingLineOne, headingLineTwo] = getHeadingLines(content.headingMain);
 	</p>
 </section>
 
+<script is:inline>
+	// Oculta el hero antes del primer pintado para que no se vea un "flash" del estado final antes del punto.
+	(function () {
+		var h = document.querySelector('[data-hero-entrance]');
+		if (h && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			h.setAttribute('data-entrance', 'prepare');
+			h.setAttribute('data-typing', 'pending');
+		}
+	})();
+</script>
+
 <script>
 	const hero = document.querySelector('[data-hero-entrance]');
 

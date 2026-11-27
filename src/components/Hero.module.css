@@ -262,6 +262,10 @@
 	opacity: 0;
 }
 
+.hero[data-typing='pending'] .headingMain {
+	visibility: hidden;
+}
+
 .hero[data-entrance='prepare'] .wordmark {
 	opacity: 1;
 	transform: var(--wordmark-transform-start) scale(1);
