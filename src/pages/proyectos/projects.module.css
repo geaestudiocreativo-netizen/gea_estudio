@@ -161,3 +161,26 @@
 		white-space: nowrap;
 	}
 }
+
+/* Cabecera y filtros en crema; debajo de la línea, los proyectos sobre blanco */
+.page {
+	background: #FFFFFF;
+	--filters-gap: clamp(54px, 7vw, 78px);
+}
+
+.header {
+	background: #F2EFE9;
+	box-shadow: 0 0 0 100vmax #F2EFE9;
+	clip-path: inset(-100vmax -100vmax calc(-1 * var(--filters-gap)) -100vmax);
+}
+
+.filtersSticky {
+	box-shadow: 0 0 0 100vmax #F2EFE9;
+	clip-path: inset(-4px -100vmax -17px -100vmax);
+}
+
+@media (max-width: 767px) {
+	.page {
+		--filters-gap: 40px;
+	}
+}
