@@ -81,17 +81,22 @@ const films = [
 		observer.observe(video);
 	});
 
-	// Entrada suave: el titular línea a línea y los vídeos uno detrás de otro
+	// Entrada suave: el titular línea a línea y los vídeos uno detrás de otro.
+	// Cada bloque se anima cuando él mismo entra bien en pantalla (no la sección entera),
+	// para que la animación se vea y no ocurra antes de llegar.
 	const section = document.querySelector<HTMLElement>('.serviceMarquee');
 	if (section) {
 		section.classList.add('is-animated');
+		const blocks = section.querySelectorAll<HTMLElement>('.serviceMarquee__statement, .serviceMarquee__grid');
 		const reveal = new IntersectionObserver((entries) => {
-			if (entries.some((entry) => entry.isIntersecting)) {
-				section.classList.add('is-in');
-				reveal.disconnect();
-			}
-		}, { threshold: 0.25 });
-		reveal.observe(section);
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('is-in');
+					reveal.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.2, rootMargin: '0px 0px -18% 0px' });
+		blocks.forEach((block) => reveal.observe(block));
 	}
 </script>
 
@@ -261,30 +266,30 @@ const films = [
 		.serviceMarquee.is-animated .serviceMarquee__support,
 		.serviceMarquee.is-animated .serviceMarquee__film {
 			opacity: 0;
-			transform: translateY(28px);
-			transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1), transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+			transform: translateY(40px);
+			transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1), transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
 		}
 
 		.serviceMarquee.is-animated .serviceMarquee__film {
-			transform: translateY(40px) scale(0.97);
+			transform: translateY(60px) scale(0.94);
 		}
 
-		.serviceMarquee.is-in .serviceMarquee__eyebrow,
-		.serviceMarquee.is-in .serviceMarquee__headlineLine,
-		.serviceMarquee.is-in .serviceMarquee__support,
-		.serviceMarquee.is-in .serviceMarquee__film {
+		.serviceMarquee.is-animated .is-in .serviceMarquee__eyebrow,
+		.serviceMarquee.is-animated .is-in .serviceMarquee__headlineLine,
+		.serviceMarquee.is-animated .is-in .serviceMarquee__support,
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film {
 			opacity: 1;
 			transform: none;
 		}
 
-		.serviceMarquee.is-in .serviceMarquee__headlineLine:nth-child(2) { transition-delay: 120ms; }
-		.serviceMarquee.is-in .serviceMarquee__headlineLine:nth-child(3) { transition-delay: 240ms; }
-		.serviceMarquee.is-in .serviceMarquee__headlineLine:nth-child(4) { transition-delay: 360ms; }
-		.serviceMarquee.is-in .serviceMarquee__support { transition-delay: 480ms; }
-		.serviceMarquee.is-in .serviceMarquee__film:nth-child(1) { transition-delay: 200ms; }
-		.serviceMarquee.is-in .serviceMarquee__film:nth-child(2) { transition-delay: 350ms; }
-		.serviceMarquee.is-in .serviceMarquee__film:nth-child(3) { transition-delay: 500ms; }
-		.serviceMarquee.is-in .serviceMarquee__film:nth-child(4) { transition-delay: 650ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__headlineLine:nth-child(2) { transition-delay: 120ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__headlineLine:nth-child(3) { transition-delay: 240ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__headlineLine:nth-child(4) { transition-delay: 360ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__support { transition-delay: 480ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film:nth-child(1) { transition-delay: 200ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film:nth-child(2) { transition-delay: 350ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film:nth-child(3) { transition-delay: 500ms; }
+		.serviceMarquee.is-animated .is-in .serviceMarquee__film:nth-child(4) { transition-delay: 650ms; }
 
 		/* Al pasar el ratón, el vídeo se acerca un poco */
 		.serviceMarquee__video {
