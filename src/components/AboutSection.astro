@@ -26,7 +26,6 @@ const content = aboutSectionContent[locale];
 				sizes="(max-width: 1120px) 100vw, 1120px"
 				widths={[640, 960, 1280, 1600]}
 			/>
-			<p class="about-caption">{locale === 'en' ? 'Ángela Contreras, founder' : 'Ángela Contreras, fundadora'}<br />Madrid · Logroño</p>
 			<h2
 				id="about-title"
 				class="about-title"
@@ -36,8 +35,8 @@ const content = aboutSectionContent[locale];
 		</div>
 
 		<div class="about-side">
-			<p class="about-folio"><span>{locale === 'en' ? 'About Gea' : 'Sobre Gea'}</span><span>{locale === 'en' ? 'The studio' : 'El estudio'}</span></p>
 			<h3 class="about-mobile-name" aria-label="Ángela Contreras">Ángela Contreras</h3>
+			<p class="about-folio"><span>{locale === 'en' ? 'About Gea' : 'Sobre Gea'}</span><span>{locale === 'en' ? 'The studio' : 'El estudio'}</span></p>
 			<div class="about-copy mt-[32px] md:mt-[40px]">
 				<p class="about-copy__label">{content.intro} {content.introSecondLine}</p>
 				<p class="about-copy__transition">{content.context}</p>
@@ -55,7 +54,7 @@ const content = aboutSectionContent[locale];
 		justify-content: space-between;
 		gap: 16px;
 		width: 100%;
-		margin: 56px 0 0;
+		margin: 28px 0 0;
 		padding: 10px 0 9px;
 		border-top: 1px solid rgba(26, 24, 22, 0.22);
 		border-bottom: 1px solid rgba(26, 24, 22, 0.22);
