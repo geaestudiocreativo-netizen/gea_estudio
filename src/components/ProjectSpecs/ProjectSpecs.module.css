@@ -104,16 +104,6 @@
 	color: rgba(26, 24, 22, 0.72);
 }
 
-/* Capitular */
-.case::first-letter {
-	float: left;
-	margin: 4px 8px 0 0;
-	font-size: 3.35em;
-	font-weight: 300;
-	line-height: 0.8;
-	color: #1a1816;
-}
-
 @media (max-width: 767px) {
 	.case {
 		font-size: 12px;
