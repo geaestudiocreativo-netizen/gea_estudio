@@ -25,10 +25,8 @@ const folioServices = [...new Set(project.services.map((service) => localizeServ
 	{project.concept && <span class="concept-tag">{en ? 'Concept project - AI' : 'Proyecto conceptual - IA'}</span>}
 	<div class={styles.article}>
 		<dl class={styles.folio}>
-			<div class={styles.folioRow}>
+			<div class={`${styles.folioRow} ${styles.folioRowJoined}`}>
 				<div><dt class="sr-only">{en ? 'Business' : 'Negocio'}</dt><dd class={styles.sector}>{sector}</dd></div>
-			</div>
-			<div class={styles.folioRow}>
 				<div><dt class="sr-only">{en ? 'Services' : 'Servicios'}</dt><dd class={styles.services}>{folioServices}</dd></div>
 			</div>
 		</dl>

@@ -805,3 +805,25 @@
 	background: #fff;
 	pointer-events: none;
 }
+
+/* Cabecera del proyecto más compacta */
+.sectionTabsWrap {
+	margin-top: 2px;
+	padding-top: 6px;
+	padding-bottom: 8px;
+}
+
+@media (max-width: 767px) {
+	.page {
+		padding-top: calc(70px + env(safe-area-inset-top));
+	}
+
+	.projectLogo {
+		max-height: 36px;
+	}
+
+	.sectionTabsWrap {
+		padding-top: 4px;
+		padding-bottom: 6px;
+	}
+}
