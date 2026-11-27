@@ -145,3 +145,19 @@
 		row-gap: clamp(28px, 8vw, 40px);
 	}
 }
+
+/* Móvil: filtros en 2 líneas parejas (3 + 3), mismo ancho */
+@media (max-width: 767px) {
+	.filtersBar {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		width: 100%;
+		max-width: 420px;
+	}
+
+	.filtersBar > :global(button) {
+		width: 100%;
+		padding-inline: 4px;
+		white-space: nowrap;
+	}
+}

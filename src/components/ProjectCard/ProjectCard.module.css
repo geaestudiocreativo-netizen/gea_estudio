@@ -283,3 +283,10 @@
 	font-size: 8px;
 	letter-spacing: 0.1em;
 }
+
+/* Página "Ver todos": todas las imágenes en el tamaño grande */
+.projectGrid .imageSmall,
+.projectGrid .imageMedium,
+.projectGrid .imageLarge {
+	aspect-ratio: 224 / 256;
+}
