@@ -29,7 +29,7 @@ const project: ProjectFolderMetadata = {
 		{
 			type: 'Web',
 			gallery: 'web',
-			video: 'Vide_Web.optimized.mp4',
+			videos: ['web-01-inicio.mp4', 'web-02-tartas.mp4', 'web-03-encargos.mp4'],
 			url: 'https://www.tartaspuntog.es',
 			images: ['web-sofa.jpg']
 		},

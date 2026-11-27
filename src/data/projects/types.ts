@@ -33,6 +33,7 @@ export type ProjectServiceMetadata =
 			images?: string[];
 			background?: string;
 			video?: string;
+			videos?: string[];
 			url?: string;
 	  }
 	| {

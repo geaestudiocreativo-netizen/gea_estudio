@@ -784,3 +784,24 @@
 	width: 100%;
 	box-shadow: none;
 }
+
+/* .G: secciones de la web en vídeo dentro de marcos de navegador, sobre crema */
+.browserSoft {
+	width: min(100%, 960px);
+	box-shadow: 0 18px 48px rgba(26, 24, 22, 0.14);
+}
+
+@media (min-width: 768px) {
+	.browserSoft {
+		width: min(70vw, 960px);
+	}
+}
+
+.browserVideo {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 720 / 414;
+	background: #fff;
+	pointer-events: none;
+}
