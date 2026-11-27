@@ -22,7 +22,7 @@ const project: ProjectFolderMetadata = {
 		{
 			type: 'Filmmaking',
 			gallery: 'stack',
-			videos: ['mercurio-campana.mp4']
+			videos: ['mercurio-campana-v2.mp4']
 		}
 	],
 	gallery: {

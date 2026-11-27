@@ -223,7 +223,7 @@ const sections = project.services.map((service) => ({
 			if (source && !video.src) {
 				video.src = source;
 				video.load();
-				void video.play().catch(() => undefined);
+				void video.play().catch(() => { video.controls = true; });
 			}
 			projectVideoObserver.unobserve(video);
 		});
