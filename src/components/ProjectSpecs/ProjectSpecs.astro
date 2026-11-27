@@ -13,10 +13,11 @@ const en = locale === 'en';
 
 const sector = en ? project.sectorEn ?? project.sector : project.sector;
 
-const first = [sector, project.concept ? (en ? 'Concept · AI' : 'Concepto · IA') : null].filter(Boolean).join('  ·  ');
+const first = sector;
 ---
 
 <div class={styles.specs}>
 	{first && <p class={styles.line}>{first}</p>}
 	<p class={styles.sub}>{project.location} — {project.year}</p>
+	{project.concept && <span class="concept-tag">{en ? 'Concept project - AI' : 'Proyecto conceptual - IA'}</span>}
 </div>
