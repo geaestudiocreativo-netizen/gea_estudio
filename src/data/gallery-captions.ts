@@ -15,6 +15,7 @@ const captions: Record<string, Caption> = {
 	// .G
 	'02-punto-g/branding/logo-sobre-foto.jpg': { es: 'Logotipo', en: 'Logo' },
 	'02-punto-g/branding/Mockup_poste.png': { es: 'Cartelería', en: 'Poster' },
+	'02-punto-g/branding/cajas.jpg': { es: 'Packaging', en: 'Packaging' },
 	// Gea Artesanía
 	'03-gea-artesania/branding/branding-02.jpg': { es: 'Tarjeta de producto', en: 'Product card' },
 	'03-gea-artesania/branding/branding-03.png': { es: 'Editorial', en: 'Editorial' },
