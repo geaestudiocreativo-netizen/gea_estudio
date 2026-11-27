@@ -17,7 +17,7 @@ const project: ProjectFolderMetadata = {
 		{
 			type: 'Fotografía',
 			gallery: 'fotografia',
-			images: ['mercurio-01.jpg', 'mercurio-02.jpg', 'mercurio-03.jpg', 'mercurio-04.jpg', 'mercurio-05.jpg']
+			images: ['mercurio-pendiente.jpg', 'mercurio-gargantilla.jpg', 'mercurio-01.jpg', 'mercurio-02.jpg', 'mercurio-03.jpg', 'mercurio-04.jpg', 'mercurio-05.jpg']
 		},
 		{
 			type: 'Filmmaking',
