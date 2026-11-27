@@ -43,7 +43,7 @@ const project: ProjectFolderMetadata = {
 	coverImage: 'hero.jpg',
 	logo: 'logo.svg',
 	heroImage: 'hero.jpg',
-	imageSize: 'small'
+	imageSize: 'medium'
 };
 
 export default project;
