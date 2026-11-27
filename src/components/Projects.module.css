@@ -351,3 +351,23 @@
 		margin-left: calc(-1 * var(--project-hover-bleed));
 	}
 }
+
+/* Móvil: un gesto vertical sobre las tarjetas debe bajar la página, no mover el carrusel */
+@media (max-width: 959px) {
+	.carousel {
+		overflow-y: hidden;
+		overscroll-behavior-x: auto;
+		overscroll-behavior-y: auto;
+		touch-action: pan-x pan-y;
+	}
+
+	.item {
+		scroll-snap-stop: normal;
+	}
+
+	.carousel :global(a),
+	.carousel :global(img) {
+		-webkit-user-drag: none;
+		touch-action: pan-x pan-y;
+	}
+}
