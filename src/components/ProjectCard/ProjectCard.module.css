@@ -276,10 +276,9 @@
 }
 
 .conceptTag {
-	margin-top: 6px;
+	margin-top: 4px;
 	margin-bottom: 4px;
-	padding: 3px 8px;
-	font-size: 10px;
-	letter-spacing: 0.14em;
-	opacity: 0.75;
+	padding: 1px 5px;
+	font-size: 8px;
+	letter-spacing: 0.1em;
 }
