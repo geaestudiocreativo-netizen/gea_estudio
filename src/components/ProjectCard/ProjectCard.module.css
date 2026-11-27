@@ -290,3 +290,33 @@
 .projectGrid .imageLarge {
 	aspect-ratio: 224 / 256;
 }
+
+/* Textos de cada proyecto más juntos (nombre, tipo y servicios) */
+.project .description {
+	margin-top: 4px;
+	line-height: 1.25;
+}
+
+.project .description + .services,
+.project .services {
+	margin-top: 2px;
+	line-height: 1.25;
+}
+
+.projectGrid .title {
+	margin-top: 16px;
+}
+
+@media (max-width: 767px) {
+	.projectGrid.compactMobile .title {
+		margin-top: 10px;
+	}
+
+	.compactMobile .description {
+		margin-top: 2px;
+	}
+
+	.compactMobile .services {
+		margin-top: 1px;
+	}
+}
