@@ -34,6 +34,7 @@ const content = footerContent[locale];
 			<nav class={styles.links} aria-label={content.footerNavAria}>
 				<a href={getLocalizedPath(locale, '/privacidad')}>{content.privacy}</a>
 			</nav>
+			<p class={styles.copy}>© {new Date().getFullYear()} Gea Estudio · Madrid · Logroño</p>
 		</div>
 
 		<p class={styles.wordmark} aria-hidden="true">
