@@ -653,6 +653,26 @@ const getServiceName = (serviceTitle: string) => {
 			visibility: visible;
 		}
 	}
+
+	/* Títulos de servicios más finos, en la línea del resto de la web (misma tipografía, menos peso y tamaño) */
+	.services-editorial .services-editorial__name {
+		font-weight: 500;
+		line-height: 0.98;
+		letter-spacing: 0;
+	}
+
+	@media (min-width: 901px) {
+		.services-editorial .services-editorial__name {
+			font-size: clamp(34px, 3.6vw, 68px);
+		}
+	}
+
+	@media (max-width: 900px) {
+		.services-editorial .services-editorial__name,
+		.services-editorial .services-editorial__name[data-service-name='photography'] {
+			font-size: clamp(22px, 6.4vw, 40px);
+		}
+	}
 </style>
 
 
