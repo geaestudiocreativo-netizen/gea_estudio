@@ -117,10 +117,10 @@ export const serviceMarqueeContent = {
 		headline: ['SE DISEÑA.', 'SE CONSTRUYE.'],
 		support: 'A través de la dirección creativa y el branding damos forma al universo visual de tu marca.',
 		films: [
-			{ title: 'Campaña de marca', meta: 'Mercurio · concepto' },
-			{ title: 'Filmmaking', meta: 'Mallorca' },
-			{ title: 'Sesión de fotos', meta: '' },
-			{ title: 'Contenido para IG', meta: '' }
+			{ title: 'Campaña de marca', meta: '' },
+			{ title: 'Filmmaking', meta: '' },
+			{ title: 'Fotografía', meta: '' },
+			{ title: 'Redes sociales', meta: '' }
 		]
 	},
 	en: {
@@ -128,10 +128,10 @@ export const serviceMarqueeContent = {
 		headline: ['DESIGNED.', 'IT IS BUILT.'],
 		support: 'Through creative direction and branding, we shape your brand visual universe.',
 		films: [
-			{ title: 'Brand campaign', meta: 'Mercurio · concept' },
-			{ title: 'Filmmaking', meta: 'Mallorca' },
-			{ title: 'Photoshoot', meta: '' },
-			{ title: 'Content for Instagram', meta: '' }
+			{ title: 'Brand campaign', meta: '' },
+			{ title: 'Filmmaking', meta: '' },
+			{ title: 'Photography', meta: '' },
+			{ title: 'Social media', meta: '' }
 		]
 	}
 } as const;
