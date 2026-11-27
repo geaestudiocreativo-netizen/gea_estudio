@@ -8,11 +8,11 @@ interface Props {
 
 const { locale = 'es' } = Astro.props as Props;
 const content = serviceMarqueeContent[locale];
+// Arriba Mallorca en horizontal a todo el ancho; debajo dos verticales
 const films = [
-	{ src: '/images/videos/mercurio-campana.optimized.mp4', poster: '/images/videos/mercurio-campana-poster.jpg', ...content.films[0] },
-	{ src: '/images/videos/video-01.optimized.mp4', poster: undefined, ...content.films[1] },
-	{ src: '/images/videos/video-02.optimized.mp4', poster: undefined, ...content.films[2] },
-	{ src: '/images/videos/video-03.optimized.mp4', poster: undefined, ...content.films[3] }
+	{ src: '/images/videos/mallorca-horizontal.mp4', poster: undefined, wide: true, ...content.films[1] },
+	{ src: '/images/videos/mercurio-campana.optimized.mp4', poster: '/images/videos/mercurio-campana-poster.jpg', wide: false, ...content.films[0] },
+	{ src: '/images/videos/video-02.optimized.mp4', poster: undefined, wide: false, ...content.films[2] }
 ];
 ---
 
@@ -31,7 +31,7 @@ const films = [
 
 			<div class="serviceMarquee__grid">
 				{films.map((film) => (
-					<figure class="serviceMarquee__film">
+					<figure class:list={['serviceMarquee__film', film.wide && 'is-wide']}>
 						<div class="serviceMarquee__frame">
 							<video
 								class="serviceMarquee__video"
@@ -179,7 +179,7 @@ const films = [
 
 	.serviceMarquee__grid {
 		/* Ancho limitado por el alto de pantalla para que los 4 vídeos quepan a la vez */
-		width: min(100%, calc((100svh - 270px) * 0.5625));
+		width: min(100%, calc((100svh - 300px) / 1.45));
 		margin-inline: auto;
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -203,6 +203,14 @@ const films = [
 		width: 100%;
 		aspect-ratio: 9 / 16;
 		object-fit: cover;
+	}
+
+	.serviceMarquee__film.is-wide {
+		grid-column: 1 / -1;
+	}
+
+	.serviceMarquee__film.is-wide .serviceMarquee__video {
+		aspect-ratio: 16 / 9;
 	}
 
 	.serviceMarquee__caption {
@@ -237,7 +245,7 @@ const films = [
 
 	@media (min-width: 768px) {
 		.serviceMarquee__top {
-			grid-template-columns: minmax(0, 1fr) min(360px, calc((100svh - 270px) * 0.5625));
+			grid-template-columns: minmax(0, 1fr) min(400px, calc((100svh - 300px) / 1.45));
 			column-gap: clamp(48px, 7vw, 120px);
 			align-items: center;
 		}
