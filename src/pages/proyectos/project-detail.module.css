@@ -801,7 +801,7 @@
 	display: block;
 	width: 100%;
 	height: auto;
-	aspect-ratio: 720 / 414;
+	aspect-ratio: 1440 / 746;
 	background: #fff;
 	pointer-events: none;
 }
