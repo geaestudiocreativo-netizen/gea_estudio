@@ -12,6 +12,10 @@ const captions: Record<string, Caption> = {
 	'01-talleres-alonso/branding/03.jpg': { es: 'Tarjetas de visita', en: 'Business cards' },
 	'01-talleres-alonso/branding/04.jpg': { es: 'Paleta de color', en: 'Colour palette' },
 	'01-talleres-alonso/branding/06.svg': { es: 'Rotulación de fachada', en: 'Signage' },
+	'01-talleres-alonso/branding/real-fachada.jpg': { es: 'Fachada', en: 'Storefront' },
+	'01-talleres-alonso/branding/real-polo.jpg': { es: 'Uniforme bordado', en: 'Embroidered uniform' },
+	'01-talleres-alonso/branding/real-rotulo.jpg': { es: 'Rotulación', en: 'Signage' },
+	'01-talleres-alonso/branding/real-taller.jpg': { es: 'En el taller', en: 'In the workshop' },
 	// .G
 	'02-punto-g/branding/mesa-logo.jpg': { es: 'Logotipo', en: 'Logo' },
 	'02-punto-g/branding/Mockup_poste.png': { es: 'Cartelería', en: 'Poster' },
